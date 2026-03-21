@@ -1,61 +1,104 @@
-/* Estilos base de Nexum Automation */
+/* =========================================
+   ESTILOS BASE - NEXUM AUTOMATION
+========================================= */
 body { 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
     margin: 0; 
     background-color: #f4f7f6; 
     color: #333; 
 }
+
 header { 
     background: #1a1a1a; 
     color: #ffffff; 
     padding: 30px 0; 
-    border-bottom: #00e676 4px solid; 
     text-align: center; 
 }
 header img { max-height: 100px; }
 h1 { margin: 10px 0 0; text-transform: uppercase; letter-spacing: 2px; }
 .subtitle { color: #00e676; margin-top: 5px; font-weight: bold; }
 .highlight { color: #00e676; font-weight: bold; }
-.container { width: 90%; max-width: 1200px; margin: 20px auto; }
 
-/* --- TABS NAV (Pestañas) --- */
-.tab-menu { 
-    overflow: hidden; 
-    background-color: #e0e0e0; 
-    border-radius: 8px 8px 0 0; 
-    display: flex; 
-}
-.tab-menu button { 
-    background-color: inherit; 
-    color: #333; 
-    border: none; 
-    cursor: pointer; 
-    padding: 14px 16px; 
-    transition: 0.3s; 
-    font-size: 16px; 
-    font-weight: bold; 
-    flex-grow: 1; 
-}
-.tab-menu button:hover { background-color: #ccc; }
-.tab-menu button.active { 
-    background-color: #ffffff; 
-    color: #008f4c; 
-    border-bottom: 3px solid #00e676; 
+/* Contenedor principal tipo "Hoja de papel" */
+.container { 
+    width: 90%; 
+    max-width: 1200px; 
+    margin: 30px auto; 
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
-/* --- CONTENIDO DE TABS --- */
-.tab-content { 
+/* =========================================
+   NUEVA BARRA DE NAVEGACIÓN (DESPLEGABLE)
+========================================= */
+.navbar {
+    background-color: #e0e0e0;
+    border-bottom: 3px solid #00e676; /* Línea verde corporativa */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.nav-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.nav-link, .dropbtn {
+    background-color: inherit;
+    color: #333;
+    padding: 16px 24px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Efecto hover en el menú principal */
+.nav-link:hover, .dropdown:hover .dropbtn {
+    background-color: #ffffff;
+    color: #008f4c;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Cuadro blanco del desplegable */
+.dropdown-content {
     display: none; 
-    padding: 30px; 
-    background: #ffffff; 
-    border-radius: 0 0 8px 8px; 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
-    animation: fadeEffect 0.5s; 
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 270px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 10; 
+    border-radius: 0 0 5px 5px;
+    border-top: 3px solid #00e676;
 }
-.active-tab { display: block; } /* Solo para mostrar la primera por defecto */
-@keyframes fadeEffect { from {opacity: 0;} to {opacity: 1;} }
 
-/* --- TARJETAS DE PRODUCTOS --- */
+.dropdown-content a {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #eee;
+    font-size: 15px;
+}
+
+.dropdown-content a:last-child { border-bottom: none; }
+.dropdown-content a:hover { background-color: #f4f7f6; color: #008f4c; font-weight: bold; }
+.dropdown:hover .dropdown-content { display: block; }
+
+/* =========================================
+   ELEMENTOS DE DISEÑO INTERNOS
+========================================= */
+/* Tarjetas de Productos */
 .product-grid { display: flex; gap: 20px; margin-top: 20px; flex-wrap: wrap; }
 .product-card { 
     background: #f9f9f9; 
@@ -68,7 +111,15 @@ h1 { margin: 10px 0 0; text-transform: uppercase; letter-spacing: 2px; }
 }
 .product-card h3 { margin-top: 0; color: #1a1a1a; border-bottom: 1px solid #ddd; padding-bottom: 10px;}
 
-/* --- ALERTAS --- */
+/* Alertas y Mensajes */
 .alert-box { background: #fff3cd; padding: 15px; border-left: 5px solid #ffecb5; margin-top: 20px; }
 
-footer { text-align: center; padding: 20px; margin-top: 40px; background: #1a1a1a; color: #b0b0b0; }
+/* Pie de página */
+footer { 
+    text-align: center; 
+    padding: 20px; 
+    margin-top: 40px; 
+    background: #1a1a1a; 
+    color: #b0b0b0; 
+    border-top: 3px solid #00e676;
+}

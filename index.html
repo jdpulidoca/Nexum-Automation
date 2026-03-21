@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexum Automation - Planta Multilínea</title>
+    <title>Inicio - Nexum Automation</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -16,68 +16,22 @@
 
     <div class="container">
         <div class="tab-menu">
-            <button class="tab-links active" onclick="abrirPestana(event, 'Inicio')">Inicio & Scope</button>
-            <button class="tab-links" onclick="abrirPestana(event, 'Modulo1')">Mód 1: Gestión Prod.</button>
-            <button class="tab-links" onclick="abrirPestana(event, 'Modulo2')">Mód 2: Proyectos</button>
-            <button class="tab-links" onclick="abrirPestana(event, 'Modulo3')">Mód 3: Celdas</button>
+            <a href="index.html" class="tab-links active">Inicio & Scope</a>
+            <a href="modulo1.html" class="tab-links">Mód 1: Gestión Prod.</a>
+            <a href="modulo2.html" class="tab-links">Mód 2: Proyectos</a>
+            <a href="modulo3.html" class="tab-links">Mód 3: Celdas</a>
         </div>
 
-        <div id="Inicio" class="tab-content active-tab">
+        <main class="tab-content active-tab">
             <h2>Alcance del Proyecto: Planta Embotelladora</h2>
             <p>El equipo de <span class="highlight">Nexum Automation</span> presenta el análisis operativo, financiero y de automatización para una planta embotelladora compuesta por tres líneas de producción principales.</p>
             
-            <div class="product-grid">
-                <div class="product-card">
-                    <h3>🔋 Monster Energy</h3>
-                    <p><strong>Formato:</strong> Lata 473 ml</p>
-                    <p>Línea de alta rentabilidad por litro, con requerimientos críticos en la mezcla de jarabes.</p>
-                </div>
-                <div class="product-card">
-                    <h3>🥤 Gaseosa Quatro</h3>
-                    <p><strong>Formato:</strong> PET 1.5 Litros</p>
-                    <p>Línea de volumen. El costo del azúcar industrial es el principal driver del OPEX.</p>
-                </div>
-                <div class="product-card">
-                    <h3>💧 Agua Brisa</h3>
-                    <p><strong>Formato:</strong> Garrafón 20L</p>
-                    <p>Línea de volumen masivo continuo. Presenta un cuello de botella ergonómico en paletizado.</p>
-                </div>
-            </div>
-        </div>
-
-        <div id="Modulo1" class="tab-content">
-            <h2>Gestión y Evaluación de la Producción</h2>
-            <p><strong>Profesor:</strong> Carlos Julio Cortés</p>
-            <ul>
-                <li><strong>Análisis Multilínea:</strong> Comparativa de tiempos de ciclo y cuellos de botella.</li>
-                <li><strong>Tiempos de Alistamiento:</strong> Tiempos de calentamiento CIP (Start-up 60 min) en lavadora.</li>
-                <li><strong>Cálculo de OEE:</strong> Disponibilidad, Rendimiento y Calidad.</li>
-            </ul>
-        </div>
-
-        <div id="Modulo2" class="tab-content">
-            <h2>Planeación y Evaluación de Proyectos</h2>
-            <p><strong>Profesor:</strong> Luis Miguel Méndez</p>
-            <ul>
-                <li><strong>Análisis OPEX:</strong> Impacto del azúcar industrial (precios DANE) vs estructura de Agua Brisa.</li>
-                <li><strong>Evaluación CAPEX:</strong> Inversión de máquina (1.200 BPH a $32.000 USD) + Celda Robótica.</li>
-                <li><strong>Indicadores Financieros:</strong> Flujo de caja, TIR y VPN.</li>
-            </ul>
-        </div>
-
-        <div id="Modulo3" class="tab-content">
-            <h2>Celdas Robotizadas</h2>
-            <p><strong>Profesor:</strong> Ricardo Ramirez</p>
-            <div class="alert-box">
-                <strong>🚧 En Construcción:</strong> Según el cronograma, el diseño de la celda de paletizado se presentará en la sustentación final.
-            </div>
-        </div>
+            </main>
     </div>
 
     <footer>
         <p>Documentación Técnica &copy; 2026 - Nexum Automation | Universidad Nacional de Colombia</p>
     </footer>
 
-    <script src="assets/js/main.js"></script>
 </body>
 </html>
