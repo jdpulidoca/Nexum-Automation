@@ -6,28 +6,44 @@
     <title>Inicio - Nexum Automation | Coca-Cola FEMSA</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
-        /* Estilos para las fotos de los envases al inicio de la tarjeta */
-        .product-img-top {
-            width: 100px;
-            height: auto;
-            display: block;
-            margin: 0 auto 15px auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        /* Diseño horizontal para el contenido de la pestaña */
+        .tab-horizontal-layout {
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+            align-items: flex-start;
         }
         
-        /* Estilos para la tabla nutricional escrita en HTML */
+        /* Contenedor de la imagen a la izquierda */
+        .tab-image-container {
+            flex: 0 0 200px; /* Ancho fijo para la imagen */
+            text-align: center;
+        }
+        .tab-image-container img {
+            width: 100%;
+            max-width: 200px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Contenedor del texto y tabla a la derecha */
+        .tab-info-container {
+            flex: 1; /* Toma el resto del espacio */
+        }
+
+        /* Estilos para la tabla nutricional en HTML */
         .nutrition-table {
             width: 100%;
+            max-width: 400px;
             border-collapse: collapse;
             font-family: Arial, sans-serif;
             border: 2px solid #333;
-            margin-top: 15px;
-            font-size: 13px;
+            margin-top: 20px;
+            font-size: 14px;
         }
         .nutrition-table th, .nutrition-table td {
             border-bottom: 1px solid #333;
-            padding: 5px;
+            padding: 6px 8px;
             text-align: left;
         }
         .nutrition-table th { 
@@ -36,7 +52,19 @@
             text-align: center;
         }
         .nutrition-table .thick-border { border-bottom: 4px solid #333; }
-        .nutrition-table .indent { padding-left: 15px; }
+        .nutrition-table .indent { padding-left: 20px; }
+
+        /* Responsividad: Si la pantalla es pequeña (celular), se pone vertical */
+        @media (max-width: 768px) {
+            .tab-horizontal-layout {
+                flex-direction: column;
+                align-items: center;
+            }
+            .tab-image-container {
+                flex: none;
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -47,7 +75,7 @@
 
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="nav-link active" style="background-color: #3F51B5; color: #ffffff;">Inicio y Mercado</a>
+            <a href="index.html" class="nav-link" style="background-color: #3F51B5; color: #ffffff;">Inicio y Mercado</a>
             
             <div class="dropdown">
                 <button class="dropbtn">Módulos <span>&#9662;</span></button>
@@ -66,81 +94,112 @@
     <div class="container">
         <main>
             <h2 style="text-align: center; color: #3F51B5;">Contexto Operativo: Coca-Cola FEMSA</h2>
-            <p>Atendiendo a más de <strong>276 millones de consumidores</strong> diariamente, con 56 plantas de manufactura a nivel global, el grupo embotellador opera bajo una demanda que exige la máxima eficiencia. La consultora <span class="highlight">Nexum Automation</span> interviene para optimizar la planta multilínea, garantizando rentabilidad y ergonomía.</p>
+            <p style="text-align: center;">Atendiendo a más de <strong>276 millones de consumidores</strong> diariamente, la consultora <span class="highlight">Nexum Automation</span> presenta la evaluación operativa y propuesta de automatización para el siguiente portafolio de productos:</p>
 
-            <hr style="border: 1px solid #eee; margin: 30px 0;">
+            <div class="tab">
+                <button class="tablinks active" onclick="abrirLinea(event, 'Monster')">Línea: Monster</button>
+                <button class="tablinks" onclick="abrirLinea(event, 'Quatro')">Línea: Quatro</button>
+                <button class="tablinks" onclick="abrirLinea(event, 'Brisa')">Línea: Agua Brisa</button>
+            </div>
 
-            <h2 style="text-align: center; color: #3F51B5;">Portafolio de Productos Analizados</h2>
-            
-            <div class="product-grid" style="align-items: stretch;">
-                
-                <div class="product-card" style="display: flex; flex-direction: column;">
-                    <img src="assets/img/lataMonster.png" alt="Lata Monster Energy" class="product-img-top">
+            <div id="Monster" class="tabcontent" style="display: block;">
+                <div class="tab-horizontal-layout">
+                    <div class="tab-image-container">
+                        <img src="assets/img/lataMonster.png" alt="Lata Monster Energy">
+                    </div>
                     
-                    <h3>🔋 Monster Energy</h3>
-                    <p><strong>Formato:</strong> Lata 473 ml</p>
-                    <p>Línea de alta rentabilidad por litro, con requerimientos críticos en la mezcla de jarabes y cuellos de botella severos en los tiempos de alistamiento (Setup).</p>
-                    
-                    <div style="flex-grow: 1;"></div>
-                    
-                    <table class="nutrition-table">
-                        <tr><th colspan="2" class="thick-border">Información Nutricional<br><span style="font-size: 11px; font-weight: normal;">Porción: 200 ml (1 vaso)</span></th></tr>
-                        <tr><td><strong>Calorías</strong></td><td style="text-align: right;">44 kcal</td></tr>
-                        <tr><td><strong>Grasa Total</strong></td><td style="text-align: right;">0 g</td></tr>
-                        <tr><td><strong>Sodio</strong></td><td style="text-align: right;">77 mg</td></tr>
-                        <tr><td><strong>Carbohidratos Totales</strong></td><td style="text-align: right;">12 g</td></tr>
-                        <tr><td class="indent">Azúcares Totales</td><td style="text-align: right;">11 g</td></tr>
-                        <tr><td class="indent">Azúcares Añadidos</td><td style="text-align: right;">11 g</td></tr>
-                        <tr class="thick-border"><td><strong>Proteínas</strong></td><td style="text-align: right;">0 g</td></tr>
-                        <tr><td>Niacina (Vit B3)</td><td style="text-align: right;">8.5 mg</td></tr>
-                        <tr><td>Vitamina B6</td><td style="text-align: right;">0.8 mg</td></tr>
-                        <tr><td>Vitamina B2</td><td style="text-align: right;">0.7 mg</td></tr>
-                        <tr><td>Vitamina B12</td><td style="text-align: right;">2.4 µg</td></tr>
-                    </table>
-                </div>
-
-                <div class="product-card" style="display: flex; flex-direction: column;">
-                    <img src="assets/img/botellaQuatro.jpg" alt="Botella Quatro PET" class="product-img-top">
-                    
-                    <h3>🥤 Gaseosa Quatro</h3>
-                    <p><strong>Formato:</strong> PET 1.5 Litros</p>
-                    <p>Línea de volumen masivo continua. El costo del azúcar industrial es el principal driver que impacta el OPEX de esta operación.</p>
-                    
-                    <div style="flex-grow: 1;"></div>
-                    
-                    <table class="nutrition-table">
-                        <tr><th colspan="2" class="thick-border">Información Nutricional<br><span style="font-size: 11px; font-weight: normal;">Porción: 200 ml (1 vaso)</span></th></tr>
-                        <tr><td><strong>Calorías</strong></td><td style="text-align: right;">80 kcal</td></tr>
-                        <tr><td><strong>Grasa Total</strong></td><td style="text-align: right;">0 g</td></tr>
-                        <tr><td><strong>Sodio</strong></td><td style="text-align: right;">35 mg</td></tr>
-                        <tr><td><strong>Carbohidratos Totales</strong></td><td style="text-align: right;">21 g</td></tr>
-                        <tr><td class="indent">Azúcares Totales</td><td style="text-align: right;">21 g</td></tr>
-                        <tr class="thick-border"><td class="indent">Azúcares Añadidos</td><td style="text-align: right;">21 g</td></tr>
-                        <tr><td><strong>Proteínas</strong></td><td style="text-align: right;">0 g</td></tr>
-                    </table>
-                </div>
-
-                <div class="product-card" style="display: flex; flex-direction: column;">
-                    <img src="assets/img/garrafonBrissa.png" alt="Garrafón Agua Brisa" class="product-img-top">
-                    
-                    <h3>💧 Agua Brisa</h3>
-                    <p><strong>Formato:</strong> Garrafón 20L</p>
-                    <p>Línea de alto peso volumétrico. Presenta un cuello de botella ergonómico crítico al final de la línea que será el foco principal de la automatización en el Módulo 3.</p>
-                    
-                    <div style="flex-grow: 1;"></div>
-                    
-                    <div style="margin-top: 15px; padding: 15px; background-color: #f4f7f6; border: 1px dashed #ccc; text-align: center; border-radius: 4px; font-size: 13px; color: #757575;">
-                        <p style="margin: 0;"><em>*Al ser agua purificada, no requiere declaración de tabla nutricional calórica.</em></p>
+                    <div class="tab-info-container">
+                        <h3 style="margin-top: 0; color: #3F51B5; font-size: 24px;">🔋 Monster Energy</h3>
+                        <p style="color: #757575;"><strong>Formato:</strong> Lata 330ml / 473ml</p>
+                        <p>Línea de alta rentabilidad por litro, con requerimientos críticos en la mezcla de jarabes y cuellos de botella severos en los tiempos de alistamiento (Setup) que alcanzan los 180 minutos.</p>
+                        
+                        <table class="nutrition-table">
+                            <tr><th colspan="2" class="thick-border">Información Nutricional<br><span style="font-size: 12px; font-weight: normal;">Porción: 200 ml (1 vaso)</span></th></tr>
+                            <tr><td><strong>Calorías</strong></td><td style="text-align: right;">44 kcal</td></tr>
+                            <tr><td><strong>Grasa Total</strong></td><td style="text-align: right;">0 g</td></tr>
+                            <tr><td><strong>Sodio</strong></td><td style="text-align: right;">77 mg</td></tr>
+                            <tr><td><strong>Carbohidratos Totales</strong></td><td style="text-align: right;">12 g</td></tr>
+                            <tr><td class="indent">Azúcares Totales</td><td style="text-align: right;">11 g</td></tr>
+                            <tr><td class="indent">Azúcares Añadidos</td><td style="text-align: right;">11 g</td></tr>
+                            <tr class="thick-border"><td><strong>Proteínas</strong></td><td style="text-align: right;">0 g</td></tr>
+                            <tr><td>Niacina (Vit B3)</td><td style="text-align: right;">8.5 mg</td></tr>
+                            <tr><td>Vitamina B6</td><td style="text-align: right;">0.8 mg</td></tr>
+                        </table>
                     </div>
                 </div>
-                
             </div>
+
+            <div id="Quatro" class="tabcontent">
+                <div class="tab-horizontal-layout">
+                    <div class="tab-image-container">
+                        <img src="assets/img/botellaQuatro.jpg" alt="Botella Quatro PET">
+                    </div>
+                    
+                    <div class="tab-info-container">
+                        <h3 style="margin-top: 0; color: #3F51B5; font-size: 24px;">🥤 Gaseosa Quatro</h3>
+                        <p style="color: #757575;"><strong>Formato:</strong> PET 1.5 Litros</p>
+                        <p>Línea de volumen masivo continua. Presenta integración del soplado de preformas en sitio. El costo del azúcar es el principal driver que impacta el OPEX de esta operación.</p>
+                        
+                        <table class="nutrition-table">
+                            <tr><th colspan="2" class="thick-border">Información Nutricional<br><span style="font-size: 12px; font-weight: normal;">Porción: 200 ml (1 vaso)</span></th></tr>
+                            <tr><td><strong>Calorías</strong></td><td style="text-align: right;">80 kcal</td></tr>
+                            <tr><td><strong>Grasa Total</strong></td><td style="text-align: right;">0 g</td></tr>
+                            <tr><td><strong>Sodio</strong></td><td style="text-align: right;">35 mg</td></tr>
+                            <tr><td><strong>Carbohidratos Totales</strong></td><td style="text-align: right;">21 g</td></tr>
+                            <tr><td class="indent">Azúcares Totales</td><td style="text-align: right;">21 g</td></tr>
+                            <tr class="thick-border"><td class="indent">Azúcares Añadidos</td><td style="text-align: right;">21 g</td></tr>
+                            <tr><td><strong>Proteínas</strong></td><td style="text-align: right;">0 g</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="Brisa" class="tabcontent">
+                <div class="tab-horizontal-layout">
+                    <div class="tab-image-container">
+                        <img src="assets/img/garrafonBrissa.png" alt="Garrafón Agua Brisa">
+                    </div>
+                    
+                    <div class="tab-info-container">
+                        <h3 style="margin-top: 0; color: #3F51B5; font-size: 24px;">💧 Agua Brisa</h3>
+                        <p style="color: #757575;"><strong>Formato:</strong> Garrafón 20 Litros</p>
+                        <p>Línea de alto peso volumétrico. Presenta un cuello de botella ergonómico crítico al final de la línea que será el foco de la solución de celda robotizada.</p>
+                        
+                        <div style="margin-top: 20px; padding: 15px; background-color: #f4f7f6; border: 1px dashed #ccc; border-radius: 4px; color: #757575;">
+                            <p style="margin: 0;"><em>*Al ser agua purificada, no requiere declaración de tabla nutricional calórica.</em></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </main>
     </div>
 
     <footer>
         <p>Documentación Técnica &copy; 2026 - Nexum Automation | Universidad Nacional de Colombia</p>
     </footer>
+
+    <script>
+        function abrirLinea(evt, nombreLinea) {
+            var i, tabcontent, tablinks;
+            
+            // Ocultar todo el contenido de las pestañas
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            
+            // Quitar la clase "active"
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            
+            // Mostrar la actual
+            document.getElementById(nombreLinea).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
 
 </body>
 </html>
