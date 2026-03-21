@@ -3,81 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto Embotelladora - Automatización</title>
-
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f7f6;
-            color: #333;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
-            padding: 20px;
-        }
-        header {
-            background: #0056b3; /* Azul industrial */
-            color: #ffffff;
-            padding-top: 30px;
-            min-height: 70px;
-            border-bottom: #004494 3px solid;
-            text-align: center;
-        }
-        header h1 {
-            margin: 0;
-            padding-bottom: 10px;
-        }
-        main {
-            background: #ffffff;
-            padding: 20px;
-            margin-top: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            margin-top: 20px;
-            background: #333;
-            color: #fff;
-        }
-    </style>
+    <title>Nexum Automation - Planta Multilínea</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
     <header>
-        <div class="container">
-            <h1>Automatización de Línea: Agua Brisa 20L</h1>
-            <p>Análisis Operativo y Financiero (CAPEX / OPEX)</p>
-        </div>
+        <img src="assets/img/logo.png" alt="Logo Nexum Automation">
+        <h1>Nexum Automation</h1>
+        <p class="subtitle">Gestión y Optimización de Planta Multilínea - APM 2026-1</p>
     </header>
 
     <div class="container">
-        <main>
-            <h2>Resumen del Proyecto</h2>
-            <p>Este portafolio documenta la viabilidad técnica y financiera para la implementación de un sistema de paletizado automático en una línea de producción de <strong>1.200 botellones por hora (BPH)</strong>.</p>
+        <div class="tab-menu">
+            <button class="tab-links active" onclick="abrirPestana(event, 'Inicio')">Inicio & Scope</button>
+            <button class="tab-links" onclick="abrirPestana(event, 'Modulo1')">Mód 1: Gestión Prod.</button>
+            <button class="tab-links" onclick="abrirPestana(event, 'Modulo2')">Mód 2: Proyectos</button>
+            <button class="tab-links" onclick="abrirPestana(event, 'Modulo3')">Mód 3: Celdas</button>
+        </div>
 
-            <h3>Parámetros Técnicos</h3>
+        <div id="Inicio" class="tab-content active-tab">
+            <h2>Alcance del Proyecto: Planta Embotelladora</h2>
+            <p>El equipo de <span class="highlight">Nexum Automation</span> presenta el análisis operativo, financiero y de automatización para una planta embotelladora compuesta por tres líneas de producción principales.</p>
+            
+            <div class="product-grid">
+                <div class="product-card">
+                    <h3>🔋 Monster Energy</h3>
+                    <p><strong>Formato:</strong> Lata 473 ml</p>
+                    <p>Línea de alta rentabilidad por litro, con requerimientos críticos en la mezcla de jarabes.</p>
+                </div>
+                <div class="product-card">
+                    <h3>🥤 Gaseosa Quatro</h3>
+                    <p><strong>Formato:</strong> PET 1.5 Litros</p>
+                    <p>Línea de volumen. El costo del azúcar industrial es el principal driver del OPEX.</p>
+                </div>
+                <div class="product-card">
+                    <h3>💧 Agua Brisa</h3>
+                    <p><strong>Formato:</strong> Garrafón 20L</p>
+                    <p>Línea de volumen masivo continuo. Presenta un cuello de botella ergonómico en paletizado.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="Modulo1" class="tab-content">
+            <h2>Gestión y Evaluación de la Producción</h2>
+            <p><strong>Profesor:</strong> Carlos Julio Cortés</p>
             <ul>
-                <li><strong>Capacidad Instalada:</strong> 1.200 BPH</li>
-                <li><strong>Eficiencia Operativa (OEE):</strong> 85%</li>
-                <li><strong>Tiempo de Calentamiento (CIP):</strong> 60 minutos/turno</li>
-                <li><strong>Restricción Actual:</strong> Cuello de botella ergonómico en final de línea.</li>
+                <li><strong>Análisis Multilínea:</strong> Comparativa de tiempos de ciclo y cuellos de botella.</li>
+                <li><strong>Tiempos de Alistamiento:</strong> Tiempos de calentamiento CIP (Start-up 60 min) en lavadora.</li>
+                <li><strong>Cálculo de OEE:</strong> Disponibilidad, Rendimiento y Calidad.</li>
             </ul>
+        </div>
 
-            <h3>Impacto Financiero</h3>
-            <p>Al eliminar el cuello de botella manual, la línea recupera un 5% de eficiencia, generando un volumen de producción extra que impacta positivamente la Tasa Interna de Retorno (TIR) del proyecto.</p>
-        </main>
+        <div id="Modulo2" class="tab-content">
+            <h2>Planeación y Evaluación de Proyectos</h2>
+            <p><strong>Profesor:</strong> Luis Miguel Méndez</p>
+            <ul>
+                <li><strong>Análisis OPEX:</strong> Impacto del azúcar industrial (precios DANE) vs estructura de Agua Brisa.</li>
+                <li><strong>Evaluación CAPEX:</strong> Inversión de máquina (1.200 BPH a $32.000 USD) + Celda Robótica.</li>
+                <li><strong>Indicadores Financieros:</strong> Flujo de caja, TIR y VPN.</li>
+            </ul>
+        </div>
+
+        <div id="Modulo3" class="tab-content">
+            <h2>Celdas Robotizadas</h2>
+            <p><strong>Profesor:</strong> Ricardo Ramirez</p>
+            <div class="alert-box">
+                <strong>🚧 En Construcción:</strong> Según el cronograma, el diseño de la celda de paletizado se presentará en la sustentación final.
+            </div>
+        </div>
     </div>
 
     <footer>
-        <p>Documentación del Proyecto Estudiantil &copy; 2026 - Alojado en GitHub Pages</p>
+        <p>Documentación Técnica &copy; 2026 - Nexum Automation | Universidad Nacional de Colombia</p>
     </footer>
 
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
