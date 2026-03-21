@@ -3,18 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio - Nexum Automation</title>
+    <title>Inicio - Nexum Automation | Coca-Cola FEMSA</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* Estilos para las fotos de los envases al inicio de la tarjeta */
+        .product-img-top {
+            width: 100px;
+            height: auto;
+            display: block;
+            margin: 0 auto 15px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        /* Estilos para la tabla nutricional escrita en HTML */
+        .nutrition-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+            border: 2px solid #333;
+            margin-top: 15px;
+            font-size: 13px;
+        }
+        .nutrition-table th, .nutrition-table td {
+            border-bottom: 1px solid #333;
+            padding: 5px;
+            text-align: left;
+        }
+        .nutrition-table th { 
+            background-color: #f4f7f6; 
+            font-weight: bold; 
+            text-align: center;
+        }
+        .nutrition-table .thick-border { border-bottom: 4px solid #333; }
+        .nutrition-table .indent { padding-left: 15px; }
+    </style>
 </head>
 <body>
 
     <header>
-    <img src="assets/img/logo.png" alt="Logo Nexum Automation">
+        <img src="assets/img/logo.png" alt="Logo Nexum Automation">
     </header>
 
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="nav-link">Inicio</a>
+            <a href="index.html" class="nav-link active" style="background-color: #3F51B5; color: #ffffff;">Inicio y Mercado</a>
             
             <div class="dropdown">
                 <button class="dropbtn">Módulos <span>&#9662;</span></button>
@@ -32,31 +65,75 @@
 
     <div class="container">
         <main>
-            <h2>Contexto del Mercado</h2>
-            <p>Como el embotellador más grande del mundo por volumen de ventas, la compañía atiende a más de <strong>276 millones de consumidores</strong> diariamente. Con un volumen que supera los <strong>4.2 mil millones de cajas unidad</strong> al año y operando 56 plantas de manufactura, la eficiencia operativa no es una opción, es una necesidad crítica.</p>
-            <p>En este escenario de alta demanda, la firma consultora <span class="highlight">Nexum Automation</span> interviene para garantizar que la infraestructura tecnológica de la planta esté preparada para el futuro <em>(Future-Ready)</em>, alineándose con los objetivos de crecimiento sostenible, rentabilidad y ergonomía de la compañía.</p>
+            <h2 style="text-align: center; color: #3F51B5;">Contexto Operativo: Coca-Cola FEMSA</h2>
+            <p>Atendiendo a más de <strong>276 millones de consumidores</strong> diariamente, con 56 plantas de manufactura a nivel global, el grupo embotellador opera bajo una demanda que exige la máxima eficiencia. La consultora <span class="highlight">Nexum Automation</span> interviene para optimizar la planta multilínea, garantizando rentabilidad y ergonomía.</p>
 
             <hr style="border: 1px solid #eee; margin: 30px 0;">
 
-            <h2>Alcance del Proyecto: Planta Embotelladora</h2>
-            <p>Presentamos el análisis operativo, financiero y de automatización para una planta embotelladora compuesta por tres líneas de producción principales. Nuestro enfoque ataca cuellos de botella específicos (Tiempos CIP, Set-ups) y evalúa la viabilidad financiera de la automatización frente a los altos costos de materias primas.</p>
+            <h2 style="text-align: center; color: #3F51B5;">Portafolio de Productos Analizados</h2>
             
-            <div class="product-grid">
-                <div class="product-card">
+            <div class="product-grid" style="align-items: stretch;">
+                
+                <div class="product-card" style="display: flex; flex-direction: column;">
+                    <img src="assets/img/lataMonster.png" alt="Lata Monster Energy" class="product-img-top">
+                    
                     <h3>🔋 Monster Energy</h3>
                     <p><strong>Formato:</strong> Lata 473 ml</p>
-                    <p>Línea de alta rentabilidad por litro, con requerimientos críticos en la mezcla de jarabes y llenado presurizado.</p>
+                    <p>Línea de alta rentabilidad por litro, con requerimientos críticos en la mezcla de jarabes y cuellos de botella severos en los tiempos de alistamiento (Setup).</p>
+                    
+                    <div style="flex-grow: 1;"></div>
+                    
+                    <table class="nutrition-table">
+                        <tr><th colspan="2" class="thick-border">Información Nutricional<br><span style="font-size: 11px; font-weight: normal;">Porción: 200 ml (1 vaso)</span></th></tr>
+                        <tr><td><strong>Calorías</strong></td><td style="text-align: right;">44 kcal</td></tr>
+                        <tr><td><strong>Grasa Total</strong></td><td style="text-align: right;">0 g</td></tr>
+                        <tr><td><strong>Sodio</strong></td><td style="text-align: right;">77 mg</td></tr>
+                        <tr><td><strong>Carbohidratos Totales</strong></td><td style="text-align: right;">12 g</td></tr>
+                        <tr><td class="indent">Azúcares Totales</td><td style="text-align: right;">11 g</td></tr>
+                        <tr><td class="indent">Azúcares Añadidos</td><td style="text-align: right;">11 g</td></tr>
+                        <tr class="thick-border"><td><strong>Proteínas</strong></td><td style="text-align: right;">0 g</td></tr>
+                        <tr><td>Niacina (Vit B3)</td><td style="text-align: right;">8.5 mg</td></tr>
+                        <tr><td>Vitamina B6</td><td style="text-align: right;">0.8 mg</td></tr>
+                        <tr><td>Vitamina B2</td><td style="text-align: right;">0.7 mg</td></tr>
+                        <tr><td>Vitamina B12</td><td style="text-align: right;">2.4 µg</td></tr>
+                    </table>
                 </div>
-                <div class="product-card">
+
+                <div class="product-card" style="display: flex; flex-direction: column;">
+                    <img src="assets/img/botellaQuatro.jpg" alt="Botella Quatro PET" class="product-img-top">
+                    
                     <h3>🥤 Gaseosa Quatro</h3>
                     <p><strong>Formato:</strong> PET 1.5 Litros</p>
-                    <p>Línea de volumen masivo para el segmento familiar. El costo del azúcar industrial es el principal driver que impacta el OPEX.</p>
+                    <p>Línea de volumen masivo continua. El costo del azúcar industrial es el principal driver que impacta el OPEX de esta operación.</p>
+                    
+                    <div style="flex-grow: 1;"></div>
+                    
+                    <table class="nutrition-table">
+                        <tr><th colspan="2" class="thick-border">Información Nutricional<br><span style="font-size: 11px; font-weight: normal;">Porción: 200 ml (1 vaso)</span></th></tr>
+                        <tr><td><strong>Calorías</strong></td><td style="text-align: right;">80 kcal</td></tr>
+                        <tr><td><strong>Grasa Total</strong></td><td style="text-align: right;">0 g</td></tr>
+                        <tr><td><strong>Sodio</strong></td><td style="text-align: right;">35 mg</td></tr>
+                        <tr><td><strong>Carbohidratos Totales</strong></td><td style="text-align: right;">21 g</td></tr>
+                        <tr><td class="indent">Azúcares Totales</td><td style="text-align: right;">21 g</td></tr>
+                        <tr class="thick-border"><td class="indent">Azúcares Añadidos</td><td style="text-align: right;">21 g</td></tr>
+                        <tr><td><strong>Proteínas</strong></td><td style="text-align: right;">0 g</td></tr>
+                    </table>
                 </div>
-                <div class="product-card">
+
+                <div class="product-card" style="display: flex; flex-direction: column;">
+                    <img src="assets/img/garrafonBrissa.png" alt="Garrafón Agua Brisa" class="product-img-top">
+                    
                     <h3>💧 Agua Brisa</h3>
                     <p><strong>Formato:</strong> Garrafón 20L</p>
-                    <p>Línea de volumen masivo continuo. Presenta un cuello de botella ergonómico crítico en la etapa de paletizado final.</p>
+                    <p>Línea de alto peso volumétrico. Presenta un cuello de botella ergonómico crítico al final de la línea que será el foco principal de la automatización en el Módulo 3.</p>
+                    
+                    <div style="flex-grow: 1;"></div>
+                    
+                    <div style="margin-top: 15px; padding: 15px; background-color: #f4f7f6; border: 1px dashed #ccc; text-align: center; border-radius: 4px; font-size: 13px; color: #757575;">
+                        <p style="margin: 0;"><em>*Al ser agua purificada, no requiere declaración de tabla nutricional calórica.</em></p>
+                    </div>
                 </div>
+                
             </div>
         </main>
     </div>
