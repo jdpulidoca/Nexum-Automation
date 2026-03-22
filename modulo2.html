@@ -3,28 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Módulo 2 - Nexum Automation</title>
+    <title>Módulo 1 - Gestión de Producción | Nexum Automation</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
     <header>
-    <img src="assets/img/logo.png" alt="Logo Nexum Automation">
+        <img src="assets/img/logo.png" alt="Logo Nexum Automation">
     </header>
 
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-link">Inicio</a>
-            
             <div class="dropdown">
-                <button class="dropbtn">Módulos <span>&#9662;</span></button>
+                <button class="dropbtn" style="background-color: #3F51B5; color: #ffffff;">Módulos <span>&#9662;</span></button>
                 <div class="dropdown-content">
-                    <a href="modulo1.html">Módulo 1: Gestión de Producción</a>
+                    <a href="modulo1.html" style="color: #3F51B5; font-weight: bold;">Módulo 1: Gestión de Producción</a>
                     <a href="modulo2.html">Módulo 2: Evaluación de Proyectos</a>
                     <a href="modulo3.html">Módulo 3: Celdas Robotizadas</a>
                 </div>
             </div>
-            
             <a href="equipo.html" class="nav-link">Equipo y Contacto</a>
             <a href="reflexiones.html" class="nav-link">Reflexiones</a>
         </div>
@@ -32,37 +30,120 @@
 
     <div class="container">
         <main>
-            <h2>Módulo 2: Planeación y Evaluación de Proyectos</h2>
-            <p><strong>Profesor Titular:</strong> Ing. Luis Miguel Méndez</p>
-            <p>En este módulo, <span class="highlight">Nexum Automation</span> presenta la viabilidad económica de la operación multilínea, justificando la inversión en tecnología mediante un análisis riguroso de CAPEX y OPEX.</p>
+            <h2 style="color: #3F51B5;">Módulo 1: Gestión y Evaluación de la Producción</h2>
+            
+            <p>En esta sección, el equipo consultor de <strong>Nexum Automation</strong> presenta el diagnóstico operativo de la planta multilínea. A través del mapeo de procesos (VSM, DOP) y el cálculo de indicadores clave, identificamos las restricciones de capacidad y los cuellos de botella que justifican técnica y financieramente las propuestas de automatización posteriores.</p>
 
-            <hr style="border: 1px solid #eee; margin: 30px 0;">
+            <div class="docs-section">
+                <h3 style="margin-top: 0; color: #3F51B5;">📄 Soportes y Documentación Técnica</h3>
+                <p style="color: #757575;">Todos los cálculos de demanda, métricas de OEE y diagramas presentados a continuación tienen su origen en el levantamiento de información documentado en los siguientes archivos:</p>
+                <div style="display: flex; gap: 15px; margin-top: 15px; flex-wrap: wrap;">
+                    <a href="docs/modulo1/Taller_1.pdf" target="_blank" class="download-btn" style="padding: 10px 20px; font-size: 14px;">📝 Informe Taller 1 (Cálculos Base)</a>
+                    <a href="docs/modulo1/Informe_Mercado_CocaCola.pdf" target="_blank" class="download-btn" style="padding: 10px 20px; font-size: 14px; background-color: #757575;">📊 Análisis de Mercado y Demanda</a>
+                </div>
+            </div>
 
-            <h3>1. Análisis de OPEX (Costos Operativos y Materias Primas)</h3>
-            <p>Se realizó un estudio comparativo de la estructura de costos entre las líneas de producción:</p>
-            <ul>
-                <li><strong>Impacto del Azúcar:</strong> Basado en los precios reportados por DANE/Corabastos, el costo del azúcar industrial representa el principal rubro del OPEX para las líneas de <strong>Monster (Lata)</strong> y <strong>Quatro (PET)</strong>, reduciendo el margen operativo por litro en comparación con el agua purificada.</li>
-                <li><strong>Estrategia de Margen:</strong> Debido al alto costo de insumos en bebidas azucaradas, la línea de <strong>Agua Brisa (20L)</strong> se vuelve crítica para la liquidez de la planta, justificando la necesidad de automatizarla para alcanzar su volumen máximo teórico.</li>
-            </ul>
+            <div class="tab">
+                <button class="tablinks active" onclick="abrirLinea(event, 'Monster')">Línea: Monster (473ml)</button>
+                <button class="tablinks" onclick="abrirLinea(event, 'Quatro')">Línea: Quatro (1.5L)</button>
+                <button class="tablinks" onclick="abrirLinea(event, 'Brisa')">Línea: Agua Brisa (20L)</button>
+            </div>
 
-            <h3>2. Presupuesto de Inversión (CAPEX)</h3>
-            <p>Para la línea de 20L, el proyecto contempla la siguiente estructura de capital inicial:</p>
-            <ul>
-                <li><strong>Maquinaria Principal:</strong> Adquisición de un equipo de llenado con capacidad instalada de 1.200 BPH por un valor de <strong>$32,000 USD</strong>.</li>
-                <li><strong>Celda de Paletizado (Fase 2):</strong> Proyección de inversión para la integración del brazo robótico (cuyos detalles técnicos se desarrollarán en el Módulo 3).</li>
-            </ul>
+            <div id="Monster" class="tabcontent" style="display: block;">
+                <h3 style="color: #3F51B5; border-bottom: 1px solid #eee; padding-bottom: 10px;">🔋 Análisis: Monster Energy (Lata 330ml)</h3>
+                
+                <h4>1. Cálculo de la Demanda</h4>
+                <p>Se encontró que se vendieron 157,6 millones de litros en bebidas energéticas en el año 2022, de ese mercado la participación de Monster fue del 5 al 7 % en Colombia y se estima que el mercado colombiano de bebidas energizantes crecerá a una CAGR de 5,7 % anual en el periodo 2026-2035.</p>
+                <p>Estimando un total de 186.12 millones de litros vendidos en el año 2025. De los cuales, el 7% corresponde la mercado de Monster es decir 13,028,400 litros o 27,544,187 latas al año.</p>
+                <ul>
+                    <li><strong>Demanda estimada:</strong> 2,295,349 unidades/mes.</li>
+                </ul>
 
-            <h3>3. Indicadores Financieros</h3>
-            <p>El flujo de caja proyectado demuestra que la eliminación del cuello de botella en paletizado incrementa las ventas anuales, generando una <strong>Tasa Interna de Retorno (TIR)</strong> favorable y un <strong>Valor Presente Neto (VPN)</strong> positivo que garantiza el retorno de la inversión (Payback) dentro del horizonte de planeación.</p>
+                <h4>2. Mapas de Proceso (DOP / VSM)</h4>
+                <div style="background-color: #f9f9f9; padding: 15px; text-align: center; border: 1px dashed #ccc; margin-bottom: 20px;">
+                    <p style="color: #757575;"><em>[Insertar Imagen DOP / VSM de Monster Aquí]</em></p>
+                    </div>
+                <p><strong>Hallazgo VSM:</strong> El tiempo que agrega valor es de apenas 0,36 segundos frente a un Lead Time total de 180 minutos, penalizado fuertemente por los tiempos de Set-up y el desestibado manual inicial.</p>
 
-            <hr style="border: 1px solid #eee; margin: 30px 0;">
+                <h4>3. Indicadores de Desempeño</h4>
+                <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                    <tr style="background-color: #f4f7f6;">
+                        <th style="padding: 10px; border: 1px solid #ddd;">Indicador</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Valor</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Análisis</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>Takt Time</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">0.007135 min/lata</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Ritmo de producción exigido por el cliente.</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>Tiempo de Ciclo (Tc)</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">0.002 min/lata</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">La maquinaria es veloz, pero restringida por el Setup.</td>
+                    </tr>
+                </table>
+            </div>
 
-            <div style="text-align: center; margin-top: 20px;">
-                <p><em>Consulte el modelo financiero interactivo para ver los flujos de caja y cálculos de TIR/VPN:</em></p>
-                <br>
-                <a href="docs/modulo2/Evaluacion_Financiera_Nexum.xlsx" download style="background-color: #00e676; color: #1a1a1a; padding: 15px 30px; text-decoration: none; font-weight: bold; border-radius: 5px; display: inline-block; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                    📥 Descargar Excel Financiero (CAPEX/OPEX)
-                </a>
+            <div id="Quatro" class="tabcontent">
+                <h3 style="color: #3F51B5; border-bottom: 1px solid #eee; padding-bottom: 10px;">🥤 Análisis: Quatro (PET 1.5L)</h3>
+                
+                <h4>1. Cálculo de la Demanda</h4>
+                <p>Análisis enfocado al segmento familiar de bebidas carbonatadas. Presenta un volumen sostenido con picos en temporadas específicas.</p>
+                <ul>
+                    <li><strong>Demanda estimada:</strong> [Ingresar Dato] unidades/mes.</li>
+                </ul>
+
+                <h4>2. Mapas de Proceso</h4>
+                <div style="background-color: #f9f9f9; padding: 15px; text-align: center; border: 1px dashed #ccc; margin-bottom: 20px;">
+                    <p style="color: #757575;"><em>[Insertar Imagen DOP / VSM de Quatro Aquí]</em></p>
+                </div>
+                <p><strong>Hallazgo VSM:</strong> Destaca la integración de la máquina sopladora de preformas PET en la línea, optimizando el flujo de materiales pero concentrando el riesgo de parada en una sola etapa crítica.</p>
+
+                <h4>3. Indicadores de Desempeño</h4>
+                <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                    <tr style="background-color: #f4f7f6;">
+                        <th style="padding: 10px; border: 1px solid #ddd;">Indicador</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Valor</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Análisis</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>OEE (Eficiencia General)</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">[%]</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">[Breve análisis del rendimiento]</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="Brisa" class="tabcontent">
+                <h3 style="color: #3F51B5; border-bottom: 1px solid #eee; padding-bottom: 10px;">💧 Análisis: Agua Brisa (Garrafón 20L)</h3>
+                
+                <h4>1. Cálculo de la Demanda</h4>
+                <p>En 2024, el volumen de ventas en Colombia aumentó 1.4% a 352.3 millones de Cajas Unidad en 2024, de los cuales 4% corresponden a garrafones, lo que deja un volumen total de 14,092,000 cajas unidad.</p>
+                <p>Lo que serían 21,138,000 galones o 4,227,600 garrafones anuales.</p>
+                <ul>
+                    <li><strong>Demanda estimada:</strong> 352,300 garrafones/mes.</li>
+                </ul>
+
+                <h4>2. Mapas de Proceso</h4>
+                <div style="background-color: #f9f9f9; padding: 15px; text-align: center; border: 1px dashed #ccc; margin-bottom: 20px;">
+                    <p style="color: #757575;"><em>[Insertar Imagen DOP / VSM de Agua Brisa Aquí]</em></p>
+                </div>
+                <p><strong>Hallazgo VSM:</strong> Identificación del Cuello de Botella primario. El paletizado manual al final de la línea genera retrasos constantes debido a restricciones ergonómicas por el peso (20kg por unidad).</p>
+
+                <h4>3. Indicadores de Desempeño</h4>
+                <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                    <tr style="background-color: #f4f7f6;">
+                        <th style="padding: 10px; border: 1px solid #ddd;">Indicador</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Valor</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Análisis</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>Pérdida por Fatiga</strong></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">[Valor de tiempo/unidades perdidas]</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Justificación técnica principal para el Módulo 3 (Celda Robotizada).</td>
+                    </tr>
+                </table>
             </div>
 
         </main>
@@ -71,6 +152,28 @@
     <footer>
         <p>Documentación Técnica &copy; 2026 - Nexum Automation | Universidad Nacional de Colombia</p>
     </footer>
+
+    <script>
+        function abrirLinea(evt, nombreLinea) {
+            var i, tabcontent, tablinks;
+            
+            // Ocultar todo el contenido de las pestañas
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            
+            // Quitar la clase "active" de todos los botones
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            
+            // Mostrar la pestaña actual y añadir "active" al botón clickeado
+            document.getElementById(nombreLinea).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
 
 </body>
 </html>
