@@ -1,3 +1,3 @@
 # jdpulidoca.github.io
 
-hola a todos
+hola a todos.
