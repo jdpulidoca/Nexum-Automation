@@ -4,7 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Módulo 2 - Gestión de Producción | Nexum Automation</title>
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png"> <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png"> 
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        /* Estilos para los KPIs gerenciales (Sin fórmulas) */
+        .kpi-box {
+            background-color: #f4f7f6;
+            border-left: 4px solid #3F51B5;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .kpi-title {
+            color: #3F51B5;
+            margin-top: 0;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        .kpi-result {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            margin-top: 10px;
+            display: inline-block;
+        }
+        .kpi-placeholder {
+            color: #9e9e9e;
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
 
@@ -54,11 +81,11 @@
             </div>
 
             <div id="Monster" class="tabcontent" style="display: block;">
-                <h3 style="color: #3F51B5; border-bottom: 1px solid #eee; padding-bottom: 10px;">🔋 Análisis: Monster Energy (Lata 330ml)</h3>
+                <h3 style="color: #3F51B5; border-bottom: 1px solid #eee; padding-bottom: 10px;">🔋 Análisis: Monster Energy (Lata 473ml)</h3>
                 
                 <h4>1. Cálculo de la Demanda</h4>
                 <p>La demanda de Monster Energy en Colombia se puede estimar a partir del tamaño del mercado de bebidas energéticas, el cual alcanzó aproximadamente 157,6 millones de litros en 2022 (<a href="https://www.larepublica.co/empresas/quienes-lideran-en-las-bebidas-energizantes-3578134" target="_blank" style="color: #3F51B5; text-decoration: none; font-weight: bold;">La República, 2023</a>). Considerando una participación de mercado cercana al 6% para la marca, se obtiene una demanda aproximada de 9,46 millones de litros anuales.</p>
-                <p> Al convertir este valor a unidades de consumo, tomando como referencia latas de 473  ml, se obtiene un volumen aproximado de 20  millones de latas al año. Esta aproximación es consistente con el crecimiento del sector y las tendencias de consumo en el país (<a href="https://www.informesdeexpertos.com/informes/mercado-de-bebidas-energizantes-en-colombia" target="_blank" style="color: #3F51B5; text-decoration: none; font-weight: bold;">Informes de Expertos, 2023</a>).</p>
+                <p>Al convertir este valor a unidades de consumo, tomando como referencia latas de 473 ml, se obtiene un volumen aproximado de 20 millones de latas al año. Esta aproximación es consistente con el crecimiento del sector y las tendencias de consumo en el país (<a href="https://www.informesdeexpertos.com/informes/mercado-de-bebidas-energizantes-en-colombia" target="_blank" style="color: #3F51B5; text-decoration: none; font-weight: bold;">Informes de Expertos, 2023</a>).</p>
                 <ul>
                     <li><strong>Demanda estimada:</strong> 20,000,000 unidades/año.</li>
                 </ul>
@@ -66,41 +93,57 @@
                 <h4>2. Mapas de Proceso (DOP / VSM)</h4>
                 <div style="background-color: #f9f9f9; padding: 15px; text-align: center; border: 1px dashed #ccc; margin-bottom: 20px;">
                     <p style="color: #757575;"><em>[Insertar Imagen DOP / VSM de Monster Aquí]</em></p>
-                    </div>
+                </div>
                 <p><strong>Hallazgo VSM:</strong> El tiempo que agrega valor es de apenas 0,36 segundos frente a un Lead Time total de 180 minutos, penalizado fuertemente por los tiempos de Set-up y el desestibado manual inicial.</p>
 
                 <h4>3. Indicadores de Desempeño</h4>
-                <table style="width: 100%; border-collapse: collapse; text-align: left;">
-                    <tr style="background-color: #f4f7f6;">
-                        <th style="padding: 10px; border: 1px solid #ddd;">Indicador</th>
-                        <th style="padding: 10px; border: 1px solid #ddd;">Valor</th>
-                        <th style="padding: 10px; border: 1px solid #ddd;">Análisis</th>
-                    </tr>
-                    <tr>
-                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>Takt Time</strong></td>
-                        <td style="padding: 10px; border: 1px solid #ddd;">0.007135 min/lata</td>
-                        <td style="padding: 10px; border: 1px solid #ddd;">Ritmo de producción exigido por el cliente.</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>Tiempo de Ciclo (Tc)</strong></td>
-                        <td style="padding: 10px; border: 1px solid #ddd;">0.002 min/lata</td>
-                        <td style="padding: 10px; border: 1px solid #ddd;">La maquinaria es veloz, pero restringida por el Setup.</td>
-                    </tr>
-                </table>
+                
+                <div class="kpi-box">
+                    <h5 class="kpi-title">⏱️ Takt Time</h5>
+                    <p>Es el ritmo de producción estrictamente necesario para satisfacer la demanda sin generar retrasos. Asumiendo que esta línea opera 2.5 días a la semana, la tasa mínima requerida es de 12,206 latas/hora.</p>
+                    <span class="kpi-result">Resultado: 0.0049 minutos/lata</span>
+                </div>
+
+                <div class="kpi-box">
+                    <h5 class="kpi-title">⚙️ Cycle Time (Tc) y Setup Time (Tsu)</h5>
+                    <p>Comparando el Takt Time con la velocidad nominal de la maquinaria (15,000 latas/hora), establecemos el tiempo físico de fabricación por unidad.</p>
+                    <ul>
+                        <li><strong>Tiempo de Ciclo (Tc):</strong> 0.004 minutos/lata.</li>
+                        <li><strong>Tiempo de Setup (Tsu):</strong> 90 minutos máximo.</li>
+                    </ul>
+                </div>
+
+                <div class="kpi-box">
+                    <h5 class="kpi-title">📈 Tasa y Capacidad de Producción</h5>
+                    <p>Calculado sobre un lote estándar de 94,500 latas por turno y evaluando la capacidad técnica instalada:</p>
+                    <ul>
+                        <li><strong>Production Rate (Rp):</strong> 12,117 latas/hora.</li>
+                        <li><strong>Capacidad Teórica (PC):</strong> 600,000 latas/semana.</li>
+                        <li><strong>Utilización:</strong> 64.08%. (La línea no está saturada).</li>
+                    </ul>
+                </div>
+
+                <div class="kpi-box">
+                    <h5 class="kpi-title">⏳ Manufacturing Lead Time (MLT)</h5>
+                    <p>Tiempo total que transcurre para procesar un lote completo de producción, incluyendo configuración y empaquetado final.</p>
+                    <span class="kpi-result">Resultado: 9.13 Horas / lote</span>
+                </div>
+
+                <div class="kpi-box">
+                    <h5 class="kpi-title">📊 Overall Equipment Effectiveness (OEE)</h5>
+                    <p>Indicador que evalúa la Disponibilidad (93.5%), el Desempeño (97.5%) y la Calidad (98.0%) del proceso de envasado.</p>
+                    <span class="kpi-result">OEE Consolidado: 89.47% (Desempeño Muy Bueno)</span>
+                </div>
             </div>
 
-            <div id="Quatro" class="tabcontent">
+            <div id="Quatro" class="tabcontent" style="display: none;">
                 <h3 style="color: #3F51B5; border-bottom: 1px solid #eee; padding-bottom: 10px;">🥤 Análisis: Quatro (PET 1.5L)</h3>
                 
                 <h4>1. Cálculo de la Demanda</h4>
                 <p>Para la estimación de la demanda de la línea de PET, el equipo consultor partió del volumen total de producción del sistema Coca-Cola en Colombia, el cual asciende a 352 millones de cajas unidad anuales. Para segmentar este volumen hacia nuestro producto objetivo, se analizaron tres macrotendencias del portafolio: bebidas carbonatadas (76%), envases no retornables (74%) y presentaciones de tamaño familiar (70%).</p>
-
                 <p>Dado que la intersección de estos tres conjuntos no puede superar al menor de ellos, el límite máximo teórico es del 70%. Por otro lado, aplicando el principio de inclusión-exclusión para hallar el mínimo teórico (76% + 74% + 70% - 200%), se obtiene un límite inferior del 20%. Tomando un escenario base conservador dentro de este rango, se asume que el <strong>45%</strong> del volumen total cumple con las tres características, lo que equivale a 158.4 millones de cajas unidad.</p>
-
                 <p>De este subsegmento, marcas líderes como Coca-Cola y Sprite dominan la participación. Por lo tanto, se estima de manera prudente que <strong>Quatro</strong> representa un 6% de este volumen, resultando en 9.5 millones de cajas unidad. Tomando como estándar que una caja unidad equivale a 5.67 litros (redondeado a 6 litros para este modelo, según el <a href="../docs/modulo2/Informe_Mercado_CocaCola.pdf" target="_blank" style="color: #3F51B5; text-decoration: none; font-weight: bold;">Informe Integrado 2024</a>), el volumen alcanzó los 57 millones de litros anuales en 2024.</p>
-
                 <p>Finalmente, proyectando el escenario operativo al año 2026 y considerando la tendencia nacional de contracción en el consumo de bebidas azucaradas reportada por <a href="https://www.semana.com/economia/empresas/articulo/consumo-de-gaseosas-esta-a-la-baja-estas-son-las-estrategias-de-las-empresas-para-mantener-su-mercado/202518/" target="_blank" style="color: #3F51B5; text-decoration: none; font-weight: bold;">Revista Semana</a> (aprox. 3% anual), se aplicó una reducción acumulada del 6%. Esto nos arroja una <strong>demanda proyectada de 53.58 millones de litros anuales</strong> para el diseño de la línea.</p>
-
                 <ul>
                     <li><strong>Demanda estimada:</strong> 35,720,000 unidades/año.</li>
                 </ul>
@@ -112,31 +155,36 @@
                 <p><strong>Hallazgo VSM:</strong> Destaca la integración de la máquina sopladora de preformas PET en la línea, optimizando el flujo de materiales pero concentrando el riesgo de parada en una sola etapa crítica.</p>
 
                 <h4>3. Indicadores de Desempeño</h4>
-                <table style="width: 100%; border-collapse: collapse; text-align: left;">
-                    <tr style="background-color: #f4f7f6;">
-                        <th style="padding: 10px; border: 1px solid #ddd;">Indicador</th>
-                        <th style="padding: 10px; border: 1px solid #ddd;">Valor</th>
-                        <th style="padding: 10px; border: 1px solid #ddd;">Análisis</th>
-                    </tr>
-                    <tr>
-                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>OEE (Eficiencia General)</strong></td>
-                        <td style="padding: 10px; border: 1px solid #ddd;">[%]</td>
-                        <td style="padding: 10px; border: 1px solid #ddd;">[Breve análisis del rendimiento]</td>
-                    </tr>
-                </table>
+                
+                <div class="kpi-box">
+                    <h5 class="kpi-title">⏱️ Takt Time y Cycle Time</h5>
+                    <p class="kpi-placeholder">[Espacio reservado para el análisis de Takt Time y Cycle Time de la línea Quatro]</p>
+                    <span class="kpi-result kpi-placeholder">Resultado: [Valor]</span>
+                </div>
+
+                <div class="kpi-box">
+                    <h5 class="kpi-title">📈 Capacidad de Producción y MLT</h5>
+                    <p class="kpi-placeholder">[Espacio reservado para el análisis de capacidad, utilización y Lead Time de la línea Quatro]</p>
+                    <span class="kpi-result kpi-placeholder">Resultado: [Valor]</span>
+                </div>
+
+                <div class="kpi-box">
+                    <h5 class="kpi-title">📊 OEE (Eficiencia General)</h5>
+                    <p class="kpi-placeholder">[Espacio reservado para el cálculo de Disponibilidad, Rendimiento y Calidad de la línea Quatro]</p>
+                    <span class="kpi-result kpi-placeholder">OEE Consolidado: [%]</span>
+                </div>
+
             </div>
 
-            <div id="Brisa" class="tabcontent">
+            <div id="Brisa" class="tabcontent" style="display: none;">
                 <h3 style="color: #3F51B5; border-bottom: 1px solid #eee; padding-bottom: 10px;">💧 Análisis: Agua Brisa (Garrafón 20L)</h3>
                 
                 <h4>1. Cálculo de la Demanda</h4>
                 <p>Para la Línea de Brissa, dedicada al envasado de agua purificada en formato HOD (<em>Home & Office Delivery</em> - retornables), la estimación de la demanda se fundamenta en los resultados consolidados de ventas en Colombia para el cierre del año 2024. Según los reportes financieros (<a href="../docs/modulo2/Informe_Mercado_CocaCola.pdf" target="_blank" style="color: #3F51B5; text-decoration: none; font-weight: bold;">Pág. 153 del Informe Anual</a>), el volumen de ventas nacional experimentó un crecimiento interanual del 1.4%, pasando de 347.6 a 352.3 millones de Cajas Unidad.</p>
-
                 <p>Para dimensionar correctamente la capacidad de la maquinaria, es imperativo estandarizar la unidad de medida corporativa. En la industria embotelladora, una "Caja Unidad" es una métrica estándar que equivale a 24 porciones de 8 onzas de bebida terminada; esto representa un volumen exacto de 192 onzas, 1.5 galones, o 5.678 litros.</p>
-
                 <p>De acuerdo con el desglose del mix de ventas (<a href="../docs/modulo2/Informe_Mercado_CocaCola.pdf" target="_blank" style="color: #3F51B5; text-decoration: none; font-weight: bold;">Pág. 163 del Informe Anual</a>), el formato de garrafones representa el 4% del volumen total comercializado en el país. Al aplicar esta proporción sobre los 352.3 millones de Cajas Unidad, se consolida un volumen de 14,092,000 Cajas Unidad destinadas exclusivamente a este formato. Lo que eequivale a 21,138,000 galones anuales.</p>
                 <ul>
-                    <li><strong>Demanda estimada:</strong> 4,227,600 garrafones/mes.</li>
+                    <li><strong>Demanda estimada:</strong> 4,227,600 garrafones/año.</li>
                 </ul>
 
                 <h4>2. Mapas de Proceso</h4>
@@ -146,18 +194,18 @@
                 <p><strong>Hallazgo VSM:</strong> Identificación del Cuello de Botella primario. El paletizado manual al final de la línea genera retrasos constantes debido a restricciones ergonómicas por el peso (20kg por unidad).</p>
 
                 <h4>3. Indicadores de Desempeño</h4>
-                <table style="width: 100%; border-collapse: collapse; text-align: left;">
-                    <tr style="background-color: #f4f7f6;">
-                        <th style="padding: 10px; border: 1px solid #ddd;">Indicador</th>
-                        <th style="padding: 10px; border: 1px solid #ddd;">Valor</th>
-                        <th style="padding: 10px; border: 1px solid #ddd;">Análisis</th>
-                    </tr>
-                    <tr>
-                        <td style="padding: 10px; border: 1px solid #ddd;"><strong>Pérdida por Fatiga</strong></td>
-                        <td style="padding: 10px; border: 1px solid #ddd;">[Valor de tiempo/unidades perdidas]</td>
-                        <td style="padding: 10px; border: 1px solid #ddd;">Justificación técnica principal para el Módulo 3 (Celda Robotizada).</td>
-                    </tr>
-                </table>
+                
+                <div class="kpi-box">
+                    <h5 class="kpi-title">⚠️ Pérdida por Fatiga (Cuello de Botella)</h5>
+                    <p class="kpi-placeholder">[Espacio reservado para justificar la caída de rendimiento por el peso de los garrafones (20kg)]</p>
+                    <span class="kpi-result kpi-placeholder">Justificación Módulo 3: Celda Robotizada</span>
+                </div>
+
+                <div class="kpi-box">
+                    <h5 class="kpi-title">⏱️ Takt Time y Capacidad</h5>
+                    <p class="kpi-placeholder">[Espacio reservado para los cálculos operativos de la línea de Agua Brisa]</p>
+                    <span class="kpi-result kpi-placeholder">Resultado: [Valor]</span>
+                </div>
             </div>
 
         </main>
