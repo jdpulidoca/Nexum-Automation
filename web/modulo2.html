@@ -198,7 +198,7 @@
                 <h4>1. Cálculo de la Demanda</h4>
                 <p>Para la Línea de Brissa, dedicada al envasado de agua purificada en formato HOD (<em>Home & Office Delivery</em> - retornables), la estimación de la demanda se fundamenta en los resultados consolidados de ventas en Colombia para el cierre del año 2024. Según los reportes financieros (<a href="../docs/modulo2/Informe_Mercado_CocaCola.pdf" target="_blank" style="color: #3F51B5; text-decoration: none; font-weight: bold;">Pág. 153 del Informe Anual</a>), el volumen de ventas nacional experimentó un crecimiento interanual del 1.4%, pasando de 347.6 a 352.3 millones de Cajas Unidad.</p>
                 <p>Para dimensionar correctamente la capacidad de la maquinaria, es imperativo estandarizar la unidad de medida corporativa. En la industria embotelladora, una "Caja Unidad" es una métrica estándar que equivale a 24 porciones de 8 onzas de bebida terminada; esto representa un volumen exacto de 192 onzas, 1.5 galones, o 5.678 litros.</p>
-                <p>De acuerdo con el desglose del mix de ventas (<a href="../docs/modulo2/Informe_Mercado_CocaCola.pdf" target="_blank" style="color: #3F51B5; text-decoration: none; font-weight: bold;">Pág. 163 del Informe Anual</a>), el formato de garrafones representa el 4% del volumen total comercializado en el país. Al aplicar esta proporción sobre los 352.3 millones de Cajas Unidad, se consolida un volumen de 14,092,000 Cajas Unidad destinadas exclusivamente a este formato. Lo que eequivale a 21,138,000 galones anuales.</p>
+                <p>De acuerdo con el desglose del mix de ventas (<a href="../docs/modulo2/Informe_Mercado_CocaCola.pdf" target="_blank" style="color: #3F51B5; text-decoration: none; font-weight: bold;">Pág. 163 del Informe Anual</a>), el formato de garrafones representa el 4% del volumen total comercializado en el país. Al aplicar esta proporción sobre los 352.3 millones de Cajas Unidad, se consolida un volumen de 14,092,000 Cajas Unidad destinadas exclusivamente a este formato. Lo que equivale a 21,138,000 galones anuales.</p>
                 <ul>
                     <li><strong>Demanda estimada:</strong> 4,227,600 garrafones/año.</li>
                 </ul>
@@ -212,15 +212,40 @@
                 <h4>3. Indicadores de Desempeño</h4>
                 
                 <div class="kpi-box">
-                    <h5 class="kpi-title">⚠️ Pérdida por Fatiga (Cuello de Botella)</h5>
-                    <p class="kpi-placeholder">[Espacio reservado para justificar la caída de rendimiento por el peso de los garrafones (20kg)]</p>
-                    <span class="kpi-result kpi-placeholder">Justificación Módulo 3: Celda Robotizada</span>
+                    <h5 class="kpi-title">⏱️ Takt Time</h5>
+                    <p>Es el ritmo de producción estrictamente necesario para satisfacer la demanda sin generar retrasos. Asumiendo que esta línea opera 5 días a la semana, la tasa mínima requerida es de 1,288 garrafones/hora.</p>
+                    <span class="kpi-result">Resultado: 0.0465 minutos/garrafón</span>
                 </div>
 
                 <div class="kpi-box">
-                    <h5 class="kpi-title">⏱️ Takt Time y Capacidad</h5>
-                    <p class="kpi-placeholder">[Espacio reservado para los cálculos operativos de la línea de Agua Brisa]</p>
-                    <span class="kpi-result kpi-placeholder">Resultado: [Valor]</span>
+                    <h5 class="kpi-title">⚙️ Cycle Time (Tc) y Setup Time (Tsu)</h5>
+                    <p>Comparando el Takt Time con la velocidad nominal de la maquinaria (1,500 garrafones/hora), establecemos el tiempo físico de fabricación por unidad.</p>
+                    <ul>
+                        <li><strong>Tiempo de Ciclo (Tc):</strong> 0.04 minutos/garrafón.</li>
+                        <li><strong>Tiempo de Setup (Tsu):</strong> 90 minutos máximo.</li>
+                    </ul>
+                </div>
+
+                <div class="kpi-box">
+                    <h5 class="kpi-title">📈 Tasa y Capacidad de Producción</h5>
+                    <p>Calculado sobre un lote estándar de 8,115 garrafones por turno y evaluando la capacidad técnica instalada:</p>
+                    <ul>
+                        <li><strong>Production Rate (Rp):</strong> 1,175 garrafones/hora.</li>
+                        <li><strong>Capacidad Teórica (PC):</strong> 120,000 garrafones/semana.</li>
+                        <li><strong>Utilización:</strong> 67.62%. (La línea no está saturada).</li>
+                    </ul>
+                </div>
+
+                <div class="kpi-box">
+                    <h5 class="kpi-title">⏳ Manufacturing Lead Time (MLT)</h5>
+                    <p>Tiempo total que transcurre para procesar un lote completo de producción, incluyendo configuración y empaquetado final.</p>
+                    <span class="kpi-result">Resultado: 8.65 Horas / lote</span>
+                </div>
+
+                <div class="kpi-box">
+                    <h5 class="kpi-title">📊 Overall Equipment Effectiveness (OEE)</h5>
+                    <p>Indicador que evalúa la Disponibilidad (93.5%), el Desempeño (97.9%) y la Calidad (98.0%) del proceso de envasado.</p>
+                    <span class="kpi-result">OEE Consolidado: 89.77% (Desempeño Muy Bueno)</span>
                 </div>
             </div>
 
