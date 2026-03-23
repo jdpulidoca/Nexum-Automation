@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulación Preliminar | Nexum Automation</title>
+    <link rel="icon" type="image/png" href="assets/img/favicon.png"> 
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <header>
+        <img src="assets/img/logo.png" alt="Logo Nexum Automation">
+    </header>
+
+     <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-link">Inicio</a>
+            
+            <div class="dropdown">
+                <button class="dropbtn">Módulos del Proyecto <span>&#9662;</span></button>
+                <div class="dropdown-content">
+                    <a href="modulo1.html">Módulo 1: Introducción a la Automatización</a>
+                    <a href="modulo2.html">Módulo 2: Gestión de Producción</a>
+                    <a href="modulo3.html">Módulo 3: Evaluación de Proyectos</a>
+                    <a href="modulo4.html">Módulo 4: Celda de Manufactura</a>
+                </div>
+            </div>
+            <a href="propuesta.html" class="nav-link">Propuesta</a>
+            <a href="simulacion.html" class="nav-link" style="background-color: #3F51B5; color: #ffffff;">Simulación</a>
+            <a href="equipo.html" class="nav-link">Equipo y Contacto</a>
+            <a href="reflexiones.html" class="nav-link">Reflexiones</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <main>
+            <h2 style="color: #3F51B5;">Simulación Preliminar de Líneas</h2>
+            
+            <p>En esta sección, el equipo consultor de <strong>Nexum Automation</strong> presenta los modelos preliminares desarrollados en <strong>Tecnomatix Plant Simulation</strong>. El objetivo de esta fase es validar la lógica de flujo continuo, dimensionar capacidades operativas y establecer los tiempos de ciclo requeridos para alcanzar las metas de <em>Throughput</em> en cada una de las tres líneas de producción.</p>
+
+            <div class="tab" style="margin-top: 20px;">
+                <button class="tablinks active" onclick="abrirLinea(event, 'Monster')">Línea: Monster (473ml)</button>
+                <button class="tablinks" onclick="abrirLinea(event, 'Quatro')">Línea: Quatro (1.5L)</button>
+                <button class="tablinks" onclick="abrirLinea(event, 'Brisa')">Línea: Agua Brisa (20L)</button>
+            </div>
+
+            <div id="Monster" class="tabcontent" style="display: block;">
+                <h3 style="color: #3F51B5; border-bottom: 1px solid #eee; padding-bottom: 10px;">🔋 Simulación: Monster Energy (Lata 473ml)</h3>
+                
+                <p>El modelo preliminar de esta línea de alta velocidad se enfoca en la validación del sincronismo entre la despaletizadora, la llenadora y la engargoladora (seamer). Se modeló el comportamiento de los <em>buffers</em> de acumulación para mitigar el impacto de micro-paros inherentes a velocidades de procesamiento de 0.002 min/lata.</p>
+                
+                <ul>
+                    <li><strong>Objetivo de Simulación:</strong> Validar el flujo frente a una demanda de 2,295,349 unidades/mes.</li>
+                    <li><strong>Software:</strong> Tecnomatix Plant Simulation v23.</li>
+                </ul>
+
+                <div style="background-color: #f9f9f9; padding: 40px; text-align: center; border: 1px dashed #ccc; margin: 20px 0;">
+                    <p style="color: #757575;"><em>[Insertar Captura del Layout Tecnomatix: Monster]</em></p>
+                </div>
+
+                <a href="https://github.com/TU-USUARIO/TU-REPO/tree/main/Simulaciones/Monster" target="_blank" style="display: inline-block; background-color: #24292e; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; font-family: sans-serif; transition: background 0.3s;">
+                    🐙 Ver archivos de simulación en GitHub
+                </a>
+            </div>
+
+            <div id="Quatro" class="tabcontent">
+                <h3 style="color: #3F51B5; border-bottom: 1px solid #eee; padding-bottom: 10px;">🥤 Simulación: Quatro (PET 1.5L)</h3>
+                
+                <p>La simulación preliminar de la línea PET evalúa el comportamiento del bloque integrado (Sopladora - Llenadora). El modelo busca confirmar que el suministro neumático de preformas y la velocidad del transportador aéreo (Air Conveyor) logren mantener la llenadora abastecida de forma constante sin generar un cuello de botella en la entrada.</p>
+
+                <ul>
+                    <li><strong>Objetivo de Simulación:</strong> Balanceo de línea para envases de formato familiar.</li>
+                    <li><strong>Software:</strong> Tecnomatix Plant Simulation v23.</li>
+                </ul>
+
+                <div style="background-color: #f9f9f9; padding: 40px; text-align: center; border: 1px dashed #ccc; margin: 20px 0;">
+                    <p style="color: #757575;"><em>[Insertar Captura del Layout Tecnomatix: Quatro]</em></p>
+                </div>
+
+                <a href="https://github.com/TU-USUARIO/TU-REPO/tree/main/Simulaciones/Quatro" target="_blank" style="display: inline-block; background-color: #24292e; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; font-family: sans-serif; transition: background 0.3s;">
+                    🐙 Ver archivos de simulación en GitHub
+                </a>
+            </div>
+
+            <div id="Brisa" class="tabcontent">
+                <h3 style="color: #3F51B5; border-bottom: 1px solid #eee; padding-bottom: 10px;">💧 Simulación: Agua Brisa (Garrafón 20L)</h3>
+                
+                <p>Para la línea HOD (retornables), el modelo fue configurado paramétricamente para soportar la nueva arquitectura de 1,500 BPH. Se implementó un <em>Takt Time</em> maestro de 2.4 segundos en la llenadora principal, y se ajustaron los tiempos de procesamiento en los túneles de lavado para garantizar que el flujo continuo no rompa los estándares de calidad de la sanitización.</p>
+
+                <ul>
+                    <li><strong>Objetivo de Simulación:</strong> Escalar capacidad y evidenciar la saturación en el fin de línea (paletizado).</li>
+                    <li><strong>Software:</strong> Tecnomatix Plant Simulation v23.</li>
+                </ul>
+
+                <div style="background-color: #f9f9f9; padding: 40px; text-align: center; border: 1px dashed #ccc; margin: 20px 0;">
+                    <p style="color: #757575;"><em>[Insertar Captura del Layout Tecnomatix: Agua Brisa]</em></p>
+                </div>
+
+                <a href="https://github.com/TU-USUARIO/TU-REPO/tree/main/Simulaciones/AguaBrisa" target="_blank" style="display: inline-block; background-color: #24292e; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; font-family: sans-serif; transition: background 0.3s;">
+                    🐙 Ver archivos de simulación en GitHub
+                </a>
+            </div>
+
+        </main>
+    </div>
+
+    <footer>
+        <p>Documentación Técnica &copy; 2026 - Nexum Automation | Universidad Nacional de Colombia</p>
+    </footer>
+
+    <script>
+        function abrirLinea(evt, nombreLinea) {
+            var i, tabcontent, tablinks;
+            
+            // Ocultar todo el contenido de las pestañas
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            
+            // Quitar la clase "active" de todos los botones
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            
+            // Mostrar la pestaña actual y añadir "active" al botón clickeado
+            document.getElementById(nombreLinea).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+
+</body>
+</html>

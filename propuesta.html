@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta de Automatización | Nexum Automation</title>
+    <link rel="icon" type="image/png" href="assets/img/favicon.png"> 
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <header>
+        <img src="assets/img/logo.png" alt="Logo Nexum Automation">
+    </header>
+
+     <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-link">Inicio</a>
+            
+            <div class="dropdown">
+                <button class="dropbtn">Módulos del Proyecto <span>&#9662;</span></button>
+                <div class="dropdown-content">
+                    <a href="modulo1.html">Módulo 1: Introducción a la Automatización</a>
+                    <a href="modulo2.html">Módulo 2: Gestión de Producción</a>
+                    <a href="modulo3.html">Módulo 3: Evaluación de Proyectos</a>
+                    <a href="modulo4.html">Módulo 4: Celda de Manufactura</a>
+                </div>
+            </div>
+            <a href="propuesta.html" class="nav-link" style="background-color: #3F51B5; color: #ffffff;">Propuesta</a>
+            <a href="simulacion.html" class="nav-link">Simulación</a>
+            <a href="equipo.html" class="nav-link">Equipo y Contacto</a>
+            <a href="reflexiones.html" class="nav-link">Reflexiones</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <main>
+            <h2 style="color: #3F51B5;">Propuesta Técnica de Automatización</h2>
+            
+            <p>Con base en los diagnósticos operativos y las simulaciones preliminares, <strong>Nexum Automation</strong> ha diseñado un plan de modernización tecnológica. El objetivo es transicionar la planta hacia un modelo de <strong>Industria 4.0</strong>, eliminando restricciones de capacidad, mejorando la ergonomía y garantizando la trazabilidad bajo el estándar ISA-95.</p>
+
+            <div class="tab" style="margin-top: 30px;">
+                <button class="tablinks active" onclick="abrirLinea(event, 'Monster')">Monster (Lata 473ml)</button>
+                <button class="tablinks" onclick="abrirLinea(event, 'Quatro')">Quatro (PET 1.5L)</button>
+                <button class="tablinks" onclick="abrirLinea(event, 'Brisa')">Agua Brisa (Garrafón 20L)</button>
+            </div>
+
+            <div id="Monster" class="tabcontent" style="display: block;">
+                <h3 style="color: #3F51B5; border-bottom: 1px solid #eee; padding-bottom: 10px;">🔋 Propuesta: Monster Energy (Alta Velocidad)</h3>
+                
+                <p>El principal reto de esta línea son los micro-paros por desincronización y los tiempos de Set-up. La propuesta se enfoca en control de movimiento avanzado (Motion Control) y visión artificial.</p>
+
+                <h4>Soluciones Implementadas:</h4>
+                <ul>
+                    <li><strong>Sincronismo Electrónico (Virtual Master):</strong> Reemplazo de acoples mecánicos por servomotores sincronizados en la llenadora y engargoladora, comandados por un PLC de seguridad, reduciendo el desgaste y vibraciones.</li>
+                    <li><strong>Inspección Autónoma (Machine Vision):</strong> Integración de cámaras de alta velocidad y sensores de Rayos X post-sellado para rechazo automático de latas con bajo nivel o abolladuras sin detener el flujo.</li>
+                    <li><strong>Gestión Inteligente de Buffers:</strong> Control PID sobre los variadores de frecuencia de las bandas transportadoras, regulando la velocidad de acumulación en función del estado de la máquina aguas abajo.</li>
+                </ul>
+
+                <div style="background-color: #f4f7f6; padding: 20px; border-left: 4px solid #3F51B5; margin-top: 20px;">
+                    <strong>Impacto Esperado:</strong> Reducción del 40% en tiempos de Set-up y estabilización del OEE por mitigación de paradas cortas.
+                </div>
+            </div>
+
+            <div id="Quatro" class="tabcontent">
+                <h3 style="color: #3F51B5; border-bottom: 1px solid #eee; padding-bottom: 10px;">🥤 Propuesta: Quatro (Triblock PET 1.5L)</h3>
+                
+                <p>Al ser una bebida carbonatada en formato familiar, la propuesta ataca el control de variables críticas (presión y temperatura) y la fluidez del bloque de soplado-llenado.</p>
+
+                <h4>Soluciones Implementadas:</h4>
+                <ul>
+                    <li><strong>Instrumentación Inteligente (IO-Link):</strong> Instalación de caudalímetros másicos y transmisores de presión digitales para garantizar la saturación exacta de CO2 (Brix/Carbonatación) en tiempo real.</li>
+                    <li><strong>Automatización del Air Conveyor:</strong> Sistema de control de flujo neumático zonificado mediante sopladores con variadores de frecuencia (VFD), evitando cuellos de botella de preformas en la entrada de la llenadora.</li>
+                    <li><strong>Torquímetros Dinámicos:</strong> Cabezales magnéticos con feedback en red para garantizar el sellado hermético de la tapa sin deformar el cuello de la botella PET.</li>
+                </ul>
+
+                <div style="background-color: #f4f7f6; padding: 20px; border-left: 4px solid #d32f2f; margin-top: 20px;">
+                    <strong>Impacto Esperado:</strong> Disminución del 15% en rechazos por calidad (fuga de gas/bajo llenado) y flujo continuo ininterrumpido.
+                </div>
+            </div>
+
+            <div id="Brisa" class="tabcontent">
+                <h3 style="color: #3F51B5; border-bottom: 1px solid #eee; padding-bottom: 10px;">💧 Propuesta: Agua Brisa (Garrafón 20L)</h3>
+                
+                <p>La línea HOD (retornables) presenta un cuello de botella grave por fatiga humana al final de la línea. La automatización se centra en reemplazar el esfuerzo físico y asegurar la cadencia de 1,500 BPH.</p>
+
+                <h4>Soluciones Implementadas:</h4>
+                <ul>
+                    <li><strong>Celda Robótica de Paletizado (Módulo 4):</strong> Integración de un brazo robótico industrial de 6 ejes (ej. tipo KUKA KR o FANUC) con garra neumática personalizada para tomar múltiples garrafones llenos (20kg c/u) y armar la estiba automáticamente.</li>
+                    <li><strong>Dosificación Química PID:</strong> Automatización de las válvulas de inyección de sanitizante (Ácido Peracético/Ozono) en el túnel de lavado interno, controladas por sensores de conductividad.</li>
+                    <li><strong>Inspección de Envase Retornable:</strong> Sistema de olfatometría electrónica (Sniffer) y visión 3D para rechazar garrafones contaminados o con microfisuras antes de ingresar a la lavadora.</li>
+                </ul>
+
+                <div style="background-color: #f4f7f6; padding: 20px; border-left: 4px solid #0288d1; margin-top: 20px;">
+                    <strong>Impacto Esperado:</strong> Eliminación total de lesiones osteomusculares, cumplimiento de la meta de 1,500 BPH (Takt Time 2.4s) y aseguramiento de inocuidad.
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <footer>
+        <p>Documentación Técnica &copy; 2026 - Nexum Automation | Universidad Nacional de Colombia</p>
+    </footer>
+
+    <script>
+        function abrirLinea(evt, nombreLinea) {
+            var i, tabcontent, tablinks;
+            
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            
+            document.getElementById(nombreLinea).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+
+</body>
+</html>
