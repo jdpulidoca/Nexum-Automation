@@ -82,19 +82,60 @@
             </div>
 
             <div id="Brisa" class="tabcontent">
-                <h3 style="color: #3F51B5; border-bottom: 1px solid #eee; padding-bottom: 10px;">💧 Propuesta: Agua Brisa (Garrafón 20L)</h3>
+                <h3 style="color: #3F51B5; border-bottom: 1px solid #eee; padding-bottom: 10px;">💧 Propuestas de Mejora: Agua Brisa (Garrafón 20L)</h3>
                 
-                <p>La línea HOD (retornables) presenta un cuello de botella grave por fatiga humana al final de la línea. La automatización se centra en reemplazar el esfuerzo físico y asegurar la cadencia de 1,500 BPH.</p>
+                <p>Para la línea HOD (garrafones retornables), <strong>Nexum Automation</strong> ha desarrollado dos propuestas de mejora independientes. Cada una ataca un desafío específico de la planta actual y puede ser evaluada o implementada de manera autónoma.</p>
 
-                <h4>Soluciones Implementadas:</h4>
-                <ul>
-                    <li><strong>Celda Robótica de Paletizado (Módulo 4):</strong> Integración de un brazo robótico industrial de 6 ejes (ej. tipo KUKA KR o FANUC) con garra neumática personalizada para tomar múltiples garrafones llenos (20kg c/u) y armar la estiba automáticamente.</li>
-                    <li><strong>Dosificación Química PID:</strong> Automatización de las válvulas de inyección de sanitizante (Ácido Peracético/Ozono) en el túnel de lavado interno, controladas por sensores de conductividad.</li>
-                    <li><strong>Inspección de Envase Retornable:</strong> Sistema de olfatometría electrónica (Sniffer) y visión 3D para rechazar garrafones contaminados o con microfisuras antes de ingresar a la lavadora.</li>
-                </ul>
+                <div style="margin-top: 40px; border: 1px solid #e0e0e0; border-radius: 8px; padding: 25px; background-color: #ffffff; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                    <h4 style="color: #0288d1; font-size: 20px; margin-top: 0; border-bottom: 2px solid #0288d1; padding-bottom: 10px; display: inline-block;">Propuesta A: Reorganización en estructura Tipo U</h4>
+                    
+                    <p style="text-align: justify; line-height: 1.6; margin-top: 15px;">La planta actual de la línea de garrafones presenta una disposición de equipos que según nuestro criterio no responde a criterios óptimos de flujo productivo, ya que existen estaciones de proceso ubicadas a distancias mayores a las necesarias, generando recorridos innecesarios del producto y aumentando los tiempos de transporte interno. Esta configuración provoca acumulación de inventario en proceso, mayores tiempos de ciclo y menor eficiencia operativa.</p>
+                    
+                    <p style="text-align: justify; line-height: 1.6;">Como alternativa, se propone una reorganización de la línea bajo una estructura tipo U, la cual permite integrar los procesos de forma más compacta y secuencial, facilitando un flujo continuo y reduciendo significativamente las distancias entre estaciones críticas como lavado, llenado, tapado y etiquetado. Este tipo de distribución, no sólo disminuye los tiempos de desplazamiento, sino que también mejora la supervisión del proceso, optimiza el uso del espacio y permite una mayor flexibilidad operativa. En consecuencia, la implementación de un layout en U contribuiría a la reducción de tiempos improductivos, el incremento de la productividad y una mejor sincronización de la línea de producción.</p>
+                    
+                    <div style="text-align: center; margin: 25px 0; background-color: #f8f9fa; padding: 20px; border-radius: 8px; border: 1px dashed #ccc;">
+                        <h5 style="margin-top: 0; color: #333; font-size: 14px;"><strong>(Haz clic en la imagen para ampliar)</strong></h5>
+                        
+                        <a href="#zoom_layout_u">
+                            <img src="../assets/img/Imagen de propuesta_garrafones.png" alt="Propuesta de Layout en U" style="max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); cursor: zoom-in;">
+                        </a>
+                        
+                        <div id="zoom_layout_u" class="lightbox">
+                            <a href="#Brisa" class="close-lightbox">&times;</a>
+                            <img src="../assets/img/Imagen de propuesta_garrafones.png" alt="Propuesta de Layout en U Ampliado">
+                        </div>
+                        <p style="font-size: 13px; color: #666; margin-top: 10px;"><em>Figura 1. Reorganización espacial de la línea HOD mediante Layout en forma de U.</em></p>
+                    </div>
 
-                <div style="background-color: #f4f7f6; padding: 20px; border-left: 4px solid #0288d1; margin-top: 20px;">
-                    <strong>Impacto Esperado:</strong> Eliminación total de lesiones osteomusculares, cumplimiento de la meta de 1,500 BPH (Takt Time 2.4s) y aseguramiento de inocuidad.
+                    <div style="background-color: #f4f7f6; padding: 15px; border-left: 4px solid #0288d1; margin-top: 20px; font-size: 15px;">
+                        <strong>Impacto de la Propuesta A:</strong> Reducción de tiempos improductivos por transporte, optimización del espacio físico en planta y mejora en la supervisión visual del flujo continuo.
+                    </div>
+                </div>
+
+                <div style="margin-top: 40px; margin-bottom: 20px; border: 1px solid #e0e0e0; border-radius: 8px; padding: 25px; background-color: #ffffff; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                    <h4 style="color: #4caf50; font-size: 20px; margin-top: 0; border-bottom: 2px solid #4caf50; padding-bottom: 10px; display: inline-block;">Propuesta B: Celda Robotizada para Paletización</h4>
+                    
+                    <p style="text-align: justify; line-height: 1.6; margin-top: 15px;">Actualmente, el proceso de paletización de garrafones se realiza de forma manual, lo que representa una limitación significativa en términos de productividad, ergonomía y estabilidad del proceso. Esta operación requiere múltiples operarios por turno, quienes deben manipular cargas de aproximadamente 18–20 kg de manera repetitiva, aumentando el riesgo de fatiga y lesiones musculoesqueléticas, tal como lo advierten entidades como la Occupational Safety and Health Administration y la National Institute for Occupational Safety and Health. Además, la variabilidad en los tiempos de manipulación (entre 6 y 10 segundos por unidad) genera inconsistencias en el ritmo de producción, afectando directamente indicadores clave como el tiempo de ciclo y la eficiencia global del equipo (OEE).</p>
+                    
+                    <p style="text-align: justify; line-height: 1.6;">Como solución, se propone la implementación de una celda robotizada de paletización, compuesta por un robot industrial especializado —como el ABB IRB 660 o el FANUC M-410iC/185— capaz de realizar operaciones de <em>pick and place</em> de manera continua, precisa y sin fatiga. Esta automatización permitiría reducir el tiempo de paletizado de aproximadamente 2–3 minutos por pallet a menos de 40 segundos, incrementar la capacidad productiva, disminuir la dependencia de mano de obra directa (de 5–6 operarios a 1 operario de supervisión) y mejorar las condiciones de seguridad en planta. En conjunto, la celda robotizada no solo elimina un cuello de botella crítico, sino que también contribuye a la estandarización del proceso, la reducción de costos operativos y el cumplimiento sostenido de la demanda de producción.</p>
+                    
+                    <div style="text-align: center; margin: 25px 0; background-color: #f8f9fa; padding: 20px; border-radius: 8px; border: 1px dashed #ccc;">
+                        <h5 style="margin-top: 0; color: #333; font-size: 14px;"><strong>(Haz clic en la imagen para ampliar)</strong></h5>
+                        
+                        <a href="#zoom_robot">
+                            <img src="../assets/img/Celda_galones.png" alt="Celda Robotizada de Paletización" style="max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); cursor: zoom-in;">
+                        </a>
+                        
+                        <div id="zoom_robot" class="lightbox">
+                            <a href="#Brisa" class="close-lightbox">&times;</a>
+                            <img src="../assets/img/Celda_galones.png" alt="Celda Robotizada de Paletización Ampliado">
+                        </div>
+                        <p style="font-size: 13px; color: #666; margin-top: 10px;"><em>Figura 2. Diseño conceptual de la celda de paletizado robótico.</em></p>
+                    </div>
+
+                    <div style="background-color: #f4f7f6; padding: 15px; border-left: 4px solid #4caf50; margin-top: 20px; font-size: 15px;">
+                        <strong>Impacto de la Propuesta B:</strong> Eliminación del riesgo ergonómico, estabilización del <em>Takt Time</em>, reducción del tiempo de paletizado a menos de 40 segundos y optimización de la mano de obra directa.
+                    </div>
                 </div>
             </div>
 
