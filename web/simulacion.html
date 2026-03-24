@@ -88,18 +88,35 @@
                 
                 <p>Para la línea HOD (retornables), el modelo fue configurado paramétricamente para soportar la nueva arquitectura de 1,500 BPH. Se implementó un <em>Takt Time</em> maestro de 2.4 segundos en la llenadora principal, y se ajustaron los tiempos de procesamiento en los túneles de lavado para garantizar que el flujo continuo no rompa los estándares de calidad de la sanitización.</p>
 
-                <ul>
+                <ul style="margin-bottom: 25px;">
                     <li><strong>Objetivo de Simulación:</strong> Escalar capacidad y evidenciar la saturación en el fin de línea (paletizado).</li>
                     <li><strong>Software:</strong> Tecnomatix Plant Simulation v23.</li>
                 </ul>
 
-                <div style="background-color: #f9f9f9; padding: 40px; text-align: center; border: 1px dashed #ccc; margin: 20px 0;">
-                    <p style="color: #757575;"><em>[Insertar Captura del Layout Tecnomatix: Agua Brisa]</em></p>
+                <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 30px;">
+                    
+                    <div style="flex: 1; min-width: 300px; background-color: #f8f9fa; padding: 15px; border-radius: 8px; border: 1px solid #ddd; text-align: center;">
+                        <h4 style="margin-top: 0; color: #333; font-size: 15px;">Layout de Simulación</h4>
+                        <img src="../simulacion/Brissa/Brisa_Simulacion.png" alt="Layout Simulación Brisa" style="max-width: 100%; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                    </div>
+
+                    <div style="flex: 1; min-width: 300px; background-color: #f8f9fa; padding: 15px; border-radius: 8px; border: 1px solid #ddd; text-align: center;">
+                        <h4 style="margin-top: 0; color: #333; font-size: 15px;">Demostración del Flujo</h4>
+                        <video width="100%" controls style="border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); background-color: #000;">
+                            <source src="../simulacion/Brissa/Simulación_Galones.mp4" type="video/mp4">
+                            Tu navegador no soporta la reproducción de video.
+                        </video>
+                    </div>
+
                 </div>
 
-                <a href="https://github.com/TU-USUARIO/TU-REPO/tree/main/Simulaciones/AguaBrisa" target="_blank" style="display: inline-block; background-color: #24292e; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; font-family: sans-serif; transition: background 0.3s;">
-                    🐙 Ver archivos de simulación en GitHub
-                </a>
+                <div style="display: flex; justify-content: center; margin-top: 20px; border-top: 1px solid #eee; padding-top: 20px;">
+                    
+                    <a href="../simulacion/Brissa/Gallones_Line1.spp" download style="display: inline-flex; align-items: center; background-color: #4caf50; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; font-family: sans-serif; transition: background 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                        💾 Descargar Archivo de Simulación
+                    </a>
+
+                </div>
             </div>
 
         </main>
