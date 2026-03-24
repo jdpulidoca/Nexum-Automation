@@ -216,3 +216,52 @@ footer {
     border-radius: 4px;
     margin: 20px 0;
 }
+/* --- ESTILOS PARA AMPLIAR IMÁGENES (LIGHTBOX SIN JS) --- */
+        
+        /* Contenedor oscuro que cubre toda la pantalla */
+        .lightbox {
+            display: none; /* Oculto por defecto */
+            position: fixed;
+            z-index: 9999; /* Por encima de todo */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85); /* Fondo oscuro transparente */
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease; /* Efecto suave de aparición */
+        }
+
+        /* La imagen grande que flota en el centro */
+        .lightbox img {
+            max-width: 90%;
+            max-height: 80%;
+            margin-top: 5%; /* Espacio arriba para el botón cerrar */
+            border: 4px solid #ffffff;
+            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        /* Botón "X" para cerrar el lightbox */
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 40px;
+            font-weight: bold;
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .close-lightbox:hover {
+            color: #ff5252; /* Color de advertencia al pasar el mouse */
+        }
+
+        /* --- El "TRUCO" CSS --- */
+        /* Cuando el ID de la URL (#monster_vsm) coincide con el ID de un elemento (.lightbox#monster_vsm) */
+        .lightbox:target {
+            display: block; /* Lo mostramos */
+            opacity: 1; /* Le damos visibilidad */
+        }

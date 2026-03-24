@@ -97,31 +97,65 @@
                 </ul>
 
                 <h4>2. Mapas y Diagramas de Ingeniería</h4>
-                <p>Análisis de flujo, recorridos y valor de la línea de producción:</p>
+                <p>Análisis de flujo, recorridos y valor de la línea de producción. <strong>(Haz clic en cualquier imagen para ampliarla)</strong>:</p>
                 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                    
                     <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
                         <h5 style="margin-top: 0; color: #3F51B5;">Layout de la Línea</h5>
-                        <img src="../docs/modulo2/Diagramas/Layout/Layout Mosnter.png" alt="Layout Línea Monster" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px;">
+                        <a href="#zoom_layout_monster">
+                            <img src="../docs/modulo2/Diagramas/Layout/Layout Mosnter.png" alt="Layout Línea Monster" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
+                        </a>
+                        <div id="zoom_layout_monster" class="lightbox">
+                            <a href="#Monster" class="close-lightbox">&times;</a>
+                            <img src="../docs/modulo2/Diagramas/Layout/Layout Mosnter.png" alt="Layout Línea Monster">
+                        </div>
                     </div>
+
                     <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
                         <h5 style="margin-top: 0; color: #3F51B5;">Diagrama Spaghetti</h5>
-                        <img src="../docs/modulo2/Diagramas/Spaghetti/Monster_Spagetti.jpg" alt="Diagrama Spaghetti Monster" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px;">
+                        <a href="#zoom_spagetti_monster">
+                            <img src="../docs/modulo2/Diagramas/Spaghetti/Monster_Spagetti.jpg" alt="Diagrama Spaghetti Monster" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
+                        </a>
+                        <div id="zoom_spagetti_monster" class="lightbox">
+                            <a href="#Monster" class="close-lightbox">&times;</a>
+                            <img src="../docs/modulo2/Diagramas/Spaghetti/Monster_Spagetti.jpg" alt="Diagrama Spaghetti Monster">
+                        </div>
                     </div>
+
                     <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
                         <h5 style="margin-top: 0; color: #3F51B5;">DOP (Operaciones)</h5>
-                        <img src="../assets/img/dop_monster.png" alt="DOP Monster" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px;">
+                        <a href="#zoom_dop_monster">
+                            <img src="../assets/img/dop_monster.png" alt="DOP Monster" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
+                        </a>
+                        <div id="zoom_dop_monster" class="lightbox">
+                            <a href="#Monster" class="close-lightbox">&times;</a>
+                            <img src="../assets/img/dop_monster.png" alt="DOP Monster">
+                        </div>
                     </div>
+
                     <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
                         <h5 style="margin-top: 0; color: #3F51B5;">VSM (Value Stream Map)</h5>
-                        <img src="../docs/modulo2/Diagramas/VSM/VMS Monster.png" alt="VSM Monster" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px;">
+                        <a href="#zoom_vsm_monster">
+                            <img src="../docs/modulo2/Diagramas/VSM/VMS Monster.png" alt="VSM Monster" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
+                        </a>
+                        <div id="zoom_vsm_monster" class="lightbox">
+                            <a href="#Monster" class="close-lightbox">&times;</a>
+                            <img src="../docs/modulo2/Diagramas/VSM/VMS Monster.png" alt="VSM Monster">
+                        </div>
                     </div>
                 </div>
 
                 <h5 style="color: #3F51B5;">📋 Diagrama de Análisis de Proceso</h5>
                 <p>Resumen analítico de tiempos, distancias y tipos de operación (operación, transporte, inspección, demora y almacenaje):</p>
                 <div style="text-align: center; border: 1px solid #eee; margin-bottom: 25px; border-radius: 5px; padding: 10px;">
-                    <img src="../assets/img/tabla_proceso_monster.png" alt="Tabla Análisis de Proceso Monster" style="max-width: 100%; height: auto;">
+                    <a href="#zoom_tabla_monster">
+                        <img src="../assets/img/tabla_proceso_monster.png" alt="Tabla Análisis de Proceso Monster" style="max-width: 100%; height: auto; cursor: zoom-in;">
+                    </a>
+                    <div id="zoom_tabla_monster" class="lightbox">
+                        <a href="#Monster" class="close-lightbox">&times;</a>
+                        <img src="../assets/img/tabla_proceso_monster.png" alt="Tabla Análisis de Proceso Monster">
+                    </div>
                 </div>
 
                 <p><strong>Hallazgo Principal del VSM:</strong> El tiempo que agrega valor es de apenas 0,36 segundos frente a un Lead Time total de 180 minutos, penalizado fuertemente por los tiempos de Set-up y el desestibado manual inicial.</p>
