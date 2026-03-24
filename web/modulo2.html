@@ -73,11 +73,11 @@
                     <a href="../docs/modulo2/Informe_Mercado_CocaCola.pdf" target="_blank" class="download-btn" style="padding: 10px 20px; font-size: 14px; background-color: #757575;">📊 Análisis de Mercado y Demanda</a>
                 </div>
             </div>
-            <div style="margin-bottom: 30px; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+           <div style="margin-bottom: 30px; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                 <h3 style="margin-top: 0; color: #3F51B5; border-bottom: 2px solid #3F51B5; padding-bottom: 5px;">📍 Layout General de la Planta</h3>
                 <p>Distribución macro de las áreas de producción, almacenamiento y servicios industriales de Nexum Automation.</p>
                 <div style="text-align: center; border: 1px solid #eee; border-radius: 8px; padding: 10px;">
-                    <img src="../docs/modulo2/Diagramas/Layout/Layout_planta.png" alt="Layout General de la Planta" style="max-width: 100%; height: auto; border-radius: 4px;">
+                    <img src="../docs/modulo2/Diagramas/Layout/Layout planta.png" alt="Layout General de la Planta" style="max-width: 100%; height: auto; border-radius: 4px;">
                 </div>
             </div>
             <div class="tab">
@@ -96,12 +96,35 @@
                     <li><strong>Demanda estimada:</strong> 20,000,000 unidades/año.</li>
                 </ul>
 
-                <h4>2. Mapas de Proceso (DOP / VSM)</h4>
-                <div style="background-color: #f9f9f9; padding: 15px; text-align: center; border: 1px dashed #ccc; margin-bottom: 20px;">
-                    <p style="color: #757575;"><em>[Insertar Imagen DOP / VSM de Monster Aquí]</em></p>
+                <h4>2. Mapas y Diagramas de Ingeniería</h4>
+                <p>Análisis de flujo, recorridos y valor de la línea de producción:</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
+                        <h5 style="margin-top: 0; color: #3F51B5;">Layout de la Línea</h5>
+                        <img src="../docs/modulo2/Diagramas/Layout/Layout Mosnter.png" alt="Layout Línea Monster" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px;">
+                    </div>
+                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
+                        <h5 style="margin-top: 0; color: #3F51B5;">Diagrama Spaghetti</h5>
+                        <img src="../docs/modulo2/Diagramas/Spaghetti/Monster_Spagetti.jpg" alt="Diagrama Spaghetti Monster" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px;">
+                    </div>
+                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
+                        <h5 style="margin-top: 0; color: #3F51B5;">DOP (Operaciones)</h5>
+                        <img src="../assets/img/dop_monster.png" alt="DOP Monster" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px;">
+                    </div>
+                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
+                        <h5 style="margin-top: 0; color: #3F51B5;">VSM (Value Stream Map)</h5>
+                        <img src="../docs/modulo2/Diagramas/VSM/VMS Monster.png" alt="VSM Monster" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px;">
+                    </div>
                 </div>
-                <p><strong>Hallazgo VSM:</strong> El tiempo que agrega valor es de apenas 0,36 segundos frente a un Lead Time total de 180 minutos, penalizado fuertemente por los tiempos de Set-up y el desestibado manual inicial.</p>
 
+                <h5 style="color: #3F51B5;">📋 Diagrama de Análisis de Proceso</h5>
+                <p>Resumen analítico de tiempos, distancias y tipos de operación (operación, transporte, inspección, demora y almacenaje):</p>
+                <div style="text-align: center; border: 1px solid #eee; margin-bottom: 25px; border-radius: 5px; padding: 10px;">
+                    <img src="../assets/img/tabla_proceso_monster.png" alt="Tabla Análisis de Proceso Monster" style="max-width: 100%; height: auto;">
+                </div>
+
+                <p><strong>Hallazgo Principal del VSM:</strong> El tiempo que agrega valor es de apenas 0,36 segundos frente a un Lead Time total de 180 minutos, penalizado fuertemente por los tiempos de Set-up y el desestibado manual inicial.</p>
                 <h4>3. Indicadores de Desempeño</h4>
                 
                 <div class="kpi-box">
