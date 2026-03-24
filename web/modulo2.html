@@ -340,27 +340,31 @@
             evt.currentTarget.className += " active";
         }
 
-        // --- EFECTO LUPA ESTILO MERCADOLIBRE ---
+        // --- EFECTO LUPA CORREGIDO ---
         document.addEventListener("DOMContentLoaded", function() {
-            // Seleccionamos todas las imágenes que están dentro de los lightboxes
             const imagenesLightbox = document.querySelectorAll('.lightbox img');
             
             imagenesLightbox.forEach(img => {
-                // Cuando el mouse se mueve sobre la imagen
+                // Transición suave al entrar/salir del zoom
+                img.style.transition = "transform 0.1s ease";
+                
                 img.addEventListener('mousemove', function(e) {
-                    // Calculamos las dimensiones de la imagen
                     const rect = e.target.getBoundingClientRect();
-                    // Calculamos la posición X y Y del mouse en porcentajes (0 a 100)
+                    // Calculamos dónde está el mouse en porcentaje relativo a la imagen
                     const x = ((e.clientX - rect.left) / rect.width) * 100;
                     const y = ((e.clientY - rect.top) / rect.height) * 100;
                     
-                    // Movemos el "centro" del zoom a la posición del mouse
+                    // Movemos el origen y APLICAMOS EL ZOOM (Scale)
                     img.style.transformOrigin = `${x}% ${y}%`;
+                    img.style.transform = "scale(2.5)"; // Esta línea es la que hace la magia de ampliar
+                    img.style.cursor = "zoom-in";
                 });
                 
-                // Cuando el mouse sale de la imagen, la reiniciamos al centro
                 img.addEventListener('mouseleave', function() {
+                    // Quitamos el zoom al sacar el cursor
+                    img.style.transform = "scale(1)";
                     img.style.transformOrigin = 'center center';
+                    img.style.cursor = "default";
                 });
             });
         });
