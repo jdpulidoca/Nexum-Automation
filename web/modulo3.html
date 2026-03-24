@@ -4,12 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Módulo 3 - Evaluación de Proyectos | Nexum Automation</title>
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png"> <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png"> 
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        /* Estilos específicos para las tarjetas de este módulo */
+        .card-modulo3 {
+            background-color: #ffffff; 
+            padding: 25px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05); 
+            margin-bottom: 30px;
+            border-top: 4px solid #3F51B5;
+        }
+        .card-modulo3 h3 {
+            color: #3F51B5; 
+            border-bottom: 2px solid #eee; 
+            padding-bottom: 10px; 
+            margin-top: 0;
+        }
+    </style>
 </head>
 <body>
 
     <header>
-    <img src="../assets/img/logo.png" alt="Logo Nexum Automation">
+        <img src="../assets/img/logo.png" alt="Logo Nexum Automation">
     </header>
 
     <nav class="navbar">
@@ -34,37 +52,87 @@
 
     <div class="container">
         <main>
-            <h2>Módulo 3: Planeación y Evaluación de Proyectos</h2>
-            
-            <p>En este módulo, <span class="highlight">Nexum Automation</span> presenta la viabilidad económica de la operación multilínea, justificando la inversión en tecnología mediante un análisis riguroso de CAPEX y OPEX.</p>
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 style="color: #3F51B5; font-size: 28px;">Módulo 3: Planeación y Evaluación de Proyectos</h2>
+                <p style="color: #666; font-size: 16px; max-width: 800px; margin: 0 auto;">
+                    Estructuración, modelo de negocio, cronograma y demostración de la viabilidad económica (CAPEX/OPEX) para la automatización de la planta multilínea de <span class="highlight">Nexum Automation</span>.
+                </p>
+            </div>
 
-            <hr style="border: 1px solid #eee; margin: 30px 0;">
+            <div id="canvas-negocio" class="card-modulo3">
+                <h3>📊 1. Modelo Canvas de Negocio</h3>
+                <p>Visualización del modelo de negocio enfocado en la automatización, propuesta de valor y relaciones con clientes clave. <strong>(Haz clic en la imagen para ampliarla)</strong></p>
+                
+                <div style="text-align: center; border: 1px solid #ddd; border-radius: 8px; padding: 15px; background-color: #f9fbfc;">
+                    <a href="#zoom_canvas">
+                        <img src="../docs/modulo3/Modelo canvas de negocio .png" alt="Modelo Canvas de Negocio" style="max-width: 100%; height: auto; border-radius: 4px; cursor: zoom-in;">
+                    </a>
+                    <div id="zoom_canvas" class="lightbox">
+                        <a href="#canvas-negocio" class="close-lightbox">&times;</a>
+                        <img src="../docs/modulo3/Modelo canvas de negocio .png" alt="Modelo Canvas de Negocio">
+                    </div>
+                </div>
+            </div>
 
-            <h3>1. Análisis de OPEX (Costos Operativos y Materias Primas)</h3>
-            <p>Se realizó un estudio comparativo de la estructura de costos entre las líneas de producción:</p>
-            <ul>
-                <li><strong>Impacto del Azúcar:</strong> Basado en los precios reportados por DANE/Corabastos, el costo del azúcar industrial representa el principal rubro del OPEX para las líneas de <strong>Monster (Lata)</strong> y <strong>Quatro (PET)</strong>, reduciendo el margen operativo por litro en comparación con el agua purificada.</li>
-                <li><strong>Estrategia de Margen:</strong> Debido al alto costo de insumos en bebidas azucaradas, la línea de <strong>Agua Brisa (20L)</strong> se vuelve crítica para la liquidez de la planta, justificando la necesidad de automatizarla para alcanzar su volumen máximo teórico.</li>
-            </ul>
+           <div id="edt-proyecto" class="card-modulo3">
+                <h3>🧩 2. Estructura de Desglose del Trabajo (EDT)</h3>
+                <p>El EDT se utiliza para identificar y organizar los paquetes de trabajo que componen el proyecto, descomponiendo el objetivo general en actividades más manejables. <strong>(Haz clic en la imagen para ampliarla)</strong></p>
+                
+                <div style="background-color: #e8eaf6; padding: 15px; border-left: 4px solid #3F51B5; border-radius: 4px; margin-bottom: 20px;">
+                    <p style="margin: 0; font-size: 14px; color: #333;">
+                        <strong>Dinámica de Ejecución:</strong> Aunque el EDT no define el orden temporal exacto (función del cronograma), sí establece entregables y dependencias lógicas. En este proyecto existen secuencias claras: primero se requiere <strong>definir el proceso productivo</strong>, posteriormente <strong>identificar sensores y actuadores</strong>, luego desarrollar la <strong>lógica de control en PLC</strong>, y finalmente integrar el <strong>sistema de supervisión SCADA</strong>.
+                    </p>
+                </div>
+                
+                <div style="text-align: center; border: 1px solid #ddd; border-radius: 8px; padding: 15px; background-color: #f9fbfc;">
+                    <a href="#zoom_edt">
+                        <img src="../docs/modulo3/EDT.jpg" alt="Estructura de Desglose del Trabajo (EDT)" style="max-width: 100%; height: auto; border-radius: 4px; cursor: zoom-in;">
+                    </a>
+                    <div id="zoom_edt" class="lightbox">
+                        <a href="#edt-proyecto" class="close-lightbox">&times;</a>
+                        <img src="../docs/modulo3/EDT.jpg" alt="Estructura de Desglose del Trabajo (EDT)">
+                    </div>
+                </div>
+            </div>
 
-            <h3>2. Presupuesto de Inversión (CAPEX)</h3>
-            <p>Para la línea de 20L, el proyecto contempla la siguiente estructura de capital inicial:</p>
-            <ul>
-                <li><strong>Maquinaria Principal:</strong> Adquisición de un equipo de llenado con capacidad instalada de 1.200 BPH por un valor de <strong>$32,000 USD</strong>.</li>
-                <li><strong>Celda de Paletizado (Fase 2):</strong> Proyección de inversión para la integración del brazo robótico (cuyos detalles técnicos se desarrollarán en el Módulo 3).</li>
-            </ul>
+            <div id="cronograma-gantt" class="card-modulo3">
+                <h3>🗓️ 3. Cronograma del Proyecto (Diagrama de Gantt)</h3>
+                <p>Planificación temporal de las actividades, secuencias, responsables y fechas de ejecución (Febrero - Junio 2026).</p>
+                
+                <div style="text-align: center; margin-top: 20px; padding: 30px; border: 2px dashed #ccc; border-radius: 8px; background-color: #f9fbfc;">
+                    <p style="margin-bottom: 20px; color: #555;">Documento detallado de planificación general (Exportado desde Excel)</p>
+                    <a href="../docs/modulo3/Cronograma_Gantt.pdf" target="_blank" style="display: inline-block; padding: 12px 24px; background-color: #3F51B5; color: #ffffff; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                        📄 Abrir Cronograma Gantt (PDF)
+                    </a>
+                </div>
+            </div>
 
-            <h3>3. Indicadores Financieros</h3>
-            <p>El flujo de caja proyectado demuestra que la eliminación del cuello de botella en paletizado incrementa las ventas anuales, generando una <strong>Tasa Interna de Retorno (TIR)</strong> favorable y un <strong>Valor Presente Neto (VPN)</strong> positivo que garantiza el retorno de la inversión (Payback) dentro del horizonte de planeación.</p>
+            <div class="card-modulo3" style="border-top: 4px solid #00e676;">
+                <h3 style="color: #2e7d32;">💰 4. Análisis Financiero y Viabilidad</h3>
+                
+                <h4 style="color: #333;">Análisis de OPEX (Costos Operativos y Materias Primas)</h4>
+                <p>Se realizó un estudio comparativo de la estructura de costos entre las líneas de producción:</p>
+                <ul>
+                    <li><strong>Impacto del Azúcar:</strong> Basado en los precios reportados por DANE/Corabastos, el costo del azúcar industrial representa el principal rubro del OPEX para las líneas de <strong>Monster (Lata)</strong> y <strong>Quatro (PET)</strong>, reduciendo el margen operativo por litro en comparación con el agua purificada.</li>
+                    <li><strong>Estrategia de Margen:</strong> Debido al alto costo de insumos en bebidas azucaradas, la línea de <strong>Agua Brisa (20L)</strong> se vuelve crítica para la liquidez de la planta, justificando la necesidad de automatizarla para alcanzar su volumen máximo teórico.</li>
+                </ul>
 
-            <hr style="border: 1px solid #eee; margin: 30px 0;">
+                <h4 style="color: #333; margin-top: 25px;">Presupuesto de Inversión (CAPEX)</h4>
+                <p>Para la línea de 20L, el proyecto contempla la siguiente estructura de capital inicial:</p>
+                <ul>
+                    <li><strong>Maquinaria Principal:</strong> Adquisición de un equipo de llenado con capacidad instalada de 1.200 BPH por un valor de <strong>$32,000 USD</strong>.</li>
+                    <li><strong>Celda de Paletizado (Fase 2):</strong> Proyección de inversión para la integración del brazo robótico (cuyos detalles técnicos se desarrollarán en el Módulo 3).</li>
+                </ul>
 
-            <div style="text-align: center; margin-top: 20px;">
-                <p><em>Consulte el modelo financiero interactivo para ver los flujos de caja y cálculos de TIR/VPN:</em></p>
-                <br>
-                <a href="../docs/modulo2/Evaluacion_Financiera_Nexum.xlsx" download style="background-color: #00e676; color: #1a1a1a; padding: 15px 30px; text-decoration: none; font-weight: bold; border-radius: 5px; display: inline-block; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                    📥 Descargar Excel Financiero (CAPEX/OPEX)
-                </a>
+                <h4 style="color: #333; margin-top: 25px;">Indicadores Financieros</h4>
+                <p>El flujo de caja proyectado demuestra que la eliminación del cuello de botella en paletizado incrementa las ventas anuales, generando una <strong>Tasa Interna de Retorno (TIR)</strong> favorable y un <strong>Valor Presente Neto (VPN)</strong> positivo que garantiza el retorno de la inversión (Payback) dentro del horizonte de planeación.</p>
+
+                <div style="text-align: center; margin-top: 35px; border-top: 1px solid #eee; padding-top: 25px;">
+                    <p style="margin-bottom: 15px; color: #555;"><em>Consulte el modelo financiero interactivo para ver los flujos de caja y cálculos de TIR/VPN:</em></p>
+                    <a href="../docs/modulo2/Evaluacion_Financiera_Nexum.xlsx" download style="background-color: #00e676; color: #1a1a1a; padding: 15px 30px; text-decoration: none; font-weight: bold; border-radius: 5px; display: inline-block; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s;">
+                        📥 Descargar Excel Financiero (CAPEX/OPEX)
+                    </a>
+                </div>
             </div>
 
         </main>
@@ -73,6 +141,30 @@
     <footer>
         <p>Documentación Técnica &copy; 2026 - Nexum Automation | Universidad Nacional de Colombia</p>
     </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const imagenesLightbox = document.querySelectorAll('.lightbox img');
+            
+            imagenesLightbox.forEach(img => {
+                img.style.transition = "transform 0.2s ease-out";
+                
+                img.addEventListener('mousemove', function(e) {
+                    const x = (e.offsetX / img.offsetWidth) * 100;
+                    const y = (e.offsetY / img.offsetHeight) * 100;
+                    
+                    img.style.transformOrigin = `${x}% ${y}%`;
+                    img.style.transform = "scale(2.5)"; 
+                    img.style.cursor = "zoom-in";
+                });
+                
+                img.addEventListener('mouseleave', function() {
+                    img.style.transform = "scale(1)";
+                    img.style.cursor = "default";
+                });
+            });
+        });
+    </script>
 
 </body>
 </html>
