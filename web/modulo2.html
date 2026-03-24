@@ -339,6 +339,31 @@
             document.getElementById(nombreLinea).style.display = "block";
             evt.currentTarget.className += " active";
         }
+
+        // --- EFECTO LUPA ESTILO MERCADOLIBRE ---
+        document.addEventListener("DOMContentLoaded", function() {
+            // Seleccionamos todas las imágenes que están dentro de los lightboxes
+            const imagenesLightbox = document.querySelectorAll('.lightbox img');
+            
+            imagenesLightbox.forEach(img => {
+                // Cuando el mouse se mueve sobre la imagen
+                img.addEventListener('mousemove', function(e) {
+                    // Calculamos las dimensiones de la imagen
+                    const rect = e.target.getBoundingClientRect();
+                    // Calculamos la posición X y Y del mouse en porcentajes (0 a 100)
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    
+                    // Movemos el "centro" del zoom a la posición del mouse
+                    img.style.transformOrigin = `${x}% ${y}%`;
+                });
+                
+                // Cuando el mouse sale de la imagen, la reiniciamos al centro
+                img.addEventListener('mouseleave', function() {
+                    img.style.transformOrigin = 'center center';
+                });
+            });
+        });
     </script>
 
 </body>
