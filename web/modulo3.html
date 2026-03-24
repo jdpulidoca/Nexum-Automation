@@ -96,16 +96,92 @@
             </div>
 
             <div id="cronograma-gantt" class="card-modulo3">
-                <h3>🗓️ 3. Cronograma del Proyecto (Diagrama de Gantt)</h3>
-                <p>Planificación temporal de las actividades, secuencias, responsables y fechas de ejecución (Febrero - Junio 2026).</p>
-                
-                <div style="text-align: center; margin-top: 20px; padding: 30px; border: 2px dashed #ccc; border-radius: 8px; background-color: #f9fbfc;">
-                    <p style="margin-bottom: 20px; color: #555;">Documento detallado de planificación general (Exportado desde Excel)</p>
-                    <a href="../docs/modulo3/Cronograma_Gantt.pdf" target="_blank" style="display: inline-block; padding: 12px 24px; background-color: #3F51B5; color: #ffffff; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
-                        📄 Abrir Cronograma Gantt (PDF)
-                    </a>
-                </div>
-            </div>
+    <h3>🗓️ 3. Diagrama de Gantt: Planeación Proyecto Nexum Automation</h3>
+    <p>Cronograma detallado de ejecución. El semestre académico finalizó el <strong>30 de mayo de 2026</strong>.</p>
+
+    <div style="overflow-x: auto; background: #fff; border: 1px solid #ddd; border-radius: 8px;">
+        <table style="width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 11px;">
+            <thead>
+                <tr style="background: #3F51B5; color: white;">
+                    <th style="padding: 10px; border: 1px solid #303f9f; text-align: left; width: 30%;">ACTIVIDADES</th>
+                    <th style="padding: 10px; border: 1px solid #303f9f; text-align: left;">RESPONSABLE</th>
+                    <th style="padding: 10px; border: 1px solid #303f9f; text-align: center; width: 80px;">INICIO</th>
+                    <th style="padding: 10px; border: 1px solid #303f9f; text-align: left;">VISUALIZACIÓN GANTT (Feb - May)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <script>
+                    const actividades = [
+                        ["Definición del proceso y alcance del proyecto", "Lider", "10-Feb", 100, "#2e7d32"],
+                        ["Selección de los 3 productos y líneas", "Ing. Automatización", "21-Feb", 100, "#2e7d32"],
+                        ["Investigación del proceso industrial", "Ing. Automatización", "26-Feb", 100, "#2e7d32"],
+                        ["Descripción del proceso productivo", "Ing. Comunicación", "26-Feb", 100, "#2e7d32"],
+                        ["Elaboración del DOP", "Lider", "26-Feb", 100, "#2e7d32"],
+                        ["Elaboración del DAP", "Ing. Digital CAD 2", "26-Feb", 100, "#2e7d32"],
+                        ["Identificación de etapas", "Lider", "26-Feb", 100, "#2e7d32"],
+                        ["Identificación de sensores y actuadores", "Ing. Digital CAD 2", "01-Mar", 100, "#2e7d32"],
+                        ["Análisis de flujo (VSM)", "Ing. Digital CAD 1", "01-Mar", 100, "#2e7d32"],
+                        ["Análisis de tiempos", "Ing. Comunicación", "01-Mar", 100, "#2e7d32"],
+                        ["Definición de indicadores", "Ing. Comunicación", "08-Mar", 100, "#2e7d32"],
+                        ["Definición arquitectura automatización", "Ing. Automatización", "08-Mar", 100, "#2e7d32"],
+                        ["Definición arquitectura control", "Ing. Automatización", "10-Mar", 100, "#2e7d32"],
+                        ["Diseño estrategia de control", "Lider", "12-Mar", 100, "#2e7d32"],
+                        ["Diseño control secuencial (Grafcet)", "Lider", "13-Mar", 100, "#2e7d32"],
+                        ["Diseño preliminar integración", "Ing. Digital CAD 1", "19-Mar", 100, "#2e7d32"],
+                        ["Construcción modelo simulación", "Ing. Digital CAD 2", "25-Mar", 100, "#2e7d32"],
+                        ["Simulación sistema productivo", "Lider", "30-Mar", 100, "#2e7d32"],
+                        ["Análisis resultados simulación", "Ing. Automatización", "30-Mar", 100, "#2e7d32"],
+                        ["Evaluación desempeño sistema", "Ing. Automatización", "03-Apr", 100, "#2e7d32"],
+                        ["Identificación operación robotizable", "Ing. Comunicación", "03-Apr", 100, "#2e7d32"],
+                        ["Justificación de robotización", "Lider", "07-Apr", 100, "#2e7d32"],
+                        ["Diseño conceptual celda robotizada", "Ing. Digital CAD 2", "12-Apr", 100, "#2e7d32"],
+                        ["Simulación de celda robotizada", "Lider", "16-Apr", 100, "#2e7d32"],
+                        ["Preparación entrega parcial", "Ing. Digital CAD 2", "21-Apr", 100, "#2e7d32"],
+                        ["Diseño detallado sistema control", "Ing. Digital CAD 1", "26-Apr", 100, "#2e7d32"],
+                        ["Programación lógica (Ladder)", "Ing. Comunicación", "29-Apr", 100, "#2e7d32"],
+                        ["Pruebas control secuencial", "Ing. Comunicación", "01-May", 100, "#2e7d32"],
+                        ["Integración con simulación", "Ing. Automatización", "04-May", 100, "#2e7d32"],
+                        ["Diseño de interfaz HMI", "Lider", "07-May", 100, "#2e7d32"],
+                        ["Configuración sistema SCADA", "Ing. Automatización", "12-May", 100, "#2e7d32"],
+                        ["Integración comunicación OPC", "Ing. Automatización", "15-May", 100, "#2e7d32"],
+                        ["Pruebas sistema SCADA", "Ing. Comunicación", "15-May", 100, "#2e7d32"],
+                        ["Estimación costos automatización", "Lider", "19-May", 100, "#2e7d32"],
+                        ["Desarrollo presupuesto", "Ing. Digital CAD 2", "19-May", 100, "#2e7d32"],
+                        ["Análisis financiero (Flujo caja)", "Lider", "22-May", 100, "#2e7d32"],
+                        ["Evaluación indicadores económicos", "Ing. Digital CAD 2", "22-May", 100, "#2e7d32"],
+                        ["Organización repositorio final", "Ing. Digital CAD 1", "27-May", 100, "#2e7d32"],
+                        ["Actualización sitio web", "Ing. Comunicación", "27-May", 100, "#2e7d32"],
+                        ["Producción video final", "Ing. Comunicación", "03-Jun", 0, "#9e9e9e"],
+                        ["Redacción informe final", "Ing. Automatización", "07-Jun", 0, "#9e9e9e"],
+                        ["Preparación sustentación final", "Lider", "09-Jun", 0, "#9e9e9e"]
+                    ];
+
+                    const tbody = document.currentScript.parentElement;
+                    actividades.forEach((act, index) => {
+                        const row = `<tr>
+                            <td style="padding: 8px; border: 1px solid #eee;">${act[0]}</td>
+                            <td style="padding: 8px; border: 1px solid #eee;">${act[1]}</td>
+                            <td style="padding: 8px; border: 1px solid #eee; text-align: center;">${act[2]}</td>
+                            <td style="padding: 8px; border: 1px solid #eee;">
+                                <div style="background: #eee; border-radius: 4px; height: 10px; width: 100%;">
+                                    <div style="width: ${act[3]}%; background: ${act[4]}; height: 100%; border-radius: 4px; transition: width 0.5s;"></div>
+                                </div>
+                            </td>
+                        </tr>`;
+                        document.write(row);
+                    });
+                </script>
+            </tbody>
+        </table>
+    </div>
+
+    <div style="margin-top: 20px; text-align: center;">
+        <p style="font-size: 13px; color: #666;"><em>Nota: Las actividades de junio se consideran fuera del periodo lectivo presencial (Cierre semestral 30 de mayo).</em></p>
+        <a href="../docs/modulo3/Cronograma_Gantt.pdf" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #3F51B5; color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold;">
+            📄 Ver Gráfico Gantt Detallado (Excel)
+        </a>
+    </div>
+</div>
 
             <div class="card-modulo3" style="border-top: 4px solid #00e676;">
                 <h3 style="color: #2e7d32;">💰 4. Análisis Financiero y Viabilidad</h3>
