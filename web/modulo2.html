@@ -3,155 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Propuesta Industria 4.0 | Nexum Automation</title>
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <title>Módulo 2 - Gestión de Producción | Nexum Automation</title>
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png"> 
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
-        /* ── Tarjetas de propuesta por línea ── */
-        .propuesta-card {
-            background-color: #f4f7f6;
-            border-left: 5px solid #3F51B5;
-            padding: 18px 20px;
-            border-radius: 4px;
-            margin-bottom: 0;
-        }
-        .propuesta-card h3 {
-            margin-top: 0;
-            font-size: 1.05em;
-        }
-        .propuesta-card ul {
-            margin: 8px 0 10px 0;
-            padding-left: 20px;
-        }
-        .propuesta-card .card-tag {
-            display: inline-block;
-            background-color: #3F51B5;
-            color: #ffffff;
-            font-size: 0.8em;
-            font-weight: bold;
-            padding: 3px 10px;
-            border-radius: 20px;
-            margin-top: 4px;
-        }
-
-        /* ── Variantes de color por línea ── */
-        .propuesta-card.monster  { border-left-color: #000000; }
-        .propuesta-card.monster h3 { color: #000000; }
-        .propuesta-card.monster .card-tag { background-color: #000000; }
-
-        .propuesta-card.quatro   { border-left-color: #d32f2f; }
-        .propuesta-card.quatro h3 { color: #d32f2f; }
-        .propuesta-card.quatro .card-tag { background-color: #d32f2f; }
-
-        .propuesta-card.garrafon { border-left-color: #0288d1; }
-        .propuesta-card.garrafon h3 { color: #0288d1; }
-        .propuesta-card.garrafon .card-tag { background-color: #0288d1; }
-
-        /* ── KPI boxes (mismo patrón que Módulo 2) ── */
+        /* Estilos para los KPIs gerenciales (Sin fórmulas) */
         .kpi-box {
             background-color: #f4f7f6;
             border-left: 4px solid #3F51B5;
             padding: 15px;
-            margin-bottom: 16px;
-            border-radius: 0 4px 4px 0;
+            margin-bottom: 20px;
         }
         .kpi-title {
             color: #3F51B5;
             margin-top: 0;
-            font-size: 1.05em;
-            margin-bottom: 8px;
+            font-size: 1.1em;
+            margin-bottom: 10px;
         }
         .kpi-result {
-            font-size: 1.15em;
+            font-size: 1.2em;
             font-weight: bold;
             color: #333;
-            margin-top: 8px;
+            margin-top: 10px;
             display: inline-block;
         }
-
-        /* ── Lista ISA-95 con badge de nivel ── */
-        .isa-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+        .kpi-placeholder {
+            color: #9e9e9e;
+            font-style: italic;
         }
-        .isa-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            padding: 10px 14px;
-            border-left: 3px solid #e0e0e0;
-            margin-bottom: 6px;
-            background-color: #fafafa;
-            border-radius: 0 4px 4px 0;
-        }
-        .isa-list li .nivel-badge {
-            flex-shrink: 0;
-            font-size: 0.72em;
-            font-weight: bold;
-            color: #fff;
-            background-color: #3F51B5;
-            padding: 2px 8px;
-            border-radius: 20px;
-            margin-top: 2px;
-            white-space: nowrap;
-        }
-
-        /* ── Chips de protocolo de comunicaciones ── */
-        .protocol-list {
-            list-style: none;
-            padding: 0;
-            margin: 12px 0 0 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .protocol-list li {
-            background-color: #f4f7f6;
-            border: 1px solid #3F51B5;
-            color: #3F51B5;
-            font-size: 0.88em;
-            font-weight: bold;
-            padding: 6px 14px;
-            border-radius: 20px;
-        }
-
-        /* ── Alert boxes ── */
-        .alert-box {
-            padding: 15px 18px;
-            border-radius: 4px;
-            margin-top: 20px;
-        }
-        .alert-box h3 {
-            margin-top: 0;
-            font-size: 1em;
-        }
-        .alert-box p {
-            margin-bottom: 0;
-        }
-        .alert-warning {
-            background-color: #fff3cd;
-            color: #856404;
-            border-left: 5px solid #ffc107;
-        }
-        .alert-warning h3 { color: #856404; }
-
-        .alert-info {
-            background-color: #e3f2fd;
-            color: #0d47a1;
-            border-left: 5px solid #1565c0;
-        }
-        .alert-info h3 { color: #0d47a1; }
-
-        /* ── Conclusión destacada ── */
-        .conclusion-card {
-            background-color: #3F51B5;
-            color: #ffffff;
-            padding: 22px 24px;
-            border-radius: 6px;
-            margin-top: 10px;
-        }
-        .conclusion-card p { margin: 0; line-height: 1.7; }
     </style>
 </head>
 <body>
@@ -160,10 +39,10 @@
         <img src="../assets/img/logo.png" alt="Logo Nexum Automation">
     </header>
 
-    <nav class="navbar">
+     <nav class="navbar">
         <div class="nav-container">
             <a href="../index.html" class="nav-link" style="background-color: #3F51B5; color: #ffffff;">Inicio</a>
-
+            
             <div class="dropdown">
                 <button class="dropbtn">Módulos del Proyecto <span>&#9662;</span></button>
                 <div class="dropdown-content">
@@ -182,195 +61,370 @@
 
     <div class="container">
         <main>
+            <h2 style="color: #3F51B5;">Módulo 2: Gestión y Evaluación de la Producción</h2>
+            
+            <p>En esta sección, el equipo consultor de <strong>Nexum Automation</strong> presenta el diagnóstico operativo de la planta multilínea. A través del mapeo de procesos (VSM, DOP) y el cálculo de indicadores clave, identificamos las restricciones de capacidad y los cuellos de botella que justifican técnica y financieramente las propuestas de automatización posteriores.</p>
 
-            <h2 style="color: #3F51B5;">Propuesta de Automatización e Industria 4.0</h2>
+            <div class="docs-section">
+                <h3 style="margin-top: 0; color: #3F51B5;">📄 Soportes y Documentación Técnica</h3>
+                <p style="color: #757575;">Todos los cálculos de demanda, métricas de OEE y diagramas presentados a continuación tienen su origen en el levantamiento de información documentado en los siguientes archivos:</p>
+                <div style="display: flex; gap: 15px; margin-top: 15px; flex-wrap: wrap;">
+                    <a href="../docs/modulo2/documento Modulo 1.pdf" target="_blank" class="download-btn" style="padding: 10px 20px; font-size: 14px;">📝 Informe Taller 1 (Cálculos Base)</a>
+                    <a href="../docs/modulo2/Informe_Mercado_CocaCola.pdf" target="_blank" class="download-btn" style="padding: 10px 20px; font-size: 14px; background-color: #757575;">📊 Análisis de Mercado y Demanda</a>
+                </div>
+            </div>
+           <div id="layout-general" style="margin-bottom: 30px; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <h3 style="margin-top: 0; color: #3F51B5; border-bottom: 2px solid #3F51B5; padding-bottom: 5px;">📍 Layout General de la Planta</h3>
+                <p>Distribución macro de las áreas de producción, almacenamiento y servicios industriales de Nexum Automation. <strong>(Haz clic en la imagen para ampliarla)</strong></p>
+                
+                <div style="text-align: center; border: 1px solid #eee; border-radius: 8px; padding: 10px;">
+                    <a href="#zoom_layout_planta">
+                        <img src="../docs/modulo2/Diagramas/Layout/Layout planta.png" alt="Layout General de la Planta" style="max-width: 100%; height: auto; border-radius: 4px; cursor: zoom-in;">
+                    </a>
+                    
+                    <div id="zoom_layout_planta" class="lightbox">
+                        <a href="#layout-general" class="close-lightbox">&times;</a>
+                        <img src="../docs/modulo2/Diagramas/Layout/Layout planta.png" alt="Layout General de la Planta">
+                    </div>
+                </div>
+            </div>
+            <div class="tab">
+                <button class="tablinks active" onclick="abrirLinea(event, 'Monster')">Línea: Monster (473ml)</button>
+                <button class="tablinks" onclick="abrirLinea(event, 'Quatro')">Línea: Quatro (1.5L)</button>
+                <button class="tablinks" onclick="abrirLinea(event, 'Brisa')">Línea: Agua Brisa (20L)</button>
+            </div>
 
-            <p>En esta propuesta, <strong>Nexum Automation</strong> plantea una transformación integral de la planta multiproducto de bebidas, integrando tecnologías de Industria 4.0 para mejorar el desempeño operativo, reducir tiempos muertos y aumentar la eficiencia global (OEE).</p>
+            <div id="Monster" class="tabcontent" style="display: block;">
+                <h3 style="color: #3F51B5; border-bottom: 1px solid #eee; padding-bottom: 10px;">🔋 Análisis: Monster Energy (Lata 473ml)</h3>
+                
+                <h4>1. Cálculo de la Demanda</h4>
+                <p>La demanda de Monster Energy en Colombia se puede estimar a partir del tamaño del mercado de bebidas energéticas, el cual alcanzó aproximadamente 157,6 millones de litros en 2022 (<a href="https://www.larepublica.co/empresas/quienes-lideran-en-las-bebidas-energizantes-3578134" target="_blank" style="color: #3F51B5; text-decoration: none; font-weight: bold;">La República, 2023</a>). Considerando una participación de mercado cercana al 6% para la marca, se obtiene una demanda aproximada de 9,46 millones de litros anuales.</p>
+                <p>Al convertir este valor a unidades de consumo, tomando como referencia latas de 473 ml, se obtiene un volumen aproximado de 20 millones de latas al año. Esta aproximación es consistente con el crecimiento del sector y las tendencias de consumo en el país (<a href="https://www.informesdeexpertos.com/informes/mercado-de-bebidas-energizantes-en-colombia" target="_blank" style="color: #3F51B5; text-decoration: none; font-weight: bold;">Informes de Expertos, 2023</a>).</p>
+                <ul>
+                    <li><strong>Demanda estimada:</strong> 20,000,000 unidades/año.</li>
+                </ul>
 
-            <hr style="border: 1px solid #eee; margin: 30px 0;">
+                <h4>2. Mapas y Diagramas de Ingeniería</h4>
+                <p>Análisis de flujo, recorridos y valor de la línea de producción. <strong>(Haz clic en cualquier imagen para ampliarla)</strong>:</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                    
+                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
+                        <h5 style="margin-top: 0; color: #3F51B5;">Layout de la Línea</h5>
+                        <a href="#zoom_layout_monster">
+                            <img src="../docs/modulo2/Diagramas/Layout/Layout Mosnter.png" alt="Layout Línea Monster" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
+                        </a>
+                        <div id="zoom_layout_monster" class="lightbox">
+                            <a href="#Monster" class="close-lightbox">&times;</a>
+                            <img src="../docs/modulo2/Diagramas/Layout/Layout Mosnter.png" alt="Layout Línea Monster">
+                        </div>
+                    </div>
 
-            <!-- ══════════════════════════════════════════
-                 SECCIÓN 1 · Arquitectura ISA-95
-            ═══════════════════════════════════════════ -->
-            <h3 style="color: #3F51B5; border-bottom: 2px solid #3F51B5; padding-bottom: 6px;">🏗️ Arquitectura de Automatización (ISA-95)</h3>
-            <p>El sistema se estructura bajo el modelo ISA-95, permitiendo integración vertical completa desde el sensor hasta la gestión empresarial:</p>
+                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
+                        <h5 style="margin-top: 0; color: #3F51B5;">Diagrama Spaghetti</h5>
+                        <a href="#zoom_spagetti_monster">
+                            <img src="../docs/modulo2/Diagramas/Spaghetti/Monster_Spagetti.jpg" alt="Diagrama Spaghetti Monster" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
+                        </a>
+                        <div id="zoom_spagetti_monster" class="lightbox">
+                            <a href="#Monster" class="close-lightbox">&times;</a>
+                            <img src="../docs/modulo2/Diagramas/Spaghetti/Monster_Spagetti.jpg" alt="Diagrama Spaghetti Monster">
+                        </div>
+                    </div>
 
-            <ul class="isa-list">
-                <li>
-                    <span class="nivel-badge">Nivel 4</span>
-                    <span><strong>ERP:</strong> Planeación de demanda y gestión logística integrada con SAP corporativo de FEMSA.</span>
-                </li>
-                <li>
-                    <span class="nivel-badge">Nivel 3</span>
-                    <span><strong>MES:</strong> Monitoreo de OEE en tiempo real, gestión de órdenes de producción y análisis de microparos por causa.</span>
-                </li>
-                <li>
-                    <span class="nivel-badge">Nivel 2</span>
-                    <span><strong>SCADA/HMI:</strong> Supervisión centralizada, alarmas configurables y trazabilidad completa del proceso.</span>
-                </li>
-                <li>
-                    <span class="nivel-badge">Nivel 1</span>
-                    <span><strong>PLC:</strong> Control secuencial y sincronización de procesos (Siemens S7-1500 / Allen-Bradley ControlLogix).</span>
-                </li>
-                <li>
-                    <span class="nivel-badge">Nivel 0</span>
-                    <span><strong>Campo:</strong> Sensores inteligentes, actuadores, robots y sistemas físicos conectados vía IO-Link.</span>
-                </li>
-            </ul>
+                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
+                        <h5 style="margin-top: 0; color: #3F51B5;">DOP (Operaciones)</h5>
+                        <a href="#zoom_dop_monster">
+                            <img src="../docs/modulo2/Diagramas/DOP/DOP Monster.PNG" alt="DOP Monster" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
+                        </a>
+                        <div id="zoom_dop_monster" class="lightbox">
+                            <a href="#Monster" class="close-lightbox">&times;</a>
+                            <img src="../docs/modulo2/Diagramas/DOP/DOP Monster.PNG" alt="DOP Monster">
+                        </div>
+                    </div>
 
-            <hr style="border: 1px solid #eee; margin: 30px 0;">
+                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
+                        <h5 style="margin-top: 0; color: #3F51B5;">VSM (Value Stream Map)</h5>
+                        <a href="#zoom_vsm_monster">
+                            <img src="../docs/modulo2/Diagramas/VSM/VMS Monster.png" alt="VSM Monster" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
+                        </a>
+                        <div id="zoom_vsm_monster" class="lightbox">
+                            <a href="#Monster" class="close-lightbox">&times;</a>
+                            <img src="../docs/modulo2/Diagramas/VSM/VMS Monster.png" alt="VSM Monster">
+                        </div>
+                    </div>
+                </div>
 
-            <!-- ══════════════════════════════════════════
-                 SECCIÓN 2 · Comunicaciones
-            ═══════════════════════════════════════════ -->
-            <h3 style="color: #3F51B5; border-bottom: 2px solid #3F51B5; padding-bottom: 6px;">🔗 Arquitectura de Comunicaciones</h3>
-            <p>La integración del sistema se realiza mediante protocolos industriales estándar que garantizan interoperabilidad, tiempo real y ciberseguridad:</p>
+                <h5 style="color: #3F51B5;">📋 Diagrama de Análisis de Proceso</h5>
+                <p>Resumen analítico de tiempos, distancias y tipos de operación (operación, transporte, inspección, demora y almacenaje):</p>
+                
+                <div style="text-align: center; margin-bottom: 25px; padding: 20px; border: 1px dashed #ccc; border-radius: 5px; background-color: #f9fbfc;">
+                    <p style="margin-bottom: 15px; color: #555;">Documento detallado en formato PDF</p>
+                    <a href="../docs/modulo2/Diagramas/DAP/Analisis de proceso Monster.pdf" target="_blank" style="display: inline-block; padding: 12px 24px; background-color: #3F51B5; color: #ffffff; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                        📄 Abrir Análisis de Proceso Monster (PDF)
+                    </a>
+                </div>
 
-            <ul class="protocol-list">
-                <li>PLC ↔ Sensores: Profinet</li>
-                <li>PLC ↔ Sensores: EtherNet/IP</li>
-                <li>PLC ↔ Sensores: IO-Link</li>
-                <li>PLC ↔ SCADA: OPC UA</li>
-                <li>SCADA ↔ MES: REST API</li>
-                <li>MES ↔ ERP: SAP Integration</li>
-            </ul>
+                <p><strong>Hallazgo Principal del VSM:</strong> El tiempo que agrega valor es de apenas 0,36 segundos frente a un Lead Time total de 180 minutos, penalizado fuertemente por los tiempos de Set-up y el desestibado manual inicial.</p>
+                <h4>3. Indicadores de Desempeño</h4>
+                
+                <div class="kpi-box">
+                    <h5 class="kpi-title">⏱️ Takt Time</h5>
+                    <p>Es el ritmo de producción estrictamente necesario para satisfacer la demanda sin generar retrasos. Asumiendo que esta línea opera 2.5 días a la semana, la tasa mínima requerida es de 12,206 latas/hora.</p>
+                    <span class="kpi-result">Resultado: 0.0049 minutos/lata</span>
+                </div>
 
-            <p style="margin-top: 16px;">Esto permite capturar datos en tiempo real desde el campo y tomar decisiones basadas en información operativa verificable a cada nivel de la pirámide.</p>
-
-            <hr style="border: 1px solid #eee; margin: 30px 0;">
-
-            <!-- ══════════════════════════════════════════
-                 SECCIÓN 3 · Propuestas por línea
-            ═══════════════════════════════════════════ -->
-            <h3 style="color: #3F51B5; border-bottom: 2px solid #3F51B5; padding-bottom: 6px;">⚙️ Propuestas de Automatización por Línea</h3>
-            <p>Cada línea de producción requiere una estrategia diferenciada en función de sus restricciones operativas específicas:</p>
-
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
-
-                <div class="propuesta-card monster">
-                    <h3>🔋 Optimización Línea Monster (473ml)</h3>
+                <div class="kpi-box">
+                    <h5 class="kpi-title">⚙️ Cycle Time (Tc) y Setup Time (Tsu)</h5>
+                    <p>Comparando el Takt Time con la velocidad nominal de la maquinaria (15,000 latas/hora), establecemos el tiempo físico de fabricación por unidad.</p>
                     <ul>
-                        <li>Instalación de buffers dinámicos antes de llenado y empaque</li>
-                        <li>Control de velocidades en cascada entre estaciones</li>
-                        <li>Sistema de visión artificial para reducción de microparos</li>
-                        <li>Inspección por rayos X integrada en línea</li>
+                        <li><strong>Tiempo de Ciclo (Tc):</strong> 0.004 minutos/lata.</li>
+                        <li><strong>Tiempo de Setup (Tsu):</strong> 90 minutos máximo.</li>
                     </ul>
-                    <span class="card-tag">🎯 OEE objetivo: 80%</span>
                 </div>
 
-                <div class="propuesta-card quatro">
-                    <h3>🥤 Robotización Línea Quatro (PET 1.5L)</h3>
+                <div class="kpi-box">
+                    <h5 class="kpi-title">📈 Tasa y Capacidad de Producción</h5>
+                    <p>Calculado sobre un lote estándar de 94,500 latas por turno y evaluando la capacidad técnica instalada:</p>
                     <ul>
-                        <li>Paletizado automático con robot articulado de 6 ejes</li>
-                        <li>Control de presiones isomórficas y saturación de CO₂</li>
-                        <li>Reducción de carga operativa manual en fin de línea</li>
-                        <li>Incremento de productividad y ergonomía operativa</li>
+                        <li><strong>Production Rate (Rp):</strong> 12,117 latas/hora.</li>
+                        <li><strong>Capacidad Teórica (PC):</strong> 600,000 latas/semana.</li>
+                        <li><strong>Utilización:</strong> 64.08%. (La línea no está saturada).</li>
                     </ul>
-                    <span class="card-tag">💰 ROI estimado: 2–5 años</span>
                 </div>
 
-                <div class="propuesta-card garrafon">
-                    <h3>💧 Optimización Línea Garrafón (20L)</h3>
+                <div class="kpi-box">
+                    <h5 class="kpi-title">⏳ Manufacturing Lead Time (MLT)</h5>
+                    <p>Tiempo total que transcurre para procesar un lote completo de producción, incluyendo configuración y empaquetado final.</p>
+                    <span class="kpi-result">Resultado: 9.13 Horas / lote</span>
+                </div>
+
+                <div class="kpi-box">
+                    <h5 class="kpi-title">📊 Overall Equipment Effectiveness (OEE)</h5>
+                    <p>Indicador que evalúa la Disponibilidad (93.5%), el Desempeño (97.5%) y la Calidad (98.0%) del proceso de envasado.</p>
+                    <span class="kpi-result">OEE Consolidado: 89.47% (Desempeño Muy Bueno)</span>
+                </div>
+            </div>
+
+            <div id="Quatro" class="tabcontent" style="display: none;">
+                <h3 style="color: #3F51B5; border-bottom: 1px solid #eee; padding-bottom: 10px;">🥤 Análisis: Quatro (PET 1.5L)</h3>
+                
+                <h4>1. Cálculo de la Demanda</h4>
+                <p>Para la estimación de la demanda de la línea de PET, el equipo consultor partió del volumen total de producción del sistema Coca-Cola en Colombia, el cual asciende a 352 millones de cajas unidad anuales. Para segmentar este volumen hacia nuestro producto objetivo, se analizaron tres macrotendencias del portafolio: bebidas carbonatadas (76%), envases no retornables (74%) y presentaciones de tamaño familiar (70%).</p>
+                <p>Tomando un escenario base conservador, se asume que el 45% del volumen total cumple con las tres características. De este subsegmento, se estima de manera prudente que Quatro representa un 6%. Finalmente, proyectando al año 2026 y considerando una contracción en el mercado de bebidas azucaradas, la demanda resultante es de 53,58 millones de litros anuales.</p>
+                <ul>
+                    <li><strong>Demanda estimada:</strong> 35,720,000 unidades/año.</li>
+                </ul>
+
+                <h4>2. Mapas y Diagramas de Ingeniería</h4>
+                <p>Análisis de flujo, recorridos y valor de la línea de producción. <strong>(Haz clic en cualquier imagen para ampliarla)</strong>:</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                    
+                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
+                        <h5 style="margin-top: 0; color: #3F51B5;">Layout de la Línea</h5>
+                        <a href="#zoom_layout_quatro">
+                            <img src="../docs/modulo2/Diagramas/Layout/Layout Quatro.png" alt="Layout Línea Quatro" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
+                        </a>
+                        <div id="zoom_layout_quatro" class="lightbox">
+                            <a href="#Quatro" class="close-lightbox">&times;</a>
+                            <img src="../docs/modulo2/Diagramas/Layout/Layout Quatro.png" alt="Layout Línea Quatro">
+                        </div>
+                    </div>
+
+                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
+                        <h5 style="margin-top: 0; color: #3F51B5;">Diagrama Spaghetti</h5>
+                        <a href="#zoom_spagetti_quatro">
+                            <img src="../docs/modulo2/Diagramas/Spaghetti/Quatro_Spagetti.jpg" alt="Diagrama Spaghetti Quatro" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
+                        </a>
+                        <div id="zoom_spagetti_quatro" class="lightbox">
+                            <a href="#Quatro" class="close-lightbox">&times;</a>
+                            <img src="../docs/modulo2/Diagramas/Spaghetti/Quatro_Spagetti.jpg" alt="Diagrama Spaghetti Quatro">
+                        </div>
+                    </div>
+
+                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
+                        <h5 style="margin-top: 0; color: #3F51B5;">DOP (Operaciones)</h5>
+                        <a href="#zoom_dop_quatro">
+                            <img src="../docs/modulo2/Diagramas/DOP/DOP Quatro.PNG" alt="DOP Quatro" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
+                        </a>
+                        <div id="zoom_dop_quatro" class="lightbox">
+                            <a href="#Quatro" class="close-lightbox">&times;</a>
+                            <img src="../docs/modulo2/Diagramas/DOP/DOP Quatro.PNG" alt="DOP Quatro">
+                        </div>
+                    </div>
+
+                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
+                        <h5 style="margin-top: 0; color: #3F51B5;">VSM (Value Stream Map)</h5>
+                        <a href="#zoom_vsm_quatro">
+                            <img src="../docs/modulo2/Diagramas/VSM/VMS Quatro.png" alt="VSM Quatro" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
+                        </a>
+                        <div id="zoom_vsm_quatro" class="lightbox">
+                            <a href="#Quatro" class="close-lightbox">&times;</a>
+                            <img src="../docs/modulo2/Diagramas/VSM/VMS Quatro.png" alt="VSM Quatro">
+                        </div>
+                    </div>
+                </div>
+                
+                <h5 style="color: #3F51B5;">📋 Diagrama de Análisis de Proceso</h5>
+                <p>Resumen analítico de tiempos, distancias y tipos de operación (operación, transporte, inspección, demora y almacenaje):</p>
+                
+                <div style="text-align: center; margin-bottom: 25px; padding: 20px; border: 1px dashed #ccc; border-radius: 5px; background-color: #f9fbfc;">
+                    <p style="margin-bottom: 15px; color: #555;">Documento detallado en formato PDF</p>
+                    <a href="../docs/modulo2/Diagramas/DAP/Analisis de proceso Quatro .pdf" target="_blank" style="display: inline-block; padding: 12px 24px; background-color: #3F51B5; color: #ffffff; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                        📄 Abrir Análisis de Proceso Quatro (PDF)
+                    </a>
+                </div>
+
+                <h4>3. Indicadores de Desempeño</h4>
+                
+                <div class="kpi-box">
+                    <h5 class="kpi-title">⏱️ Takt Time</h5>
+                    <p>Es el ritmo de producción estrictamente necesario para satisfacer la demanda sin generar retrasos. Asumiendo que esta línea opera 4 días a la semana, la tasa mínima requerida es de 13,593 botellas/hora.</p>
+                    <span class="kpi-result">Resultado: 0.0044 minutos/botella</span>
+                </div>
+
+                <div class="kpi-box">
+                    <h5 class="kpi-title">⚙️ Cycle Time (Tc) y Setup Time (Tsu)</h5>
+                    <p>Comparando el Takt Time con la velocidad nominal de la maquinaria (15,000 botellas/hora), establecemos el tiempo físico de fabricación por unidad.</p>
                     <ul>
-                        <li>Rediseño de layout tipo flujo continuo (U-Shape)</li>
-                        <li>Automatización de paletizado y manejo de cargas pesadas</li>
-                        <li>Dosificación química automática en túneles de lavado</li>
-                        <li>Reducción de tiempos de ciclo en proceso HOD</li>
+                        <li><strong>Tiempo de Ciclo (Tc):</strong> 0.004 minutos/botella.</li>
+                        <li><strong>Tiempo de Setup (Tsu):</strong> 90 minutos máximo.</li>
                     </ul>
-                    <span class="card-tag">📈 Impacto: +2× productividad</span>
                 </div>
 
+                <div class="kpi-box">
+                    <h5 class="kpi-title">📈 Tasa y Capacidad de Producción</h5>
+                    <p>Calculado sobre un lote estándar de 85,636 botellas por turno y evaluando la capacidad técnica instalada:</p>
+                    <ul>
+                        <li><strong>Production Rate (Rp):</strong> 11,879 botellas/hora.</li>
+                        <li><strong>Capacidad Teórica (PC):</strong> 960,000 botellas/semana.</li>
+                        <li><strong>Utilización:</strong> 71.36%. (La línea no está saturada).</li>
+                    </ul>
+                </div>
+
+                <div class="kpi-box">
+                    <h5 class="kpi-title">⏳ Manufacturing Lead Time (MLT)</h5>
+                    <p>Tiempo total que transcurre para procesar un lote completo de producción, incluyendo configuración y empaquetado final.</p>
+                    <span class="kpi-result">Resultado: 8.95 Horas / lote</span>
+                </div>
+
+                <div class="kpi-box">
+                    <h5 class="kpi-title">📊 Overall Equipment Effectiveness (OEE)</h5>
+                    <p>Indicador que evalúa la Disponibilidad (93.5%), el Desempeño (100%) y la Calidad (98.0%) del proceso de envasado.</p>
+                    <span class="kpi-result">OEE Consolidado: 91.69% (Desempeño Muy Bueno)</span>
+                </div>
             </div>
 
-            <hr style="border: 1px solid #eee; margin: 30px 0;">
+            <div id="Brisa" class="tabcontent" style="display: none;">
+                <h3 style="color: #3F51B5; border-bottom: 1px solid #eee; padding-bottom: 10px;">💧 Análisis: Agua Brisa (Garrafón 20L)</h3>
+                
+                <h4>1. Cálculo de la Demanda</h4>
+                <p>Para la Línea de Brissa, dedicada al envasado de agua purificada en formato HOD (<em>Home & Office Delivery</em> - retornables), la estimación de la demanda se fundamenta en los resultados consolidados de ventas en Colombia para el cierre del año 2024. Según los reportes financieros (<a href="../docs/modulo2/Informe_Mercado_CocaCola.pdf" target="_blank" style="color: #3F51B5; text-decoration: none; font-weight: bold;">Pág. 153 del Informe Anual</a>), el volumen de ventas nacional experimentó un crecimiento interanual del 1.4%, pasando de 347.6 a 352.3 millones de Cajas Unidad.</p>
+                <p>Para dimensionar correctamente la capacidad de la maquinaria, es imperativo estandarizar la unidad de medida corporativa. En la industria embotelladora, una "Caja Unidad" es una métrica estándar que equivale a 24 porciones de 8 onzas de bebida terminada; esto representa un volumen exacto de 192 onzas, 1.5 galones, o 5.678 litros.</p>
+                <p>De acuerdo con el desglose del mix de ventas (<a href="../docs/modulo2/Informe_Mercado_CocaCola.pdf" target="_blank" style="color: #3F51B5; text-decoration: none; font-weight: bold;">Pág. 163 del Informe Anual</a>), el formato de garrafones representa el 4% del volumen total comercializado en el país. Al aplicar esta proporción sobre los 352.3 millones de Cajas Unidad, se consolida un volumen de 14,092,000 Cajas Unidad destinadas exclusivamente a este formato. Lo que equivale a 21,138,000 galones anuales.</p>
+                <ul>
+                    <li><strong>Demanda estimada:</strong> 4,227,600 garrafones/año.</li>
+                </ul>
 
-            <!-- ══════════════════════════════════════════
-                 SECCIÓN 4 · P&ID
-            ═══════════════════════════════════════════ -->
-            <h3 style="color: #3F51B5; border-bottom: 2px solid #3F51B5; padding-bottom: 6px;">📐 Diagramas de Instrumentación (P&ID)</h3>
-            <p>A continuación se detallan los esquemas de tuberías e instrumentación de los procesos críticos, identificando los lazos de control, sensores (caudalímetros, presostatos, fotoceldas) y actuadores (válvulas neumáticas, variadores de frecuencia).</p>
+                <h4>2. Mapas y Diagramas de Ingeniería</h4>
+                <p>Análisis de flujo, recorridos y valor de la línea de producción. <strong>(Haz clic en cualquier imagen para ampliarla)</strong>:</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                    
+                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
+                        <h5 style="margin-top: 0; color: #3F51B5;">Layout de la Línea</h5>
+                        <a href="#zoom_layout_brisa">
+                            <img src="../docs/modulo2/Diagramas/Layout/Layout Brissa.png" alt="Layout Línea Agua Brisa" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
+                        </a>
+                        <div id="zoom_layout_brisa" class="lightbox">
+                            <a href="#Brisa" class="close-lightbox">&times;</a>
+                            <img src="../docs/modulo2/Diagramas/Layout/Layout Brissa.png" alt="Layout Línea Agua Brisa">
+                        </div>
+                    </div>
 
-            <div class="alert-box alert-warning">
-                <h3>🚧 Evidencia en Desarrollo</h3>
-                <p>Los planos P&ID correspondientes a las válvulas de llenado, túneles de lavado y sistemas de paletizado se encuentran en etapa de digitalización bajo la norma <strong>ISA-5.1</strong> y serán anexados en este espacio para la revisión final del módulo.</p>
-            </div>
+                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
+                        <h5 style="margin-top: 0; color: #3F51B5;">Diagrama Spaghetti</h5>
+                        <a href="#zoom_spagetti_brisa">
+                            <img src="../docs/modulo2/Diagramas/Spaghetti/Garrafon_Spagetti.jpg" alt="Diagrama Spaghetti Agua Brisa" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
+                        </a>
+                        <div id="zoom_spagetti_brisa" class="lightbox">
+                            <a href="#Brisa" class="close-lightbox">&times;</a>
+                            <img src="../docs/modulo2/Diagramas/Spaghetti/Garrafon_Spagetti.jpg" alt="Diagrama Spaghetti Agua Brisa">
+                        </div>
+                    </div>
 
-            <hr style="border: 1px solid #eee; margin: 30px 0;">
+                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
+                        <h5 style="margin-top: 0; color: #3F51B5;">DOP (Operaciones)</h5>
+                        <a href="#zoom_dop_brisa">
+                            <img src="../docs/modulo2/Diagramas/DOP/DOP Brissa.PNG" alt="DOP Agua Brisa" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
+                        </a>
+                        <div id="zoom_dop_brisa" class="lightbox">
+                            <a href="#Brisa" class="close-lightbox">&times;</a>
+                            <img src="../docs/modulo2/Diagramas/DOP/DOP Brissa.PNG" alt="DOP Agua Brisa">
+                        </div>
+                    </div>
 
-            <!-- ══════════════════════════════════════════
-                 SECCIÓN 5 · Gemelo Digital
-            ═══════════════════════════════════════════ -->
-            <h3 style="color: #3F51B5; border-bottom: 2px solid #3F51B5; padding-bottom: 6px;">🖥️ Gemelo Digital y Simulación</h3>
-            <p>Se implementa simulación discreta en <strong>Plant Simulation (Tecnomatix)</strong> para validar decisiones de diseño antes de ejecutarlas en planta real:</p>
+                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
+                        <h5 style="margin-top: 0; color: #3F51B5;">VSM (Value Stream Map)</h5>
+                        <a href="#zoom_vsm_brisa">
+                            <img src="../docs/modulo2/Diagramas/VSM/VSM Brissa.png" alt="VSM Agua Brisa" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
+                        </a>
+                        <div id="zoom_vsm_brisa" class="lightbox">
+                            <a href="#Brisa" class="close-lightbox">&times;</a>
+                            <img src="../docs/modulo2/Diagramas/VSM/VSM Brissa.png" alt="VSM Agua Brisa">
+                        </div>
+                    </div>
+                </div>
+                
+                <h5 style="color: #3F51B5;">📋 Diagrama de Análisis de Proceso</h5>
+                <p>Resumen analítico de tiempos, distancias y tipos de operación (operación, transporte, inspección, demora y almacenaje):</p>
+                
+                <div style="text-align: center; margin-bottom: 25px; padding: 20px; border: 1px dashed #ccc; border-radius: 5px; background-color: #f9fbfc;">
+                    <p style="margin-bottom: 15px; color: #555;">Documento detallado en formato PDF</p>
+                    <a href="../docs/modulo2/Diagramas/DAP/Analisis de proceso Garrafones.pdf" target="_blank" style="display: inline-block; padding: 12px 24px; background-color: #3F51B5; color: #ffffff; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                        📄 Abrir Análisis de Proceso Brissa (PDF)
+                    </a>
+                </div>
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 16px;">
 
+                <h4>3. Indicadores de Desempeño</h4>
+                
                 <div class="kpi-box">
-                    <h5 class="kpi-title">🔍 Evaluación de Cuellos de Botella</h5>
-                    <p>Identificación de las estaciones que restringen el throughput total de cada línea bajo distintos escenarios de demanda.</p>
+                    <h5 class="kpi-title">⏱️ Takt Time</h5>
+                    <p>Es el ritmo de producción estrictamente necesario para satisfacer la demanda sin generar retrasos. Asumiendo que esta línea opera 5 días a la semana, la tasa mínima requerida es de 1,288 garrafones/hora.</p>
+                    <span class="kpi-result">Resultado: 0.0465 minutos/garrafón</span>
                 </div>
 
                 <div class="kpi-box">
-                    <h5 class="kpi-title">⏱️ Validación de Tiempos de Ciclo</h5>
-                    <p>Verificación de que los tiempos de ciclo propuestos cumplen el Takt Time requerido por la demanda proyectada.</p>
+                    <h5 class="kpi-title">⚙️ Cycle Time (Tc) y Setup Time (Tsu)</h5>
+                    <p>Comparando el Takt Time con la velocidad nominal de la maquinaria (1,500 garrafones/hora), establecemos el tiempo físico de fabricación por unidad.</p>
+                    <ul>
+                        <li><strong>Tiempo de Ciclo (Tc):</strong> 0.04 minutos/garrafón.</li>
+                        <li><strong>Tiempo de Setup (Tsu):</strong> 90 minutos máximo.</li>
+                    </ul>
                 </div>
 
                 <div class="kpi-box">
-                    <h5 class="kpi-title">📦 Análisis de Inventarios en Proceso</h5>
-                    <p>Modelado de acumulación (WIP) en buffers intermedios para dimensionar correctamente las zonas de espera.</p>
-                </div>
-
-            </div>
-
-            <div class="alert-box alert-info" style="margin-top: 20px;">
-                <h3>🔗 Resultados de Simulación</h3>
-                <p>Los modelos ejecutados y los reportes de análisis de escenarios están disponibles en la sección <a href="../web/simulacion.html" style="color: #1565c0; font-weight: bold;">Simulación</a> de este portal.</p>
-            </div>
-
-            <hr style="border: 1px solid #eee; margin: 30px 0;">
-
-            <!-- ══════════════════════════════════════════
-                 SECCIÓN 6 · KPIs
-            ═══════════════════════════════════════════ -->
-            <h3 style="color: #3F51B5; border-bottom: 2px solid #3F51B5; padding-bottom: 6px;">📊 Indicadores de Desempeño (KPIs)</h3>
-            <p>El sistema de monitoreo continuo evalúa los siguientes indicadores en tiempo real para las tres líneas de producción:</p>
-
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 16px;">
-
-                <div class="kpi-box">
-                    <h5 class="kpi-title">📈 OEE — Overall Equipment Effectiveness</h5>
-                    <p>Indicador compuesto que multiplica Disponibilidad × Desempeño × Calidad. Es el KPI maestro de la propuesta de mejora.</p>
-                    <span class="kpi-result">Meta: ≥ 85% en las 3 líneas</span>
+                    <h5 class="kpi-title">📈 Tasa y Capacidad de Producción</h5>
+                    <p>Calculado sobre un lote estándar de 8,115 garrafones por turno y evaluando la capacidad técnica instalada:</p>
+                    <ul>
+                        <li><strong>Production Rate (Rp):</strong> 1,175 garrafones/hora.</li>
+                        <li><strong>Capacidad Teórica (PC):</strong> 120,000 garrafones/semana.</li>
+                        <li><strong>Utilización:</strong> 67.62%. (La línea no está saturada).</li>
+                    </ul>
                 </div>
 
                 <div class="kpi-box">
-                    <h5 class="kpi-title">🟢 Disponibilidad (Uptime)</h5>
-                    <p>Porcentaje del tiempo planificado en que la línea está efectivamente produciendo, excluyendo paros programados y no programados.</p>
+                    <h5 class="kpi-title">⏳ Manufacturing Lead Time (MLT)</h5>
+                    <p>Tiempo total que transcurre para procesar un lote completo de producción, incluyendo configuración y empaquetado final.</p>
+                    <span class="kpi-result">Resultado: 8.65 Horas / lote</span>
                 </div>
 
                 <div class="kpi-box">
-                    <h5 class="kpi-title">⏳ Tiempos de Ciclo vs. Takt Time</h5>
-                    <p>Comparación continua entre el ritmo real de producción y el ritmo exigido por la demanda del cliente.</p>
+                    <h5 class="kpi-title">📊 Overall Equipment Effectiveness (OEE)</h5>
+                    <p>Indicador que evalúa la Disponibilidad (93.5%), el Desempeño (97.9%) y la Calidad (98.0%) del proceso de envasado.</p>
+                    <span class="kpi-result">OEE Consolidado: 89.77% (Desempeño Muy Bueno)</span>
                 </div>
-
-                <div class="kpi-box">
-                    <h5 class="kpi-title">🛑 Microparos por Causa Raíz</h5>
-                    <p>Clasificación y frecuencia de paros menores (&lt;5 min) capturados automáticamente por el MES para análisis de Pareto.</p>
-                </div>
-
-            </div>
-
-            <p style="margin-top: 16px;">El análisis diagnóstico del Módulo 2 demuestra que el <strong>mayor potencial de mejora del OEE reside en la reducción de microparos y tiempos de set-up</strong>, y no en incrementar la velocidad nominal de las máquinas.</p>
-
-            <hr style="border: 1px solid #eee; margin: 30px 0;">
-
-            <!-- ══════════════════════════════════════════
-                 SECCIÓN 7 · Conclusión
-            ═══════════════════════════════════════════ -->
-            <h3 style="color: #3F51B5; border-bottom: 2px solid #3F51B5; padding-bottom: 6px;">✅ Conclusión</h3>
-
-            <div class="conclusion-card">
-                <p>La implementación de esta propuesta permite evolucionar la planta de Coca-Cola FEMSA hacia un <strong>sistema inteligente, conectado y optimizado</strong>, plenamente alineado con los principios de Industria 4.0. La integración vertical ISA-95, la instrumentación inteligente en campo, el gemelo digital para validación y el monitoreo continuo de KPIs conforman un ecosistema tecnológico que <strong>reduce riesgos, maximiza la eficiencia y habilita la toma de decisiones basada en datos</strong> en todos los niveles de la organización.</p>
             </div>
 
         </main>
@@ -379,6 +433,55 @@
     <footer>
         <p>Documentación Técnica &copy; 2026 - Nexum Automation | Universidad Nacional de Colombia</p>
     </footer>
+
+   <script>
+        function abrirLinea(evt, nombreLinea) {
+            var i, tabcontent, tablinks;
+            
+            // Ocultar todo el contenido de las pestañas
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            
+            // Quitar la clase "active" de todos los botones
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            
+            // Mostrar la pestaña actual y añadir "active" al botón clickeado
+            document.getElementById(nombreLinea).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        // --- EFECTO LUPA CORREGIDO (SIN BUG AL SALIR) ---
+        document.addEventListener("DOMContentLoaded", function() {
+            const imagenesLightbox = document.querySelectorAll('.lightbox img');
+            
+            imagenesLightbox.forEach(img => {
+                // Aumentamos a 0.2s para que la salida sea más elegante
+                img.style.transition = "transform 0.2s ease-out";
+                
+                img.addEventListener('mousemove', function(e) {
+                    // Usar offsetX y offsetWidth evita temblores porque lee las medidas internas
+                    const x = (e.offsetX / img.offsetWidth) * 100;
+                    const y = (e.offsetY / img.offsetHeight) * 100;
+                    
+                    img.style.transformOrigin = `${x}% ${y}%`;
+                    img.style.transform = "scale(2.5)"; 
+                    img.style.cursor = "zoom-in";
+                });
+                
+                img.addEventListener('mouseleave', function() {
+                    // Solo le decimos que vuelva al tamaño original. 
+                    // Ya no forzamos el centro aquí, evitando el salto feo.
+                    img.style.transform = "scale(1)";
+                    img.style.cursor = "default";
+                });
+            });
+        });
+    </script>
 
 </body>
 </html>
