@@ -319,7 +319,7 @@
         <p>Documentación Técnica &copy; 2026 - Nexum Automation | Universidad Nacional de Colombia</p>
     </footer>
 
-    <script>
+   <script>
         function abrirLinea(evt, nombreLinea) {
             var i, tabcontent, tablinks;
             
@@ -340,30 +340,28 @@
             evt.currentTarget.className += " active";
         }
 
-        // --- EFECTO LUPA CORREGIDO ---
+        // --- EFECTO LUPA CORREGIDO (SIN BUG AL SALIR) ---
         document.addEventListener("DOMContentLoaded", function() {
             const imagenesLightbox = document.querySelectorAll('.lightbox img');
             
             imagenesLightbox.forEach(img => {
-                // Transición suave al entrar/salir del zoom
-                img.style.transition = "transform 0.1s ease";
+                // Aumentamos a 0.2s para que la salida sea más elegante
+                img.style.transition = "transform 0.2s ease-out";
                 
                 img.addEventListener('mousemove', function(e) {
-                    const rect = e.target.getBoundingClientRect();
-                    // Calculamos dónde está el mouse en porcentaje relativo a la imagen
-                    const x = ((e.clientX - rect.left) / rect.width) * 100;
-                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    // Usar offsetX y offsetWidth evita temblores porque lee las medidas internas
+                    const x = (e.offsetX / img.offsetWidth) * 100;
+                    const y = (e.offsetY / img.offsetHeight) * 100;
                     
-                    // Movemos el origen y APLICAMOS EL ZOOM (Scale)
                     img.style.transformOrigin = `${x}% ${y}%`;
-                    img.style.transform = "scale(2.5)"; // Esta línea es la que hace la magia de ampliar
+                    img.style.transform = "scale(2.5)"; 
                     img.style.cursor = "zoom-in";
                 });
                 
                 img.addEventListener('mouseleave', function() {
-                    // Quitamos el zoom al sacar el cursor
+                    // Solo le decimos que vuelva al tamaño original. 
+                    // Ya no forzamos el centro aquí, evitando el salto feo.
                     img.style.transform = "scale(1)";
-                    img.style.transformOrigin = 'center center';
                     img.style.cursor = "default";
                 });
             });
