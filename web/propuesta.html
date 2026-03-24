@@ -48,19 +48,46 @@
             </div>
 
             <div id="Monster" class="tabcontent" style="display: block;">
-                <h3 style="color: #3F51B5; border-bottom: 1px solid #eee; padding-bottom: 10px;">🔋 Propuesta: Monster Energy (Alta Velocidad)</h3>
+                <h3 style="color: #3F51B5; border-bottom: 1px solid #eee; padding-bottom: 10px;">🔋 Propuesta de Mejora: Monster Energy (Lata 473ml)</h3>
                 
-                <p>El principal reto de esta línea son los micro-paros por desincronización y los tiempos de Set-up. La propuesta se enfoca en control de movimiento avanzado (Motion Control) y visión artificial.</p>
+                <div style="margin-top: 30px; border: 1px solid #e0e0e0; border-radius: 8px; padding: 25px; background-color: #ffffff; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                    <h4 style="color: #ff9800; font-size: 20px; margin-top: 0; border-bottom: 2px solid #ff9800; padding-bottom: 10px; display: inline-block;">Rediseño y Automatización del Fin de Línea</h4>
+                    
+                    <p style="text-align: justify; line-height: 1.6; margin-top: 15px;">La propuesta consiste en rediseñar y estabilizar la línea de envasado de Monster atacando de forma directa los principales puntos de pérdida de eficiencia. Se plantea reorganizar el <em>dry-end</em> para hacer más fluido el paso de codificación a empaque y paletizado, incorporar acumulación estratégica, corregir transfers y conveyors, y automatizar parcialmente el fin de línea. A nivel operativo, se propone controlar la línea con una lógica centrada en el <em>filler</em> (llenadora), robustecer la sensorización, fortalecer el control de calidad del cierre y establecer una estrategia de mantenimiento más preventiva y predictiva.</p>
+                    
+                    <div style="text-align: center; margin: 25px 0; background-color: #f8f9fa; padding: 20px; border-radius: 8px; border: 1px dashed #ccc;">
+                        <h5 style="margin-top: 0; color: #333; font-size: 14px;"><strong>(Haz clic en la imagen para ampliar)</strong></h5>
+                        
+                        <a href="#zoom_monster1">
+                            <img src="../assets/img/PropuestaMonster.jpeg" alt="Esquema de rediseño de línea Monster" style="max-width: 100%; height: auto; max-height: 400px; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); cursor: zoom-in;">
+                        </a>
+                        
+                        <div id="zoom_monster1" class="lightbox">
+                            <a href="#Monster" class="close-lightbox">&times;</a>
+                            <img src="../assets/img/PropuestaMonster.jpeg" alt="Esquema de rediseño ampliado">
+                        </div>
+                        <p style="font-size: 13px; color: #666; margin-top: 10px;"><em>Figura 1. Esquema de reorganización del dry-end y lógica operativa.</em></p>
+                    </div>
 
-                <h4>Soluciones Implementadas:</h4>
-                <ul>
-                    <li><strong>Sincronismo Electrónico (Virtual Master):</strong> Reemplazo de acoples mecánicos por servomotores sincronizados en la llenadora y engargoladora, comandados por un PLC de seguridad, reduciendo el desgaste y vibraciones.</li>
-                    <li><strong>Inspección Autónoma (Machine Vision):</strong> Integración de cámaras de alta velocidad y sensores de Rayos X post-sellado para rechazo automático de latas con bajo nivel o abolladuras sin detener el flujo.</li>
-                    <li><strong>Gestión Inteligente de Buffers:</strong> Control PID sobre los variadores de frecuencia de las bandas transportadoras, regulando la velocidad de acumulación en función del estado de la máquina aguas abajo.</li>
-                </ul>
+                    <p style="text-align: justify; line-height: 1.6;">Se propone la implementación del robot paletizador <strong>ABB IRB 460-110/2.4</strong> para automatizar la estación final de paletizado de la línea de envasado. Su selección se justifica porque es un robot de 4 ejes específicamente diseñado para aplicaciones de paletizado de fin de línea, con una capacidad de carga de 110 kg, alcance de 2,4 m y velocidad de hasta 2.190 ciclos por hora, lo que le permite operar con suficiente capacidad para manejar packs o cajas sin constituirse en un cuello de botella del proceso. Adicionalmente, su diseño compacto favorece la integración en layouts existentes, aspecto clave en la propuesta de reajuste del <em>dry-end</em> de la planta. Con su implementación se espera reducir la variabilidad operativa del paletizado manual, disminuir microparadas y mejorar la estabilidad del flujo hacia despacho.</p>
 
-                <div style="background-color: #f4f7f6; padding: 20px; border-left: 4px solid #3F51B5; margin-top: 20px;">
-                    <strong>Impacto Esperado:</strong> Reducción del 40% en tiempos de Set-up y estabilización del OEE por mitigación de paradas cortas.
+                    <div style="text-align: center; margin: 25px 0; background-color: #f8f9fa; padding: 20px; border-radius: 8px; border: 1px dashed #ccc;">
+                        <h5 style="margin-top: 0; color: #333; font-size: 14px;"><strong>(Haz clic en la imagen para ampliar)</strong></h5>
+                        
+                        <a href="#zoom_monster2">
+                            <img src="../assets/img/Propuesta paletizadoMonster.png" alt="Robot paletizador ABB IRB 460" style="max-width: 100%; height: auto; max-height: 400px; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); cursor: zoom-in;">
+                        </a>
+                        
+                        <div id="zoom_monster2" class="lightbox">
+                            <a href="#Monster" class="close-lightbox">&times;</a>
+                            <img src="../assets/img/Propuesta paletizadoMonster.png" alt="Robot paletizador ampliado">
+                        </div>
+                        <p style="font-size: 13px; color: #666; margin-top: 10px;"><em>Figura 2. Especificaciones y alcance operativo del robot ABB IRB 460.</em></p>
+                    </div>
+                    
+                    <div style="background-color: #fff3e0; padding: 15px; border-left: 4px solid #ff9800; margin-top: 20px; font-size: 15px;">
+                        <strong>Impacto de la Propuesta:</strong> Reducción de la variabilidad operativa en el paletizado, disminución de microparadas, mejora en la estabilidad del flujo hacia despacho y eliminación de cuellos de botella en el <em>dry-end</em>.
+                    </div>
                 </div>
             </div>
 
