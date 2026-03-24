@@ -1,4 +1,4 @@
-# Automatización de Procesos de Manufactura - UNAL 2026-I
+# Automatización de Procesos de Manufactura  Nexum Automation
 
 Este repositorio contiene el desarrollo integral de un sistema de automatización y gestión de producción para una planta embotelladora, realizado como proyecto principal de la asignatura **Automatización de Procesos de Manufactura** en la Universidad Nacional de Colombia.
 
@@ -11,7 +11,7 @@ El proyecto se centra en la optimización y planificación de la automatización
 
 A través de  fases documentadas (Módulos), el equipo ha diagnosticado el estado actual de la planta mediante indicadores de desempeño (**OEE**, **VSM**) y ha proyectado una solución de automatización que integra lógica de control en **PLC**, instrumentación industrial y supervisión **SCADA**.
 
-## 👥 Equipo de Trabajo (Grupo 2)
+## 👥 Equipo de Trabajo Nexum Automation
 
 Ariadna Contreras Nossa
 
