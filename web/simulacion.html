@@ -111,10 +111,11 @@
             <div id="Brisa" class="tabcontent">
                 <h3 style="color: #3F51B5; border-bottom: 1px solid #eee; padding-bottom: 10px;">💧 Simulación: Agua Brisa (Garrafón 20L)</h3>
                 
-                <p>Para la línea HOD (retornables), el modelo fue configurado paramétricamente para soportar la nueva arquitectura de 1,500 BPH. Se implementó un <em>Takt Time</em> maestro de 2.4 segundos en la llenadora principal, y se ajustaron los tiempos de procesamiento en los túneles de lavado para garantizar que el flujo continuo no rompa los estándares de calidad de la sanitización.</p>
+                <p>La simulación corresponde a la línea 3 de garrafones de agua de 20 L de la marca Agua Brisa. En ella se observa una planta automatizada organizada mediante una línea de transporte que conecta diversas estaciones de trabajo.</p>
 
+                <p> El proceso inicia en la zona de recepción, donde los garrafones son ingresados de forma manual por un operario, quien se encarga de colocarlos en la banda transportadora. A partir de allí, los envases pasan por etapas como la destapadora y el lavado interno, donde se realiza la limpieza de los recipientes. Posteriormente, avanzan hacia la estación de llenado y tapado, seguida del proceso de etiquetado para su correcta identificación. A lo largo del recorrido se incluyen puntos de inspección, tanto manual como automática, con el fin de garantizar la calidad del producto. </p>
+                <p>Finalmente, los garrafones son organizados mediante un proceso de paletizado que también se realiza de forma manual por un operario, antes de ser trasladados a la zona de almacenamiento. La simulación integra además elementos de control como sensores, un sistema tipo broker y un “worker pool”, lo que permite la gestión coordinada de tareas y el monitoreo del flujo dentro de la planta.</p>
                 <ul style="margin-bottom: 25px;">
-                    <li><strong>Objetivo de Simulación:</strong> Escalar capacidad y evidenciar la saturación en el fin de línea (paletizado).</li>
                     <li><strong>Software:</strong> Tecnomatix Plant Simulation v23.</li>
                 </ul>
 
