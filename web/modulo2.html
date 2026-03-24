@@ -73,11 +73,19 @@
                     <a href="../docs/modulo2/Informe_Mercado_CocaCola.pdf" target="_blank" class="download-btn" style="padding: 10px 20px; font-size: 14px; background-color: #757575;">📊 Análisis de Mercado y Demanda</a>
                 </div>
             </div>
-           <div style="margin-bottom: 30px; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+           <div id="layout-general" style="margin-bottom: 30px; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                 <h3 style="margin-top: 0; color: #3F51B5; border-bottom: 2px solid #3F51B5; padding-bottom: 5px;">📍 Layout General de la Planta</h3>
-                <p>Distribución macro de las áreas de producción, almacenamiento y servicios industriales de Nexum Automation.</p>
+                <p>Distribución macro de las áreas de producción, almacenamiento y servicios industriales de Nexum Automation. <strong>(Haz clic en la imagen para ampliarla)</strong></p>
+                
                 <div style="text-align: center; border: 1px solid #eee; border-radius: 8px; padding: 10px;">
-                    <img src="../docs/modulo2/Diagramas/Layout/Layout planta.png" alt="Layout General de la Planta" style="max-width: 100%; height: auto; border-radius: 4px;">
+                    <a href="#zoom_layout_planta">
+                        <img src="../docs/modulo2/Diagramas/Layout/Layout planta.png" alt="Layout General de la Planta" style="max-width: 100%; height: auto; border-radius: 4px; cursor: zoom-in;">
+                    </a>
+                    
+                    <div id="zoom_layout_planta" class="lightbox">
+                        <a href="#layout-general" class="close-lightbox">&times;</a>
+                        <img src="../docs/modulo2/Diagramas/Layout/Layout planta.png" alt="Layout General de la Planta">
+                    </div>
                 </div>
             </div>
             <div class="tab">
@@ -126,11 +134,11 @@
                     <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
                         <h5 style="margin-top: 0; color: #3F51B5;">DOP (Operaciones)</h5>
                         <a href="#zoom_dop_monster">
-                            <img src="../assets/img/dop_monster.png" alt="DOP Monster" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
+                            <img src="../docs/modulo2/Diagramas/DOP/DOP Monster.PNG" alt="DOP Monster" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
                         </a>
                         <div id="zoom_dop_monster" class="lightbox">
                             <a href="#Monster" class="close-lightbox">&times;</a>
-                            <img src="../assets/img/dop_monster.png" alt="DOP Monster">
+                            <img src="../docs/modulo2/Diagramas/DOP/DOP Monster.PNG" alt="DOP Monster">
                         </div>
                     </div>
 
@@ -209,12 +217,56 @@
                     <li><strong>Demanda estimada:</strong> 35,720,000 unidades/año.</li>
                 </ul>
 
-                <h4>2. Mapas de Proceso (DOP / VSM)</h4>
-                <div style="background-color: #f9f9f9; padding: 15px; text-align: center; border: 1px dashed #ccc; margin-bottom: 20px;">
-                    <p style="color: #757575;"><em>[Insertar Imagen DOP / VSM de Quatro Aquí]</em></p>
-                </div>
-                <p><strong>Hallazgo VSM:</strong> Destaca la integración de la máquina sopladora de preformas PET en la línea, optimizando el flujo de materiales pero concentrando el riesgo de parada en una sola etapa crítica.</p>
+                <h4>2. Mapas y Diagramas de Ingeniería</h4>
+                <p>Análisis de flujo, recorridos y valor de la línea de producción. <strong>(Haz clic en cualquier imagen para ampliarla)</strong>:</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                    
+                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
+                        <h5 style="margin-top: 0; color: #3F51B5;">Layout de la Línea</h5>
+                        <a href="#zoom_layout_quatro">
+                            <img src="../docs/modulo2/Diagramas/Layout/Layout Quatro.png" alt="Layout Línea Quatro" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
+                        </a>
+                        <div id="zoom_layout_quatro" class="lightbox">
+                            <a href="#Quatro" class="close-lightbox">&times;</a>
+                            <img src="../docs/modulo2/Diagramas/Layout/Layout Quatro.png" alt="Layout Línea Quatro">
+                        </div>
+                    </div>
 
+                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
+                        <h5 style="margin-top: 0; color: #3F51B5;">Diagrama Spaghetti</h5>
+                        <a href="#zoom_spagetti_quatro">
+                            <img src="../docs/modulo2/Diagramas/Spaghetti/Quatro_Spagetti.jpg" alt="Diagrama Spaghetti Quatro" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
+                        </a>
+                        <div id="zoom_spagetti_quatro" class="lightbox">
+                            <a href="#Quatro" class="close-lightbox">&times;</a>
+                            <img src="../docs/modulo2/Diagramas/Spaghetti/Quatro_Spagetti.jpg" alt="Diagrama Spaghetti Quatro">
+                        </div>
+                    </div>
+
+                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
+                        <h5 style="margin-top: 0; color: #3F51B5;">DOP (Operaciones)</h5>
+                        <a href="#zoom_dop_quatro">
+                            <img src="../docs/modulo2/Diagramas/DOP/DOP Quatro.PNG" alt="DOP Quatro" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
+                        </a>
+                        <div id="zoom_dop_quatro" class="lightbox">
+                            <a href="#Quatro" class="close-lightbox">&times;</a>
+                            <img src="../docs/modulo2/Diagramas/DOP/DOP Quatro.PNG" alt="DOP Quatro">
+                        </div>
+                    </div>
+
+                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
+                        <h5 style="margin-top: 0; color: #3F51B5;">VSM (Value Stream Map)</h5>
+                        <a href="#zoom_vsm_quatro">
+                            <img src="../docs/modulo2/Diagramas/VSM/VMS Quatro.png" alt="VSM Quatro" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
+                        </a>
+                        <div id="zoom_vsm_quatro" class="lightbox">
+                            <a href="#Quatro" class="close-lightbox">&times;</a>
+                            <img src="../docs/modulo2/Diagramas/VSM/VMS Quatro.png" alt="VSM Quatro">
+                        </div>
+                    </div>
+                </div>
+                
                 <h4>3. Indicadores de Desempeño</h4>
                 
                 <div class="kpi-box">
@@ -266,12 +318,55 @@
                     <li><strong>Demanda estimada:</strong> 4,227,600 garrafones/año.</li>
                 </ul>
 
-                <h4>2. Mapas de Proceso</h4>
-                <div style="background-color: #f9f9f9; padding: 15px; text-align: center; border: 1px dashed #ccc; margin-bottom: 20px;">
-                    <p style="color: #757575;"><em>[Insertar Imagen DOP / VSM de Agua Brisa Aquí]</em></p>
-                </div>
-                <p><strong>Hallazgo VSM:</strong> Identificación del Cuello de Botella primario. El paletizado manual al final de la línea genera retrasos constantes debido a restricciones ergonómicas por el peso (20kg por unidad).</p>
+                <h4>2. Mapas y Diagramas de Ingeniería</h4>
+                <p>Análisis de flujo, recorridos y valor de la línea de producción. <strong>(Haz clic en cualquier imagen para ampliarla)</strong>:</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                    
+                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
+                        <h5 style="margin-top: 0; color: #3F51B5;">Layout de la Línea</h5>
+                        <a href="#zoom_layout_brisa">
+                            <img src="../docs/modulo2/Diagramas/Layout/Layout Brissa.png" alt="Layout Línea Agua Brisa" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
+                        </a>
+                        <div id="zoom_layout_brisa" class="lightbox">
+                            <a href="#Brisa" class="close-lightbox">&times;</a>
+                            <img src="../docs/modulo2/Diagramas/Layout/Layout Brissa.png" alt="Layout Línea Agua Brisa">
+                        </div>
+                    </div>
 
+                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
+                        <h5 style="margin-top: 0; color: #3F51B5;">Diagrama Spaghetti</h5>
+                        <a href="#zoom_spagetti_brisa">
+                            <img src="../docs/modulo2/Diagramas/Spaghetti/Garrafon_Spagetti.jpg" alt="Diagrama Spaghetti Agua Brisa" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
+                        </a>
+                        <div id="zoom_spagetti_brisa" class="lightbox">
+                            <a href="#Brisa" class="close-lightbox">&times;</a>
+                            <img src="../docs/modulo2/Diagramas/Spaghetti/Garrafon_Spagetti.jpg" alt="Diagrama Spaghetti Agua Brisa">
+                        </div>
+                    </div>
+
+                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
+                        <h5 style="margin-top: 0; color: #3F51B5;">DOP (Operaciones)</h5>
+                        <a href="#zoom_dop_brisa">
+                            <img src="../docs/modulo2/Diagramas/DOP/DOP Brissa.PNG" alt="DOP Agua Brisa" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
+                        </a>
+                        <div id="zoom_dop_brisa" class="lightbox">
+                            <a href="#Brisa" class="close-lightbox">&times;</a>
+                            <img src="../docs/modulo2/Diagramas/DOP/DOP Brissa.PNG" alt="DOP Agua Brisa">
+                        </div>
+                    </div>
+
+                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
+                        <h5 style="margin-top: 0; color: #3F51B5;">VSM (Value Stream Map)</h5>
+                        <a href="#zoom_vsm_brisa">
+                            <img src="../docs/modulo2/Diagramas/VSM/VSM Brissa.png" alt="VSM Agua Brisa" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
+                        </a>
+                        <div id="zoom_vsm_brisa" class="lightbox">
+                            <a href="#Brisa" class="close-lightbox">&times;</a>
+                            <img src="../docs/modulo2/Diagramas/VSM/VSM Brissa.png" alt="VSM Agua Brisa">
+                        </div>
+                    </div>
+                </div>
                 <h4>3. Indicadores de Desempeño</h4>
                 
                 <div class="kpi-box">
