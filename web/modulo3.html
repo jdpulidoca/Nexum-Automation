@@ -184,29 +184,67 @@
 </div>
 
             <div class="card-modulo3" style="border-top: 4px solid #00e676;">
-                <h3 style="color: #2e7d32;">💰 4. Análisis Financiero y Viabilidad</h3>
+                <h3 style="color: #2e7d32;">💰 4. Análisis Financiero y Viabilidad (CAPEX / OPEX)</h3>
                 
-                <h4 style="color: #333;">Análisis de OPEX (Costos Operativos y Materias Primas)</h4>
-                <p>Se realizó un estudio comparativo de la estructura de costos entre las líneas de producción:</p>
-                <ul>
-                    <li><strong>Impacto del Azúcar:</strong> Basado en los precios reportados por DANE/Corabastos, el costo del azúcar industrial representa el principal rubro del OPEX para las líneas de <strong>Monster (Lata)</strong> y <strong>Quatro (PET)</strong>, reduciendo el margen operativo por litro en comparación con el agua purificada.</li>
-                    <li><strong>Estrategia de Margen:</strong> Debido al alto costo de insumos en bebidas azucaradas, la línea de <strong>Agua Brisa (20L)</strong> se vuelve crítica para la liquidez de la planta, justificando la necesidad de automatizarla para alcanzar su volumen máximo teórico.</li>
-                </ul>
+                <h4 style="color: #333; margin-top: 20px;">4.1. Presupuesto del Proyecto (CAPEX)</h4>
+                <p>La estimación del proyecto de automatización se realizó mediante un enfoque ascendente basado en la EDT, bajo la estructura de una empresa integradora. Se priorizó la inversión en la celda de paletizado (ABB IRB 460) y la integración del sistema OEE-MES Lite, manteniendo la maquinaria de llenado existente.</p>
+                
+                <div style="background-color: #f9fbfc; border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 25px;">
+                    <ul style="list-style-type: none; padding-left: 0; margin: 0; font-size: 14px;">
+                        <li style="padding: 5px 0; border-bottom: 1px dashed #ccc;"><strong>Costos Directos (Equipos, software, labor directa):</strong> <span style="float: right;">$ 763.922.450 COP</span></li>
+                        <li style="padding: 5px 0; border-bottom: 1px dashed #ccc;"><strong>Costos Indirectos (6%):</strong> <span style="float: right;">$ 45.835.347 COP</span></li>
+                        <li style="padding: 5px 0; border-bottom: 1px dashed #ccc;"><strong>Administración (12%):</strong> <span style="float: right;">$ 91.670.694 COP</span></li>
+                        <li style="padding: 5px 0; border-bottom: 1px dashed #ccc;"><strong>Imprevistos e Integración (5%):</strong> <span style="float: right;">$ 38.196.123 COP</span></li>
+                        <li style="padding: 5px 0; border-bottom: 1px dashed #ccc;"><strong>Utilidad del Integrador (10%):</strong> <span style="float: right;">$ 76.392.245 COP</span></li>
+                        <li style="padding: 10px 0 5px 0; font-size: 16px; color: #2e7d32;"><strong>PRESUPUESTO TOTAL BASE (Sin IVA):</strong> <span style="float: right; font-weight: bold;">$ 1.016.016.859 COP</span></li>
+                    </ul>
+                    <p style="font-size: 11px; color: #777; margin-top: 10px; text-align: right;">*TRM de referencia: COP/USD 3.704,87 | EUR/COP 4.309,87</p>
+                </div>
 
-                <h4 style="color: #333; margin-top: 25px;">Presupuesto de Inversión (CAPEX)</h4>
-                <p>Para la línea de 20L, el proyecto contempla la siguiente estructura de capital inicial:</p>
-                <ul>
-                    <li><strong>Maquinaria Principal:</strong> Adquisición de un equipo de llenado con capacidad instalada de 1.200 BPH por un valor de <strong>$32,000 USD</strong>.</li>
-                    <li><strong>Celda de Paletizado (Fase 2):</strong> Proyección de inversión para la integración del brazo robótico (cuyos detalles técnicos se desarrollarán en el Módulo 3).</li>
-                </ul>
+                <h4 style="color: #333;">4.2. Análisis de OPEX y Precios Unitarios (APU)</h4>
+                <p>Para determinar el flujo operativo, se evaluaron los costos directos de producción asumiendo un margen de costo de fabricación del 54% sobre el precio directo. El análisis de materias primas reveló que <strong>el azúcar ($3.520/kg) representa el rubro crítico</strong> de gasto operativo, superando ampliamente los costos hídricos ($5.056/m³).</p>
 
-                <h4 style="color: #333; margin-top: 25px;">Indicadores Financieros</h4>
-                <p>El flujo de caja proyectado demuestra que la eliminación del cuello de botella en paletizado incrementa las ventas anuales, generando una <strong>Tasa Interna de Retorno (TIR)</strong> favorable y un <strong>Valor Presente Neto (VPN)</strong> positivo que garantiza el retorno de la inversión (Payback) dentro del horizonte de planeación.</p>
+                <div style="overflow-x: auto; margin-bottom: 25px;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 13px; text-align: center;">
+                        <thead>
+                            <tr style="background-color: #e8f5e9; color: #2e7d32;">
+                                <th style="padding: 10px; border: 1px solid #c8e6c9;">Producto</th>
+                                <th style="padding: 10px; border: 1px solid #c8e6c9;">Demanda Anual</th>
+                                <th style="padding: 10px; border: 1px solid #c8e6c9;">Precio Sugerido</th>
+                                <th style="padding: 10px; border: 1px solid #c8e6c9;">Costo Producción (54%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 8px; border: 1px solid #eee; text-align: left;"><strong>Monster (473 ml)</strong></td>
+                                <td style="padding: 8px; border: 1px solid #eee;">21.850.000 un.</td>
+                                <td style="padding: 8px; border: 1px solid #eee;">$ 8.500</td>
+                                <td style="padding: 8px; border: 1px solid #eee;">$ 3.780</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px; border: 1px solid #eee; text-align: left;"><strong>Quatro (1.5 L)</strong></td>
+                                <td style="padding: 8px; border: 1px solid #eee;">35.720.000 un.</td>
+                                <td style="padding: 8px; border: 1px solid #eee;">$ 4.500</td>
+                                <td style="padding: 8px; border: 1px solid #eee;">$ 2.025</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px; border: 1px solid #eee; text-align: left;"><strong>Agua Brisa (Garrafón 20L)</strong></td>
+                                <td style="padding: 8px; border: 1px solid #eee;">4.227.600 un.</td>
+                                <td style="padding: 8px; border: 1px solid #eee;">$ 15.000</td>
+                                <td style="padding: 8px; border: 1px solid #eee;">$ 6.804</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4 style="color: #333;">4.3. Flujo de Caja y Retorno de Inversión</h4>
+                <p>Al proyectar el modelo de negocio incluso en un escenario conservador, los indicadores demuestran una viabilidad absoluta. La automatización tiene un costo aproximado de <strong>1.016 Millones de COP</strong> (Año 0), lo cual se amortiza rápidamente frente al volumen de producción.</p>
+                <p>Debido a que el negocio maneja un volumen de circulación masivo (más de 60 millones de unidades anuales consolidadas), <strong>el EBITDA proyectado para el Año 1 supera los 214.000 Millones COP</strong>, garantizando una recuperación de la inversión (Payback) prácticamente inmediata, minimizando el riesgo de capital de la propuesta tecnológica.</p>
 
                 <div style="text-align: center; margin-top: 35px; border-top: 1px solid #eee; padding-top: 25px;">
-                    <p style="margin-bottom: 15px; color: #555;"><em>Consulte el modelo financiero interactivo para ver los flujos de caja y cálculos de TIR/VPN:</em></p>
-                    <a href="../docs/modulo2/Evaluacion_Financiera_Nexum.xlsx" download style="background-color: #00e676; color: #1a1a1a; padding: 15px 30px; text-decoration: none; font-weight: bold; border-radius: 5px; display: inline-block; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s;">
-                        📥 Descargar Excel Financiero (CAPEX/OPEX)
+                    <p style="margin-bottom: 15px; color: #555;"><em>Consulte el modelo financiero interactivo para ver el APU detallado y los cálculos de TIR/VPN:</em></p>
+                    <a href="../docs/modulo3/Flujo de Caja.xlsx" download style="background-color: #00e676; color: #1a1a1a; padding: 15px 30px; text-decoration: none; font-weight: bold; border-radius: 5px; display: inline-block; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s;">
+                        📥 Descargar Excel Financiero (Flujo de Caja y APU)
                     </a>
                 </div>
             </div>
