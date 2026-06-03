@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexum Automation | Central Nexus</title>
+    
+    <style>
+        /* FONDO OSCURO INDUSTRIAL */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: radial-gradient(circle at center, #091021 0%, #03050c 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* CONTENEDOR DE LA RED INTERACTIVA */
+        .nexus-container {
+            position: relative;
+            width: 800px;
+            height: 600px;
+        }
+
+        /* LÍNEAS DE CONEXIÓN DE FONDO */
+        .svg-connections {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .connection-line {
+            stroke: #3F51B5;
+            stroke-width: 2;
+            stroke-dasharray: 6, 6;
+            opacity: 0.12; /* Casi invisibles en estado de reposo lejano */
+            transition: stroke 0.2s ease, stroke-width 0.2s ease, filter 0.2s ease, opacity 0.15s ease;
+        }
+
+        /* Estado encendido inmediato por proximidad matemática */
+        .connection-line.active {
+            opacity: 1 !important;
+            stroke: #00d2ff !important;
+            stroke-width: 3.5 !important;
+            stroke-dasharray: none !important;
+            filter: drop-shadow(0 0 8px #00d2ff);
+        }
+
+        /* NODOS FLOTANTES BASE */
+        .node {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            z-index: 10;
+            cursor: pointer;
+        }
+
+        /* 👁️ NODO CENTRAL: EL LENTE CONTENEDOR (Fijo en estructura) */
+        .node-center {
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, #0a1124 30%, #030611 100%);
+            border: 3px solid #3F51B5;
+            box-shadow: 0 0 40px rgba(63, 81, 181, 0.4), inset 0 0 30px rgba(0, 0, 0, 0.9);
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Rejilla fina de fondo (Estilo radar/visión artificial) */
+        .radar-grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 1px dashed rgba(0, 210, 255, 0.08);
+            pointer-events: none;
+        }
+
+        /* 🛠️ EL ISOTIPO GEOMÉTRICO REAL DE NEXUM (Pupila móvil) */
+        .logo-pupil-container {
+            width: 110px;
+            height: 110px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+            transition: none;
+            filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.5));
+        }
+
+        /* Estilos vectoriales del Isotipo */
+        .contorno-hexagono { fill: none; stroke: #00d2ff; stroke-width: 10; stroke-linejoin: round; stroke-linecap: round; }
+        .lineas-estructurales { fill: none; stroke: #00d2ff; stroke-width: 10; stroke-linecap: round; }
+        .hexagono-punteado { fill: none; stroke: #3F51B5; stroke-width: 5; stroke-dasharray: 8, 8; stroke-linejoin: round; }
+        .circulo-mediano { fill: none; stroke: #00d2ff; stroke-width: 8; }
+        .lineas-radiales { fill: none; stroke: #00d2ff; stroke-width: 7; stroke-linecap: round; }
+        .circulo-central-pequeno { fill: none; stroke: #00d2ff; stroke-width: 5; }
+        .circulos-satelite { fill: #00d2ff; }
+        .lineas-puente-delgadas { fill: none; stroke: #3F51B5; stroke-width: 2.5; stroke-linecap: round; }
+        .nucleo-relleno { fill: #00d2ff; }
+        .cruz-calada { fill: none; stroke: #0a1124; stroke-width: 3.5; stroke-linecap: round; }
+
+        /* Reflejo sutil de cristal sobre el lente */
+        .lens-glare {
+            position: absolute;
+            top: 8%; left: 12%;
+            width: 55px; height: 25px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            transform: rotate(-45deg);
+            pointer-events: none;
+            z-index: 3;
+            filter: blur(1px);
+        }
+
+        /* MÓDULOS PERIFÉRICOS (ÓRBITA) */
+        .node-orbit {
+            width: 95px;
+            height: 95px;
+            background: rgba(8, 15, 36, 0.85);
+            border: 2px solid #3F51B5;
+            box-shadow: 0 0 15px rgba(63, 81, 181, 0.25);
+            backdrop-filter: blur(5px);
+            transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+            will-change: transform;
+        }
+
+        /* Posiciones iniciales absolutas en el lienzo */
+        .tl { top: 12%; left: 12%; }
+        .tr { top: 12%; right: 12%; }
+        .bl { bottom: 12%; left: 12%; }
+        .br { bottom: 12%; right: 12%; }
+
+        .node-icon { 
+            font-size: 28px; 
+            transition: transform 0.3s; 
+        }
+
+        /* TEXTOS DE LOS NODOS */
+        .node-title {
+            position: absolute;
+            bottom: -35px;
+            font-size: 11px;
+            font-weight: bold;
+            color: #8c9eff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            white-space: nowrap;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(-8px);
+            transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease;
+            pointer-events: none;
+        }
+
+        /* Al estar encima o en el rango activo, forzamos los textos y brillos */
+        .node-orbit.near {
+            border-color: #00d2ff;
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.5);
+        }
+        .node-orbit.near .node-title {
+            opacity: 1;
+            transform: translateY(0);
+            color: #00d2ff;
+        }
+
+        .node-orbit:hover {
+            background: rgba(14, 27, 66, 0.95);
+            border-color: #00d2ff;
+            box-shadow: 0 0 35px rgba(0, 210, 255, 0.7);
+        }
+        .node-orbit:hover .node-icon { 
+            transform: scale(1.2); 
+        }
+
+        /* FOOTER DE MARCA */
+        .nexus-footer {
+            position: absolute;
+            bottom: 25px;
+            text-align: center;
+            width: 100%;
+            color: #434e6c;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            pointer-events: none;
+        }
+        .nexus-footer span { color: #00d2ff; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="nexus-container" id="main-container">
+        
+        <svg class="svg-connections" id="svg-network">
+            <line x1="400" y1="300" x2="145" y2="145" class="connection-line" id="line-tl"></line>
+            <line x1="400" y1="300" x2="655" y2="145" class="connection-line" id="line-tr"></line>
+            <line x1="400" y1="300" x2="145" y2="455" class="connection-line" id="line-bl"></line>
+            <line x1="400" y1="300" x2="655" y2="455" class="connection-line" id="line-br"></line>
+        </svg>
+
+        <div class="node node-center" id="center-node">
+            <div class="radar-grid"></div>
+            
+            <div class="logo-pupil-container" id="nexum-logo-eye">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+                    <polygon class="contorno-hexagono" points="200,60 321,130 321,270 200,340 79,270 79,130" />
+                    <g class="lineas-estructurales">
+                        <line x1="79" y1="185" x2="104" y2="185" />
+                        <line x1="79" y1="215" x2="104" y2="215" />
+                        <line x1="321" y1="185" x2="296" y2="185" />
+                        <line x1="321" y1="215" x2="296" y2="215" />
+                    </g>
+                    <polygon class="hexagono-punteado" points="200,110 285,159 285,241 200,290 115,241 115,159" />
+                    <circle class="circulo-mediano" cx="200" cy="200" r="65" />
+                    <g class="lineas-radiales">
+                        <line x1="143.7" y1="167.5" x2="105" y2="145" />
+                        <line x1="256.3" y1="167.5" x2="295" y2="145" />
+                        <line x1="143.7" y1="232.5" x2="105" y2="255" />
+                        <line x1="256.3" y1="232.5" x2="295" y2="255" />
+                    </g>
+                    <circle class="circulo-central-pequeno" cx="200" cy="200" r="30" />
+                    <g class="circulos-satelite">
+                        <circle cx="200" cy="164" r="6" />
+                        <circle cx="200" cy="236" r="6" />
+                        <circle cx="231.2" cy="182" r="6" />
+                        <circle cx="231.2" cy="218" r="6" />
+                        <circle cx="168.8" cy="218" r="6" />
+                        <circle cx="168.8" cy="182" r="6" />
+                    </g>
+                    <g class="lineas-puente-delgadas">
+                        <line x1="200" y1="185" x2="200" y2="170" />
+                        <line x1="200" y1="215" x2="200" y2="230" />
+                        <line x1="213" y1="192.5" x2="226" y2="185" />
+                        <line x1="213" y1="207.5" x2="226" y2="215" />
+                        <line x1="187" y1="207.5" x2="174" y2="215" />
+                        <line x1="187" y1="192.5" x2="174" y2="185" />
+                    </g>
+                    <circle class="nucleo-relleno" cx="200" cy="200" r="15" />
+                    <g class="cruz-calada">
+                        <line x1="192" y1="200" x2="208" y2="200" />
+                        <line x1="200" y1="192" x2="200" y2="208" />
+                    </g>
+                </svg>
+            </div>
+            <div class="lens-glare"></div>
+        </div>
+
+        <a href="web/modulo1.html" id="node-tl" class="node node-orbit tl">
+            <span class="node-icon">🔍</span>
+            <span class="node-title">Diagnóstico Operativo</span>
+        </a>
+
+        <a href="web/simulacion.html" id="node-tr" class="node node-orbit tr">
+            <span class="node-icon">⚙️</span>
+            <span class="node-title">Ingeniería e Innovación</span>
+        </a>
+
+        <a href="web/modulo3.html" id="node-bl" class="node node-orbit bl">
+            <span class="node-icon">💰</span>
+            <span class="node-title">Viabilidad Económica</span>
+        </a>
+
+        <a href="web/equipo.html" id="node-br" class="node node-orbit br">
+            <span class="node-icon">👥</span>
+            <span class="node-title">Equipo Consultor</span>
+        </a>
+
+    </div>
+
+    <div class="nexus-footer">
+        Nexum Core // Monitoreo en Tiempo Real // <span>Industria 4.0</span>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('main-container');
+            const logoEye = document.getElementById('nexum-logo-eye');
+            const centerNode = document.getElementById('center-node');
+            
+            let mX = 0, mY = 0;
+            document.addEventListener('mousemove', (e) => {
+                mX = e.clientX;
+                mY = e.clientY;
+            });
+
+            const nodes = [
+                { el: document.getElementById('node-tl'), line: document.getElementById('line-tl'), currentX: 0, currentY: 0, targetX: 0, targetY: 0, seed: 0 },
+                { el: document.getElementById('node-tr'), line: document.getElementById('line-tr'), currentX: 0, currentY: 0, targetX: 0, targetY: 0, seed: 2 },
+                { el: document.getElementById('node-bl'), line: document.getElementById('line-bl'), currentX: 0, currentY: 0, targetX: 0, targetY: 0, seed: 4 },
+                { el: document.getElementById('node-br'), line: document.getElementById('line-br'), currentX: 0, currentY: 0, targetX: 0, targetY: 0, seed: 6 }
+            ];
+
+            let eyeCurrentX = 0, eyeCurrentY = 0;
+            let time = 0;
+
+            function updateNetwork() {
+                time += 0.02; 
+                const containerRect = container.getBoundingClientRect();
+                
+                // 1. CÁLCULO FIJO DEL OJO CENTRAL
+                const rectEye = centerNode.getBoundingClientRect();
+                const centerNodeX = rectEye.left + rectEye.width / 2;
+                const centerNodeY = rectEye.top + rectEye.height / 2;
+
+                const angleEye = Math.atan2(mY - centerNodeY, mX - centerNodeX);
+                const distEye = Math.sqrt(Math.pow(mX - centerNodeX, 2) + Math.pow(mY - centerNodeY, 2));
+
+                const maxRadiusEye = 32; 
+                const moveRadiusEye = Math.min(distEye / 10, maxRadiusEye);
+                
+                const targetEyeX = Math.cos(angleEye) * moveRadiusEye;
+                const targetEyeY = Math.sin(angleEye) * moveRadiusEye;
+
+                eyeCurrentX += (targetEyeX - eyeCurrentX) * 0.1;
+                eyeCurrentY += (targetEyeY - eyeCurrentY) * 0.1;
+                logoEye.style.transform = `translate(${eyeCurrentX}px, ${eyeCurrentY}px)`;
+
+                // CORRECCIÓN CLAVE: El punto (x1,y1) ya no suma la pupila móvil.
+                // Es el centro geométrico del lente exterior pasado al lienzo SVG local.
+                const localEyeFixedX = centerNodeX - containerRect.left;
+                const localEyeFixedY = centerNodeY - containerRect.top;
+
+                // 2. DETECCIÓN DE PROXIMIDAD Y CONTROL VECTORIAL
+                nodes.forEach(node => {
+                    const nodeBaseRect = node.el.getBoundingClientRect();
+                    const nodeCenterX = nodeBaseRect.left + nodeBaseRect.width / 2 - node.currentX;
+                    const nodeCenterY = nodeBaseRect.top + nodeBaseRect.height / 2 - node.currentY;
+
+                    const distanceX = mX - nodeCenterX;
+                    const distanceY = mY - nodeCenterY;
+                    const distanceToMouse = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+                    // Umbral magnético
+                    const proximityThreshold = 220;
+
+                    if (distanceToMouse < proximityThreshold) {
+                        // --- ACCIÓN INMEDIATA POR PROXIMIDAD ---
+                        node.el.classList.add('near');
+                        node.line.classList.add('active'); // Dibuja y enciende la línea al instante
+
+                        const angleNode = Math.atan2(distanceY, distanceX);
+                        const force = (1 - (distanceToMouse / proximityThreshold)); 
+                        const maxMagnetMove = 35; 
+                        
+                        node.targetX = Math.cos(angleNode) * maxMagnetMove * force;
+                        node.targetY = Math.sin(angleNode) * maxMagnetMove * force;
+                    } else {
+                        // --- REPOSO / FUERA DEL NODO ---
+                        node.el.classList.remove('near');
+                        node.line.classList.remove('active'); // Desvanece la línea de inmediato
+
+                        node.targetX = Math.sin(time + node.seed) * 8;
+                        node.targetY = Math.cos(time * 0.8 + node.seed) * 6;
+                    }
+
+                    node.currentX += (node.targetX - node.currentX) * 0.08;
+                    node.currentY += (node.targetY - node.currentY) * 0.08;
+
+                    node.el.style.transform = `translate(${node.currentX}px, ${node.currentY}px)`;
+
+                    // Configuración de las coordenadas de las líneas
+                    node.line.setAttribute('x1', localEyeFixedX);
+                    node.line.setAttribute('y1', localEyeFixedY);
+
+                    const finalNodeX = (nodeCenterX + node.currentX) - containerRect.left;
+                    const finalNodeY = (nodeCenterY + node.currentY) - containerRect.top;
+                    node.line.setAttribute('x2', finalNodeX);
+                    node.line.setAttribute('y2', finalNodeY);
+                });
+
+                requestAnimationFrame(updateNetwork);
+            }
+
+            requestAnimationFrame(updateNetwork);
+        });
+    </script>
+</body>
+</html>
