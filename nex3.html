@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexum Automation | Synaptic Neural Mesh V3</title>
+    
+    <style>
+        /* ==========================================================================
+           SISTEMA DE DISEÑO: NEURAL MESH OS V3
+           ========================================================================== */
+        :root {
+            --nexum-blue: #3A52B3;
+            --nexum-gray: #8E8E93;
+            --nexum-glow: rgba(58, 82, 179, 0.4);
+            --bg-gradient: radial-gradient(circle at 50% 50%, #FFFFFF 0%, #F1F5F9 100%);
+            --node-bg: #FFFFFF;       
+            --text-main: #0F172A;     
+            --text-muted: #64748B;    
+            --axon-base: rgba(58, 82, 179, 0.06);
+            --axon-active: rgba(58, 82, 179, 0.5);
+            
+            --shadow-nucleus: 0 20px 50px -15px rgba(58, 82, 179, 0.35), inset 0 1px 2px #FFF;
+            --shadow-node: 0 8px 22px -6px rgba(15, 23, 42, 0.08), 0 4px 10px -3px rgba(58, 82, 179, 0.05);
+            --shadow-node-hover: 0 16px 32px -6px rgba(58, 82, 179, 0.3);
+            --panel-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        [data-theme="dark"] {
+            --bg-gradient: radial-gradient(circle at 50% 50%, #111827 0%, #030712 100%);
+            --node-bg: #1F2937;       
+            --text-main: #F9FAFB;     
+            --text-muted: #9CA3AF;    
+            --axon-base: rgba(255, 255, 255, 0.04);
+            --axon-active: rgba(99, 102, 241, 0.65);
+            --nexum-glow: rgba(99, 102, 241, 0.5);
+            
+            --shadow-nucleus: 0 0 45px rgba(99, 102, 241, 0.45), inset 0 1px 1px rgba(255,255,255,0.1);
+            --shadow-node: 0 10px 25px -5px rgba(0, 0, 0, 0.6);
+            --shadow-node-hover: 0 0 25px rgba(99, 102, 241, 0.5);
+            --panel-bg: rgba(31, 41, 55, 0.98);
+        }
+
+        body {
+            margin: 0; padding: 0; height: 100vh;
+            background: var(--bg-gradient);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            overflow: hidden; color: var(--text-main);
+            display: flex; justify-content: center; align-items: center;
+            transition: background 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* CONTENEDOR MAESTRO ESCALADO */
+        .neural-container {
+            position: relative;
+            width: 1150px;
+            height: 740px;
+        }
+
+        /* LIENZO VECTORIAL DE FILAMENTOS SINÁPTICOS */
+        .synaptic-space {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1; pointer-events: none;
+        }
+
+        .axon-path {
+            fill: none;
+            stroke: var(--axon-base);
+            stroke-width: 1.2;
+            transition: stroke 0.3s ease, stroke-width 0.3s ease;
+        }
+        .axon-path.active {
+            stroke: var(--axon-active);
+            stroke-width: 2px;
+            filter: drop-shadow(0 0 4px var(--nexum-glow));
+        }
+        .axon-path.backbone-link {
+            stroke-dasharray: none;
+            stroke-width: 1.6;
+        }
+        .axon-path.backbone-link.active {
+            stroke-width: 2.8px;
+        }
+
+        /* NODOS DE INFORMACIÓN (FUNCIONALES) */
+        .node {
+            position: absolute;
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            text-decoration: none; z-index: 10; cursor: pointer;
+            background: var(--node-bg);
+            box-shadow: var(--shadow-node);
+            border: 1px solid rgba(142, 142, 147, 0.15);
+            transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+        }
+
+        /* NÚCLEO CENTRAL CON LOGO CORE ORIGINAL */
+        .nucleus {
+            width: 150px; height: 150px;
+            box-shadow: var(--shadow-nucleus);
+            border: 1px solid rgba(58, 82, 179, 0.25);
+        }
+        
+        .logo-pupil { 
+            width: 85px; height: 85px; 
+            display: flex; justify-content: center; align-items: center; 
+            z-index: 2; will-change: transform;
+        }
+        
+        /* Estilos del Logo Premium Original Restablecido */
+        .contorno-hexagono { fill: none; stroke: var(--nexum-blue); stroke-width: 10; stroke-linejoin: round; }
+        .lineas-estructurales { fill: none; stroke: var(--nexum-blue); stroke-width: 10; }
+        .hexagono-punteado { fill: none; stroke: var(--nexum-gray); stroke-width: 5; stroke-dasharray: 8, 8; opacity: 0.7; }
+        .circulo-mediano { fill: none; stroke: var(--nexum-blue); stroke-width: 8; }
+        .lineas-radiales { fill: none; stroke: var(--nexum-blue); stroke-width: 7; }
+        .circulo-central-pequeno { fill: none; stroke: var(--nexum-blue); stroke-width: 5; }
+        .circulos-satelite { fill: var(--nexum-blue); }
+        .nucleo-relleno { fill: var(--nexum-blue); }
+        .cruz-calada { fill: none; stroke: var(--node-bg); stroke-width: 3.5; transition: stroke 0.3s; }
+
+        /* NODOS ORBITALES ESTRUCTURALES */
+        .node-functional { width: 72px; height: 72px; }
+        .node-icon { font-size: 24px; transition: transform 0.3s; z-index: 2; }
+
+        /* NODOS ESTÉTICOS DESCENTRALIZADOS */
+        .node-aesthetic {
+            position: absolute; border-radius: 50%;
+            background: var(--nexum-blue); opacity: 0.2;
+            pointer-events: none; z-index: 5;
+            transition: opacity 0.3s, transform 0.3s, background-color 0.3s;
+        }
+        .node-aesthetic.active {
+            opacity: 0.8; transform: scale(1.4);
+            background-color: var(--axon-active);
+            box-shadow: 0 0 10px var(--nexum-glow);
+        }
+        .syn-large { width: 12px; height: 12px; }
+        .syn-medium { width: 8px; height: 8px; }
+        .syn-small { width: 5px; height: 5px; }
+
+        /* ETIQUETAS DE TEXTO INTEGRADAS */
+        .node-label {
+            position: absolute; bottom: -28px;
+            font-size: 10px; font-weight: 700; color: var(--text-muted);
+            text-transform: uppercase; letter-spacing: 1.5px;
+            white-space: nowrap; pointer-events: none;
+            opacity: 0; transform: translateY(-4px);
+            transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease;
+        }
+        .nucleus .node-label { bottom: -34px; opacity: 1; transform: none; color: var(--text-main); }
+        
+        .node.near .node-label, .node:hover .node-label { opacity: 1; transform: translateY(0); color: var(--nexum-blue); }
+        .node-functional.near, .node-functional:hover { border-color: var(--nexum-blue); box-shadow: var(--shadow-node-hover); }
+        .node-functional:hover .node-icon { transform: scale(1.15); }
+
+        /* SWITCH DE ENTORNO */
+        .theme-toggle { position: absolute; top: 25px; right: 25px; z-index: 100; }
+        .theme-toggle input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: relative; display: inline-block; width: 50px; height: 26px;
+            background-color: #CBD5E1; border-radius: 20px; cursor: pointer; transition: 0.4s;
+            display: flex; align-items: center; justify-content: space-between; padding: 0 5px;
+        }
+        .slider:before {
+            position: absolute; content: ""; height: 18px; width: 18px; left: 4px; bottom: 4px;
+            background-color: white; border-radius: 50%; transition: 0.4s; box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+        }
+        input:checked + .slider { background-color: var(--nexum-blue); }
+        input:checked + .slider:before { transform: translateX(24px); }
+
+        /* ==========================================================================
+           PANEL DESLIZANTE DE CONTEXTO OPERATIVO (GLASSMORPHISM)
+           ========================================================================== */
+        .info-panel {
+            position: fixed; top: 0; right: -600px;
+            width: 100%; max-width: 540px; height: 100vh;
+            background: var(--panel-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15); z-index: 2000;
+            overflow-y: auto; transition: right 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 40px 30px; box-sizing: border-box;
+            border-left: 1px solid rgba(142, 142, 147, 0.15);
+        }
+        .info-panel.open { right: 0; }
+        
+        .close-panel-btn {
+            position: absolute; top: 25px; right: 25px;
+            background: none; border: none; font-size: 32px;
+            cursor: pointer; color: var(--text-muted); transition: color 0.2s;
+        }
+        .close-panel-btn:hover { color: var(--nexum-blue); }
+
+        .panel-title { color: var(--nexum-blue); font-size: 24px; margin-top: 10px; margin-bottom: 20px; font-weight: 700; }
+        .panel-text { text-align: justify; line-height: 1.6; color: var(--text-muted); font-size: 14.5px; margin-bottom: 16px; }
+
+        /* Pestañas de las Fichas dentro del Panel */
+        .panel-tab { display: flex; gap: 6px; border-bottom: 1px solid rgba(142, 142, 147, 0.15); padding-bottom: 8px; margin: 30px 0 20px 0; }
+        .panel-tablinks {
+            background-color: transparent; border: 1px solid transparent; color: var(--text-muted);
+            padding: 8px 16px; cursor: pointer; font-size: 13px; font-weight: 700; border-radius: 20px;
+            transition: all 0.25s ease;
+        }
+        .panel-tablinks:hover { color: var(--nexum-blue); }
+        .panel-tablinks.active { background-color: var(--nexum-blue); color: #FFFFFF; }
+
+        .panel-tabcontent { display: none; animation: panelFade 0.35s ease; }
+        @keyframes panelFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+        .panel-product-title { margin: 0 0 5px 0; color: var(--text-main); font-size: 19px; font-weight: 700; }
+        .panel-product-format { font-size: 13px; color: var(--text-muted); margin-bottom: 12px; }
+        .panel-product-desc { font-size: 14px; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; text-align: justify; }
+
+        /* Tablas Nutricionales en el Panel */
+        .nutrition-table {
+            width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 12.5px; color: var(--text-main);
+            border: 2px solid var(--text-muted);
+        }
+        .nutrition-table th, .nutrition-table td { border: 1px solid rgba(142, 142, 147, 0.3); padding: 7px 12px; }
+        .nutrition-table th { background-color: rgba(142, 142, 147, 0.15); font-weight: 800; text-align: center; }
+        .water-notice { padding: 16px; background-color: rgba(142, 142, 147, 0.08); border: 1px dashed var(--text-muted); border-radius: 6px; color: var(--text-muted); font-style: italic; font-size: 13px; }
+
+        .footer-branding {
+            position: absolute; bottom: 15px; width: 100%; text-align: center;
+            font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+            color: var(--text-muted); opacity: 0.5; pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="theme-toggle">
+        <label>
+            <input type="checkbox" id="mode-checkbox">
+            <div class="slider">
+                <span style="font-size:10px">☀️</span>
+                <span style="font-size:10px">🌙</span>
+            </div>
+        </label>
+    </div>
+
+    <div class="neural-container" id="space-container">
+        
+        <svg class="synaptic-space" id="canvas-synapses"></svg>
+
+        <a href="web/equipo.html" class="node nucleus" id="n-center" style="top: 295px; left: 500px;">
+            <div class="logo-pupil" id="retina-eye">
+                <svg viewBox="0 0 400 400" width="100%" height="100%">
+                    <polygon class="contorno-hexagono" points="200,60 321,130 321,270 200,340 79,270 79,130" />
+                    <g class="lineas-estructurales">
+                        <line x1="79" y1="185" x2="104" y2="185" /><line x1="79" y1="215" x2="104" y2="215" />
+                        <line x1="321" y1="185" x2="296" y2="185" /><line x1="321" y1="215" x2="296" y2="215" />
+                    </g>
+                    <polygon class="hexagono-punteado" points="200,110 285,159 285,241 200,290 115,241 115,159" />
+                    <circle class="circulo-mediano" cx="200" cy="200" r="65" />
+                    <g class="lineas-radiales">
+                        <line x1="143.7" y1="167.5" x2="105" y2="145" /><line x1="256.3" y1="167.5" x2="295" y2="145" />
+                        <line x1="143.7" y1="232.5" x2="105" y2="255" /><line x1="256.3" y1="232.5" x2="295" y2="255" />
+                    </g>
+                    <circle class="circulo-central-pequeno" cx="200" cy="200" r="30" />
+                    <g class="circulos-satelite">
+                        <circle cx="200" cy="164" r="6" /><circle cx="200" cy="236" r="6" />
+                        <circle cx="231.2" cy="182" r="6" /><circle cx="231.2" cy="218" r="6" />
+                        <circle cx="168.8" cy="218" r="6" /><circle cx="168.8" cy="182" r="6" />
+                    </g>
+                    <circle class="nucleo-relleno" cx="200" cy="200" r="15" />
+                    <g class="cruz-calada"><line x1="192" y1="200" x2="208" y2="200" /><line x1="200" y1="192" x2="200" y2="208" /></g>
+                </svg>
+            </div>
+            <span class="node-label">Equipo Consultor</span>
+        </a>
+
+        <a href="#" id="n-contexto" class="node node-functional" style="top: 190px; left: 290px;" onclick="abrirPanel(event)">
+            <span class="node-icon">🏭</span><span class="node-label">Contexto Operativo</span>
+        </a>
+        <a href="web/propuesta.html" id="n-propuesta" class="node node-functional" style="top: 80px; left: 539px;">
+            <span class="node-icon">🎯</span><span class="node-label">Propuesta Comercial</span>
+        </a>
+        <a href="web/isa95.html" id="n-isa" class="node node-functional" style="top: 470px; left: 280px;">
+            <span class="node-icon">🏛️</span><span class="node-label">Arquitectura ISA-95</span>
+        </a>
+        <a href="web/controladores.html" id="n-plc" class="node node-functional" style="top: 180px; left: 740px;">
+            <span class="node-icon">💻</span><span class="node-label">Controladores PLC</span>
+        </a>
+        <a href="web/reflexiones.html" id="n-reflexiones" class="node node-functional" style="top: 480px; left: 710px;">
+            <span class="node-icon">🧠</span><span class="node-label">Reflexiones Académicas</span>
+        </a>
+
+        <a href="web/resumen.html" id="n-resumen" class="node node-functional" style="top: 70px; left: 150px;">
+            <span class="node-icon">📋</span><span class="node-label">Resumen Ejecutivo</span>
+        </a>
+        <a href="web/gestion.html" id="n-gestion" class="node node-functional" style="top: 590px; left: 110px;">
+            <span class="node-icon">📈</span><span class="node-label">Gestión de Producción</span>
+        </a>
+        <a href="web/viabilidad.html" id="n-economia" class="node node-functional" style="top: 630px; left: 340px;">
+            <span class="node-icon">💰</span><span class="node-label">Viabilidad Económica</span>
+        </a>
+        <a href="web/celda.html" id="n-celda" class="node node-functional" style="top: 90px; left: 920px;">
+            <span class="node-icon">🤖</span><span class="node-label">Celda Robotizada</span>
+        </a>
+        <a href="web/digital-factory.html" id="n-digital" class="node node-functional" style="top: 310px; left: 950px;">
+            <span class="node-icon">🌐</span><span class="node-label">Digital Twin & SCADA</span>
+        </a>
+        <a href="web/bibliografia.html" id="n-bibliografia" class="node node-functional" style="top: 540px; left: 930px;">
+            <span class="node-icon">📚</span><span class="node-label">Bibliografía</span>
+        </a>
+
+        <div class="node-aesthetic syn-large" style="top: 250px; left: 420px;"></div>
+        <div class="node-aesthetic syn-medium" style="top: 130px; left: 390px;"></div>
+        <div class="node-aesthetic syn-small" style="top: 160px; left: 480px;"></div>
+        <div class="node-aesthetic syn-large" style="top: 390px; left: 390px;"></div>
+        <div class="node-aesthetic syn-medium" style="top: 520px; left: 180px;"></div>
+        <div class="node-aesthetic syn-small" style="top: 560px; left: 470px;"></div>
+        <div class="node-aesthetic syn-large" style="top: 170px; left: 650px;"></div>
+        <div class="node-aesthetic syn-medium" style="top: 110px; left: 680px;"></div>
+        <div class="node-aesthetic syn-small" style="top: 230px; left: 630px;"></div>
+        <div class="node-aesthetic syn-large" style="top: 400px; left: 620px;"></div>
+        <div class="node-aesthetic syn-medium" style="top: 390px; left: 820px;"></div>
+        <div class="node-aesthetic syn-small" style="top: 210px; left: 860px;"></div>
+        <div class="node-aesthetic syn-medium" style="top: 460px; left: 840px;"></div>
+        <div class="node-aesthetic syn-large" style="top: 270px; left: 180px;"></div>
+
+    </div>
+
+    <div id="panel-contexto" class="info-panel">
+        <button class="close-panel-btn" onclick="cerrarPanel()">&times;</button>
+        
+        <h2 class="panel-title">Contexto Operativo: Coca-Cola FEMSA</h2>
+        
+        <p class="panel-text">La presente página ha sido desarrollada como parte del proyecto integrador de la asignatura Automatización de Procesos de Manufactura de la Universidad Nacional de Colombia, correspondiente al periodo académico 2026, con el propósito de exponer la evaluación operativa y la propuesta de automatización de tres líneas de producción de Coca-Cola FEMSA, correspondientes a los productos Monster, Quatro y Agua Brisa.</p>
+        <p class="panel-text">La propuesta se fundamenta en la información recopilada durante la visita técnica a la planta, donde se analizaron los procesos productivos y sus condiciones actuales. En este contexto, se plantea la creación de Nexum Automation, una empresa consultora académica conformada por seis estudiantes de ingeniería, encargada de desarrollar y estructurar la propuesta de mejora.</p>
+        <p class="panel-text">A partir del análisis realizado, se identifican oportunidades en la distribución de planta, eficiencia operativa y condiciones ergonómicas, con base en ello, se proponen soluciones orientadas a la optimización del flujo productivo y la implementación de tecnologías de automatización, con el objetivo de incrementar la productividad, reducir tiempos de ciclo y mejorar la seguridad en las operaciones, en concordancia con los principios de manufactura moderna e Industria 4.0.</p>
+        
+        <div class="panel-tab">
+            <button class="panel-tablinks active" onclick="abrirPanelLinea(event, 'PanelMonster')">Monster</button>
+            <button class="panel-tablinks" onclick="abrirPanelLinea(event, 'PanelQuatro')">Quatro</button>
+            <button class="panel-tablinks" onclick="abrirPanelLinea(event, 'PanelBrisa')">Agua Brisa</button>
+        </div>
+
+        <div id="PanelMonster" class="panel-tabcontent" style="display: block;">
+            <h3 class="panel-product-title">🔋 Monster Energy</h3>
+            <p class="panel-product-format"><strong>Formato:</strong> Lata 473ml</p>
+            <p class="panel-product-desc">Línea de alta rentabilidad por litro, con requerimientos críticos en la mezcla de jarabes.</p>
+            <table class="nutrition-table">
+                <thead>
+                    <tr><th colspan="2">Información Nutricional<br><span style="font-size: 11px; font-weight: normal;">Cada: 100 ml </span></th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Calorías</strong></td><td style="text-align: right;">47 kcal</td></tr>
+                    <tr><td><strong>Grasa Total</strong></td><td style="text-align: right;">0 g</td></tr>
+                    <tr><td><strong>Carbohidratos Totales</strong></td><td style="text-align: right;">12 g</td></tr>
+                    <tr><td style="padding-left: 20px;">Azúcares Totales</td><td style="text-align: right;">12 g</td></tr>
+                    <tr><td style="padding-left: 20px;">Azúcares Añadidos</td><td style="text-align: right;">13 g</td></tr>
+                    <tr><td><strong>Otros</strong></td><td style="text-align: right;"></td></tr>
+                    <tr><td>Riboflavina</td><td style="text-align: right;">0.72 mg</td></tr>
+                    <tr><td>Niacina</td><td style="text-align: right;">8.5 mg</td></tr>
+                    <tr><td>Vitamina B6</td><td style="text-align: right;">0.85 mg</td></tr>
+                    <tr><td>Vitamina B12</td><td style="text-align: right;">2.5 µg</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="PanelQuatro" class="panel-tabcontent">
+            <h3 class="panel-product-title">🥤 Gaseosa Quatro</h3>
+            <p class="panel-product-format"><strong>Formato:</strong> PET 1.5 Litros</p>
+            <p class="panel-product-desc">Línea de volumen masivo continua. Presenta integración del soplado de preformas en sitio. El costo del azúcar es el principal driver que impacta el OPEX de esta operación.</p>
+            <table class="nutrition-table">
+                <thead>
+                    <tr><th colspan="2">Información Nutricional<br><span style="font-size: 11px; font-weight: normal;">Cada: 100 ml </span></th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Calorías</strong></td><td style="text-align: right;">20 kcal</td></tr>
+                    <tr><td><strong>Grasa Total</strong></td><td style="text-align: right;">0 g</td></tr>
+                    <tr><td><strong>Sodio</strong></td><td style="text-align: right;">26 mg</td></tr>
+                    <tr><td><strong>Carbohidratos Totales</strong></td><td style="text-align: right;">4.9 g</td></tr>
+                    <tr><td style="padding-left: 20px;">Azúcares Totales</td><td style="text-align: right;">4.9 g</td></tr>
+                    <tr><td style="padding-left: 20px;">Azúcares Añadidos</td><td style="text-align: right;">4.9 g</td></tr>
+                    <tr><td><strong>Proteínas</strong></td><td style="text-align: right;">0 g</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="PanelBrisa" class="panel-tabcontent">
+            <h3 class="panel-product-title">💧 Agua Brisa</h3>
+            <p class="panel-product-format"><strong>Formato:</strong> Garrafón 20 Litros</p>
+            <p class="panel-product-desc">Línea de alto peso volumétrico. Presenta un cuello de botella ergonómico crítico al final de la línea que será el foco de la solución de celda robotizada.</p>
+            <div class="water-notice">
+                <p style="margin: 0;"><em>*Al ser agua purificada, no requiere declaración de tabla nutricional calórica bajo estándares de etiquetado vigentes.</em></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-branding">
+        Nexum Core // Intelligent Architecture Mesh // Coca-Cola FEMSA
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('space-container');
+            const svgCanvas = document.getElementById('canvas-synapses');
+            const retinaEye = document.getElementById('retina-eye');
+            const centerNode = document.getElementById('n-center');
+            const toggleTheme = document.getElementById('mode-checkbox');
+
+            toggleTheme.addEventListener('change', (e) => {
+                document.documentElement.setAttribute('data-theme', e.target.checked ? 'dark' : 'light');
+            });
+
+            let mouse = { x: 0, y: 0 };
+            document.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+
+            const networkElements = [];
+            
+            document.querySelectorAll('.node').forEach(el => {
+                networkElements.push({
+                    el: el, isFunctional: true, isCenter: el.classList.contains('nucleus'),
+                    currentX: 0, currentY: 0, targetX: 0, targetY: 0, seed: Math.random() * 10
+                });
+            });
+
+            document.querySelectorAll('.node-aesthetic').forEach(el => {
+                networkElements.push({
+                    el: el, isFunctional: false, isCenter: false,
+                    currentX: 0, currentY: 0, targetX: 0, targetY: 0, seed: Math.random() * 10
+                });
+            });
+
+            // MAPA DE TOPOLOGÍA CENTRAL ESTRUCTURAL (Padres -> Hijos Descentralizados)
+            const structuralBackbone = [
+                { from: 'n-center', to: 'n-contexto' },
+                { from: 'n-center', to: 'n-propuesta' },
+                { from: 'n-center', to: 'n-isa' },
+                { from: 'n-center', to: 'n-plc' },
+                { from: 'n-center', to: 'n-reflexiones' },
+                
+                { from: 'n-contexto', to: 'n-resumen' },
+                { from: 'n-isa', to: 'n-gestion' },
+                { from: 'n-gestion', to: 'n-economia' },
+                { from: 'n-plc', to: 'n-celda' },
+                { from: 'n-plc', to: 'n-digital' },
+                { from: 'n-digital', to: 'n-bibliografia' },
+                { from: 'n-reflexiones', to: 'n-bibliografia' }
+            ];
+
+            const nodesMap = {};
+            networkElements.forEach(n => { if (n.el.id) nodesMap[n.el.id] = n; });
+
+            const linesData = [];
+            const containerRect = container.getBoundingClientRect();
+
+            // 1. Trazar Esqueleto Estructural Primario
+            structuralBackbone.forEach(link => {
+                const fromNode = nodesMap[link.from];
+                const toNode = nodesMap[link.to];
+                if (fromNode && toNode) {
+                    const lineEl = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    lineEl.setAttribute('class', 'axon-path backbone-link');
+                    svgCanvas.appendChild(lineEl);
+                    linesData.push({ el: lineEl, from: fromNode, to: toNode, isBackbone: true });
+                }
+            });
+
+            // 2. Trazar Red Secundaria por Proximidad Organica (Nodos Estéticos)
+            for (let i = 0; i < networkElements.length; i++) {
+                for (let j = i + 1; j < networkElements.length; j++) {
+                    const id1 = networkElements[i].el.id;
+                    const id2 = networkElements[j].el.id;
+                    
+                    const isBackbone = structuralBackbone.some(l => 
+                        (l.from === id1 && l.to === id2) || (l.from === id2 && l.to === id1)
+                    );
+                    if (isBackbone) continue;
+
+                    const rA = networkElements[i].el.getBoundingClientRect();
+                    const rB = networkElements[j].el.getBoundingClientRect();
+                    const x1 = (rA.left + rA.width / 2) - containerRect.left;
+                    const y1 = (rA.top + rA.height / 2) - containerRect.top;
+                    const x2 = (rB.left + rB.width / 2) - containerRect.left;
+                    const y2 = (rB.top + rB.height / 2) - containerRect.top;
+
+                    const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+                    if (distance < 135) {
+                        const lineEl = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                        lineEl.setAttribute('class', 'axon-path');
+                        svgCanvas.appendChild(lineEl);
+                        linesData.push({ el: lineEl, from: networkElements[i], to: networkElements[j], isBackbone: false });
+                    }
+                }
+            }
+
+            let eyeX = 0, eyeY = 0;
+            let loopTime = 0;
+
+            function runNeuralEngine() {
+                loopTime += 0.014;
+                const cRect = container.getBoundingClientRect();
+
+                // CONTROL CINÉTICO DEL LOGO PRINCIPAL (OJO ROBÓTICO)
+                const centRect = centerNode.getBoundingClientRect();
+                const centX = centRect.left + centRect.width / 2;
+                const centY = centRect.top + centRect.height / 2;
+                
+                const angle = Math.atan2(mouse.y - centY, mouse.x - centX);
+                const dist = Math.sqrt(Math.pow(mouse.x - centX, 2) + Math.pow(mouse.y - centY, 2));
+                const maxEyeMove = 20;
+                const eyeMoveRadius = Math.min(dist / 15, maxEyeMove);
+
+                eyeX += ((Math.cos(angle) * eyeMoveRadius) - eyeX) * 0.14;
+                eyeY += ((Math.sin(angle) * eyeMoveRadius) - eyeY) * 0.14;
+                retinaEye.style.transform = `translate(${eyeX}px, ${eyeY}px)`;
+
+                // CÁLCULO DE FLUIDEZ BIO-ORGÁNICA Y DESPLAZAMIENTO POR CURSOR
+                networkElements.forEach(node => {
+                    const r = node.el.getBoundingClientRect();
+                    const nX = r.left + r.width / 2 - node.currentX;
+                    const nY = r.top + r.height / 2 - node.currentY;
+
+                    const dX = mouse.x - nX;
+                    const dY = mouse.y - nY;
+                    const mDist = Math.sqrt(dX * dX + dY * dY);
+                    
+                    const influenceRadius = 150;
+
+                    if (mDist < influenceRadius) {
+                        node.el.classList.add('near');
+                        if(!node.isFunctional) node.el.classList.add('active');
+
+                        const fAngle = Math.atan2(dY, dX);
+                        const pushForce = (1 - (mDist / influenceRadius));
+                        const displacement = node.isCenter ? 10 : 24; 
+
+                        node.targetX = Math.cos(fAngle) * displacement * pushForce;
+                        node.targetY = Math.sin(fAngle) * displacement * pushForce;
+                    } else {
+                        node.el.classList.remove('near');
+                        if(!node.isFunctional) node.el.classList.remove('active');
+                        
+                        node.targetX = Math.sin(loopTime + node.seed) * 4.5;
+                        node.targetY = Math.cos(loopTime * 0.8 + node.seed) * 3.5;
+                    }
+
+                    node.currentX += (node.targetX - node.currentX) * 0.08;
+                    node.currentY += (node.targetY - node.currentY) * 0.08;
+                    node.el.style.transform = `translate(${node.currentX}px, ${node.currentY}px)`;
+                });
+
+                // RENDERIZADO ASÍNCRONO DE LÍNEAS DE LA RED
+                linesData.forEach(line => {
+                    const fromRect = line.from.el.getBoundingClientRect();
+                    const toRect = line.to.el.getBoundingClientRect();
+
+                    const x1 = (fromRect.left + fromRect.width / 2) - cRect.left;
+                    const y1 = (fromRect.top + fromRect.height / 2) - cRect.top;
+                    const x2 = (toRect.left + toRect.width / 2) - cRect.left;
+                    const y2 = (toRect.top + toRect.height / 2) - cRect.top;
+
+                    line.el.setAttribute('x1', x1);
+                    line.el.setAttribute('y1', y1);
+                    line.el.setAttribute('x2', x2);
+                    line.el.setAttribute('y2', y2);
+
+                    if (line.from.el.classList.contains('near') || line.to.el.classList.contains('near')) {
+                        line.el.classList.add('active');
+                    } else {
+                        line.el.classList.remove('active');
+                    }
+                });
+
+                requestAnimationFrame(runNeuralEngine);
+            }
+            requestAnimationFrame(runNeuralEngine);
+        });
+
+        // MANIPULADORES NATIVOS INTERACTIVOS DEL PANEL DE CONTROL
+        function abrirPanel(e) {
+            if (e) e.preventDefault();
+            document.getElementById('panel-contexto').classList.add('open');
+        }
+
+        function cerrarPanel() {
+            document.getElementById('panel-contexto').classList.remove('open');
+        }
+
+        function abrirPanelLinea(evt, nombreLinea) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("panel-tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("panel-tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(nombreLinea).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</body>
+</html>

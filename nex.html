@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexum Automation | Connected Mesh OS</title>
+    
+    <style>
+        /* SISTEMA DE VARIABLES DINÁMICAS (CONTRATE DE RED MEJORADO) */
+        :root {
+            --nexum-blue: #3A52B3;
+            --nexum-gray: #8E8E93;
+            
+            /* MODO CLARO */
+            --bg-gradient: radial-gradient(circle at center, #FFFFFF 30%, #F1F5F9 100%);
+            --node-bg: #FFFFFF;       
+            --text-main: #1E293B;     
+            --text-muted: #475569;    
+            --line-soft: rgba(58, 82, 179, 0.22); /* Líneas base mucho más marcadas */
+            --line-ghost: rgba(142, 142, 147, 0.25);
+            
+            --shadow-center-idle: 0 12px 40px -10px rgba(148, 163, 184, 0.35), inset 0 1px 2px #FFF;
+            --shadow-center-hover: 0 25px 55px -10px rgba(58, 82, 179, 0.28), inset 0 1px 2px #FFF;
+            --shadow-node-idle: 0 6px 14px -1px rgba(0, 0, 0, 0.04), 0 10px 20px -3px rgba(148, 163, 184, 0.18);
+            --shadow-node-hover: 0 16px 28px -4px rgba(58, 82, 179, 0.22), 0 6px 14px -2px rgba(58, 82, 179, 0.12);
+        }
+
+        [data-theme="dark"] {
+            /* MODO OSCURO */
+            --bg-gradient: radial-gradient(circle at center, #1E293B 0%, #0F172A 100%);
+            --node-bg: #1E293B;       
+            --text-main: #F8FAFC;     
+            --text-muted: #94A3B8;    
+            --line-soft: rgba(255, 255, 255, 0.18); /* Mayor visibilidad en oscuridad */
+            --line-ghost: rgba(255, 255, 255, 0.1);
+            
+            --shadow-center-idle: 0 15px 45px -12px rgba(0, 0, 0, 0.65), 0 0 1px rgba(255,255,255,0.15);
+            --shadow-center-hover: 0 25px 60px -10px rgba(58, 82, 179, 0.45), 0 0 4px rgba(58, 82, 179, 0.4);
+            --shadow-node-idle: 0 6px 16px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255,255,255,0.06);
+            --shadow-node-hover: 0 14px 32px rgba(58, 82, 179, 0.35), 0 0 10px rgba(58, 82, 179, 0.25);
+        }
+
+        body {
+            margin: 0; padding: 0; height: 100vh;
+            background: var(--bg-gradient);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden; color: var(--text-main);
+            display: flex; justify-content: center; align-items: center;
+            transition: background 0.4s ease, color 0.4s ease;
+        }
+
+        .nexus-container {
+            position: relative;
+            width: 1024px;
+            height: 680px;
+        }
+
+        /* TRAZADOS DE LA RED NEURONAL */
+        .svg-connections {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1; pointer-events: none;
+        }
+        .connection-line {
+            stroke: var(--line-soft);
+            stroke-width: 1.8; /* Líneas reforzadas */
+            stroke-dasharray: 6, 4; /* Punteado nítido y limpio */
+            transition: stroke 0.3s, stroke-width 0.3s, stroke-dasharray 0.3s;
+        }
+        
+        /* Líneas de fuga intencionadas hacia el infinito */
+        .ghost-link {
+            stroke: var(--line-ghost);
+            stroke-width: 1.2;
+            stroke-dasharray: 2, 5;
+        }
+
+        /* Activación fluida al interactuar */
+        .connection-line.active {
+            stroke: var(--nexum-blue) !important;
+            stroke-width: 3px !important;
+            stroke-dasharray: none !important;
+        }
+
+        /* COMPORTAMIENTO DE LOS NODOS COHESIVOS */
+        .node {
+            position: absolute;
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            text-decoration: none; z-index: 10; cursor: pointer;
+            background: var(--node-bg);
+            transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+        }
+
+        /* 👁️ NODO CENTRAL (Contenedor maestro del ojo) */
+        .node-center {
+            width: 170px; height: 170px;
+            top: 240px; left: 390px;
+            border: 1px solid rgba(58, 82, 179, 0.25);
+            box-shadow: var(--shadow-center-idle);
+        }
+        .node-center.near, .node-center:hover {
+            border-color: var(--nexum-blue);
+            box-shadow: var(--shadow-center-hover);
+        }
+
+        .radar-grid {
+            position: absolute; width: 100%; height: 100%; border-radius: 50%;
+            border: 1px dashed rgba(58, 82, 179, 0.12); pointer-events: none;
+        }
+        
+        /* Pupila mecánica aislada para el script de seguimiento */
+        .logo-pupil-container { 
+            width: 95px; height: 95px; 
+            display: flex; justify-content: center; align-items: center; 
+            z-index: 2;
+            will-change: transform;
+        }
+        
+        /* Vectores de Identidad Corporativa */
+        .contorno-hexagono { fill: none; stroke: var(--nexum-blue); stroke-width: 10; stroke-linejoin: round; stroke-linecap: round; }
+        .lineas-estructurales { fill: none; stroke: var(--nexum-blue); stroke-width: 10; stroke-linecap: round; }
+        .hexagono-punteado { fill: none; stroke: var(--nexum-gray); stroke-width: 5; stroke-dasharray: 8, 8; stroke-linejoin: round; }
+        .circulo-mediano { fill: none; stroke: var(--nexum-blue); stroke-width: 8; }
+        .lineas-radiales { fill: none; stroke: var(--nexum-blue); stroke-width: 7; stroke-linecap: round; }
+        .circulo-central-pequeno { fill: none; stroke: var(--nexum-blue); stroke-width: 5; }
+        .circulos-satelite { fill: var(--nexum-blue); }
+        .nucleo-relleno { fill: var(--nexum-blue); }
+        .cruz-calada { fill: none; stroke: var(--node-bg); stroke-width: 3.5; stroke-linecap: round; transition: stroke 0.3s; }
+
+        /* MÓDULOS DE LA MALLA */
+        .node-orbit {
+            width: 76px; height: 76px;
+            border: 1px solid var(--line-soft);
+            box-shadow: var(--shadow-node-idle);
+        }
+
+        /* DISTRIBUCIÓN ASIMÉTRICA ORGÁNICA */
+        /* Clúster Técnico (Derecha) */
+        .n-plc { top: 120px; left: 740px; }
+        .n-celda { top: 240px; left: 860px; }
+        .n-digital { top: 350px; left: 710px; }
+
+        /* Clúster Gestión / Negocios (Izquierda) */
+        .n-isa { top: 190px; left: 160px; }
+        .n-gestion { top: 380px; left: 120px; }
+        .n-economia { top: 510px; left: 210px; }
+
+        /* Entregables Integrados e Interconectados */
+        .n-propuesta { top: 60px; left: 450px; }
+        .n-reflexiones { top: 540px; left: 450px; }
+        .n-bibliografia { top: 500px; left: 760px; }
+
+        .node-icon { font-size: 24px; transition: transform 0.3s; z-index: 5; }
+
+        /* ETIQUETAS */
+        .node-title {
+            position: absolute; bottom: -28px;
+            font-size: 10px; font-weight: 700; color: var(--text-muted);
+            text-transform: uppercase; letter-spacing: 1.2px;
+            white-space: nowrap; text-align: center;
+            opacity: 0; transform: translateY(-4px);
+            transition: opacity 0.25s ease, transform 0.25s ease, color 0.25s ease;
+            pointer-events: none;
+        }
+        .node-center .node-title { font-size: 11px; bottom: -32px; color: var(--text-main); }
+        .n-propuesta .node-title { bottom: auto; top: -25px; }
+
+        /* EFECTOS VISUALES ACTIVOS */
+        .node.near .node-title { opacity: 1; transform: translateY(0); color: var(--nexum-blue); }
+        .node-orbit.near { border-color: rgba(58, 82, 179, 0.5); box-shadow: var(--shadow-node-hover); }
+        
+        .node:hover .node-title { opacity: 1; transform: translateY(0); color: var(--nexum-blue); }
+        .node-orbit:hover { border-color: var(--nexum-blue); box-shadow: var(--shadow-node-hover); }
+        .node-orbit:hover .node-icon { transform: scale(1.15); }
+
+        /* SWITCH DE CONMUTACIÓN DE ENTORNO */
+        .theme-switch-wrapper {
+            position: absolute; top: 25px; right: 25px;
+            display: flex; align-items: center; z-index: 100;
+        }
+        .theme-switch { display: inline-block; width: 55px; height: 28px; position: relative; }
+        .theme-switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #CBD5E1; transition: 0.4s; border-radius: 34px;
+            display: flex; align-items: center; justify-content: space-between; padding: 0 5px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.08);
+        }
+        .slider:before {
+            position: absolute; content: ""; height: 20px; width: 20px; left: 4px; bottom: 4px;
+            background-color: white; transition: 0.4s; border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15); z-index: 2;
+        }
+        .slider .icon { font-size: 12px; user-select: none; z-index: 1; }
+        input:checked + .slider { background-color: var(--nexum-blue); }
+        input:checked + .slider:before { transform: translateX(27px); }
+
+        /* FOOTER */
+        .nexus-footer {
+            position: absolute; bottom: 15px; text-align: center; width: 100%;
+            color: var(--text-muted); font-size: 9.5px; letter-spacing: 2.5px;
+            text-transform: uppercase; pointer-events: none; font-weight: 500; opacity: 0.6;
+        }
+        .nexus-footer span { color: var(--nexum-blue); font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider round">
+                <span class="icon">☀️</span>
+                <span class="icon">🌙</span>
+            </div>
+        </label>
+    </div>
+
+    <div class="nexus-container" id="main-container">
+        
+        <svg class="svg-connections" id="svg-network">
+            <line id="l-center-isa" class="connection-line"></line>
+            <line id="l-center-gestion" class="connection-line"></line>
+            <line id="l-center-plc" class="connection-line"></line>
+            <line id="l-center-digital" class="connection-line"></line>
+            <line id="l-center-propuesta" class="connection-line"></line>
+            <line id="l-center-reflexiones" class="connection-line"></line>
+
+            <line id="l-isa-gestion" class="connection-line"></line>
+            <line id="l-gestion-economia" class="connection-line"></line>
+            <line id="l-isa-plc" class="connection-line"></line>
+            <line id="l-plc-celda" class="connection-line"></line>
+            <line id="l-plc-digital" class="connection-line"></line>
+            <line id="l-celda-digital" class="connection-line"></line>
+
+            <line id="l-propuesta-isa" class="connection-line"></line>
+            <line id="l-propuesta-plc" class="connection-line"></line>
+            <line id="l-reflexiones-gestion" class="connection-line"></line>
+            <line id="l-reflexiones-economia" class="connection-line"></line>
+            <line id="l-biblio-digital" class="connection-line"></line>
+            <line id="l-biblio-reflexiones" class="connection-line"></line>
+            <line id="l-biblio-celda" class="connection-line"></line>
+
+            <line class="ghost-link" x1="860" y1="240" x2="980" y2="210"></line>
+            <line class="ghost-link" x1="120" y1="380" x2="-10" y2="410"></line>
+            <line class="ghost-link" x1="760" y1="500" x2="880" y2="610"></line>
+        </svg>
+
+        <a href="web/equipo.html" class="node node-center" id="center-node">
+            <div class="radar-grid"></div>
+            <div class="logo-pupil-container" id="nexum-logo-eye">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+                    <polygon class="contorno-hexagono" points="200,60 321,130 321,270 200,340 79,270 79,130" />
+                    <g class="lineas-estructurales">
+                        <line x1="79" y1="185" x2="104" y2="185" /><line x1="79" y1="215" x2="104" y2="215" />
+                        <line x1="321" y1="185" x2="296" y2="185" /><line x1="321" y1="215" x2="296" y2="215" />
+                    </g>
+                    <polygon class="hexagono-punteado" points="200,110 285,159 285,241 200,290 115,241 115,159" />
+                    <circle class="circulo-mediano" cx="200" cy="200" r="65" />
+                    <g class="lineas-radiales">
+                        <line x1="143.7" y1="167.5" x2="105" y2="145" /><line x1="256.3" y1="167.5" x2="295" y2="145" />
+                        <line x1="143.7" y1="232.5" x2="105" y2="255" /><line x1="256.3" y1="232.5" x2="295" y2="255" />
+                    </g>
+                    <circle class="circulo-central-pequeno" cx="200" cy="200" r="30" />
+                    <g class="circulos-satelite">
+                        <circle cx="200" cy="164" r="6" /><circle cx="200" cy="236" r="6" />
+                        <circle cx="231.2" cy="182" r="6" /><circle cx="231.2" cy="218" r="6" />
+                        <circle cx="168.8" cy="218" r="6" /><circle cx="168.8" cy="182" r="6" />
+                    </g>
+                    <circle class="nucleo-relleno" cx="200" cy="200" r="15" />
+                    <g class="cruz-calada"><line x1="192" y1="200" x2="208" y2="200" /><line x1="200" y1="192" x2="200" y2="208" /></g>
+                </svg>
+            </div>
+            <span class="node-title">Equipo Consultor</span>
+        </a>
+
+        <a href="web/isa95.html" id="n-isa" class="node node-orbit n-isa">
+            <span class="node-icon">🏛️</span>
+            <span class="node-title">Arquitectura ISA-95</span>
+        </a>
+        <a href="web/gestion.html" id="n-gestion" class="node node-orbit n-gestion">
+            <span class="node-icon">📈</span>
+            <span class="node-title">Gestión de Producción</span>
+        </a>
+        <a href="web/viabilidad.html" id="n-economia" class="node node-orbit n-economia">
+            <span class="node-icon">💰</span>
+            <span class="node-title">Viabilidad Económica</span>
+        </a>
+
+        <a href="web/controladores.html" id="n-plc" class="node node-orbit n-plc">
+            <span class="node-icon">💻</span>
+            <span class="node-title">Controladores PLC</span>
+        </a>
+        <a href="web/celda.html" id="n-celda" class="node node-orbit n-celda">
+            <span class="node-icon">🤖</span>
+            <span class="node-title">Celda Robotizada</span>
+        </a>
+        <a href="web/digital-factory.html" id="n-digital" class="node node-orbit n-digital">
+            <span class="node-icon">🌐</span>
+            <span class="node-title">Digital Twin & SCADA</span>
+        </a>
+
+        <a href="web/propuesta.html" id="n-propuesta" class="node node-orbit n-propuesta">
+            <span class="node-icon">🎯</span>
+            <span class="node-title">Propuesta Comercial</span>
+        </a>
+        <a href="web/reflexiones.html" id="n-reflexiones" class="node node-orbit n-reflexiones">
+            <span class="node-icon">🧠</span>
+            <span class="node-title">Reflexiones Académicas</span>
+        </a>
+        <a href="web/bibliografia.html" id="n-bibliografia" class="node node-orbit n-bibliografia">
+            <span class="node-icon">📚</span>
+            <span class="node-title">Bibliografía</span>
+        </a>
+
+    </div>
+
+    <div class="nexus-footer">
+        Nexum Core Network // Alternancia de Entorno // <span>Coca-Cola FEMSA</span>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('main-container');
+            const centerNode = document.getElementById('center-node');
+            const logoEye = document.getElementById('nexum-logo-eye');
+            const toggleSwitch = document.getElementById('checkbox');
+
+            // CONMUTADOR DE TEMA DINÁMICO
+            toggleSwitch.addEventListener('change', (e) => {
+                document.documentElement.setAttribute('data-theme', e.target.checked ? 'dark' : 'light');
+            });
+            
+            let mX = 0, mY = 0;
+            document.addEventListener('mousemove', (e) => {
+                mX = e.clientX; mY = e.clientY;
+            });
+
+            // ESTRUCTURA CINÉTICA INDEPENDIENTE
+            const nodes = {
+                center: { el: centerNode, currentX: 0, currentY: 0, targetX: 0, targetY: 0, seed: 0 },
+                isa: { el: document.getElementById('n-isa'), currentX: 0, currentY: 0, targetX: 0, targetY: 0, seed: 1.2 },
+                gestion: { el: document.getElementById('n-gestion'), currentX: 0, currentY: 0, targetX: 0, targetY: 0, seed: 2.4 },
+                economia: { el: document.getElementById('n-economia'), currentX: 0, currentY: 0, targetX: 0, targetY: 0, seed: 3.6 },
+                plc: { el: document.getElementById('n-plc'), currentX: 0, currentY: 0, targetX: 0, targetY: 0, seed: 4.8 },
+                celda: { el: document.getElementById('n-celda'), currentX: 0, currentY: 0, targetX: 0, targetY: 0, seed: 6.0 },
+                digital: { el: document.getElementById('n-digital'), currentX: 0, currentY: 0, targetX: 0, targetY: 0, seed: 7.2 },
+                propuesta: { el: document.getElementById('n-propuesta'), currentX: 0, currentY: 0, targetX: 0, targetY: 0, seed: 8.4 },
+                reflexiones: { el: document.getElementById('n-reflexiones'), currentX: 0, currentY: 0, targetX: 0, targetY: 0, seed: 9.6 },
+                biblio: { el: document.getElementById('n-bibliografia'), currentX: 0, currentY: 0, targetX: 0, targetY: 0, seed: 10.8 }
+            };
+
+            // MALLADO COMPLETO DE LÍNEAS DE INTERCONEXIÓN
+            const lines = [
+                { id: 'l-center-isa', from: nodes.center, to: nodes.isa },
+                { id: 'l-center-gestion', from: nodes.center, to: nodes.gestion },
+                { id: 'l-center-plc', from: nodes.center, to: nodes.plc },
+                { id: 'l-center-digital', from: nodes.center, to: nodes.digital },
+                { id: 'l-center-propuesta', from: nodes.center, to: nodes.propuesta },
+                { id: 'l-center-reflexiones', from: nodes.center, to: nodes.reflexiones },
+                
+                // Enlaces internos de afinidad estructural
+                { id: 'l-isa-gestion', from: nodes.isa, to: nodes.gestion },
+                { id: 'l-gestion-economia', from: nodes.gestion, to: nodes.economia },
+                { id: 'l-isa-plc', from: nodes.isa, to: nodes.plc }, 
+                { id: 'l-plc-celda', from: nodes.plc, to: nodes.celda },
+                { id: 'l-plc-digital', from: nodes.plc, to: nodes.digital },
+                { id: 'l-celda-digital', from: nodes.celda, to: nodes.digital },
+
+                // Nuevos Amarres de Cohesión (Eliminan el aislamiento)
+                { id: 'l-propuesta-isa', from: nodes.propuesta, to: nodes.isa },
+                { id: 'l-propuesta-plc', from: nodes.propuesta, to: nodes.plc },
+                { id: 'l-reflexiones-gestion', from: nodes.reflexiones, to: nodes.gestion },
+                { id: 'l-reflexiones-economia', from: nodes.reflexiones, to: nodes.economia },
+                { id: 'l-biblio-digital', from: nodes.biblio, to: nodes.digital },
+                { id: 'l-biblio-reflexiones', from: nodes.biblio, to: nodes.reflexiones },
+                { id: 'l-biblio-celda', from: nodes.biblio, to: nodes.celda }
+            ].map(l => ({ ...l, el: document.getElementById(l.id) }));
+
+            let eyeCurrentX = 0, eyeCurrentY = 0;
+            let time = 0;
+
+            function animate() {
+                time += 0.012;
+                const containerRect = container.getBoundingClientRect();
+
+                // --- 1. RENDERIZACIÓN EXCLUSIVA DEL EFECTO OJO (PUPILA SEGUIDORA) ---
+                const rectCenter = centerNode.getBoundingClientRect();
+                const centerNodeX = rectCenter.left + rectCenter.width / 2;
+                const centerNodeY = rectCenter.top + rectCenter.height / 2;
+
+                const angleEye = Math.atan2(mY - centerNodeY, mX - centerNodeX);
+                const distEye = Math.sqrt(Math.pow(mX - centerNodeX, 2) + Math.pow(mY - centerNodeY, 2));
+
+                const maxRadiusEye = 22; // Rango de holgura de la pupila dentro del nodo
+                const moveRadiusEye = Math.min(distEye / 14, maxRadiusEye);
+                
+                const targetEyeX = Math.cos(angleEye) * moveRadiusEye;
+                const targetEyeY = Math.sin(angleEye) * moveRadiusEye;
+
+                eyeCurrentX += (targetEyeX - eyeCurrentX) * 0.12;
+                eyeCurrentY += (targetEyeY - eyeCurrentY) * 0.12;
+                logoEye.style.transform = `translate(${eyeCurrentX}px, ${eyeCurrentY}px)`;
+
+
+                // --- 2. FÍSICAS DE NODOS (MAGNETISMO + FLOTACIÓN PASIVA) ---
+                Object.keys(nodes).forEach(key => {
+                    const node = nodes[key];
+                    const rect = node.el.getBoundingClientRect();
+                    
+                    const cX = rect.left + rect.width / 2 - node.currentX;
+                    const cY = rect.top + rect.height / 2 - node.currentY;
+
+                    const dX = mX - cX;
+                    const dY = mY - cY;
+                    const distance = Math.sqrt(dX * dX + dY * dY);
+
+                    const threshold = 165;
+
+                    if (distance < threshold) {
+                        node.el.classList.add('near');
+                        const angle = Math.atan2(dY, dX);
+                        const force = (1 - (distance / threshold));
+                        const maxMove = key === 'center' ? 10 : 22; 
+                        
+                        node.targetX = Math.cos(angle) * maxMove * force;
+                        node.targetY = Math.sin(angle) * maxMove * force;
+                    } else {
+                        node.el.classList.remove('near');
+                        node.targetX = Math.sin(time + node.seed * 1.5) * 4.5;
+                        node.targetY = Math.cos(time * 0.8 + node.seed * 1.2) * 3.5;
+                    }
+
+                    node.currentX += (node.targetX - node.currentX) * 0.08;
+                    node.currentY += (node.targetY - node.currentY) * 0.08;
+
+                    node.el.style.transform = `translate(${node.currentX}px, ${node.currentY}px)`;
+                });
+
+
+                // --- 3. RE-CÁLCULO DE LÍNEAS VECTORIALES REFORZADAS ---
+                lines.forEach(line => {
+                    if (!line.el) return;
+                    const fromRect = line.from.el.getBoundingClientRect();
+                    const toRect = line.to.el.getBoundingClientRect();
+
+                    const x1 = (fromRect.left + fromRect.width / 2) - containerRect.left;
+                    const y1 = (fromRect.top + fromRect.height / 2) - containerRect.top;
+                    const x2 = (toRect.left + toRect.width / 2) - containerRect.left;
+                    const y2 = (toRect.top + toRect.height / 2) - containerRect.top;
+
+                    line.el.setAttribute('x1', x1);
+                    line.el.setAttribute('y1', y1);
+                    line.el.setAttribute('x2', x2);
+                    line.el.setAttribute('y2', y2);
+
+                    if (line.from.el.classList.contains('near') || line.to.el.classList.contains('near')) {
+                        line.el.classList.add('active');
+                    } else {
+                        line.el.classList.remove('active');
+                    }
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            requestAnimationFrame(animate);
+        });
+    </script>
+</body>
+</html>

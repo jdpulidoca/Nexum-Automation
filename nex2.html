@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - Nexum Automation | Coca-Cola FEMSA</title>
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    
+    <style>
+        /* ==========================================================================
+           SISTEMA DE DISEÑO UNIFICADO (NEXUM CORE UI V2)
+           ========================================================================== */
+        :root {
+            --nexum-blue: #3A52B3;
+            --nexum-gray: #8E8E93;
+            
+            /* ENTORNO CLARO */
+            --bg-main: #F8FAFC;
+            --bg-canvas: radial-gradient(circle at center, #FFFFFF 30%, #E2E8F0 100%);
+            --bg-card: #FFFFFF;
+            --text-main: #1E293B;
+            --text-muted: #475569;
+            --line-soft: rgba(58, 82, 179, 0.2);
+            --line-ghost: rgba(142, 142, 147, 0.2);
+            --nav-bg: rgba(255, 255, 255, 0.8);
+            --table-border: #334155;
+            --table-th: #F1F5F9;
+            
+            /* Sombras */
+            --shadow-center-idle: 0 12px 40px -10px rgba(148, 163, 184, 0.4);
+            --shadow-center-hover: 0 25px 55px -10px rgba(58, 82, 179, 0.3);
+            --shadow-node-idle: 0 6px 14px -1px rgba(0, 0, 0, 0.05), 0 10px 20px -3px rgba(148, 163, 184, 0.2);
+            --shadow-node-hover: 0 16px 28px -4px rgba(58, 82, 179, 0.25);
+        }
+
+        [data-theme="dark"] {
+            /* ENTORNO OSCURO */
+            --bg-main: #0F172A;
+            --bg-canvas: radial-gradient(circle at center, #1E293B 0%, #0F172A 100%);
+            --bg-card: #1E293B;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --line-soft: rgba(255, 255, 255, 0.15);
+            --line-ghost: rgba(255, 255, 255, 0.06);
+            --nav-bg: rgba(15, 23, 42, 0.8);
+            --table-border: #64748B;
+            --table-th: #334155;
+            
+            /* Sombras */
+            --shadow-center-idle: 0 15px 45px -12px rgba(0, 0, 0, 0.7);
+            --shadow-center-hover: 0 25px 60px -10px rgba(58, 82, 179, 0.5);
+            --shadow-node-idle: 0 6px 16px rgba(0, 0, 0, 0.5);
+            --shadow-node-hover: 0 14px 32px rgba(58, 82, 179, 0.4);
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0; padding: 0;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            overflow-x: hidden;
+        }
+
+        /* ==========================================================================
+           BARRA DE NAVEGACIÓN SUPERIOR (GLASSMORPHISM)
+           ========================================================================== */
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%; height: 70px;
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line-soft);
+            z-index: 1000; display: flex; align-items: center; justify-content: space-between;
+            padding: 0 40px; transition: background 0.4s, border-color 0.4s;
+        }
+        .nav-logo img { height: 38px; width: auto; display: block; }
+        
+        .nav-container { display: flex; align-items: center; gap: 15px; }
+        .nav-link {
+            text-decoration: none; color: var(--text-main); font-size: 14px; font-weight: 600;
+            padding: 8px 16px; border-radius: 6px; transition: 0.25s ease;
+        }
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--nexum-blue); color: #FFFFFF !important;
+        }
+
+        /* Dropdown Estilizado */
+        .dropdown { position: relative; display: inline-block; }
+        .dropbtn {
+            background: none; border: none; color: var(--text-main); font-size: 14px;
+            font-weight: 600; padding: 8px 16px; cursor: pointer; display: flex; align-items: center; gap: 6px;
+        }
+        .dropdown-content {
+            display: none; position: absolute; right: 0; background-color: var(--bg-card);
+            min-width: 280px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); border-radius: 8px;
+            border: 1px solid var(--line-soft); overflow: hidden; z-index: 1100;
+        }
+        .dropdown-content a {
+            color: var(--text-main); padding: 12px 16px; text-decoration: none;
+            display: block; font-size: 13.5px; border-bottom: 1px solid var(--line-soft);
+            transition: 0.2s;
+        }
+        .dropdown-content a:last-child { border-bottom: none; }
+        .dropdown-content a:hover { background-color: var(--nexum-blue); color: #FFFFFF; }
+        .dropdown:hover .dropdown-content { display: block; }
+
+        /* Switch Conmutador Premium */
+        .theme-switch-wrapper { display: flex; align-items: center; margin-left: 10px; }
+        .theme-switch { display: inline-block; width: 50px; height: 26px; position: relative; }
+        .theme-switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #CBD5E1; transition: 0.4s; border-radius: 34px;
+            display: flex; align-items: center; justify-content: space-between; padding: 0 6px;
+        }
+        .slider:before {
+            position: absolute; content: ""; height: 18px; width: 18px; left: 4px; bottom: 4px;
+            background-color: white; transition: 0.4s; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+        }
+        input:checked + .slider { background-color: var(--nexum-blue); }
+        input:checked + .slider:before { transform: translateX(24px); }
+        .slider .icon { font-size: 11px; user-select: none; }
+
+        /* ==========================================================================
+           NIVEL 1: SECCIÓN DEL MAPA DE RED INTERACTIVO (HERO CANVAS)
+           ========================================================================== */
+        .network-hero-section {
+            width: 100%; height: 740px; background: var(--bg-canvas);
+            display: flex; justify-content: center; align-items: center;
+            position: relative; padding-top: 70px; border-bottom: 1px solid var(--line-soft);
+            transition: background 0.4s;
+        }
+        .nexus-container { position: relative; width: 1024px; height: 650px; }
+
+        /* Malla Vectorial */
+        .svg-connections { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+        .connection-line { stroke: var(--line-soft); stroke-width: 1.8; stroke-dasharray: 6, 4; transition: stroke 0.3s, stroke-width 0.3s; }
+        .ghost-link { stroke: var(--line-ghost); stroke-width: 1.2; stroke-dasharray: 2, 5; }
+        .connection-line.active { stroke: var(--nexum-blue) !important; stroke-width: 3px !important; stroke-dasharray: none !important; }
+
+        /* Nodos Básicos */
+        .node {
+            position: absolute; border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            text-decoration: none; z-index: 10; cursor: pointer; background: var(--bg-card);
+            transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+        }
+
+        /* Nodo Central */
+        .node-center { width: 160px; height: 160px; top: 230px; left: 395px; border: 1px solid rgba(58, 82, 179, 0.25); box-shadow: var(--shadow-center-idle); }
+        .node-center.near, .node-center:hover { border-color: var(--nexum-blue); box-shadow: var(--shadow-center-hover); }
+        .radar-grid { position: absolute; width: 100%; height: 100%; border-radius: 50%; border: 1px dashed rgba(58, 82, 179, 0.12); pointer-events: none; }
+        .logo-pupil-container { width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; z-index: 2; will-change: transform; }
+        
+        /* Clases SVG Ojo */
+        .contorno-hexagono { fill: none; stroke: var(--nexum-blue); stroke-width: 10; stroke-linejoin: round; }
+        .lineas-estructurales { fill: none; stroke: var(--nexum-blue); stroke-width: 10; }
+        .hexagono-punteado { fill: none; stroke: var(--nexum-gray); stroke-width: 5; stroke-dasharray: 8, 8; }
+        .circulo-mediano { fill: none; stroke: var(--nexum-blue); stroke-width: 8; }
+        .lineas-radiales { fill: none; stroke: var(--nexum-blue); stroke-width: 7; }
+        .circulo-central-pequeno { fill: none; stroke: var(--nexum-blue); stroke-width: 5; }
+        .circulos-satelite { fill: var(--nexum-blue); }
+        .nucleo-relleno { fill: var(--nexum-blue); }
+        .cruz-calada { fill: none; stroke: var(--bg-card); stroke-width: 3.5; transition: stroke 0.3s; }
+
+        /* Nodos Satélite Coordenadas Asimétricas */
+        .node-orbit { width: 74px; height: 74px; border: 1px solid var(--line-soft); box-shadow: var(--shadow-node-idle); }
+        .n-isa { top: 180px; left: 140px; }
+        .n-gestion { top: 380px; left: 110px; }
+        .n-economia { top: 510px; left: 210px; }
+        .n-plc { top: 110px; left: 740px; }
+        .n-celda { top: 240px; left: 860px; }
+        .n-digital { top: 360px; left: 720px; }
+        .n-propuesta { top: 50px; left: 445px; }
+        .n-reflexiones { top: 530px; left: 445px; }
+        .n-bibliografia { top: 490px; left: 770px; }
+
+        .node-icon { font-size: 24px; transition: transform 0.3s; z-index: 5; }
+        .node-title {
+            position: absolute; bottom: -28px; font-size: 10px; font-weight: 700; color: var(--text-muted);
+            text-transform: uppercase; letter-spacing: 1.2px; white-space: nowrap; text-align: center;
+            opacity: 0; transform: translateY(-4px); transition: all 0.25s ease; pointer-events: none;
+        }
+        .node-center .node-title { font-size: 11px; bottom: -32px; color: var(--text-main); }
+        .n-propuesta .node-title { bottom: auto; top: -25px; }
+
+        .node.near .node-title, .node:hover .node-title { opacity: 1; transform: translateY(0); color: var(--nexum-blue); }
+        .node-orbit.near, .node-orbit:hover { border-color: var(--nexum-blue); box-shadow: var(--shadow-node-hover); }
+        .node-orbit:hover .node-icon { transform: scale(1.15); }
+
+        /* Hint de Scroll */
+        .scroll-hint {
+            position: absolute; bottom: 20px; display: flex; flex-direction: column; align-items: center;
+            font-size: 10px; font-weight: 700; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase;
+        }
+        .scroll-hint span { margin-top: 5px; animation: bounce 2s infinite; }
+
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-6px); } 60% { transform: translateY(-3px); } }
+
+        /* ==========================================================================
+           NIVEL 2: CONTENIDO INFORMATIVO Y TABLAS (ESTILO ORIGINAL PULIDO)
+           ========================================================================== */
+        .main-content-section { width: 100%; padding: 80px 20px; display: flex; justify-content: center; }
+        .container { width: 100%; max-width: 1080px; }
+        
+        .section-title { text-align: center; color: var(--nexum-blue); font-size: 32px; margin-bottom: 40px; font-weight: 700; }
+        
+        .info-block { display: flex; flex-wrap: wrap; gap: 40px; align-items: center; margin-bottom: 60px; }
+        .text-wrapper { flex: 3; min-width: 320px; text-align: justify; line-height: 1.7; color: var(--text-muted); font-size: 15.5px; }
+        .text-wrapper p { margin-top: 0; margin-bottom: 16px; }
+        .image-wrapper { flex: 1.2; min-width: 260px; text-align: center; }
+        .image-wrapper img { width: 100%; max-width: 360px; height: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+
+        .separator-text { text-align: center; font-weight: 600; font-size: 18px; color: var(--text-main); margin: 50px 0 30px 0; }
+
+        /* Pestañas de Fichas Técnicas */
+        .tab { display: flex; justify-content: center; gap: 10px; border-bottom: 1px solid var(--line-soft); padding-bottom: 15px; margin-bottom: 30px; }
+        .tablinks {
+            background-color: var(--bg-card); border: 1px solid var(--line-soft); color: var(--text-main);
+            padding: 12px 28px; cursor: pointer; font-size: 14px; font-weight: 700; border-radius: 30px;
+            transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+        .tablinks:hover { border-color: var(--nexum-blue); color: var(--nexum-blue); }
+        .tablinks.active { background-color: var(--nexum-blue); color: #FFFFFF; border-color: var(--nexum-blue); box-shadow: 0 8px 20px rgba(58, 82, 179, 0.25); }
+
+        .tabcontent { display: none; background-color: var(--bg-card); border-radius: 16px; padding: 40px; border: 1px solid var(--line-soft); box-shadow: var(--shadow-node-idle); }
+        .tab-horizontal-layout { display: flex; flex-direction: row; gap: 40px; align-items: flex-start; }
+        .tab-image-container { flex: 0 0 220px; text-align: center; }
+        .tab-image-container img { width: 100%; max-width: 220px; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+        .tab-info-container { flex: 1; }
+        .product-title { margin-top: 0; color: var(--nexum-blue); font-size: 26px; font-weight: 700; }
+        .product-format { color: var(--text-muted); font-size: 14px; margin-bottom: 12px; }
+        .product-desc { color: var(--text-muted); line-height: 1.6; font-size: 15px; margin-bottom: 25px; }
+
+        /* Tabla Nutricional Adaptativa Inteligente */
+        .nutrition-table {
+            width: 100%; max-width: 450px; border-collapse: collapse;
+            border: 2px solid var(--table-border); font-size: 13.5px; color: var(--text-main);
+            transition: border-color 0.4s;
+        }
+        .nutrition-table th, .nutrition-table td { border-bottom: 1px solid var(--table-border); padding: 8px 12px; text-align: left; transition: border-color 0.4s; }
+        .nutrition-table th { background-color: var(--table-th); font-weight: 800; text-align: center; font-size: 14.5px; transition: background-color 0.4s; }
+        .nutrition-table .thick-border { border-bottom: 4px solid var(--table-border); }
+        .nutrition-table .indent { padding-left: 24px; }
+        .water-notice { padding: 20px; background-color: var(--table-th); border: 1px dashed var(--table-border); border-radius: 8px; color: var(--text-muted); max-width: 450px; font-style: italic; }
+
+        /* Footer */
+        footer { border-top: 1px solid var(--line-soft); padding: 30px 20px; text-align: center; color: var(--text-muted); font-size: 13px; font-weight: 500; }
+
+        /* Responsividad Celulares */
+        @media (max-width: 768px) {
+            .navbar { padding: 0 20px; }
+            .nav-container { display: none; } /* En entorno real aquí pondrías un menú hamburguesa */
+            .tab-horizontal-layout { flex-direction: column; align-items: center; }
+            .tab-image-container { flex: none; width: 100%; }
+            .info-block { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">
+            <img src="assets/img/logo.png" alt="NEXUM AUTOMATION">
+        </div>
+        
+        <div class="nav-container">
+            <a href="index.html" class="nav-link active">Inicio</a>
+            
+            <div class="dropdown">
+                <button class="dropbtn">Módulos del Proyecto <span>&#9662;</span></button>
+                <div class="dropdown-content">
+                    <a href="web/isa95.html">🏛️ Arquitectura Estructural ISA-95</a>
+                    <a href="web/gestion.html">📈 Módulo de Gestión de Producción</a>
+                    <a href="web/viabilidad.html">💰 Evaluación de Viabilidad Económica</a>
+                    <a href="web/controladores.html">💻 Automatización y Controladores PLC</a>
+                    <a href="web/celda.html">🤖 Ingeniería de Celda Robotizada</a>
+                    <a href="web/digital-factory.html">🌐 Entorno Digital Twin & SCADA</a>
+                </div>
+            </div>
+
+            <a href="web/propuesta.html" class="nav-link">Propuesta</a>
+            <a href="web/equipo.html" class="nav-link">Equipo</a>
+            <a href="web/reflexiones.html" class="nav-link">Reflexiones</a>
+            <a href="web/reference.html" class="nav-link">Bibliografía</a>
+
+            <div class="theme-switch-wrapper">
+                <label class="theme-switch" for="checkbox">
+                    <input type="checkbox" id="checkbox" />
+                    <div class="slider">
+                        <span class="icon">☀️</span>
+                        <span class="icon">🌙</span>
+                    </div>
+                </label>
+            </div>
+        </div>
+    </nav>
+
+    <section class="network-hero-section">
+        <div class="nexus-container" id="main-container">
+            
+            <svg class="svg-connections" id="svg-network">
+                <line id="l-center-isa" class="connection-line"></line>
+                <line id="l-center-gestion" class="connection-line"></line>
+                <line id="l-center-plc" class="connection-line"></line>
+                <line id="l-center-digital" class="connection-line"></line>
+                <line id="l-center-propuesta" class="connection-line"></line>
+                <line id="l-center-reflexiones" class="connection-line"></line>
+
+                <line id="l-isa-gestion" class="connection-line"></line>
+                <line id="l-gestion-economia" class="connection-line"></line>
+                <line id="l-isa-plc" class="connection-line"></line> 
+                <line id="l-plc-celda" class="connection-line"></line>
+                <line id="l-plc-digital" class="connection-line"></line>
+                <line id="l-celda-digital" class="connection-line"></line>
+                
+                <line id="l-propuesta-isa" class="connection-line"></line>
+                <line id="l-propuesta-plc" class="connection-line"></line>
+                <line id="l-reflexiones-gestion" class="connection-line"></line>
+                <line id="l-reflexiones-economia" class="connection-line"></line>
+                <line id="l-biblio-digital" class="connection-line"></line>
+                <line id="l-biblio-reflexiones" class="connection-line"></line>
+                <line id="l-biblio-celda" class="connection-line"></line>
+
+                <line class="ghost-link" x1="860" y1="240" x2="980" y2="200"></line>
+                <line class="ghost-link" x1="110" y1="380" x2="-20" y2="400"></line>
+                <line class="ghost-link" x1="770" y1="490" x2="860" y2="600"></line>
+            </svg>
+
+            <a href="web/equipo.html" class="node node-center" id="center-node">
+                <div class="radar-grid"></div>
+                <div class="logo-pupil-container" id="nexum-logo-eye">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+                        <polygon class="contorno-hexagono" points="200,60 321,130 321,270 200,340 79,270 79,130" />
+                        <g class="lineas-estructurales">
+                            <line x1="79" y1="185" x2="104" y2="185" /><line x1="79" y1="215" x2="104" y2="215" />
+                            <line x1="321" y1="185" x2="296" y2="185" /><line x1="321" y1="215" x2="296" y2="215" />
+                        </g>
+                        <polygon class="hexagono-punteado" points="200,110 285,159 285,241 200,290 115,241 115,159" />
+                        <circle class="circulo-mediano" cx="200" cy="200" r="65" />
+                        <g class="lineas-radiales">
+                            <line x1="143.7" y1="167.5" x2="105" y2="145" /><line x1="256.3" y1="167.5" x2="295" y2="145" />
+                            <line x1="143.7" y1="232.5" x2="105" y2="255" /><line x1="256.3" y1="232.5" x2="295" y2="255" />
+                        </g>
+                        <circle class="circulo-central-pequeno" cx="200" cy="200" r="30" />
+                        <g class="circulos-satelite">
+                            <circle cx="200" cy="164" r="6" /><circle cx="200" cy="236" r="6" />
+                            <circle cx="231.2" cy="182" r="6" /><circle cx="231.2" cy="218" r="6" />
+                            <circle cx="168.8" cy="218" r="6" /><circle cx="168.8" cy="182" r="6" />
+                        </g>
+                        <circle class="nucleo-relleno" cx="200" cy="200" r="15" />
+                        <g class="cruz-calada"><line x1="192" y1="200" x2="208" y2="200" /><line x1="200" y1="192" x2="200" y2="208" /></g>
+                    </svg>
+                </div>
+                <span class="node-title">Equipo Consultor</span>
+            </a>
+
+            <a href="web/isa95.html" id="n-isa" class="node node-orbit n-isa">
+                <span class="node-icon">🏛️</span><span class="node-title">Arquitectura ISA-95</span>
+            </a>
+            <a href="web/gestion.html" id="n-gestion" class="node node-orbit n-gestion">
+                <span class="node-icon">📈</span><span class="node-title">Gestión de Producción</span>
+            </a>
+            <a href="web/viabilidad.html" id="n-economia" class="node node-orbit n-economia">
+                <span class="node-icon">💰</span><span class="node-title">Viabilidad Económica</span>
+            </a>
+
+            <a href="web/controladores.html" id="n-plc" class="node node-orbit n-plc">
+                <span class="node-icon">💻</span><span class="node-title">Controladores PLC</span>
+            </a>
+            <a href="web/celda.html" id="n-celda" class="node node-orbit n-celda">
+                <span class="node-icon">🤖</span><span class="node-title">Celda Robotizada</span>
+            </a>
+            <a href="web/digital-factory.html" id="n-digital" class="node node-orbit n-digital">
+                <span class="node-icon">🌐</span><span class="node-title">Digital Twin & SCADA</span>
+            </a>
+
+            <a href="web/propuesta.html" id="n-propuesta" class="node node-orbit n-propuesta">
+                <span class="node-icon">🎯</span><span class="node-title">Propuesta Comercial</span>
+            </a>
+            <a href="web/reflexiones.html" id="n-reflexiones" class="node node-orbit n-reflexiones">
+                <span class="node-icon">🧠</span><span class="node-title">Reflexiones Académicas</span>
+            </a>
+            <a href="web/reference.html" id="n-bibliografia" class="node node-orbit n-bibliografia">
+                <span class="node-icon">📚</span><span class="node-title">Bibliografía</span>
+            </a>
+
+        </div>
+
+        <div class="scroll-hint">
+            Explorar Fichas de Operación <span>👇</span>
+        </div>
+    </section>
+
+    <section class="main-content-section">
+        <div class="container">
+            
+            <h2 class="section-title">Contexto Operativo: Coca-Cola FEMSA</h2>
+            
+            <div class="info-block">
+                <div class="text-wrapper">
+                    <p>La presente página ha sido desarrollada como parte del proyecto integrador de la asignatura Automatización de Procesos de Manufactura de la Universidad Nacional de Colombia, correspondiente al periodo académico 2026, con el propósito de exponer la evaluación operativa y la propuesta de automatización de tres líneas de producción de Coca-Cola FEMSA, correspondientes a los productos Monster, Quatro y Agua Brisa.</p>
+                    <p>La propuesta se fundamenta en la información recopilada durante la visita técnica a la planta, donde se analizaron los procesos productivos y sus condiciones actuales. En este contexto, se plantea la creación de Nexum Automation, una empresa consultora académica conformada por seis estudiantes de ingeniería, encargada de desarrollar y estructurar la propuesta de mejora.</p>
+                    <p>A partir del análisis realizado, se identifican oportunidades en la distribución de planta, eficiencia operativa y condiciones ergonómicas, con base en ello, se proponen soluciones orientadas a la optimización del flujo productivo y la implementación de tecnologías de automatización, con el objetivo de incrementar la productividad, reducir tiempos de ciclo y mejorar la seguridad en las operaciones, en concordancia con los principios de manufactura moderna e Industria 4.0.</p>
+                </div>
+                
+                <div class="image-wrapper">
+                    <img src="assets/img/Planta_cocacola.png" alt="Planta de producción Coca-Cola FEMSA">
+                </div>
+            </div>
+
+            <p class="separator-text">
+                Productos clave objeto de la propuesta de automatización:
+            </p>
+            
+            <div class="tab">
+                <button class="tablinks active" onclick="abrirLinea(event, 'Monster')">Línea: Monster</button>
+                <button class="tablinks" onclick="abrirLinea(event, 'Quatro')">Línea: Quatro</button>
+                <button class="tablinks" onclick="abrirLinea(event, 'Brisa')">Línea: Agua Brisa</button>
+            </div>
+
+            <div id="Monster" class="tabcontent" style="display: block;">
+                <div class="tab-horizontal-layout">
+                    <div class="tab-image-container">
+                        <img src="assets/img/lataMonster.png" alt="Lata Monster Energy">
+                    </div>
+                    <div class="tab-info-container">
+                        <h3 class="product-title">🔋 Monster Energy</h3>
+                        <p class="product-format"><strong>Formato:</strong> Lata 473ml</p>
+                        <p class="product-desc">Línea de alta rentabilidad por litro, con requerimientos críticos en la mezcla de jarabes.</p>
+                        
+                        <table class="nutrition-table">
+                            <tr><th colspan="2" class="thick-border">Información Nutricional<br><span style="font-size: 11px; font-weight: normal;">Cada: 100 ml </span></th></tr>
+                            <tr><td><strong>Calorías</strong></td><td style="text-align: right;">47 kcal</td></tr>
+                            <tr><td><strong>Grasa Total</strong></td><td style="text-align: right;">0 g</td></tr>
+                            <tr><td><strong>Carbohidratos Totales</strong></td><td style="text-align: right;">12 g</td></tr>
+                            <tr><td class="indent">Azúcares Totales</td><td style="text-align: right;">12 g</td></tr>
+                            <tr><td class="indent">Azúcares Añadidos</td><td style="text-align: right;">13 g</td></tr>
+                            <tr class="thick-border"><td><strong>Otros</strong></td><td style="text-align: right;"></td></tr>
+                            <tr><td>Riboflavina</td><td style="text-align: right;">0.72 mg</td></tr>
+                            <tr><td>Niacina </td><td style="text-align: right;">8.5 mg</td></tr>
+                            <tr><td>Vitamina B6 </td><td style="text-align: right;">0.85 mg</td></tr>
+                            <tr><td>Vitamina B12</td><td style="text-align: right;">2.5 µg</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="Quatro" class="tabcontent">
+                <div class="tab-horizontal-layout">
+                    <div class="tab-image-container">
+                        <img src="assets/img/botellaQuatro.jpg" alt="Botella Quatro PET">
+                    </div>
+                    <div class="tab-info-container">
+                        <h3 class="product-title">🥤 Gaseosa Quatro</h3>
+                        <p class="product-format"><strong>Formato:</strong> PET 1.5 Litros</p>
+                        <p class="product-desc">Línea de volumen masivo continua. Presenta integración del soplado de preformas en sitio. El costo del azúcar es el principal driver que impacta el OPEX de esta operación.</p>
+                        
+                        <table class="nutrition-table">
+                            <tr><th colspan="2" class="thick-border">Información Nutricional<br><span style="font-size: 11px; font-weight: normal;">Cada: 100 ml </span></th></tr>
+                            <tr><td><strong>Calorías</strong></td><td style="text-align: right;">20 kcal</td></tr>
+                            <tr><td><strong>Grasa Total</strong></td><td style="text-align: right;">0 g</td></tr>
+                            <tr><td><strong>Sodio</strong></td><td style="text-align: right;">26 mg</td></tr>
+                            <tr><td><strong>Carbohidratos Totales</strong></td><td style="text-align: right;">4.9 g</td></tr>
+                            <tr><td class="indent">Azúcares Totales</td><td style="text-align: right;">4.9 g</td></tr>
+                            <tr class="thick-border"><td class="indent">Azúcares Añadidos</td><td style="text-align: right;">4.9 g</td></tr>
+                            <tr><td><strong>Proteínas</strong></td><td style="text-align: right;">0 g</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="Brisa" class="tabcontent">
+                <div class="tab-horizontal-layout">
+                    <div class="tab-image-container">
+                        <img src="assets/img/garrafonBrissa.png" alt="Garrafón Agua Brisa">
+                    </div>
+                    <div class="tab-info-container">
+                        <h3 class="product-title">💧 Agua Brisa</h3>
+                        <p class="product-format"><strong>Formato:</strong> Garrafón 20 Litros</p>
+                        <p class="product-desc">Línea de alto peso volumétrico. Presenta un cuello de botella ergonómico crítico al final de la línea que será el foco de la solución de celda robotizada.</p>
+                        
+                        <div class="water-notice">
+                            <p style="margin: 0;"><em>*Al ser agua purificada, no requiere declaración de tabla nutricional calórica bajo estándares de etiquetado vigentes.</em></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>Documentación Técnica &copy; 2026 - Nexum Automation | Universidad Nacional de Colombia</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('main-container');
+            const centerNode = document.getElementById('center-node');
+            const logoEye = document.getElementById('nexum-logo-eye');
+            const toggleSwitch = document.getElementById('checkbox');
+
+            // 1. CONMUTADOR DINÁMICO DE ENTORNO (LIGHT / DARK)
+            toggleSwitch.addEventListener('change', (e) => {
+                document.documentElement.setAttribute('data-theme', e.target.checked ? 'dark' : 'light');
+            });
+            
+            let mX = 0, mY = 0;
+            document.addEventListener('mousemove', (e) => {
+                mX = e.clientX; mY = e.clientY;
+            });
+
+            // 2. REGISTRO MATRIZ DE NODOS ASIMÉTRICOS
+            const nodes = {
+                center: { el: centerNode, currentX: 0, currentY: 0, targetX: 0, targetY: 0, seed: 0 },
+                isa: { el: document.getElementById('n-isa'), currentX: 0, currentY: 0, targetX: 0, targetY: 0, seed: 1.2 },
+                gestion: { el: document.getElementById('n-gestion'), currentX: 0, currentY: 0, targetX: 0, targetY: 0, seed: 2.4 },
+                economia: { el: document.getElementById('n-economia'), currentX: 0, currentY: 0, targetX: 0, targetY: 0, seed: 3.6 },
+                plc: { el: document.getElementById('n-plc'), currentX: 0, currentY: 0, targetX: 0, targetY: 0, seed: 4.8 },
+                celda: { el: document.getElementById('n-celda'), currentX: 0, currentY: 0, targetX: 0, targetY: 0, seed: 6.0 },
+                digital: { el: document.getElementById('n-digital'), currentX: 0, currentY: 0, targetX: 0, targetY: 0, seed: 7.2 },
+                propuesta: { el: document.getElementById('n-propuesta'), currentX: 0, currentY: 0, targetX: 0, targetY: 0, seed: 8.4 },
+                reflexiones: { el: document.getElementById('n-reflexiones'), currentX: 0, currentY: 0, targetX: 0, targetY: 0, seed: 9.6 },
+                biblio: { el: document.getElementById('n-bibliografia'), currentX: 0, currentY: 0, targetX: 0, targetY: 0, seed: 10.8 }
+            };
+
+            // 3. ESTRUCTURACIÓN DE LÍNEAS VECTORIALES REFORZADAS
+            const lines = [
+                { id: 'l-center-isa', from: nodes.center, to: nodes.isa },
+                { id: 'l-center-gestion', from: nodes.center, to: nodes.gestion },
+                { id: 'l-center-plc', from: nodes.center, to: nodes.plc },
+                { id: 'l-center-digital', from: nodes.center, to: nodes.digital },
+                { id: 'l-center-propuesta', from: nodes.center, to: nodes.propuesta },
+                { id: 'l-center-reflexiones', from: nodes.center, to: nodes.reflexiones },
+                
+                { id: 'l-isa-gestion', from: nodes.isa, to: nodes.gestion },
+                { id: 'l-gestion-economia', from: nodes.gestion, to: nodes.economia },
+                { id: 'l-isa-plc', from: nodes.isa, to: nodes.plc }, 
+                { id: 'l-plc-celda', from: nodes.plc, to: nodes.celda },
+                { id: 'l-plc-digital', from: nodes.plc, to: nodes.digital },
+                { id: 'l-celda-digital', from: nodes.celda, to: nodes.digital },
+
+                { id: 'l-propuesta-isa', from: nodes.propuesta, to: nodes.isa },
+                { id: 'l-propuesta-plc', from: nodes.propuesta, to: nodes.plc },
+                { id: 'l-reflexiones-gestion', from: nodes.reflexiones, to: nodes.gestion },
+                { id: 'l-reflexiones-economia', from: nodes.reflexiones, to: nodes.economia },
+                { id: 'l-biblio-digital', from: nodes.biblio, to: nodes.digital },
+                { id: 'l-biblio-reflexiones', from: nodes.biblio, to: nodes.reflexiones },
+                { id: 'l-biblio-celda', from: nodes.biblio, to: nodes.celda }
+            ].map(l => ({ ...l, el: document.getElementById(l.id) }));
+
+            let eyeCurrentX = 0, eyeCurrentY = 0;
+            let time = 0;
+
+            function animate() {
+                time += 0.012;
+                const containerRect = container.getBoundingClientRect();
+
+                // --- EFECTO REINSTALADO: SEGUIMIENTO INTEGRAL DEL OJO ---
+                const rectCenter = centerNode.getBoundingClientRect();
+                const centerNodeX = rectCenter.left + rectCenter.width / 2;
+                const centerNodeY = rectCenter.top + rectCenter.height / 2;
+
+                const angleEye = Math.atan2(mY - centerNodeY, mX - centerNodeX);
+                const distEye = Math.sqrt(Math.pow(mX - centerNodeX, 2) + Math.pow(mY - centerNodeY, 2));
+
+                const maxRadiusEye = 20; 
+                const moveRadiusEye = Math.min(distEye / 15, maxRadiusEye);
+                
+                const targetEyeX = Math.cos(angleEye) * moveRadiusEye;
+                const targetEyeY = Math.sin(angleEye) * moveRadiusEye;
+
+                eyeCurrentX += (targetEyeX - eyeCurrentX) * 0.12;
+                eyeCurrentY += (targetEyeY - eyeCurrentY) * 0.12;
+                logoEye.style.transform = `translate(${eyeCurrentX}px, ${eyeCurrentY}px)`;
+
+                // --- CINÉTICA DE NODOS INDEPENDIENTES ---
+                Object.keys(nodes).forEach(key => {
+                    const node = nodes[key];
+                    const rect = node.el.getBoundingClientRect();
+                    
+                    const cX = rect.left + rect.width / 2 - node.currentX;
+                    const cY = rect.top + rect.height / 2 - node.currentY;
+
+                    const dX = mX - cX;
+                    const dY = mY - cY;
+                    const distance = Math.sqrt(dX * dX + dY * dY);
+                    const threshold = 160;
+
+                    if (distance < threshold) {
+                        node.el.classList.add('near');
+                        const angle = Math.atan2(dY, dX);
+                        const force = (1 - (distance / threshold));
+                        const maxMove = key === 'center' ? 8 : 20; 
+                        
+                        node.targetX = Math.cos(angle) * maxMove * force;
+                        node.targetY = Math.sin(angle) * maxMove * force;
+                    } else {
+                        node.el.classList.remove('near');
+                        node.targetX = Math.sin(time + node.seed * 1.5) * 4;
+                        node.targetY = Math.cos(time * 0.8 + node.seed * 1.2) * 3;
+                    }
+
+                    node.currentX += (node.targetX - node.currentX) * 0.08;
+                    node.currentY += (node.targetY - node.currentY) * 0.08;
+                    node.el.style.transform = `translate(${node.currentX}px, ${node.currentY}px)`;
+                });
+
+                // --- RENDERIZACIÓN VECTORIAL DE RED ---
+                lines.forEach(line => {
+                    if (!line.el) return;
+                    const fromRect = line.from.el.getBoundingClientRect();
+                    const toRect = line.to.el.getBoundingClientRect();
+
+                    const x1 = (fromRect.left + fromRect.width / 2) - containerRect.left;
+                    const y1 = (fromRect.top + fromRect.height / 2) - containerRect.top;
+                    const x2 = (toRect.left + toRect.width / 2) - containerRect.left;
+                    const y2 = (toRect.top + toRect.height / 2) - containerRect.top;
+
+                    line.el.setAttribute('x1', x1);
+                    line.el.setAttribute('y1', y1);
+                    line.el.setAttribute('x2', x2);
+                    line.el.setAttribute('y2', y2);
+
+                    if (line.from.el.classList.contains('near') || line.to.el.classList.contains('near')) {
+                        line.el.classList.add('active');
+                    } else {
+                        line.el.classList.remove('active');
+                    }
+                });
+
+                requestAnimationFrame(animate);
+            }
+            requestAnimationFrame(animate);
+        });
+
+        // 4. CONTROLADOR NATIVO DE PESTAÑAS (TABS ORIGINAL CONSERVADO)
+        function abrirLinea(evt, nombreLinea) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(nombreLinea).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</body>
+</html>
