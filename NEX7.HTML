@@ -7,7 +7,7 @@
     
     <style>
         /* ==========================================================================
-           SISTEMA DE DISEÑO: SYNAPTIC HUD UI V8.0
+           SISTEMA DE DISEÑO: SYNAPTIC HUD UI V8.19 (EXTENDED BOOT)
            ========================================================================== */
         :root {
             --nexum-blue: #3A52B3;
@@ -19,7 +19,7 @@
             --node-bg: rgba(255, 255, 255, 0.9);       
             --text-main: #0F172A;     
             --text-muted: #64748B;    
-            --axon-base: rgba(58, 82, 179, 0.15); /* Red de fondo más visible */
+            --axon-base: rgba(58, 82, 179, 0.15);
             --axon-active: rgba(58, 82, 179, 0.7);
             --panel-bg: rgba(255, 255, 255, 0.95);
             
@@ -35,7 +35,7 @@
             --node-bg: rgba(30, 41, 59, 0.85);       
             --text-main: #F8FAFC;     
             --text-muted: #94A3B8;    
-            --axon-base: rgba(255, 255, 255, 0.08); /* Red fantasma en modo oscuro */
+            --axon-base: rgba(255, 255, 255, 0.08);
             --axon-active: rgba(14, 165, 233, 0.65);
             --panel-bg: rgba(15, 23, 42, 0.96);
             
@@ -49,7 +49,7 @@
         body {
             margin: 0; padding: 0; height: 100vh;
             background: var(--bg-gradient);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             overflow: hidden; color: var(--text-main);
             display: flex; justify-content: center; align-items: center;
             transition: background 0.5s ease;
@@ -57,25 +57,67 @@
         }
 
         /* ==========================================================================
-           CORTINILLA DE INTRODUCCIÓN (SPLASH SCREEN)
+           CORTINILLA DE INTRODUCCIÓN (SPLASH SCREEN TIPO OS)
            ========================================================================== */
         #splash-screen {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: var(--bg-gradient); z-index: 9999;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.2s;
+            transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.5s;
         }
+        
+        .splash-layout {
+            display: flex; align-items: center; gap: 45px;
+            animation: bootUp 2s ease-out forwards;
+        }
+
         #splash-logo {
-            width: 180px; height: 180px;
-            animation: pulseSplash 2.5s infinite;
+            width: 150px; height: 150px;
+            animation: pulseSplash 3s infinite ease-in-out;
         }
-        .splash-text {
-            margin-top: 30px; font-family: monospace; font-size: 14px;
-            letter-spacing: 8px; color: var(--nexum-blue); text-transform: uppercase;
-            animation: fadeInOut 2.5s infinite;
+
+        .splash-typography {
+            display: flex; flex-direction: column; text-align: left;
         }
-        @keyframes pulseSplash { 0% { transform: scale(0.95); opacity: 0.8; } 50% { transform: scale(1.05); opacity: 1; filter: drop-shadow(0 0 20px rgba(58, 82, 179, 0.5)); } 100% { transform: scale(0.95); opacity: 0.8; } }
-        @keyframes fadeInOut { 0% { opacity: 0.3; } 50% { opacity: 1; } 100% { opacity: 0.3; } }
+
+        .splash-title {
+            font-size: 58px; font-weight: 300; 
+            letter-spacing: 14px; color: var(--nexum-blue);
+            line-height: 1; margin-bottom: 5px; margin-left: 8px;
+        }
+
+        .splash-separator {
+            display: flex; align-items: center; width: 100%; margin: 8px 0;
+        }
+        
+        .sep-dot { width: 6px; height: 6px; background: var(--nexum-cyan); border-radius: 50%; }
+        .sep-line { flex-grow: 1; height: 1px; background: linear-gradient(90deg, var(--nexum-cyan), var(--nexum-purple)); margin: 0 10px; opacity: 0.6; }
+        .sep-square { width: 5px; height: 5px; background: var(--nexum-purple); }
+
+        .splash-subtitle {
+            font-size: 22px; font-weight: 400; letter-spacing: 17px;
+            color: var(--text-muted); margin-bottom: 20px; margin-left: 8px;
+        }
+
+        .splash-tagline {
+            font-size: 10px; font-weight: 600; letter-spacing: 3.5px;
+            color: var(--nexum-blue); opacity: 0.6; margin-left: 8px;
+        }
+
+        .splash-status {
+            position: absolute; bottom: 80px;
+            font-family: monospace; font-size: 14px; font-weight: 700;
+            letter-spacing: 6px; color: var(--nexum-cyan);
+            text-transform: uppercase;
+            opacity: 0;
+            /* Inicia oculto 1s, aparece, y luego parpadea */
+            animation: terminalFadeIn 0.5s ease-out 1s forwards, blinkTerminal 2s infinite 1.5s;
+        }
+
+        @keyframes bootUp { 0% { transform: translateY(20px); opacity: 0; filter: blur(10px); } 100% { transform: translateY(0); opacity: 1; filter: blur(0); } }
+        @keyframes pulseSplash { 0% { transform: scale(0.98); filter: drop-shadow(0 0 15px rgba(58, 82, 179, 0.2)); } 50% { transform: scale(1.02); filter: drop-shadow(0 0 25px rgba(58, 82, 179, 0.6)); } 100% { transform: scale(0.98); filter: drop-shadow(0 0 15px rgba(58, 82, 179, 0.2)); } }
+        @keyframes terminalFadeIn { to { opacity: 1; } }
+        @keyframes blinkTerminal { 0%, 100% { opacity: 1; filter: drop-shadow(0 0 8px var(--nexum-cyan)); } 50% { opacity: 0.4; filter: drop-shadow(0 0 0 transparent); } }
 
         /* LIENZO DE INTERACCIÓN CENTRAL */
         .neural-container {
@@ -91,7 +133,7 @@
             pointer-events: none; text-transform: uppercase;
         }
 
-        /* CAPA DE CONEXIONES (MALLA PERSISTENTE) */
+        /* CAPA DE CONEXIONES */
         .synaptic-space { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
         .axon-path {
             fill: none; stroke: var(--axon-base); stroke-width: 1.2;
@@ -121,7 +163,6 @@
         .node-support { width: 68px; height: 68px; }
         .node-satellite { width: 54px; height: 54px; border-style: dashed; }
 
-        /* EFECTO GLOW POR PROXIMIDAD */
         .node-hub-identity.near, .node-hub-identity.selected-hub { box-shadow: 0 0 35px rgba(14, 165, 233, 0.6), var(--shadow-identity); border-color: var(--nexum-cyan); }
         .node-hub-commercial.near, .node-hub-commercial.selected-hub { box-shadow: 0 0 35px rgba(245, 158, 11, 0.6), var(--shadow-commercial); border-color: var(--nexum-amber); }
         .node-hub-tech.near, .node-hub-tech.selected-hub { box-shadow: 0 0 35px rgba(139, 92, 246, 0.6), var(--shadow-tech); border-color: var(--nexum-purple); }
@@ -131,7 +172,7 @@
         .node-hub-identity .node-icon, .node-hub-commercial .node-icon, .node-hub-tech .node-icon { font-size: 26px; }
         .node-satellite .node-icon { font-size: 15px; opacity: 0.8; }
 
-        /* LOGO INTERACTIVO VECTORIAL KINÉTICO */
+        /* LOGO KINÉTICO (Ojo del HUD) */
         .logo-pupil { width: 66px; height: 66px; display: flex; justify-content: center; align-items: center; z-index: 2; will-change: transform; }
         .contorno-hexagono { fill: none; stroke: var(--nexum-blue); stroke-width: 10; stroke-linejoin: round; }
         .lineas-estructurales { fill: none; stroke: var(--nexum-blue); stroke-width: 10; }
@@ -147,7 +188,7 @@
         /* NODOS ESTÉTICOS */
         .node-aesthetic {
             position: absolute; border-radius: 50%;
-            background: var(--nexum-blue); opacity: 0.3; /* Visibilidad base de las intersecciones */
+            background: var(--nexum-blue); opacity: 0.3;
             pointer-events: none; z-index: 5;
             transition: opacity 0.3s, transform 0.3s, background-color 0.3s, box-shadow 0.3s;
         }
@@ -167,7 +208,7 @@
         .sec-commercial.near .node-label, .sec-commercial:hover .node-label { color: var(--nexum-amber); }
         .sec-tech.near .node-label, .sec-tech:hover .node-label { color: var(--nexum-purple); }
 
-        /* INTERRUPTOR */
+        /* CONTROLES GLOBALES */
         .theme-toggle { position: absolute; top: 20px; right: 20px; z-index: 100; }
         .theme-toggle input { opacity: 0; width: 0; height: 0; }
         .slider {
@@ -189,9 +230,7 @@
         }
         .hud-global-ref-btn:hover { border-color: var(--text-main); color: var(--text-main); box-shadow: 0 0 10px rgba(142, 142, 147, 0.2); }
 
-        /* ==========================================================================
-           PANELES DESLIZANTES INTELIGENTES (OPUESTOS)
-           ========================================================================== */
+        /* PANELES DESLIZANTES */
         .info-panel {
             position: fixed; top: 0; width: 100%; max-width: 500px; height: 100vh;
             background: var(--panel-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
@@ -199,15 +238,12 @@
             transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s;
             opacity: 0;
         }
-        /* Panel Derecho (Despliega cuando se hace click en nodo Izquierdo) */
         .info-panel.panel-right { right: 0; transform: translateX(100%); border-left: 1px solid var(--border-node); box-shadow: -10px 0 40px rgba(0,0,0,0.15); }
-        /* Panel Izquierdo (Despliega cuando se hace click en nodo Derecho) */
         .info-panel.panel-left { left: 0; transform: translateX(-100%); border-right: 1px solid var(--border-node); box-shadow: 10px 0 40px rgba(0,0,0,0.15); }
-        
         .info-panel.open { transform: translateX(0); opacity: 1; }
         
         .close-panel-btn { position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 30px; cursor: pointer; color: var(--text-muted); }
-        .panel-left .close-panel-btn { right: auto; left: 20px; } /* Botón opuesto si el panel está a la izquierda */
+        .panel-left .close-panel-btn { right: auto; left: 20px; }
 
         .panel-title { color: var(--nexum-blue); font-size: 22px; margin-bottom: 15px; margin-top: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
         .panel-text { text-align: justify; line-height: 1.6; color: var(--text-muted); font-size: 14px; margin-bottom: 14px; }
@@ -233,20 +269,32 @@
 <body>
 
     <div id="splash-screen">
-        <div id="splash-logo">
-            <svg viewBox="0 0 400 400" width="100%" height="100%">
-                <polygon class="contorno-hexagono" points="200,60 321,130 321,270 200,340 79,270 79,130" />
-                <g class="lineas-estructurales"><line x1="79" y1="185" x2="104" y2="185" /><line x1="79" y1="215" x2="104" y2="215" /><line x1="321" y1="185" x2="296" y2="185" /><line x1="321" y1="215" x2="296" y2="215" /></g>
-                <polygon class="hexagono-punteado" points="200,110 285,159 285,241 200,290 115,241 115,159" />
-                <circle class="circulo-mediano" cx="200" cy="200" r="65" />
-                <g class="lineas-radiales"><line x1="143.7" y1="167.5" x2="105" y2="145" /><line x1="256.3" y1="167.5" x2="295" y2="145" /><line x1="143.7" y1="232.5" x2="105" y2="255" /><line x1="256.3" y1="232.5" x2="295" y2="255" /></g>
-                <circle class="circulo-central-pequeno" cx="200" cy="200" r="30" />
-                <g class="circulos-satelite"><circle cx="200" cy="164" r="6" /><circle cx="200" cy="236" r="6" /><circle cx="231.2" cy="182" r="6" /><circle cx="231.2" cy="218" r="6" /><circle cx="168.8" cy="218" r="6" /><circle cx="168.8" cy="182" r="6" /></g>
-                <circle class="nucleo-relleno" cx="200" cy="200" r="15" />
-                <g class="cruz-calada"><line x1="192" y1="200" x2="208" y2="200" /><line x1="200" y1="192" x2="200" y2="208" /></g>
-            </svg>
+        <div class="splash-layout">
+            <div id="splash-logo">
+                <svg viewBox="0 0 400 400" width="100%" height="100%">
+                    <polygon class="contorno-hexagono" points="200,60 321,130 321,270 200,340 79,270 79,130" />
+                    <g class="lineas-estructurales"><line x1="79" y1="185" x2="104" y2="185" /><line x1="79" y1="215" x2="104" y2="215" /><line x1="321" y1="185" x2="296" y2="185" /><line x1="321" y1="215" x2="296" y2="215" /></g>
+                    <polygon class="hexagono-punteado" points="200,110 285,159 285,241 200,290 115,241 115,159" />
+                    <circle class="circulo-mediano" cx="200" cy="200" r="65" />
+                    <g class="lineas-radiales"><line x1="143.7" y1="167.5" x2="105" y2="145" /><line x1="256.3" y1="167.5" x2="295" y2="145" /><line x1="143.7" y1="232.5" x2="105" y2="255" /><line x1="256.3" y1="232.5" x2="295" y2="255" /></g>
+                    <circle class="circulo-central-pequeno" cx="200" cy="200" r="30" />
+                    <g class="circulos-satelite"><circle cx="200" cy="164" r="6" /><circle cx="200" cy="236" r="6" /><circle cx="231.2" cy="182" r="6" /><circle cx="231.2" cy="218" r="6" /><circle cx="168.8" cy="218" r="6" /><circle cx="168.8" cy="182" r="6" /></g>
+                    <circle class="nucleo-relleno" cx="200" cy="200" r="15" />
+                    <g class="cruz-calada"><line x1="192" y1="200" x2="208" y2="200" /><line x1="200" y1="192" x2="200" y2="208" /></g>
+                </svg>
+            </div>
+            <div class="splash-typography">
+                <div class="splash-title">NEXUM</div>
+                <div class="splash-separator">
+                    <div class="sep-dot"></div>
+                    <div class="sep-line"></div>
+                    <div class="sep-square"></div>
+                </div>
+                <div class="splash-subtitle">AUTOMATION</div>
+                <div class="splash-tagline">ROBOTICS &middot; MECHATRONICS &middot; CONTROL SYSTEMS</div>
+            </div>
         </div>
-        <div class="splash-text">INITIATING NEXUM OS...</div>
+        <div class="splash-status">[ INITIATING NEXUM OS // KERNEL v8.19.5728... ]</div>
     </div>
 
     <div class="theme-toggle">
@@ -337,21 +385,21 @@
         <div id="panel-dynamic-content"></div>
     </div>
 
-    <div class="footer-branding">Nexum Core // Synaptic Constellation V8.0 // Universidad Nacional de Colombia</div>
+    <div class="footer-branding">Nexum Core // Synaptic Constellation V8.19 // Universidad Nacional de Colombia</div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // 1. MANEJO DE LA CORTINILLA (SPLASH SCREEN)
+            // 1. MANEJO DE LA CORTINILLA (SPLASH SCREEN) - TIEMPO EXTENDIDO (4.5 segundos)
             setTimeout(() => {
                 const splash = document.getElementById('splash-screen');
                 const canvas = document.getElementById('space-container');
                 splash.style.opacity = '0';
-                canvas.classList.add('loaded'); // Desvanece el lienzo interactivo hacia adentro
+                canvas.classList.add('loaded');
                 setTimeout(() => {
                     splash.style.display = 'none';
-                }, 1200);
-            }, 1800); // 1.8s de intro visual
+                }, 1500); // 1.5s fade out
+            }, 4800); // 4.8s para apreciar el logo y la consola OS
 
             const container = document.getElementById('space-container');
             const svgCanvas = document.getElementById('canvas-synapses');
@@ -359,7 +407,6 @@
             const identityNode = document.getElementById('n-center');
             const toggleTheme = document.getElementById('mode-checkbox');
 
-            // Cambio de Tema
             toggleTheme.addEventListener('change', (e) => {
                 document.documentElement.setAttribute('data-theme', e.target.checked ? 'dark' : 'light');
             });
@@ -376,13 +423,12 @@
                 networkElements.push({
                     el: el, group: group, isSupernode: isSuper, isFunctional: isFunctional, isIdentity: id === 'n-center',
                     currentX: 0, currentY: 0, targetX: 0, targetY: 0,
-                    currentScale: isSuper ? 1 : 0, targetScale: isSuper ? 1 : 0, // Invisibles al inicio salvo supernodos
+                    currentScale: isSuper ? 1 : 0, targetScale: isSuper ? 1 : 0,
                     currentOpacity: isSuper ? 1 : 0, targetOpacity: isSuper ? 1 : 0,
                     seed: Math.random() * 10
                 });
             }
 
-            // Registrar y agrupar nodos
             registrarNodo('n-center', 'human', true, true);
             registrarNodo('n-resumen', 'human', false, true);
             registrarNodo('n-contexto', 'human', false, true);
@@ -400,7 +446,6 @@
             registrarNodo('n-celda', 'tech', false, true);
             registrarNodo('bib-sector3', 'tech', false, true);
 
-            // Nodos estéticos que forman la red visual de fondo
             const aesthetics = document.querySelectorAll('.node-aesthetic');
             aesthetics.forEach(el => {
                 networkElements.push({
@@ -410,7 +455,6 @@
                 });
             });
 
-            // Enlaces Fijos
             const structuralBackbone = [
                 { from: 'n-center', to: 'n-contexto' }, { from: 'n-center', to: 'n-resumen' }, { from: 'n-center', to: 'n-reflexiones' }, { from: 'n-center', to: 'bib-sector1' },
                 { from: 'n-center', to: 'n-propuesta' }, { from: 'n-propuesta', to: 'n-economia' }, { from: 'n-propuesta', to: 'bib-sector2' },
@@ -424,7 +468,6 @@
             const linesData = [];
             const containerRect = container.getBoundingClientRect();
 
-            // Dibujar Backbone y agregar líneas a red estética
             structuralBackbone.forEach(link => {
                 const fromNode = nodesMap[link.from];
                 const toNode = nodesMap[link.to];
@@ -448,7 +491,6 @@
                     const x2 = (rB.left + rB.width / 2) - containerRect.left;
                     const y2 = (rB.top + rB.height / 2) - containerRect.top;
 
-                    // Malla continua de fondo, umbral ajustado
                     const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
                     if (distance < 165) {
                         const lineEl = document.createElementNS('http://www.w3.org/2000/svg', 'line');
@@ -459,7 +501,6 @@
                 }
             }
 
-            // GESTIÓN DE EVENTOS: EXPLOSIÓN DE CONSTELACIÓN
             networkElements.forEach(node => {
                 if(node.isSupernode) {
                     node.el.addEventListener('click', (e) => {
@@ -492,7 +533,6 @@
                 loopTime += 0.015;
                 const cRect = container.getBoundingClientRect();
 
-                // 1. Cinemática Eye Logo
                 const centRect = identityNode.getBoundingClientRect();
                 const centX = centRect.left + centRect.width / 2;
                 const centY = centRect.top + centRect.height / 2;
@@ -503,7 +543,6 @@
                 eyeY += ((Math.sin(angle) * eyeMoveRadius) - eyeY) * 0.15;
                 retinaEye.style.transform = `translate(${eyeX}px, ${eyeY}px)`;
 
-                // 2. Cálculo LERP (Materialización y Gravedad)
                 networkElements.forEach(node => {
                     const r = node.el.getBoundingClientRect();
                     const nX = r.left + r.width / 2 - node.currentX;
@@ -530,7 +569,6 @@
                             node.targetX = Math.cos(fAngle) * displacement * pushForce;
                             node.targetY = Math.sin(fAngle) * displacement * pushForce;
                             
-                            // Expansión kinestésica por hover
                             if(node.isSupernode) node.targetScale = 1.20;
                             else if(node.isFunctional) node.targetScale = 1.15;
                         } else {
@@ -542,7 +580,6 @@
                             node.targetScale = 1.0;
                         }
                     } else {
-                        // Colapso del nodo sobre el vértice de la red (Oculto)
                         node.targetOpacity = 0.0;
                         node.targetScale = 0.0;
                         node.el.style.pointerEvents = 'none';
@@ -559,7 +596,6 @@
                     node.el.style.opacity = node.currentOpacity;
                 });
 
-                // 3. Renderizado de Malla Constante
                 linesData.forEach(line => {
                     const fromRect = line.from.el.getBoundingClientRect();
                     const toRect = line.to.el.getBoundingClientRect();
@@ -571,11 +607,9 @@
                     line.el.setAttribute('x1', x1); line.el.setAttribute('y1', y1);
                     line.el.setAttribute('x2', x2); line.el.setAttribute('y2', y2);
 
-                    // La red SIEMPRE es visible a una opacidad mínima de 0.2 para mostrar estructura
                     const lineVisibility = Math.max(0.2, Math.min(line.from.currentOpacity, line.to.currentOpacity));
                     line.el.style.opacity = lineVisibility;
 
-                    // El axón se ilumina si ambos nodos están presentes y activos
                     if (lineVisibility > 0.5 && (line.from.el.classList.contains('near') || line.to.el.classList.contains('near'))) {
                         line.el.classList.add('active');
                     } else {
@@ -588,22 +622,17 @@
             requestAnimationFrame(runNeuralEngine);
         });
 
-        // ==========================================================================
-        // CONTROL DE PANELES DINÁMICOS OPUESTOS
-        // ==========================================================================
+        // PANELES
         function cargarContenidoPanel(target, event) {
             if (event) event.preventDefault();
             
             const panel = document.getElementById('universal-panel');
             const panelContainer = document.getElementById('panel-dynamic-content');
             
-            // Determinar origen del click para abrir panel en sentido opuesto
             panel.classList.remove('panel-right', 'panel-left');
             if (event && event.clientX < window.innerWidth / 2) {
-                // Click a la izquierda, el panel desliza desde la derecha
                 panel.classList.add('panel-right');
             } else {
-                // Click a la derecha, el panel desliza desde la izquierda
                 panel.classList.add('panel-left');
             }
 
