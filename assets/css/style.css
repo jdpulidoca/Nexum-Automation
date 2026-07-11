@@ -1,5 +1,4 @@
-
-        /* ==========================================================================
+/* ==========================================================================
            SISTEMA DE DISEÑO: SYNAPTIC HUD UI V8.19 (EXTENDED BOOT)
            ========================================================================== */
         :root {
@@ -219,6 +218,32 @@
         .panel-tabcontent { display: none; animation: fadeInEffect 0.3s ease; }
         @keyframes fadeInEffect { from { opacity: 0; } to { opacity: 1; } }
 
+        /* ==========================================================================
+           SELECTOR MINI-CONSTELACIÓN
+           Alternativa a .panel-tab para cuando se quiere el look de nodos del hub.
+           IMPORTANTE: los botones deben mantener la clase panel-tablinks (además de
+           mini-node) porque abrirPanelLinea() en main.js sigue buscando esa clase —
+           esto es solo una capa visual, no cambia el JS.
+           ========================================================================== */
+        .mini-constellation { position: relative; display: flex; justify-content: space-around; margin: 30px 6px 34px 6px; }
+        .mini-constellation::before {
+            content: ''; position: absolute; top: 32px; left: 12%; right: 12%; height: 2px;
+            background-image: repeating-linear-gradient(90deg, var(--axon-base) 0 6px, transparent 6px 14px);
+            animation: miniAxonFlow 1.2s linear infinite; z-index: 0;
+        }
+        @keyframes miniAxonFlow { to { background-position: -20px 0; } }
+        .mini-node {
+            position: relative; z-index: 1; width: 64px; height: 64px; border-radius: 50%;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+            background: var(--node-bg); border: 1px solid var(--border-node); backdrop-filter: blur(8px);
+            cursor: pointer; font-family: inherit; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+        }
+        .mini-node .mini-icon { font-size: 19px; }
+        .mini-node .mini-label { font-size: 8px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; color: var(--text-muted); }
+        .mini-node:hover:not(.active) { border-color: var(--text-muted); transform: scale(1.04); }
+        .mini-node.active { border-color: var(--nexum-cyan); box-shadow: 0 0 20px rgba(14, 165, 233, 0.55); transform: scale(1.08); }
+        .mini-node.active .mini-label { color: var(--nexum-cyan); }
+
         .nutrition-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; color: var(--text-main); }
         .nutrition-table th, .nutrition-table td { border: 1px solid var(--border-node); padding: 8px 12px; }
         .nutrition-table th { background: rgba(142, 142, 147, 0.05); font-weight: 700; }
@@ -229,6 +254,33 @@
         .ref-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; margin-right: 6px; text-transform: uppercase; }
 
         .footer-branding { position: absolute; bottom: 12px; width: 100%; text-align: center; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); opacity: 0.4; pointer-events: none; font-family: monospace; }
+
+        /* ==========================================================================
+           COMPONENTES HUD REUTILIZABLES PARA CONTENIDO DE PANELES
+           (usar en cualquier fragmento de content/*.html — no crear estilos nuevos por módulo)
+           ========================================================================== */
+
+        /* Subtítulo de sección dentro de un panel (ej. nombre de producto, nombre de sub-tema) */
+        .panel-subtitle { color: var(--nexum-blue); font-size: 18px; font-weight: 700; margin: 4px 0 10px 0; letter-spacing: 0.3px; }
+
+        /* Línea de metadatos tipo terminal, para colocar justo debajo de un .panel-title */
+        .panel-meta-strip {
+            font-family: monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+            color: var(--nexum-cyan); opacity: 0.65; text-align: center; margin: -8px 0 22px 0;
+        }
+
+        /* Marco tipo "target lock" para cualquier imagen dentro de un panel */
+        .hud-frame { position: relative; display: inline-block; padding: 10px; margin: 6px 0; }
+        .hud-frame img { display: block; border-radius: 2px; }
+        .hud-frame .corner { position: absolute; width: 14px; height: 14px; border: 2px solid var(--nexum-cyan); opacity: 0.75; }
+        .hud-frame .corner.tl { top: 0; left: 0; border-right: none; border-bottom: none; }
+        .hud-frame .corner.tr { top: 0; right: 0; border-left: none; border-bottom: none; }
+        .hud-frame .corner.bl { bottom: 0; left: 0; border-right: none; border-top: none; }
+        .hud-frame .corner.br { bottom: 0; right: 0; border-left: none; border-top: none; }
+        .hud-frame figcaption {
+            font-family: monospace; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+            color: var(--text-muted); text-align: center; margin-top: 8px; opacity: 0.7;
+        }
 /* =========================================
    ESTILOS PARA EL CONTENIDO DE LAS PESTAÑAS
    ========================================= */
