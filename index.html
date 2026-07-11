@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tu Proyecto de Nodos</title>
+    <!-- Enlazamos los estilos separados -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+ <div id="splash-screen">
+        <div id="splash-terminal">
+            <div id="term-line1" class="term-line"></div>
+            <div id="term-line2" class="term-line"></div>
+            <div id="term-line3" class="term-line"></div>
+        </div>
+        <div id="splash-logo-container">
+            <div id="splash-logo">
+                <svg viewBox="0 0 400 400" width="100%" height="100%">
+                    <polygon class="contorno-hexagono" points="200,60 321,130 321,270 200,340 79,270 79,130" />
+                    <g class="lineas-estructurales"><line x1="79" y1="185" x2="104" y2="185" /><line x1="79" y1="215" x2="104" y2="215" /><line x1="321" y1="185" x2="296" y2="185" /><line x1="321" y1="215" x2="296" y2="215" /></g>
+                    <polygon class="hexagono-punteado" points="200,110 285,159 285,241 200,290 115,241 115,159" />
+                    <circle class="circulo-mediano" cx="200" cy="200" r="65" />
+                    <g class="lineas-radiales"><line x1="143.7" y1="167.5" x2="105" y2="145" /><line x1="256.3" y1="167.5" x2="295" y2="145" /><line x1="143.7" y1="232.5" x2="105" y2="255" /><line x1="256.3" y1="232.5" x2="295" y2="255" /></g>
+                    <circle class="circulo-central-pequeno" cx="200" cy="200" r="30" />
+                    <g class="circulos-satelite"><circle cx="200" cy="164" r="6" /><circle cx="200" cy="236" r="6" /><circle cx="231.2" cy="182" r="6" /><circle cx="231.2" cy="218" r="6" /><circle cx="168.8" cy="218" r="6" /><circle cx="168.8" cy="182" r="6" /></g>
+                    <circle class="nucleo-relleno" cx="200" cy="200" r="15" />
+                    <g class="cruz-calada"><line x1="192" y1="200" x2="208" y2="200" /><line x1="200" y1="192" x2="200" y2="208" /></g>
+                </svg>
+            </div>
+            <div class="splash-typography">
+                <div class="splash-title">NEXUM</div>
+                <div class="splash-separator"><div class="sep-dot"></div><div class="sep-line"></div><div class="sep-square"></div></div>
+                <div class="splash-subtitle">AUTOMATION</div>
+                <div class="splash-tagline">ROBOTICS &middot; MECHATRONICS &middot; CONTROL SYSTEMS</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="theme-toggle">
+        <label><input type="checkbox" id="mode-checkbox"><div class="slider"><span>☀️</span><span>🌙</span></div></label>
+    </div>
+    <button class="hud-global-ref-btn" onclick="cargarContenidoPanel('bib-general', event)">[ ACCESS_ALL_REFERENCES ]</button>
+
+    <div class="neural-container" id="space-container">
+        
+        <div class="hud-sector-tag" style="top: 25px; left: 30px;">[ DEPT 01 // HUMAN CORE & METHODOLOGY ]</div>
+        <div class="hud-sector-tag" style="top: 25px; left: 420px;">[ DEPT 02 // COMMERCIAL STRATEGY ]</div>
+        <div class="hud-sector-tag" style="top: 25px; left: 690px;">[ DEPT 03 // ADVANCED ENGINEERING ]</div>
+
+        <svg class="synaptic-space" id="canvas-synapses"></svg>
+
+        <a href="#" id="n-center" class="node node-hub-identity sec-human" style="top: 240px; left: 200px;">
+            <div class="logo-pupil" id="retina-eye">
+                <svg viewBox="0 0 400 400" width="100%" height="100%">
+                    <polygon class="contorno-hexagono" points="200,60 321,130 321,270 200,340 79,270 79,130" />
+                    <g class="lineas-estructurales"><line x1="79" y1="185" x2="104" y2="185" /><line x1="79" y1="215" x2="104" y2="215" /><line x1="321" y1="185" x2="296" y2="185" /><line x1="321" y1="215" x2="296" y2="215" /></g>
+                    <polygon class="hexagono-punteado" points="200,110 285,159 285,241 200,290 115,241 115,159" />
+                    <circle class="circulo-mediano" cx="200" cy="200" r="65" />
+                    <g class="lineas-radiales"><line x1="143.7" y1="167.5" x2="105" y2="145" /><line x1="256.3" y1="167.5" x2="295" y2="145" /><line x1="143.7" y1="232.5" x2="105" y2="255" /><line x1="256.3" y1="232.5" x2="295" y2="255" /></g>
+                    <circle class="circulo-central-pequeno" cx="200" cy="200" r="30" />
+                    <g class="circulos-satelite"><circle cx="200" cy="164" r="6" /><circle cx="200" cy="236" r="6" /><circle cx="231.2" cy="182" r="6" /><circle cx="231.2" cy="218" r="6" /><circle cx="168.8" cy="218" r="6" /><circle cx="168.8" cy="182" r="6" /></g>
+                    <circle class="nucleo-relleno" cx="200" cy="200" r="15" />
+                    <g class="cruz-calada"><line x1="192" y1="200" x2="208" y2="200" /><line x1="200" y1="192" x2="200" y2="208" /></g>
+                </svg>
+            </div>
+            <span class="node-label" style="opacity: 1;">Equipo Consultor</span>
+        </a>
+        <a href="#" id="n-contexto" class="node node-primary sec-human" style="top: 110px; left: 110px;" onclick="cargarContenidoPanel('contexto', event)">
+            <span class="node-icon">🏭</span><span class="node-label">Contexto Operativo</span>
+        </a>
+        <a href="web/resumen.html" id="n-resumen" class="node node-support sec-human" style="top: 260px; left: 40px;">
+            <span class="node-icon">📋</span><span class="node-label">Resumen Ejecutivo</span>
+        </a>
+        <a href="web/reflexiones.html" id="n-reflexiones" class="node node-primary sec-human" style="top: 390px; left: 150px;">
+            <span class="node-icon">🧠</span><span class="node-label">Reflexiones Académicas</span>
+        </a>
+        <a href="#" id="bib-sector1" class="node node-satellite sec-human" style="top: 420px; left: 280px;" onclick="cargarContenidoPanel('bib1', event)">
+            <span class="node-icon">📚₁</span><span class="node-label">Refs: Contexto</span>
+        </a>
+
+        <a href="#" id="n-propuesta" class="node node-hub-commercial sec-commercial" style="top: 130px; left: 430px;">
+            <span class="node-icon">🎯</span><span class="node-label" style="opacity: 1;">Propuesta Comercial</span>
+        </a>
+        <a href="web/viabilidad.html" id="n-economia" class="node node-primary sec-commercial" style="top: 290px; left: 360px;">
+            <span class="node-icon">💰</span><span class="node-label">Viabilidad Económica</span>
+        </a>
+        <a href="web/isa95.html" id="n-isa" class="node node-primary sec-commercial" style="top: 290px; left: 520px;">
+            <span class="node-icon">🏛️</span><span class="node-label">Arquitectura ISA-95</span>
+        </a>
+        <a href="web/gestion.html" id="n-gestion" class="node node-support sec-commercial" style="top: 430px; left: 450px;">
+            <span class="node-icon">📈</span><span class="node-label">Gestión de Producción</span>
+        </a>
+        <a href="#" id="bib-sector2" class="node node-satellite sec-commercial" style="top: 60px; left: 580px;" onclick="cargarContenidoPanel('bib2', event)">
+            <span class="node-icon">📚₂</span><span class="node-label">Refs: Estrategia</span>
+        </a>
+
+        <a href="#" id="n-digital" class="node node-hub-tech sec-tech" style="top: 280px; left: 740px;">
+            <span class="node-icon">🌐</span><span class="node-label" style="opacity: 1;">Digital Twin & SCADA</span>
+        </a>
+        <a href="web/controladores.html" id="n-plc" class="node node-primary sec-tech" style="top: 140px; left: 790px;">
+            <span class="node-icon">💻</span><span class="node-label">Controladores PLC</span>
+        </a>
+        <a href="web/celda.html" id="n-celda" class="node node-primary sec-tech" style="top: 290px; left: 880px;">
+            <span class="node-icon">🤖</span><span class="node-label">Celda Robotizada</span>
+        </a>
+        <a href="#" id="bib-sector3" class="node node-satellite sec-tech" style="top: 440px; left: 780px;" onclick="cargarContenidoPanel('bib3', event)">
+            <span class="node-icon">📚₃</span><span class="node-label">Refs: Ingeniería</span>
+        </a>
+
+        <div class="node-aesthetic syn-large" style="top: 120px; left: 340px;"></div>
+        <div class="node-aesthetic syn-medium" style="top: 220px; left: 320px;"></div>
+        <div class="node-aesthetic syn-small" style="top: 360px; left: 260px;"></div>
+        <div class="node-aesthetic syn-large" style="top: 180px; left: 650px;"></div>
+        <div class="node-aesthetic syn-medium" style="top: 380px; left: 620px;"></div>
+        <div class="node-aesthetic syn-small" style="top: 480px; left: 590px;"></div>
+        <div class="node-aesthetic syn-large" style="top: 240px; left: 710px;"></div>
+        <div class="node-aesthetic syn-medium" style="top: 100px; left: 900px;"></div>
+        <div class="node-aesthetic syn-small" style="top: 400px; left: 900px;"></div>
+
+    </div>
+
+    <div id="universal-panel" class="info-panel panel-right">
+        <button class="close-panel-btn" onclick="cerrarPanel()">&times;</button>
+        <div id="panel-dynamic-content"></div>
+    </div>
+
+    <div class="footer-branding">Nexum Core // Synaptic Constellation V8 // Universidad Nacional de Colombia</div>
+
+
+    <!-- Enlazamos la lógica separada al final del body -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

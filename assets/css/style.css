@@ -1,283 +1,230 @@
-/* =========================================
-   ESTILOS BASE - NEXUM AUTOMATION
-   Paleta: Azul #3F51B5 | Gris #757575
-========================================= */
-body { 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    margin: 0; 
-    background-color: #f4f7f6; /* Fondo claro general */
-    color: #333; /* Texto principal oscuro */
-}
 
-/* Header - Limpio y profesional sobre blanco */
-header { 
-    background: #ffffff; 
-    color: #333; 
-    padding: 20px 0; /* Un relleno más sutil para centrar el logo */
-    text-align: center; 
-    border-bottom: #3F51B5 4px solid; /* Borde azul corporativo */
-}
-header img {
-    max-height: 500px; /* Aumentamos sustancialmente de 150px a 250px */
-    width: auto; /* Mantenemos la proporción */ 
-}
-h1 { margin: 10px 0 0; text-transform: uppercase; letter-spacing: 2px; color: #333; }
-.subtitle { color: #757575; margin-top: 5px; font-weight: bold; }
+        /* ==========================================================================
+           SISTEMA DE DISEÑO: SYNAPTIC HUD UI V8.19 (EXTENDED BOOT)
+           ========================================================================== */
+        :root {
+            --nexum-blue: #3A52B3;
+            --nexum-cyan: #0EA5E9;
+            --nexum-amber: #F59E0B;
+            --nexum-purple: #8B5CF6;
+            --nexum-gray: #8E8E93;
+            --bg-gradient: radial-gradient(circle at 50% 50%, #FFFFFF 0%, #F1F5F9 100%);
+            --node-bg: rgba(255, 255, 255, 0.9);       
+            --text-main: #0F172A;     
+            --text-muted: #64748B;    
+            --axon-base: rgba(58, 82, 179, 0.15);
+            --axon-active: rgba(58, 82, 179, 0.7);
+            --panel-bg: rgba(255, 255, 255, 0.95);
+            
+            --shadow-identity: 0 16px 32px -10px rgba(58, 82, 179, 0.3), inset 0 1px 2px #FFF;
+            --shadow-commercial: 0 16px 32px -10px rgba(245, 158, 11, 0.25);
+            --shadow-tech: 0 16px 32px -10px rgba(139, 92, 246, 0.25);
+            --shadow-node: 0 4px 14px -4px rgba(15, 23, 42, 0.1), 0 2px 4px -2px rgba(58, 82, 179, 0.05);
+            --border-node: rgba(142, 142, 147, 0.2);
+        }
 
-/* Acentos y resaltados en Azul corporativo */
-.highlight { color: #3F51B5; font-weight: bold; }
+        [data-theme="dark"] {
+            --bg-gradient: radial-gradient(circle at 50% 50%, #0B0F19 0%, #020408 100%);
+            --node-bg: rgba(30, 41, 59, 0.85);       
+            --text-main: #F8FAFC;     
+            --text-muted: #94A3B8;    
+            --axon-base: rgba(255, 255, 255, 0.08);
+            --axon-active: rgba(14, 165, 233, 0.65);
+            --panel-bg: rgba(15, 23, 42, 0.96);
+            
+            --shadow-identity: 0 0 30px rgba(58, 82, 179, 0.4), inset 0 1px 1px rgba(255,255,255,0.1);
+            --shadow-commercial: 0 0 30px rgba(245, 158, 11, 0.3);
+            --shadow-tech: 0 0 30px rgba(139, 92, 246, 0.3);
+            --shadow-node: 0 8px 16px -6px rgba(0, 0, 0, 0.6);
+            --border-node: rgba(255, 255, 255, 0.15);
+        }
 
-/* Contenedor principal tipo "Hoja de papel" */
-.container { 
-    width: 90%; 
-    max-width: 1200px; 
-    margin: 30px auto; 
-    background: #ffffff;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-}
+        body {
+            margin: 0; padding: 0; height: 100vh;
+            background: var(--bg-gradient);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            overflow: hidden; color: var(--text-main);
+            display: flex; justify-content: center; align-items: center;
+            transition: background 0.5s ease;
+            user-select: none;
+        }
 
-/* Títulos de sección */
-main h2 { color: #333; border-bottom: 2px solid #eee; padding-bottom: 10px;}
-main h3 { color: #757575; margin-top: 25px;}
+        /* ==========================================================================
+           CORTINILLA DE ARRANQUE VISUAL (CAPA INDEPENDIENTE Z-INDEX 99999)
+           ========================================================================== */
+        #splash-screen {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: var(--bg-gradient);
+            z-index: 99999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #splash-terminal {
+            font-family: 'Courier New', Courier, monospace; color: var(--nexum-cyan); 
+            font-size: 15px; letter-spacing: 1.5px; width: 520px; text-align: left; transition: opacity 0.5s ease;
+        }
+        .term-line { margin-bottom: 10px; min-height: 22px; font-weight: 600; text-transform: uppercase; }
+        .term-success { color: #4ADE80; font-weight: bold; }
+        .cursor-blink::after { content: '█'; animation: splashBlink 1s step-end infinite; margin-left: 6px; color: var(--nexum-cyan); }
 
-/* =========================================
-   NUEVA BARRA DE NAVEGACIÓN (DESPLEGABLE)
-   Ajuste de color: Azul sobre Gris Oscuro
-========================================= */
-.navbar {
-    background-color: #1a1a1a; /* Fondo oscuro profesional */
-    border-bottom: 3px solid #3F51B5; /* Línea azul corporativa */
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
+        #splash-logo-container {
+            display: none; opacity: 0; flex-direction: row; align-items: center; gap: 45px; transition: opacity 1s ease-in;
+        }
+        #splash-logo { width: 150px; height: 150px; animation: pulseSplash 3s infinite ease-in-out; }
+        .splash-typography { display: flex; flex-direction: column; text-align: left; }
+        .splash-title { font-size: 58px; font-weight: 300; letter-spacing: 14px; color: var(--nexum-blue); line-height: 1; margin-bottom: 5px; margin-left: 8px; }
+        .splash-separator { display: flex; align-items: center; width: 100%; margin: 8px 0; }
+        .sep-dot { width: 6px; height: 6px; background: var(--nexum-cyan); border-radius: 50%; }
+        .sep-line { flex-grow: 1; height: 1px; background: linear-gradient(90deg, var(--nexum-cyan), var(--nexum-purple)); margin: 0 10px; opacity: 0.6; }
+        .sep-square { width: 5px; height: 5px; background: var(--nexum-purple); }
+        .splash-subtitle { font-size: 22px; font-weight: 400; letter-spacing: 17px; color: var(--text-muted); margin-bottom: 20px; margin-left: 8px; }
+        .splash-tagline { font-size: 10px; font-weight: 600; letter-spacing: 3.5px; color: var(--nexum-blue); opacity: 0.6; margin-left: 8px; }
 
-.nav-container {
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
-    display: flex;
-    justify-content: flex-start;
-}
+        @keyframes pulseSplash { 0% { transform: scale(0.98); filter: drop-shadow(0 0 15px rgba(58, 82, 179, 0.2)); } 50% { transform: scale(1.02); filter: drop-shadow(0 0 25px rgba(58, 82, 179, 0.5)); } 100% { transform: scale(0.98); filter: drop-shadow(0 0 15px rgba(58, 82, 179, 0.2)); } }
+        @keyframes splashBlink { 50% { opacity: 0; } }
 
-/* Enlaces principales en blanco con hover azul */
-.nav-link, .dropbtn {
-    background-color: inherit;
-    color: #ffffff; /* Texto en blanco sobre oscuro */
-    padding: 16px 24px;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-}
+        /* LIENZO DE INTERACCIÓN CENTRAL */
+        .neural-container {
+            position: relative; width: 960px; height: 560px; margin: auto;
+            opacity: 0; transition: opacity 1.5s ease 0.5s;
+        }
+        .neural-container.loaded { opacity: 1; }
 
-/* Efecto hover: Cambia a Azul corporativo */
-.nav-link:hover, .dropdown:hover .dropbtn {
-    background-color: #3F51B5; /* Fondo azul al pasar mouse */
-    color: #ffffff;
-}
+        /* MARCAS DE FONDO */
+        .hud-sector-tag {
+            position: absolute; font-family: monospace; font-size: 11px; font-weight: 700;
+            letter-spacing: 3px; color: var(--text-muted); opacity: 0.15;
+            pointer-events: none; text-transform: uppercase;
+        }
 
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
+        /* CAPA DE CONEXIONES */
+        .synaptic-space { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+        .axon-path {
+            fill: none; stroke: var(--axon-base); stroke-width: 1.2;
+            transition: stroke 0.3s, stroke-width 0.3s, filter 0.3s;
+        }
+        .axon-path.backbone-link { stroke-dasharray: 6, 12; animation: dataStreamFlux 1.5s linear infinite; stroke-width: 1.5; }
+        @keyframes dataStreamFlux { to { stroke-dashoffset: -18; } }
+        .axon-path.active { stroke: var(--axon-active); stroke-width: 2.2px; filter: drop-shadow(0 0 4px var(--axon-active)); }
 
-/* Cuadro blanco del desplegable */
-.dropdown-content {
-    display: none; 
-    position: absolute;
-    background-color: #ffffff;
-    min-width: 270px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 10; 
-    border-radius: 0 0 5px 5px;
-    border-top: 3px solid #3F51B5; /* Línea azul corporativa superior */
-}
+        /* NODOS */
+        .node {
+            position: absolute; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            text-decoration: none; z-index: 10; cursor: pointer;
+            background: var(--node-bg); box-shadow: var(--shadow-node);
+            border: 1px solid var(--border-node);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+            will-change: transform, opacity;
+        }
 
-/* Enlaces internos en gris con hover azul */
-.dropdown-content a {
-    color: #757575; /* Texto gris secundario */
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    border-bottom: 1px solid #eee;
-    font-size: 15px;
-}
+        /* JERARQUÍAS */
+        .node-hub-identity { width: 105px; height: 105px; box-shadow: var(--shadow-identity); border-color: rgba(58, 82, 179, 0.4); }
+        .node-hub-commercial { width: 105px; height: 105px; box-shadow: var(--shadow-commercial); border-color: rgba(245, 158, 11, 0.4); }
+        .node-hub-tech { width: 105px; height: 105px; box-shadow: var(--shadow-tech); border-color: rgba(139, 92, 246, 0.4); }
+        .node-primary { width: 80px; height: 80px; }
+        .node-support { width: 68px; height: 68px; }
+        .node-satellite { width: 54px; height: 54px; border-style: dashed; }
 
-.dropdown-content a:last-child { border-bottom: none; }
+        .node-hub-identity.near, .node-hub-identity.selected-hub { box-shadow: 0 0 35px rgba(14, 165, 233, 0.6), var(--shadow-identity); border-color: var(--nexum-cyan); }
+        .node-hub-commercial.near, .node-hub-commercial.selected-hub { box-shadow: 0 0 35px rgba(245, 158, 11, 0.6), var(--shadow-commercial); border-color: var(--nexum-amber); }
+        .node-hub-tech.near, .node-hub-tech.selected-hub { box-shadow: 0 0 35px rgba(139, 92, 246, 0.6), var(--shadow-tech); border-color: var(--nexum-purple); }
 
-/* Efecto hover dentro del desplegable: Texto Azul corporativo */
-.dropdown-content a:hover { 
-    background-color: #f4f7f6; 
-    color: #3F51B5; 
-    font-weight: bold; 
-}
+        .node-icon { font-size: 19px; transition: transform 0.3s; z-index: 2; }
+        .node-primary .node-icon { font-size: 21px; }
+        .node-hub-identity .node-icon, .node-hub-commercial .node-icon, .node-hub-tech .node-icon { font-size: 26px; }
+        .node-satellite .node-icon { font-size: 15px; opacity: 0.8; }
 
-.dropdown:hover .dropdown-content { display: block; }
+        /* LOGO INTERACTIVO VECTORIAL KINÉTICO (Ojo central del HUD) */
+        .logo-pupil { width: 66px; height: 66px; display: flex; justify-content: center; align-items: center; z-index: 2; will-change: transform; }
+        .contorno-hexagono { fill: none; stroke: var(--nexum-blue); stroke-width: 10; stroke-linejoin: round; }
+        .lineas-estructurales { fill: none; stroke: var(--nexum-blue); stroke-width: 10; }
+        .hexagono-punteado { fill: none; stroke: var(--nexum-gray); stroke-width: 5; stroke-dasharray: 8, 8; opacity: 0.6; }
+        .circulo-mediano { fill: none; stroke: var(--nexum-blue); stroke-width: 8; }
+        .lineas-radiales { fill: none; stroke: var(--nexum-blue); stroke-width: 7; }
+        .circulo-central-pequeno { fill: none; stroke: var(--nexum-blue); stroke-width: 5; }
+        .circulos-satelite { fill: var(--nexum-blue); }
+        .nucleo-relleno { fill: var(--nexum-blue); }
+        .cruz-calada { fill: none; stroke: rgba(255,255,255,0.9); stroke-width: 3.5; }
+        [data-theme="dark"] .cruz-calada { stroke: #1E293F; }
 
-/* =========================================
-   ELEMENTOS DE DISEÑO INTERNOS
-========================================= */
-/* Tarjetas de Productos */
-.product-grid { display: flex; gap: 20px; margin-top: 20px; flex-wrap: wrap; }
-.product-card { 
-    background: #f9f9f9; /* Fondo de tarjeta suave */
-    border-top: 4px solid #3F51B5; /* Borde azul corporativo superior */
-    border-radius: 5px; 
-    padding: 20px; 
-    flex: 1; 
-    min-width: 250px; 
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
-}
-.product-card h3 { margin-top: 0; color: #3F51B5; border-bottom: 1px solid #ddd; padding-bottom: 10px;}
-.product-card p { color: #757575; }
+        /* NODOS ESTÉTICOS */
+        .node-aesthetic {
+            position: absolute; border-radius: 50%; background: var(--nexum-blue); opacity: 0.3;
+            pointer-events: none; z-index: 5; transition: opacity 0.3s, transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+        }
+        .node-aesthetic.active { opacity: 0.8; transform: scale(1.5); background-color: var(--axon-active); box-shadow: 0 0 10px var(--axon-active); }
+        .syn-large { width: 8px; height: 8px; }
+        .syn-medium { width: 6px; height: 6px; }
+        .syn-small { width: 4px; height: 4px; }
 
-/* Alertas y Mensajes - Se mantienen para visibilidad, pero con texto de acento azul */
-.alert-box { 
-    background: #fff3cd; 
-    padding: 15px; 
-    border-left: 5px solid #ffecb5; 
-    margin-top: 20px; 
-    color: #856404; /* Color de texto de alerta estándar */
-}
-.alert-box strong { color: #3F51B5; } /* Resaltado fuerte dentro de alerta en azul */
+        /* TEXTOS INTELIGENTES HUD */
+        .node-label {
+            position: absolute; bottom: -24px; font-size: 9px; font-weight: 700; color: var(--text-muted);
+            text-transform: uppercase; letter-spacing: 1.2px; white-space: nowrap; pointer-events: none;
+            opacity: 0; transform: translateY(0); transition: opacity 0.3s, transform 0.3s, color 0.3s;
+        }
+        .node.near .node-label, .node:hover .node-label { opacity: 1; transform: translateY(2px); }
+        .sec-human.near .node-label, .sec-human:hover .node-label { color: var(--nexum-cyan); }
+        .sec-commercial.near .node-label, .sec-commercial:hover .node-label { color: var(--nexum-amber); }
+        .sec-tech.near .node-label, .sec-tech:hover .node-label { color: var(--nexum-purple); }
 
-/* Botón de descarga elegante en azul corporativo */
-.download-btn {
-    display: inline-block;
-    background-color: #3F51B5;
-    color: #ffffff;
-    padding: 15px 30px;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: background-color 0.3s, transform 0.1s;
-}
-.download-btn:hover {
-    background-color: #2c3e50; /* Un azul más oscuro al hover */
-    transform: translateY(-2px);
-}
-.download-btn:active {
-    transform: translateY(0);
-}
+        /* INTERRUPTORES Y BOTONES GLOBALES */
+        .theme-toggle { position: absolute; top: 20px; right: 20px; z-index: 100; }
+        .theme-toggle input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: relative; display: inline-block; width: 48px; height: 24px;
+            background-color: #CBD5E1; border-radius: 20px; cursor: pointer; transition: 0.4s;
+            display: flex; align-items: center; justify-content: space-between; padding: 0 4px; box-sizing: border-box;
+        }
+        .slider:before {
+            position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px;
+            background-color: white; border-radius: 50%; transition: 0.4s;
+        }
+        input:checked + .slider { background-color: var(--nexum-blue); }
+        input:checked + .slider:before { transform: translateX(24px); }
 
-/* Pie de página */
-footer { 
-    text-align: center; 
-    padding: 20px; 
-    margin-top: 40px; 
-    background: #1a1a1a; 
-    color: #b0b0b0; 
-    border-top: 3px solid #3F51B5; /* Línea azul corporativa superior */
-}
+        .hud-global-ref-btn {
+            position: absolute; bottom: 15px; left: 15px; z-index: 100;
+            background: transparent; border: 1px dashed var(--text-muted); color: var(--text-muted);
+            font-family: monospace; font-size: 10px; padding: 6px 12px; border-radius: 4px; cursor: pointer; letter-spacing: 1px; transition: all 0.3s;
+        }
+        .hud-global-ref-btn:hover { border-color: var(--text-main); color: var(--text-main); box-shadow: 0 0 10px rgba(142, 142, 147, 0.2); }
 
-/* =========================================
-   SISTEMA DE PESTAÑAS (TABS)
-========================================= */
-.tab { 
-    overflow: hidden; 
-    border-bottom: 3px solid #3F51B5; 
-    margin-top: 30px;
-    display: flex; 
-    gap: 5px; 
-}
-.tab button { 
-    background-color: #e0e0e0; 
-    border: none; 
-    outline: none; 
-    cursor: pointer; 
-    padding: 14px 24px; 
-    transition: 0.3s; 
-    font-size: 16px; 
-    font-weight: bold; 
-    color: #757575; 
-    border-radius: 8px 8px 0 0; 
-}
-.tab button:hover { background-color: #d5d5d5; color: #333; }
-.tab button.active { background-color: #3F51B5; color: white; }
-
-.tabcontent { 
-    display: none; 
-    padding: 30px 20px; 
-    border: 1px solid #eee; 
-    border-top: none; 
-    background: #ffffff; 
-    border-radius: 0 0 8px 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-    animation: fadeEffect 0.5s; 
-}
-
-@keyframes fadeEffect { from {opacity: 0;} to {opacity: 1;} }
-
-.docs-section {
-    background: #f4f7f6;
-    border-left: 5px solid #3F51B5;
-    padding: 20px;
-    border-radius: 4px;
-    margin: 20px 0;
-}
-
-/* =========================================
-   ESTILOS PARA AMPLIAR IMÁGENES (LIGHTBOX CON ZOOM)
-========================================= */
+        /* ==========================================================================
+           PANELES DESLIZANTES INTELIGENTES
+           ========================================================================== */
+        .info-panel {
+            position: fixed; top: 0; width: 100%; max-width: 500px; height: 100vh;
+            background: var(--panel-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            z-index: 2000; overflow-y: auto; padding: 40px 30px; box-sizing: border-box;
+            transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s;
+            opacity: 0;
+        }
+        .info-panel.panel-right { right: 0; transform: translateX(100%); border-left: 1px solid var(--border-node); box-shadow: -10px 0 40px rgba(0,0,0,0.15); }
+        .info-panel.panel-left { left: 0; transform: translateX(-100%); border-right: 1px solid var(--border-node); box-shadow: 10px 0 40px rgba(0,0,0,0.15); }
+        .info-panel.open { transform: translateX(0); opacity: 1; }
         
-/* Contenedor oscuro que cubre toda la pantalla */
-.lightbox {
-    display: none; /* Oculto por defecto */
-    position: fixed;
-    z-index: 9999; /* Por encima de todo */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.85); /* Fondo oscuro transparente */
-    text-align: center;
-    opacity: 0;
-    transition: opacity 0.3s ease; /* Efecto suave de aparición */
-}
+        .close-panel-btn { position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 30px; cursor: pointer; color: var(--text-muted); }
+        .panel-left .close-panel-btn { right: auto; left: 20px; }
 
-/* La imagen grande que flota en el centro */
-.lightbox img {
-    max-width: 90%;
-    max-height: 80%;
-    margin-top: 5%; /* Espacio arriba para el botón cerrar */
-    border: 4px solid #ffffff;
-    border-radius: 4px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    
-    /* --- AQUÍ ESTÁ EL CÓDIGO NUEVO PARA EL EFECTO LUPA --- */
-    transition: transform 0.1s ease-out; /* Movimiento fluido */
-    cursor: crosshair; /* Cambia el cursor a una mirilla de precisión */
-    transform-origin: center center; /* Punto de inicio del zoom */
-}
+        .panel-title { color: var(--nexum-blue); font-size: 22px; margin-bottom: 15px; margin-top: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .panel-text { text-align: justify; line-height: 1.6; color: var(--text-muted); font-size: 14px; margin-bottom: 14px; }
+        
+        .panel-tab { display: flex; gap: 6px; border-bottom: 1px solid var(--border-node); padding-bottom: 8px; margin: 25px 0 15px 0; }
+        .panel-tablinks { background-color: transparent; border: 1px solid transparent; color: var(--text-muted); padding: 6px 14px; cursor: pointer; font-size: 12px; font-weight: 700; border-radius: 20px; transition: all 0.2s; }
+        .panel-tablinks.active { background-color: var(--nexum-blue); color: #FFFFFF; }
+        .panel-tabcontent { display: none; animation: fadeInEffect 0.3s ease; }
+        @keyframes fadeInEffect { from { opacity: 0; } to { opacity: 1; } }
 
-/* Cuando pasamos el mouse sobre la imagen en el lightbox (LUPA) */
-.lightbox img:hover {
-    transform: scale(2.5); /* 2.5 indica qué tan masivo es el zoom */
-}
+        .nutrition-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; color: var(--text-main); }
+        .nutrition-table th, .nutrition-table td { border: 1px solid var(--border-node); padding: 8px 12px; }
+        .nutrition-table th { background: rgba(142, 142, 147, 0.05); font-weight: 700; }
+        
+        .ref-list { list-style: none; padding: 0; margin: 0; }
+        .ref-item { padding: 12px 0; border-bottom: 1px dashed var(--border-node); font-size: 13px; line-height: 1.5; color: var(--text-muted); }
+        .ref-item strong { color: var(--text-main); }
+        .ref-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; margin-right: 6px; text-transform: uppercase; }
 
-/* Botón "X" para cerrar el lightbox */
-.close-lightbox {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 40px;
-    font-weight: bold;
-    color: #ffffff;
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.close-lightbox:hover {
-    color: #ff5252; /* Color de advertencia al pasar el mouse */
-}
-
-/* --- El "TRUCO" CSS --- */
-/* Cuando el ID de la URL (#monster_vsm) coincide con el ID de un elemento (.lightbox#monster_vsm) */
-.lightbox:target {
-    display: block; /* Lo mostramos */
-    opacity: 1; /* Le damos visibilidad */
-}
+        .footer-branding { position: absolute; bottom: 12px; width: 100%; text-align: center; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); opacity: 0.4; pointer-events: none; font-family: monospace; }
