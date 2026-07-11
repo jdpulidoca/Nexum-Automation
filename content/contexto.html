@@ -1,20 +1,105 @@
 <!-- Archivo: content/contexto.html -->
-<div class="contenido-interno">
-    <h2>Contexto Operativo</h2>
-    <p>Aquí puedes editar todo el texto que quieras, agregar saltos de línea o cambiar cosas con total libertad y sin miedo a romper el JavaScript del index principal.</p>
+<div class="panel-header">
+    <h2 style="text-align: center; color: #3F51B5;">Contexto Operativo: Coca-Cola FEMSA</h2>
+</div>
+
+<!-- Bloque Introductorio -->
+<div style="display: flex; flex-wrap: wrap; gap: 30px; align-items: center; margin: 20px 0;">
+    <div style="flex: 3; min-width: 300px; text-align: justify; line-height: 1.6;">
+        <p style="margin-top: 0;">La presente página ha sido desarrollada como parte del proyecto integrador de la asignatura Automatización de Procesos de Manufactura de la Universidad Nacional de Colombia, correspondiente al periodo académico 2026, con el propósito de exponer la evaluación operativa y la propuesta de automatización de tres líneas de producción de Coca-Cola FEMSA, correspondientes a los productos Monster, Quatro y Agua Brisa.</p>
+        <p>La propuesta se fundamenta en la información recopilada durante la visita técnica a la planta, donde se analizaron los procesos productivos y sus condiciones actuales. En este contexto, se plantea la creación de Nexum Automation, una empresa consultora académica conformada por seis estudiantes de ingeniería, encargada de desarrollar y estructurar la propuesta de mejora.</p>
+        <p style="margin-bottom: 0;">A partir del análisis realizado, se identifican oportunidades en la distribución de planta, eficiencia operativa y condiciones ergonómicas, con base en ello, se proponen soluciones orientadas a la optimización del flujo productivo y la implementación de tecnologías de automatización, con el objetivo de incrementar la productividad, reducir tiempos de ciclo y mejorar la seguridad en las operaciones, en concordancia con los principios de manufactura moderna e Industria 4.0.</p>
+    </div>
+
+    <div style="flex: 1; min-width: 200px; text-align: center;">
+        <img src="assets/img/Planta_cocacola.png" alt="Planta de producción Coca-Cola FEMSA" style="width: 100%; max-width: 350px; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+    </div>
+</div>
+
+<p style="text-align: center; font-weight: bold; font-size: 18px; color: #333; margin-top: 30px; margin-bottom: 20px;">
+    A continuación, se presentan los productos sobre los cuales enfocamos nuestra propuesta de automatización:
+</p>
+
+<!-- Contenedor del Sistema de Pestañas (Controlado por main.js) -->
+<div class="tabs-container">
     
-    <!-- Incluso puedes usar el sistema de pestañas que discutimos -->
-    <div class="tabs-container">
-        <div class="panel-tab">
-            <button class="panel-tablinks active" data-target="tab1">Tema A</button>
-            <button class="panel-tablinks" data-target="tab2">Tema B</button>
-        </div>
-        
-        <div id="tab1" class="panel-tabcontent active" style="display: block;">
-            <p>Información del Tema A.</p>
-        </div>
-        <div id="tab2" class="panel-tabcontent" style="display: none;">
-            <p>Información del Tema B.</p>
+    
+    <!-- Navegación de Pestañas -->
+    <div class="panel-tab">
+        <button class="panel-tablinks active" onclick="abrirPanelLinea(event, 'tab-monster')">Línea: Monster</button>
+        <button class="panel-tablinks" onclick="abrirPanelLinea(event, 'tab-quatro')">Línea: Quatro</button>
+        <button class="panel-tablinks" onclick="abrirPanelLinea(event, 'tab-brisa')">Línea: Agua Brisa</button>
+    </div>
+
+    <!-- Pestaña 1: Monster -->
+    <div id="tab-monster" class="panel-tabcontent active" style="display: block;">
+        <div class="tab-horizontal-layout">
+            <div class="tab-image-container">
+                <img src="assets/img/lataMonster.png" alt="Lata Monster Energy">
+            </div>
+            <div class="tab-info-container">
+                <h3 style="margin-top: 0; color: #3F51B5; font-size: 24px;">🔋 Monster Energy</h3>
+                <p style="color: #757575;"><strong>Formato:</strong> Lata 473ml</p>
+                <p>Línea de alta rentabilidad por litro, con requerimientos críticos en la mezcla de jarabes.</p>
+                
+                <table class="nutrition-table">
+                    <tr><th colspan="2" class="thick-border">Información Nutricional<br><span style="font-size: 12px; font-weight: normal;">Cada: 100 ml </span></th></tr>
+                    <tr><td><strong>Calorías</strong></td><td style="text-align: right;">47 kcal</td></tr>
+                    <tr><td><strong>Grasa Total</strong></td><td style="text-align: right;">0 g</td></tr>
+                    <tr><td><strong>Carbohidratos Totales</strong></td><td style="text-align: right;">12 g</td></tr>
+                    <tr><td class="indent">Azúcares Totales</td><td style="text-align: right;">12 g</td></tr>
+                    <tr><td class="indent">Azúcares Añadidos</td><td style="text-align: right;">13 g</td></tr>
+                    <tr class="thick-border"><td><strong>Otros</strong></td><td style="text-align: right;"></td></tr>
+                    <tr><td>Riboflavina</td><td style="text-align: right;">0.72 mg</td></tr>
+                    <tr><td>Niacina </td><td style="text-align: right;">8.5 mg</td></tr>
+                    <tr><td>Vitamina B6 </td><td style="text-align: right;">0.85 mg</td></tr>
+                    <tr><td>Vitamina B12</td><td style="text-align: right;">2.5 µg</td></tr>
+                </table>
+            </div>
         </div>
     </div>
+
+    <!-- Pestaña 2: Quatro -->
+    <div id="tab-quatro" class="panel-tabcontent" style="display: none;">
+        <div class="tab-horizontal-layout">
+            <div class="tab-image-container">
+                <img src="assets/img/botellaQuatro.jpg" alt="Botella Quatro PET">
+            </div>
+            <div class="tab-info-container">
+                <h3 style="margin-top: 0; color: #3F51B5; font-size: 24px;">🥤 Gaseosa Quatro</h3>
+                <p style="color: #757575;"><strong>Formato:</strong> PET 1.5 Litros</p>
+                <p>Línea de volumen masivo continua. Presenta integración del soplado de preformas en sitio. El costo del azúcar es el principal driver que impacta el OPEX de esta operación.</p>
+                
+                <table class="nutrition-table">
+                    <tr><th colspan="2" class="thick-border">Información Nutricional<br><span style="font-size: 12px; font-weight: normal;">Cada: 100 ml </span></th></tr>
+                    <tr><td><strong>Calorías</strong></td><td style="text-align: right;">20 kcal</td></tr>
+                    <tr><td><strong>Grasa Total</strong></td><td style="text-align: right;">0 g</td></tr>
+                    <tr><td><strong>Sodio</strong></td><td style="text-align: right;">26 mg</td></tr>
+                    <tr><td><strong>Carbohidratos Totales</strong></td><td style="text-align: right;">4.9 g</td></tr>
+                    <tr><td class="indent">Azúcares Totales</td><td style="text-align: right;">4.9 g</td></tr>
+                    <tr class="thick-border"><td class="indent">Azúcares Añadidos</td><td style="text-align: right;">4.9 g</td></tr>
+                    <tr><td><strong>Proteínas</strong></td><td style="text-align: right;">0 g</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pestaña 3: Agua Brisa -->
+    <div id="tab-brisa" class="panel-tabcontent" style="display: none;">
+        <div class="tab-horizontal-layout">
+            <div class="tab-image-container">
+                <img src="assets/img/garrafonBrissa.png" alt="Garrafón Agua Brisa">
+            </div>
+            <div class="tab-info-container">
+                <h3 style="margin-top: 0; color: #3F51B5; font-size: 24px;">💧 Agua Brisa</h3>
+                <p style="color: #757575;"><strong>Formato:</strong> Garrafón 20 Litros</p>
+                <p>Línea de alto peso volumétrico. Presenta un cuello de botella ergonómico crítico al final de la línea que será el foco de la solución de celda robotizada.</p>
+                
+                <div style="margin-top: 20px; padding: 15px; background-color: #f4f7f6; border: 1px dashed #ccc; border-radius: 4px; color: #757575;">
+                    <p style="margin: 0;"><em>*Al ser agua purificada, no requiere declaración de tabla nutricional calórica.</em></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

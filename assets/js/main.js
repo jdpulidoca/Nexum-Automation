@@ -268,65 +268,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // PANELES
         function cargarContenidoPanel(target, event) {
-            if (event) event.preventDefault();
-            
-            const panel = document.getElementById('universal-panel');
-            const panelContainer = document.getElementById('panel-dynamic-content');
-            
-            panel.classList.remove('panel-right', 'panel-left');
-            if (event && event.clientX < window.innerWidth / 2) {
-                panel.classList.add('panel-right');
-            } else {
-                panel.classList.add('panel-left');
+    if (event) event.preventDefault();
+    
+    const panel = document.getElementById('universal-panel');
+    const panelContainer = document.getElementById('panel-dynamic-content');
+    
+    // Configura de qué lado se abre el panel dependiendo de dónde se hizo clic
+    panel.classList.remove('panel-right', 'panel-left');
+    if (event && event.clientX < window.innerWidth / 2) {
+        panel.classList.add('panel-right');
+    } else {
+        panel.classList.add('panel-left');
+    }
+
+    // Muestra un estado de carga mientras trae el archivo
+    panelContainer.innerHTML = '<p style="padding: 20px; text-align: center; color: #666;">Cargando información...</p>';
+    panel.classList.add('open');
+
+    // Aquí está la magia: va y busca el archivo en la carpeta "content/"
+    fetch(`content/${target}.html`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Archivo no encontrado');
             }
-
-            let contentHtml = '';
-
-            if (target === 'contexto') {
-                contentHtml = `
-                    <h2 class="panel-title">Contexto Operativo: Coca-Cola FEMSA</h2>
-                    <p class="panel-text">Estudio analítico de tres líneas críticas de producción evaluadas en planta durante el periodo académico 2026:</p>
-                    <div class="panel-tab">
-                        <button class="panel-tablinks active" onclick="abrirPanelLinea(event, 'PanelMonster')">Monster</button>
-                        <button class="panel-tablinks" onclick="abrirPanelLinea(event, 'PanelQuatro')">Quatro</button>
-                        <button class="panel-tablinks" onclick="abrirPanelLinea(event, 'PanelBrisa')">Agua Brisa</button>
-                    </div>
-                    <div id="PanelMonster" class="panel-tabcontent" style="display: block;">
-                        <h3 style="margin:10px 0 4px 0; font-size:16px;">🔋 Monster Energy (Lata 473ml)</h3>
-                        <table class="nutrition-table">
-                            <thead><tr><th colspan=\"2\">Información Nutricional (Base: 100 ml)</th></tr></thead>
-                            <tbody><tr><td><strong>Calorías</strong></td><td style=\"text-align: right;\">47 kcal</td></tr><tr><td><strong>Carbohidratos</strong></td><td style=\"text-align: right;\">12 g</td></tr></tbody>
-                        </table>
-                    </div>
-                    <div id="PanelQuatro" class="panel-tabcontent">
-                        <h3 style="margin:10px 0 4px 0; font-size:16px;">🥤 Gaseosa Quatro (PET 1.5L)</h3>
-                        <table class="nutrition-table">
-                            <thead><tr><th colspan=\"2\">Información Nutricional (Base: 100 ml)</th></tr></thead>
-                            <tbody><tr><td><strong>Calorías</strong></td><td style=\"text-align: right;\">20 kcal</td></tr><tr><td><strong>Sodio</strong></td><td style=\"text-align: right;\">26 mg</td></tr></tbody>
-                        </table>
-                    </div>
-                    <div id="PanelBrisa" class="panel-tabcontent">
-                        <h3 style="margin:10px 0 4px 0; font-size:16px;">💧 Agua Brisa (Garrafón 20L)</h3>
-                        <p class=\"panel-text\">Línea de envases retornables sin aditivos calóricos.</p>
-                    </div>
-                `;
-            } 
-            else if (target === 'bib1') {
-                contentHtml = `<h2 class="panel-title" style="color: var(--nexum-cyan);">Refs: Contexto e Identidad</h2><ul class="ref-list"><li class="ref-item"><span class="ref-tag" style="background:#E0F2FE; color:#0369A1;">Planta</span><strong>Coca-Cola FEMSA. (2024).</strong> <em>Reporte Operaciones.</em></li></ul>`;
-            } 
-            else if (target === 'bib2') {
-                contentHtml = `<h2 class="panel-title" style="color: var(--nexum-amber);">Refs: Estrategia y Finanzas</h2><ul class="ref-list"><li class="ref-item"><span class="ref-tag" style="background:#FEF3C7; color:#B45309;">Gestión</span><strong>PMI. (2021).</strong> <em>Guía PMBOK 7th Ed.</em></li></ul>`;
-            } 
-            else if (target === 'bib3') {
-                contentHtml = `<h2 class="panel-title" style="color: var(--nexum-purple);">Refs: Automatización</h2><ul class="ref-list"><li class="ref-item"><span class="ref-tag" style="background:#F3E8FF; color:#6B21A8;">ISA-95</span><strong>ISA. (2015).</strong> <em>Estándar ANSI/ISA-95.</em></li></ul>`;
-            } 
-            else if (target === 'bib-general') {
-                contentHtml = `<h2 class="panel-title">Bibliografía General</h2><ul class="ref-list"><li class="ref-item"><strong>ANSI/ISA-95:</strong> Integración de Sistemas Enterprise-Control.</li><li class="ref-item"><strong>ABB RobotStudio:</strong> Manual de Simulación y Gemelos Digitales.</li></ul>`;
-            }
-
-            panelContainer.innerHTML = contentHtml;
-            panel.classList.add('open');
-        }
+            return response.text(); // Convierte la respuesta a texto HTML
+        })
+        .then(html => {
+            // Inyecta el contenido del archivo externo en el panel
+            panelContainer.innerHTML = html;
+        })
+        .catch(error => {
+            console.error('Error cargando el panel:', error);
+            panelContainer.innerHTML = `
+                <div style="padding: 20px; text-align: center; color: red;">
+                    <h3>Error 404</h3>
+                    <p>No se pudo encontrar el archivo <b>content/${target}.html</b>.</p>
+                </div>`;
+        });
+}
 
         function cerrarPanel() { document.getElementById('universal-panel').classList.remove('open'); }
         

@@ -197,7 +197,7 @@
            PANELES DESLIZANTES INTELIGENTES
            ========================================================================== */
         .info-panel {
-            position: fixed; top: 0; width: 100%; max-width: 500px; height: 100vh;
+            position: fixed; top: 0; width: 100%; max-width: 1200px; height: 100vh;
             background: var(--panel-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             z-index: 2000; overflow-y: auto; padding: 40px 30px; box-sizing: border-box;
             transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s;
@@ -229,3 +229,50 @@
         .ref-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; margin-right: 6px; text-transform: uppercase; }
 
         .footer-branding { position: absolute; bottom: 12px; width: 100%; text-align: center; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); opacity: 0.4; pointer-events: none; font-family: monospace; }
+/* =========================================
+   ESTILOS PARA EL CONTENIDO DE LAS PESTAÑAS
+   ========================================= */
+
+/* Estructura horizontal (Imagen a un lado, texto al otro) */
+.tab-horizontal-layout {
+    display: flex;
+    gap: 25px;
+    align-items: flex-start; /* Alinea los elementos arriba */
+}
+
+/* Contenedor de la imagen */
+.tab-image-container {
+    flex: 0 0 35%; /* La imagen tomará el 35% del ancho del panel */
+    display: flex;
+    justify-content: center;
+}
+
+/* Control exacto del tamaño de la imagen */
+.tab-image-container img {
+    width: 100%; /* Se adapta al contenedor */
+    max-width: 220px; /* Evita que crezca desproporcionadamente */
+    height: auto; /* Mantiene la proporción original (no se aplasta) */
+    border-radius: 8px; /* Bordes redondeados para estética */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave opcional */
+    object-fit: contain; /* Asegura que no se recorte ni deforme */
+}
+
+/* Contenedor de la información (Texto y Tabla) */
+.tab-info-container {
+    flex: 1; /* Toma el espacio restante */
+    min-width: 0; /* Evita que el texto rompa el diseño flex */
+}
+
+/* Ajuste para pantallas pequeñas (Celulares) */
+@media (max-width: 768px) {
+    .tab-horizontal-layout {
+        flex-direction: column; /* Apila la imagen arriba del texto */
+        align-items: center;
+    }
+    
+    .tab-image-container {
+        flex: 0 0 auto;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}

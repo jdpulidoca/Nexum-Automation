@@ -1,18 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <head>
     <meta charset="UTF-8">
-    <!-- Agrega esta línea para solucionar la advertencia -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>Tu Proyecto de Nodos</title>
     <!-- Enlazamos los estilos separados -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
-</head>
 <body>
- <div id="splash-screen">
+    <div id="splash-screen">
         <div id="splash-terminal">
             <div id="term-line1" class="term-line"></div>
             <div id="term-line2" class="term-line"></div>
@@ -44,6 +40,8 @@
     <div class="theme-toggle">
         <label><input type="checkbox" id="mode-checkbox"><div class="slider"><span>☀️</span><span>🌙</span></div></label>
     </div>
+    
+    <!-- Botón Global (También configurado para abrir un archivo llamado bib-general.html) -->
     <button class="hud-global-ref-btn" onclick="cargarContenidoPanel('bib-general', event)">[ ACCESS_ALL_REFERENCES ]</button>
 
     <div class="neural-container" id="space-container">
@@ -70,15 +68,20 @@
             </div>
             <span class="node-label" style="opacity: 1;">Equipo Consultor</span>
         </a>
+        
+        <!-- NODO 1: CONTEXTO OPERATIVO (Este es el que te abre el contexto.html) -->
         <a href="#" id="n-contexto" class="node node-primary sec-human" style="top: 110px; left: 110px;" onclick="cargarContenidoPanel('contexto', event)">
             <span class="node-icon">🏭</span><span class="node-label">Contexto Operativo</span>
         </a>
+        
         <a href="web/resumen.html" id="n-resumen" class="node node-support sec-human" style="top: 260px; left: 40px;">
             <span class="node-icon">📋</span><span class="node-label">Resumen Ejecutivo</span>
         </a>
         <a href="web/reflexiones.html" id="n-reflexiones" class="node node-primary sec-human" style="top: 390px; left: 150px;">
             <span class="node-icon">🧠</span><span class="node-label">Reflexiones Académicas</span>
         </a>
+        
+        <!-- NODO BIBLIOGRAFÍA 1 (Configurado para abrir bib1.html) -->
         <a href="#" id="bib-sector1" class="node node-satellite sec-human" style="top: 420px; left: 280px;" onclick="cargarContenidoPanel('bib1', event)">
             <span class="node-icon">📚₁</span><span class="node-label">Refs: Contexto</span>
         </a>
@@ -95,6 +98,8 @@
         <a href="web/gestion.html" id="n-gestion" class="node node-support sec-commercial" style="top: 430px; left: 450px;">
             <span class="node-icon">📈</span><span class="node-label">Gestión de Producción</span>
         </a>
+        
+        <!-- NODO BIBLIOGRAFÍA 2 (Configurado para abrir bib2.html) -->
         <a href="#" id="bib-sector2" class="node node-satellite sec-commercial" style="top: 60px; left: 580px;" onclick="cargarContenidoPanel('bib2', event)">
             <span class="node-icon">📚₂</span><span class="node-label">Refs: Estrategia</span>
         </a>
@@ -108,6 +113,8 @@
         <a href="web/celda.html" id="n-celda" class="node node-primary sec-tech" style="top: 290px; left: 880px;">
             <span class="node-icon">🤖</span><span class="node-label">Celda Robotizada</span>
         </a>
+        
+        <!-- NODO BIBLIOGRAFÍA 3 (Configurado para abrir bib3.html) -->
         <a href="#" id="bib-sector3" class="node node-satellite sec-tech" style="top: 440px; left: 780px;" onclick="cargarContenidoPanel('bib3', event)">
             <span class="node-icon">📚₃</span><span class="node-label">Refs: Ingeniería</span>
         </a>
@@ -124,13 +131,13 @@
 
     </div>
 
+    <!-- AQUÍ SE INYECTA LA INFORMACIÓN -->
     <div id="universal-panel" class="info-panel panel-right">
         <button class="close-panel-btn" onclick="cerrarPanel()">&times;</button>
         <div id="panel-dynamic-content"></div>
     </div>
 
     <div class="footer-branding">Nexum Core // Synaptic Constellation V8 // Universidad Nacional de Colombia</div>
-
 
     <!-- Enlazamos la lógica separada al final del body -->
     <script src="assets/js/main.js"></script>
