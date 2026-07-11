@@ -1,0 +1,200 @@
+<!-- Archivo: content/modulo2.html -->
+<h2 class="panel-title" style="text-align: center;">Gestión y Evaluación de la Producción</h2>
+<div class="panel-meta-strip">[ MÓDULO: 02 ] · [ NEXUM AUTOMATION ] · [ DIAGNÓSTICO OPERATIVO ]</div>
+
+<!-- Bloque Introductorio y Soportes -->
+<div style="margin: 20px 0;">
+    <p class="panel-text" style="margin-top: 0;">El equipo consultor de <strong>Nexum Automation</strong> presenta el diagnóstico operativo de la planta multilínea[cite: 9]. A través del mapeo de procesos (VSM, DOP) y el cálculo de indicadores clave, identificamos las restricciones de capacidad y los cuellos de botella que justifican técnica y financieramente las propuestas de automatización posteriores[cite: 9].</p>
+    
+    <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+        <a href="../docs/modulo2/documento Modulo 1.pdf" target="_blank" style="flex: 1; padding: 8px 12px; font-size: 12px; background-color: rgba(63, 81, 181, 0.1); color: var(--accent-blue); text-decoration: none; border: 1px solid var(--accent-blue); border-radius: 4px; text-align: center; font-weight: bold; transition: all 0.3s;">
+            📝 Informe Taller 1 (Cálculos Base)
+        </a>
+        <a href="../docs/modulo2/Informe_Mercado_CocaCola.pdf" target="_blank" style="flex: 1; padding: 8px 12px; font-size: 12px; background-color: rgba(142, 142, 147, 0.1); color: var(--text-main); text-decoration: none; border: 1px solid var(--border-node); border-radius: 4px; text-align: center; font-weight: bold; transition: all 0.3s;">
+            📊 Análisis de Mercado y Demanda
+        </a>
+    </div>
+</div>
+
+<!-- Layout General -->
+<div style="margin-bottom: 30px; background-color: rgba(142, 142, 147, 0.03); border: 1px solid var(--border-node); padding: 15px; border-radius: 6px;">
+    <h3 style="margin-top: 0; color: var(--accent-blue); font-size: 14px; border-bottom: 1px solid var(--border-node); padding-bottom: 5px;">📍 Layout General de la Planta</h3>
+    <p class="panel-text" style="font-size: 13px; margin-bottom: 15px;">Distribución macro de las áreas de producción, almacenamiento y servicios industriales de Nexum Automation[cite: 9].</p>
+    <div style="text-align: center; overflow: hidden; border-radius: 4px;">
+        <img src="../docs/modulo2/Diagramas/Layout/Layout planta.png" alt="Layout General de la Planta" style="width: 100%; max-width: 500px; height: auto; border: 1px solid #333; border-radius: 4px;">
+    </div>
+</div>
+
+<!-- ==========================================
+     LÍNEA 1: MONSTER ENERGY
+     ========================================== -->
+<h3 class="panel-subtitle" style="margin-top: 40px; border-bottom: 1px solid var(--border-node); padding-bottom: 5px; color: #5a5a5a;">🔋 1. Análisis: Monster Energy (Lata 473ml)</h3>
+<p class="panel-text" style="font-size: 13px;"><strong>Demanda Estimada:</strong> 20,000,000 unidades/año. Calculada a partir de un mercado base de 157.6 millones de litros (2022) y una participación del 6%[cite: 9].</p>
+
+<!-- KPIs Monster -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 15px;">
+    <div style="padding: 10px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.05); border-left: 3px solid #5a5a5a; border-radius: 4px;">
+        <strong style="color: #5a5a5a; font-size: 11px; display: block;">Takt Time</strong>
+        <span style="color: var(--text-main); font-size: 13px; font-weight: bold;">0.0049 min/lata</span>
+    </div>
+    <div style="padding: 10px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.05); border-left: 3px solid #5a5a5a; border-radius: 4px;">
+        <strong style="color: #5a5a5a; font-size: 11px; display: block;">Cycle Time (Tc)</strong>
+        <span style="color: var(--text-main); font-size: 13px; font-weight: bold;">0.004 min/lata</span>
+    </div>
+    <div style="padding: 10px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.05); border-left: 3px solid #5a5a5a; border-radius: 4px;">
+        <strong style="color: #5a5a5a; font-size: 11px; display: block;">Prod. Rate (Rp)</strong>
+        <span style="color: var(--text-main); font-size: 13px; font-weight: bold;">12,117 latas/hr</span>
+    </div>
+    <div style="padding: 10px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.05); border-left: 3px solid #5a5a5a; border-radius: 4px;">
+        <strong style="color: #5a5a5a; font-size: 11px; display: block;">Utilización</strong>
+        <span style="color: var(--text-main); font-size: 13px; font-weight: bold;">64.08%</span>
+    </div>
+</div>
+
+<!-- OEE Monster -->
+<div style="margin-bottom: 20px; padding: 12px; background-color: rgba(142, 142, 147, 0.05); border: 1px dashed #5a5a5a; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+    <div style="font-size: 12px; color: var(--text-main);">Disp: <strong>93.5%</strong> | Desemp: <strong>97.5%</strong> | Cal: <strong>98.0%</strong> | MLT: <strong>9.13 Hrs/lote</strong>[cite: 9]</div>
+    <div style="font-size: 14px; font-weight: bold; color: #5a5a5a;">OEE Total: 89.47%</div>
+</div>
+
+<!-- Imágenes Monster -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 15px;">
+    <figure class="hud-frame" style="margin: 0; padding: 5px; text-align: center;">
+        <img src="../docs/modulo2/Diagramas/Layout/Layout Mosnter.png" alt="Layout Monster" style="width: 100%; height: auto; border-radius: 4px;">
+        <figcaption style="font-size: 10px; margin-top: 5px;">Layout</figcaption>
+    </figure>
+    <figure class="hud-frame" style="margin: 0; padding: 5px; text-align: center;">
+        <img src="../docs/modulo2/Diagramas/Spaghetti/Monster_Spagetti.jpg" alt="Spaghetti Monster" style="width: 100%; height: auto; border-radius: 4px;">
+        <figcaption style="font-size: 10px; margin-top: 5px;">Spaghetti</figcaption>
+    </figure>
+    <figure class="hud-frame" style="margin: 0; padding: 5px; text-align: center;">
+        <img src="../docs/modulo2/Diagramas/DOP/DOP Monster.PNG" alt="DOP Monster" style="width: 100%; height: auto; border-radius: 4px;">
+        <figcaption style="font-size: 10px; margin-top: 5px;">DOP</figcaption>
+    </figure>
+    <figure class="hud-frame" style="margin: 0; padding: 5px; text-align: center;">
+        <img src="../docs/modulo2/Diagramas/VSM/VMS Monster.png" alt="VSM Monster" style="width: 100%; height: auto; border-radius: 4px;">
+        <figcaption style="font-size: 10px; margin-top: 5px;">VSM</figcaption>
+    </figure>
+</div>
+
+<div style="text-align: center; margin-bottom: 40px;">
+    <a href="../docs/modulo2/Diagramas/DAP/Analisis de proceso Monster.pdf" target="_blank" style="display: inline-block; padding: 6px 12px; background: transparent; color: #5a5a5a; border: 1px solid #5a5a5a; text-decoration: none; border-radius: 4px; font-size: 11px; font-weight: bold;">
+        [+] Ver DAP Monster (PDF)
+    </a>
+</div>
+
+<!-- ==========================================
+     LÍNEA 2: QUATRO
+     ========================================== -->
+<h3 class="panel-subtitle" style="margin-top: 40px; border-bottom: 1px solid var(--border-node); padding-bottom: 5px; color: #d32f2f;">🥤 2. Análisis: Quatro (PET 1.5L)</h3>
+<p class="panel-text" style="font-size: 13px;"><strong>Demanda Estimada:</strong> 35,720,000 unidades/año (53.58M litros). Proyectado desde el volumen base de 352M de cajas del sistema Coca-Cola[cite: 9].</p>
+
+<!-- KPIs Quatro -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 15px;">
+    <div style="padding: 10px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.05); border-left: 3px solid #d32f2f; border-radius: 4px;">
+        <strong style="color: #d32f2f; font-size: 11px; display: block;">Takt Time</strong>
+        <span style="color: var(--text-main); font-size: 13px; font-weight: bold;">0.0044 min/bot</span>
+    </div>
+    <div style="padding: 10px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.05); border-left: 3px solid #d32f2f; border-radius: 4px;">
+        <strong style="color: #d32f2f; font-size: 11px; display: block;">Cycle Time (Tc)</strong>
+        <span style="color: var(--text-main); font-size: 13px; font-weight: bold;">0.004 min/bot</span>
+    </div>
+    <div style="padding: 10px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.05); border-left: 3px solid #d32f2f; border-radius: 4px;">
+        <strong style="color: #d32f2f; font-size: 11px; display: block;">Prod. Rate (Rp)</strong>
+        <span style="color: var(--text-main); font-size: 13px; font-weight: bold;">11,879 bot/hr</span>
+    </div>
+    <div style="padding: 10px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.05); border-left: 3px solid #d32f2f; border-radius: 4px;">
+        <strong style="color: #d32f2f; font-size: 11px; display: block;">Utilización</strong>
+        <span style="color: var(--text-main); font-size: 13px; font-weight: bold;">71.36%</span>
+    </div>
+</div>
+
+<!-- OEE Quatro -->
+<div style="margin-bottom: 20px; padding: 12px; background-color: rgba(142, 142, 147, 0.05); border: 1px dashed #d32f2f; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+    <div style="font-size: 12px; color: var(--text-main);">Disp: <strong>93.5%</strong> | Desemp: <strong>100%</strong> | Cal: <strong>98.0%</strong> | MLT: <strong>8.95 Hrs/lote</strong>[cite: 9]</div>
+    <div style="font-size: 14px; font-weight: bold; color: #d32f2f;">OEE Total: 91.69%</div>
+</div>
+
+<!-- Imágenes Quatro -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 15px;">
+    <figure class="hud-frame" style="margin: 0; padding: 5px; text-align: center;">
+        <img src="../docs/modulo2/Diagramas/Layout/Layout Quatro.png" alt="Layout Quatro" style="width: 100%; height: auto; border-radius: 4px;">
+        <figcaption style="font-size: 10px; margin-top: 5px;">Layout</figcaption>
+    </figure>
+    <figure class="hud-frame" style="margin: 0; padding: 5px; text-align: center;">
+        <img src="../docs/modulo2/Diagramas/Spaghetti/Quatro_Spagetti.jpg" alt="Spaghetti Quatro" style="width: 100%; height: auto; border-radius: 4px;">
+        <figcaption style="font-size: 10px; margin-top: 5px;">Spaghetti</figcaption>
+    </figure>
+    <figure class="hud-frame" style="margin: 0; padding: 5px; text-align: center;">
+        <img src="../docs/modulo2/Diagramas/DOP/DOP Quatro.PNG" alt="DOP Quatro" style="width: 100%; height: auto; border-radius: 4px;">
+        <figcaption style="font-size: 10px; margin-top: 5px;">DOP</figcaption>
+    </figure>
+    <figure class="hud-frame" style="margin: 0; padding: 5px; text-align: center;">
+        <img src="../docs/modulo2/Diagramas/VSM/VMS Quatro.png" alt="VSM Quatro" style="width: 100%; height: auto; border-radius: 4px;">
+        <figcaption style="font-size: 10px; margin-top: 5px;">VSM</figcaption>
+    </figure>
+</div>
+
+<div style="text-align: center; margin-bottom: 40px;">
+    <a href="../docs/modulo2/Diagramas/DAP/Analisis de proceso Quatro .pdf" target="_blank" style="display: inline-block; padding: 6px 12px; background: transparent; color: #d32f2f; border: 1px solid #d32f2f; text-decoration: none; border-radius: 4px; font-size: 11px; font-weight: bold;">
+        [+] Ver DAP Quatro (PDF)
+    </a>
+</div>
+
+<!-- ==========================================
+     LÍNEA 3: AGUA BRISA
+     ========================================== -->
+<h3 class="panel-subtitle" style="margin-top: 40px; border-bottom: 1px solid var(--border-node); padding-bottom: 5px; color: #0288d1;">💧 3. Análisis: Agua Brisa (Garrafón 20L)</h3>
+<p class="panel-text" style="font-size: 13px;"><strong>Demanda Estimada:</strong> 4,227,600 garrafones/año. Calculada sobre el 4% del volumen total nacional en formato HOD[cite: 9].</p>
+
+<!-- KPIs Brisa -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 15px;">
+    <div style="padding: 10px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.05); border-left: 3px solid #0288d1; border-radius: 4px;">
+        <strong style="color: #0288d1; font-size: 11px; display: block;">Takt Time</strong>
+        <span style="color: var(--text-main); font-size: 13px; font-weight: bold;">0.0465 min/garr</span>
+    </div>
+    <div style="padding: 10px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.05); border-left: 3px solid #0288d1; border-radius: 4px;">
+        <strong style="color: #0288d1; font-size: 11px; display: block;">Cycle Time (Tc)</strong>
+        <span style="color: var(--text-main); font-size: 13px; font-weight: bold;">0.04 min/garr</span>
+    </div>
+    <div style="padding: 10px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.05); border-left: 3px solid #0288d1; border-radius: 4px;">
+        <strong style="color: #0288d1; font-size: 11px; display: block;">Prod. Rate (Rp)</strong>
+        <span style="color: var(--text-main); font-size: 13px; font-weight: bold;">1,175 garr/hr</span>
+    </div>
+    <div style="padding: 10px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.05); border-left: 3px solid #0288d1; border-radius: 4px;">
+        <strong style="color: #0288d1; font-size: 11px; display: block;">Utilización</strong>
+        <span style="color: var(--text-main); font-size: 13px; font-weight: bold;">67.62%</span>
+    </div>
+</div>
+
+<!-- OEE Brisa -->
+<div style="margin-bottom: 20px; padding: 12px; background-color: rgba(142, 142, 147, 0.05); border: 1px dashed #0288d1; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+    <div style="font-size: 12px; color: var(--text-main);">Disp: <strong>93.5%</strong> | Desemp: <strong>97.9%</strong> | Cal: <strong>98.0%</strong> | MLT: <strong>8.65 Hrs/lote</strong>[cite: 9]</div>
+    <div style="font-size: 14px; font-weight: bold; color: #0288d1;">OEE Total: 89.77%</div>
+</div>
+
+<!-- Imágenes Brisa -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 15px;">
+    <figure class="hud-frame" style="margin: 0; padding: 5px; text-align: center;">
+        <img src="../docs/modulo2/Diagramas/Layout/Layout Brissa.png" alt="Layout Brisa" style="width: 100%; height: auto; border-radius: 4px;">
+        <figcaption style="font-size: 10px; margin-top: 5px;">Layout</figcaption>
+    </figure>
+    <figure class="hud-frame" style="margin: 0; padding: 5px; text-align: center;">
+        <img src="../docs/modulo2/Diagramas/Spaghetti/Garrafon_Spagetti.jpg" alt="Spaghetti Brisa" style="width: 100%; height: auto; border-radius: 4px;">
+        <figcaption style="font-size: 10px; margin-top: 5px;">Spaghetti</figcaption>
+    </figure>
+    <figure class="hud-frame" style="margin: 0; padding: 5px; text-align: center;">
+        <img src="../docs/modulo2/Diagramas/DOP/DOP Brissa.PNG" alt="DOP Brisa" style="width: 100%; height: auto; border-radius: 4px;">
+        <figcaption style="font-size: 10px; margin-top: 5px;">DOP</figcaption>
+    </figure>
+    <figure class="hud-frame" style="margin: 0; padding: 5px; text-align: center;">
+        <img src="../docs/modulo2/Diagramas/VSM/VSM Brissa.png" alt="VSM Brisa" style="width: 100%; height: auto; border-radius: 4px;">
+        <figcaption style="font-size: 10px; margin-top: 5px;">VSM</figcaption>
+    </figure>
+</div>
+
+<div style="text-align: center; margin-bottom: 30px;">
+    <a href="../docs/modulo2/Diagramas/DAP/Analisis de proceso Garrafones.pdf" target="_blank" style="display: inline-block; padding: 6px 12px; background: transparent; color: #0288d1; border: 1px solid #0288d1; text-decoration: none; border-radius: 4px; font-size: 11px; font-weight: bold;">
+        [+] Ver DAP Brisa (PDF)
+    </a>
+</div>
