@@ -1,0 +1,512 @@
+<!-- Archivo: content/modulo3.html -->
+<h2 class="panel-title" style="text-align: center;">Planeación y Evaluación de Proyectos</h2>
+<div class="panel-meta-strip">[ MÓDULO: 03 ] · [ NEXUM AUTOMATION ] · [ ESTRUCTURACIÓN Y FINANZAS ]</div>
+
+<!-- Bloque Introductorio -->
+<div style="margin: 20px 0; text-align: center;">
+    <p class="panel-text" style="margin-top: 0; font-size: 14px;">Estructuración, modelo de negocio, cronograma y demostración de la viabilidad económica (CAPEX/OPEX) para la automatización de la planta multilínea de <strong>Nexum Automation</strong>[cite: 10].</p>
+    
+    <div style="margin-top: 20px;">
+        <a href="../docs/modulo3/documento Modulo 2.pdf" target="_blank" style="display: inline-block; padding: 10px 20px; font-size: 12px; background-color: rgba(244, 67, 54, 0.1); color: #f44336; text-decoration: none; border: 1px solid #f44336; border-radius: 4px; font-weight: bold; transition: all 0.3s;">
+            📄 Consultar Documento Base (Taller 2 - PDF)
+        </a>
+    </div>
+</div>
+
+<!-- ==========================================
+     1. MODELO CANVAS
+     ========================================== -->
+<h3 class="panel-subtitle" style="margin-top: 40px; border-bottom: 1px solid var(--border-node); padding-bottom: 5px; color: var(--accent-blue);">📊 1. Modelo Canvas de Negocio</h3>
+<p class="panel-text" style="font-size: 13px;">Visualización del modelo de negocio enfocado en la automatización, propuesta de valor y relaciones con clientes clave[cite: 10].</p>
+<div style="text-align: center; border: 1px solid var(--border-node); border-radius: 6px; padding: 10px; background-color: rgba(142, 142, 147, 0.03);">
+    <img src="../docs/modulo3/Modelo canvas de negocio .png" alt="Modelo Canvas de Negocio" style="width: 100%; max-width: 800px; height: auto; border-radius: 4px;">
+</div>
+
+<!-- ==========================================
+     2. ESTRUCTURA DE DESGLOSE DEL PROCESO (EDP)
+     ========================================== -->
+<h3 class="panel-subtitle" style="margin-top: 40px; border-bottom: 1px solid var(--border-node); padding-bottom: 5px; color: var(--accent-blue);">⚙️ 2. Estructura de Desglose del Proceso (EDP)</h3>
+<p class="panel-text" style="font-size: 13px;">El EDP se centra en analizar todas las etapas involucradas en el proceso de elaboración del producto que se desea estudiar. En este primer acercamiento, se planteó un proceso generalizado aplicable a los diferentes productos que se fabrican en Coca-Cola FEMSA[cite: 10].</p>
+
+<div style="background-color: rgba(76, 175, 80, 0.05); padding: 12px; border-left: 3px solid #4caf50; border-radius: 4px; margin: 15px 0;">
+    <p style="margin: 0; font-size: 12px; color: var(--text-main);">
+        <strong style="color: #4caf50;">Etapas Principales Identificadas:</strong> Obtención de materias primas, preparación del equipo, producción, control de calidad, empaquetado, almacenamiento y, finalmente, la distribución del producto. Dentro de cada una de estas etapas se consideraron diversos subprocesos que buscan representar de la manera más clara y general posible las operaciones involucradas en la fabricación[cite: 10].
+    </p>
+</div>
+
+<div style="text-align: center; border: 1px solid var(--border-node); border-radius: 6px; padding: 10px; background-color: rgba(142, 142, 147, 0.03);">
+    <img src="../docs/modulo3/Etapas de EDT (EDP) de producción.png" alt="Estructura de Desglose del Proceso (EDP)" style="width: 100%; max-width: 800px; height: auto; border-radius: 4px;">
+</div>
+
+<!-- ==========================================
+     3. ESTRUCTURA DE DESGLOSE DEL TRABAJO (EDT)
+     ========================================== -->
+<h3 class="panel-subtitle" style="margin-top: 40px; border-bottom: 1px solid var(--border-node); padding-bottom: 5px; color: var(--accent-blue);">🧩 3. Estructura de Desglose del Trabajo (EDT)</h3>
+<p class="panel-text" style="font-size: 13px;">El EDT se utiliza para identificar y organizar los paquetes de trabajo que componen el proyecto, descomponiendo el objetivo general en actividades más manejables[cite: 10].</p>
+
+<div style="background-color: rgba(63, 81, 181, 0.05); padding: 12px; border-left: 3px solid var(--accent-blue); border-radius: 4px; margin: 15px 0;">
+    <p style="margin: 0; font-size: 12px; color: var(--text-main);">
+        <strong style="color: var(--accent-blue);">Dinámica de Ejecución:</strong> Aunque el EDT no define el orden temporal exacto (función del cronograma), sí establece entregables y dependencias lógicas. En este proyecto existen secuencias claras: primero se requiere definir el proceso productivo, posteriormente identificar sensores y actuadores, luego desarrollar la lógica de control en PLC, y finalmente integrar el sistema de supervisión SCADA[cite: 10].
+    </p>
+</div>
+
+<div style="text-align: center; border: 1px solid var(--border-node); border-radius: 6px; padding: 10px; background-color: rgba(142, 142, 147, 0.03);">
+    <img src="../docs/modulo3/EDT.jpg" alt="Estructura de Desglose del Trabajo (EDT)" style="width: 100%; max-width: 800px; height: auto; border-radius: 4px;">
+</div>
+
+<!-- ==========================================
+     4. CRONOGRAMA GANTT
+     ========================================== -->
+<h3 class="panel-subtitle" style="margin-top: 40px; border-bottom: 1px solid var(--border-node); padding-bottom: 5px; color: var(--accent-blue);">🗓️ 4. Diagrama de Gantt: Planeación Proyecto</h3>
+<p class="panel-text" style="font-size: 13px; margin-bottom: 15px;">Cronograma detallado de ejecución[cite: 10].</p>
+
+<div style="overflow-x: auto; background: rgba(142, 142, 147, 0.02); border: 1px solid var(--border-node); border-radius: 6px;">
+    <table style="width: 100%; border-collapse: collapse; font-family: 'Segoe UI', sans-serif; font-size: 11px; color: var(--text-main);">
+        <thead>
+            <tr style="background: rgba(63, 81, 181, 0.15); color: var(--accent-blue);">
+                <th style="padding: 10px; border: 1px solid var(--border-node); text-align: left; width: 30%;">ACTIVIDADES</th>
+                <th style="padding: 10px; border: 1px solid var(--border-node); text-align: left;">RESPONSABLE</th>
+                <th style="padding: 10px; border: 1px solid var(--border-node); text-align: center; width: 80px;">INICIO</th>
+                <th style="padding: 10px; border: 1px solid var(--border-node); text-align: left;">VISUALIZACIÓN GANTT (Feb - May)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Definición del proceso y alcance del proyecto</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Lider</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">10-Feb</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 100%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Selección de los 3 productos y líneas</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Automatización</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">21-Feb</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 100%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Investigación del proceso industrial</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Automatización</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">26-Feb</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 100%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Descripción del proceso productivo</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Comunicación</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">26-Feb</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 100%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Elaboración del DOP</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Lider</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">26-Feb</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 100%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Elaboración del DAP</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Digital CAD 2</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">26-Feb</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 100%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Identificación de etapas</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Lider</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">26-Feb</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 100%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Identificación de sensores y actuadores</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Digital CAD 2</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">01-Mar</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 100%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Análisis de flujo (VSM)</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Digital CAD 1</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">01-Mar</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 100%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Análisis de tiempos</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Comunicación</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">01-Mar</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 100%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Definición de indicadores</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Comunicación</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">08-Mar</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 100%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Definición arquitectura automatización</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Automatización</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">08-Mar</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 20%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Definición arquitectura control</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Automatización</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">10-Mar</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Diseño estrategia de control</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Lider</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">12-Mar</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Diseño control secuencial (Grafcet)</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Lider</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">13-Mar</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Diseño preliminar integración</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Digital CAD 1</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">19-Mar</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Construcción modelo simulación</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Digital CAD 2</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">25-Mar</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Simulación sistema productivo</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Lider</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">30-Mar</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Análisis resultados simulación</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Automatización</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">30-Mar</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Evaluación desempeño sistema</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Automatización</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">03-Apr</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Identificación operación robotizable</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Comunicación</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">03-Apr</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Justificación de robotización</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Lider</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">07-Apr</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Diseño conceptual celda robotizada</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Digital CAD 2</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">12-Apr</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Simulación de celda robotizada</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Lider</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">16-Apr</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Preparación entrega parcial</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Digital CAD 2</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">21-Apr</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Diseño detallado sistema control</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Digital CAD 1</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">26-Apr</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Programación lógica (Ladder)</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Comunicación</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">29-Apr</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Pruebas control secuencial</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Comunicación</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">01-May</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Integración con simulación</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Automatización</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">04-May</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Diseño de interfaz HMI</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Lider</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">07-May</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Configuración sistema SCADA</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Automatización</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">12-May</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Integración comunicación OPC</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Automatización</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">15-May</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Pruebas sistema SCADA</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Comunicación</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">15-May</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Estimación costos automatización</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Lider</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">19-May</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Desarrollo presupuesto</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Digital CAD 2</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">19-May</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Análisis financiero (Flujo caja)</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Lider</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">22-May</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Evaluación indicadores económicos</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Digital CAD 2</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">22-May</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Organización repositorio final</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Digital CAD 1</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">27-May</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Actualización sitio web</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Comunicación</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">27-May</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #388e3c; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Producción video final</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Comunicación</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">03-Jun</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #757575; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Redacción informe final</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Ing. Automatización</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">07-Jun</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #757575; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Preparación sustentación final</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Lider</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: center;">09-Jun</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);"><div style="background: rgba(142, 142, 147, 0.2); border-radius: 4px; height: 10px; width: 100%;"><div style="width: 0%; background: #757575; height: 100%; border-radius: 4px;"></div></div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div style="margin-top: 15px; text-align: center;">
+    <p style="font-size: 11px; color: #888; margin-bottom: 10px;"><em>Nota: Las actividades de junio se consideran fuera del periodo lectivo presencial (Cierre semestral 30 de mayo)[cite: 10].</em></p>
+    <a href="../docs/modulo3/Cronograma Gantt.xlsx" target="_blank" style="display: inline-block; padding: 8px 16px; font-size: 12px; background-color: rgba(63, 81, 181, 0.1); color: var(--accent-blue); text-decoration: none; border: 1px solid var(--accent-blue); border-radius: 4px; font-weight: bold; transition: all 0.3s;">
+        📊 Descargar Gráfico Gantt Detallado (Excel)
+    </a>
+</div>
+
+<!-- ==========================================
+     5. ANÁLISIS FINANCIERO Y VIABILIDAD
+     ========================================== -->
+<h3 class="panel-subtitle" style="margin-top: 50px; border-bottom: 1px solid var(--border-node); padding-bottom: 5px; color: #4caf50;">💰 5. Análisis Financiero y Viabilidad (CAPEX / OPEX)</h3>
+
+<h4 style="color: var(--text-main); font-size: 14px; margin-top: 20px;">5.1. Presupuesto del Proyecto (CAPEX)</h4>
+<p class="panel-text" style="font-size: 13px;">El presupuesto se elaboró siguiendo un enfoque de estimación ascendente por paquetes de trabajo (EDT), con la lógica de una empresa integradora. Se descompuso el alcance en equipos mecánicos y celda de paletizado, control y seguridad, eléctrico/neumático, software, pruebas y logística. Los costos directos incluyen mano de obra calculada con base en horas estimadas por estudiante y disciplina (Ingeniería Industrial, Automatización, PLC, Simulación y SCADA), tomando tarifas promedio del mercado en Colombia actualizadas al 2026[cite: 10].</p>
+
+<div style="overflow-x: auto; margin-bottom: 25px;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 12px; color: var(--text-main);">
+        <thead>
+            <tr style="background-color: rgba(76, 175, 80, 0.1); color: #4caf50;">
+                <th style="padding: 10px; border: 1px solid var(--border-node); text-align: left;">Categoría de Inversión</th>
+                <th style="padding: 10px; border: 1px solid var(--border-node); text-align: right;">Costo Directo (COP)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Equipos mecánicos y celda de paletizado</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: right;">$ 1.263.000.000</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Control, seguridad y digitalización</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: right;">$ 96.000.000</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Eléctrico, panel y neumática</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: right;">$ 116.150.000</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Software, pruebas y logística</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: right;">$ 133.700.000</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Mano de obra directa (EDT)</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: right;">$ 6.562.450</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Servicios públicos y SST</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: right;">$ 6.300.000</td>
+            </tr>
+            <tr style="background-color: rgba(142, 142, 147, 0.05); font-weight: bold;">
+                <td style="padding: 10px; border: 1px solid var(--border-node);">Subtotal Costos Directos</td>
+                <td style="padding: 10px; border: 1px solid var(--border-node); text-align: right;">$ 1.621.712.450</td>
+            </tr>
+            <tr style="color: #888;">
+                <td style="padding: 8px; border: 1px solid var(--border-node);">Costos indirectos, Imprevistos y Utilidad (AIU)</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: right;">$ 535.165.109</td>
+            </tr>
+            <tr style="background-color: rgba(76, 175, 80, 0.15); font-size: 13px; color: #4caf50;">
+                <td style="padding: 12px; border: 1px solid var(--border-node);"><strong>TOTAL PRESUPUESTO BASE (3 Líneas)</strong></td>
+                <td style="padding: 12px; border: 1px solid var(--border-node); text-align: right;"><strong>$ 2.156.877.559</strong></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<h4 style="color: var(--text-main); font-size: 14px;">5.2. Desglose de Inversión por Línea</h4>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 25px;">
+    <div style="background: rgba(142, 142, 147, 0.03); border: 1px solid var(--border-node); border-radius: 6px; padding: 15px; border-left: 3px solid #ff9800;">
+        <h5 style="margin: 0 0 10px 0; color: #ff9800; font-size: 13px;">Línea 1: Monster</h5>
+        <p style="font-size: 11px; margin-bottom: 5px; color: #888;">Costos Directos: $ 529.312.450</p>
+        <div style="font-size: 14px; font-weight: bold; color: var(--text-main); margin-top: 10px;">Total: $ 703.985.559</div>
+    </div>
+    <div style="background: rgba(142, 142, 147, 0.03); border: 1px solid var(--border-node); border-radius: 6px; padding: 15px; border-left: 3px solid #2196f3;">
+        <h5 style="margin: 0 0 10px 0; color: #2196f3; font-size: 13px;">Línea 2: Quatro</h5>
+        <p style="font-size: 11px; margin-bottom: 5px; color: #888;">Costos Directos: $ 554.562.450</p>
+        <div style="font-size: 14px; font-weight: bold; color: var(--text-main); margin-top: 10px;">Total: $ 737.568.059</div>
+    </div>
+    <div style="background: rgba(142, 142, 147, 0.03); border: 1px solid var(--border-node); border-radius: 6px; padding: 15px; border-left: 3px solid #4caf50;">
+        <h5 style="margin: 0 0 10px 0; color: #4caf50; font-size: 13px;">Línea 3: Agua Brisa</h5>
+        <p style="font-size: 11px; margin-bottom: 5px; color: #888;">Costos Directos: $ 563.562.450</p>
+        <div style="font-size: 14px; font-weight: bold; color: var(--text-main); margin-top: 10px;">Total: $ 749.538.059</div>
+    </div>
+</div>
+
+<div style="background-color: rgba(255, 193, 7, 0.1); padding: 12px; border-left: 3px solid #ffc107; font-size: 12px; margin-bottom: 25px; color: var(--text-main);">
+    <strong style="color: #ffc107;">Referencia:</strong> Equipos cotizados (ABB IRB 460). TRM COP/USD 3.704,87 | EUR/COP 4.309,87. Tarifas eléctricas industriales según Enel 2026. Valores sin IVA[cite: 10].
+</div>
+
+<h4 style="color: var(--text-main); font-size: 14px; margin-top: 30px;">5.3. Análisis de Precios Unitarios (APU) y Materias Primas</h4>
+<p class="panel-text" style="font-size: 13px;">El APU permite desagregar el costo de una unidad de medida dividiéndolo en materiales, equipos, mano de obra y transporte. A nivel operativo, se evaluaron los costos directos de producción (asumiendo un margen de utilidad bruta del 46%, lo que deja el costo de producción en un 54%). El análisis reveló que, a pesar de los altos consumos hídricos ($5.056,91/m³ EAAB), <strong>el azúcar ($3.520/kg DANE) representa el rubro crítico de gasto operativo</strong>[cite: 10].</p>
+
+<div style="overflow-x: auto; margin-bottom: 20px;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 11px; text-align: center; color: var(--text-main);">
+        <thead>
+            <tr style="background-color: rgba(33, 150, 243, 0.1); color: #2196f3;">
+                <th style="padding: 8px; border: 1px solid var(--border-node);">Producto</th>
+                <th style="padding: 8px; border: 1px solid var(--border-node);">Demanda Anual</th>
+                <th style="padding: 8px; border: 1px solid var(--border-node);">Azúcar/Unid.</th>
+                <th style="padding: 8px; border: 1px solid var(--border-node);">Precio Sugerido</th>
+                <th style="padding: 8px; border: 1px solid var(--border-node);">Precio Fabrica</th>
+                <th style="padding: 8px; border: 1px solid var(--border-node);">Costo Prod. (54%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: left;"><strong>Monster 473 ml</strong></td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">21.850.000</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">56,76 g</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">$ 8.500</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">$ 7.000</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">$ 3.780</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: left;"><strong>Quatro 1.5 L</strong></td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">35.720.000</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">73,50 g</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">$ 4.500</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">$ 3.750</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">$ 2.025</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: left;"><strong>Brisa Garrafón 5Gl</strong></td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">4.227.600</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">0 g</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">$ 15.000</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">$ 12.600</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">$ 6.804</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<h4 style="color: var(--text-main); font-size: 14px; margin-top: 30px;">5.4. Flujo de Caja y Retorno de Inversión</h4>
+<p class="panel-text" style="font-size: 13px;">Se planteó un flujo de caja evaluando incluso un escenario conservador donde la propuesta de automatización enfrentara desviaciones. Sin embargo, debido a que este modelo de negocio maneja un volumen de circulación masivo, la absorción del gasto de capital (CAPEX) frente al OPEX es altísima[cite: 10].</p>
+
+<div style="overflow-x: auto; margin-bottom: 25px;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 12px; text-align: right; color: var(--text-main);">
+        <thead>
+            <tr style="background-color: rgba(156, 39, 176, 0.1); color: #9c27b0;">
+                <th style="padding: 8px; border: 1px solid var(--border-node); text-align: left;">Concepto Consolidado</th>
+                <th style="padding: 8px; border: 1px solid var(--border-node);">Año 0 (Inversión)</th>
+                <th style="padding: 8px; border: 1px solid var(--border-node);">Año 1 (Operación)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: left;">Ingresos Totales Brutos</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">$ 0</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">$ 340.167.760.000</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: left;">Costos de Fabricación</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">$ 0</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">-$ 183.690.590.400</td>
+            </tr>
+            <tr style="font-weight: bold; background-color: rgba(142, 142, 147, 0.05);">
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: left;">Utilidad Bruta Operativa</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">$ 0</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">$ 214.006.350.400</td>
+            </tr>
+            <tr style="color: #f44336;">
+                <td style="padding: 8px; border: 1px solid var(--border-node); text-align: left;">Inversión Proyecto (CAPEX)</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">-$ 2.156.877.559</td>
+                <td style="padding: 8px; border: 1px solid var(--border-node);">$ 0</td>
+            </tr>
+            <tr style="background-color: rgba(76, 175, 80, 0.1); font-weight: bold; font-size: 13px;">
+                <td style="padding: 10px; border: 1px solid var(--border-node); text-align: left; color: #4caf50;">FLUJO NETO</td>
+                <td style="padding: 10px; border: 1px solid var(--border-node); color: #f44336;">-$ 2.156.877.559</td>
+                <td style="padding: 10px; border: 1px solid var(--border-node); color: #4caf50;">$ 211.849.472.842</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+                
+<div style="background-color: rgba(76, 175, 80, 0.05); padding: 12px; border-left: 3px solid #4caf50; font-size: 12px; color: var(--text-main);">
+    <strong style="color: #4caf50;">Conclusión Financiera:</strong> Como se evidencia en el flujo neto, la inversión tecnológica inicial (~2.150 Millones COP) representa menos del <strong>1.5% de la utilidad bruta generada en un solo año</strong> operativo, logrando una recuperación de la inversión prácticamente inmediata[cite: 10].
+</div>
+
+<div style="text-align: center; margin-top: 35px; border-top: 1px solid var(--border-node); padding-top: 20px;">
+    <p style="margin-bottom: 15px; font-size: 12px; color: #888;"><em>Consulte el modelo financiero interactivo para ver el APU detallado y los cálculos de flujo de caja[cite: 10]:</em></p>
+    <a href="../docs/modulo3/Flujo_de_Caja.xlsx" download style="display: inline-block; padding: 10px 20px; font-size: 13px; background-color: rgba(76, 175, 80, 0.15); color: #4caf50; text-decoration: none; border: 1px solid #4caf50; border-radius: 4px; font-weight: bold; transition: all 0.3s;">
+        📥 Descargar Excel Financiero (Presupuesto y APU)
+    </a>
+</div>
