@@ -46,7 +46,8 @@
             overflow: hidden; color: var(--text-main);
             display: flex; justify-content: center; align-items: center;
             transition: background 0.5s ease;
-            user-select: none;
+            -webkit-user-select: none; /* Soporte para Safari y iOS */
+            user-select: none;         /* Estándar general */
         }
 
         /* ==========================================================================
