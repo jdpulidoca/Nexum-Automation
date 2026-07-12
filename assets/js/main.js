@@ -306,6 +306,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(html => {
                     // Inyecta el contenido del archivo externo en el panel
                     panelContainer.innerHTML = html;
+
+                    // IMPORTANTE: los <script> insertados vía innerHTML NO se ejecutan
+                    // solos (así funciona el DOM en todos los navegadores). Si el
+                    // fragmento trae su propio <script> (parallax, selectores, etc.),
+                    // hay que recrearlo para que sí corra:
+                    panelContainer.querySelectorAll('script').forEach(oldScript => {
+                        const newScript = document.createElement('script');
+                        Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                        newScript.textContent = oldScript.textContent;
+                        oldScript.replaceWith(newScript);
+                    });
                 })
                 .catch(error => {
                     console.error('Error cargando el panel:', error);

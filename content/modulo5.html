@@ -8,7 +8,6 @@
         display: flex;
         flex-direction: row;
         gap: 30px;
-        font-family: 'Segoe UI', sans-serif;
         align-items: flex-start;
         padding: 10px;
         position: relative;
@@ -26,17 +25,15 @@
         justify-content: center;
     }
 
-    /* Lienzo SVG para la red (Línea central y ramas) */
     .tw-network-canvas {
         position: absolute;
         top: 0; left: 0; width: 100%; height: 100%;
         z-index: 0;
         pointer-events: none;
     }
-    .tw-line-main { stroke: #b0b8d1; stroke-width: 1.5; stroke-dasharray: 4 4; opacity: 0.7; }
-    .tw-line-ghost { stroke: #e0e4f0; stroke-width: 1.5; stroke-dasharray: 2 4; }
+    .tw-line-main { stroke: var(--text-muted); stroke-width: 1.5; stroke-dasharray: 4 4; opacity: 0.45; }
+    .tw-line-ghost { stroke: var(--text-muted); stroke-width: 1.5; stroke-dasharray: 2 4; opacity: 0.3; }
 
-    /* Contenedor de la línea de tiempo */
     .tw-timeline {
         position: relative;
         z-index: 2;
@@ -48,9 +45,7 @@
         align-items: center;
         gap: 35px;
     }
-    
-    /* Contenedor individual del Nodo (Paralaje) 
-       NOTA: Se removió la transición aquí para que el JS funcione sin trabas */
+
     .tw-node {
         position: relative;
         cursor: pointer;
@@ -58,7 +53,7 @@
         align-items: center;
         justify-content: center;
     }
-    
+
     /* ROMPER LA SIMETRÍA (Posiciones orgánicas) */
     .tw-node:nth-of-type(1) { margin-left: -15px; }
     .tw-node:nth-of-type(2) { margin-left: 20px; }
@@ -67,279 +62,325 @@
     .tw-node:nth-of-type(5) { margin-left: -20px; }
     .tw-node:nth-of-type(6) { margin-left: 15px; }
 
-    /* Círculo del Nodo */
     .tw-node-icon {
-        width: 55px;
-        height: 55px;
-        border-radius: 50%;
-        background: #ffffff;
-        border: 1px solid #d1d5db;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 22px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        position: relative;
-        z-index: 3;
+        width: 55px; height: 55px; border-radius: 50%;
+        background: var(--node-bg); border: 1px solid var(--border-node);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 22px; box-shadow: var(--shadow-node); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+        transition: border-color 0.4s, box-shadow 0.4s; /* Quitamos 'transform' de aquí para que JS lo maneje */
+        position: relative; z-index: 3;
     }
 
-    /* Etiqueta de texto (Multilínea y Hover) */
     .tw-node-text {
-        position: absolute;
-        left: 70px;
-        width: 110px; 
-        font-size: 12px;
-        font-weight: 600;
-        color: #4a5568;
-        background: rgba(255, 255, 255, 0.95);
-        padding: 6px 10px;
-        border-radius: 6px;
-        pointer-events: none;
-        line-height: 1.3;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        
-        /* Oculto por defecto, animación de entrada */
-        opacity: 0;
-        transform: translateX(-15px);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 2;
+        position: absolute; left: 70px; width: 110px;
+        font-size: 12px; font-weight: 600; color: var(--text-muted);
+        background: var(--node-bg); padding: 6px 10px; border-radius: 6px;
+        pointer-events: none; line-height: 1.3; box-shadow: var(--shadow-node);
+        border: 1px solid var(--border-node);
+        opacity: 0; transform: translateX(-15px);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 2;
     }
 
-    /* EFECTOS HOVER (Muestra el texto SOLO al pasar el mouse) */
-    .tw-node:hover .tw-node-icon {
-        transform: scale(1.15);
-        border-color: #7986cb;
-        box-shadow: 0 0 0 4px rgba(63, 81, 181, 0.05), 0 8px 20px rgba(63, 81, 181, 0.15);
+    .tw-node:hover .tw-node-icon,
+    .tw-node.near .tw-node-icon {
+        border-color: var(--nexum-cyan);
+        box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.12), 0 8px 20px rgba(14, 165, 233, 0.2);
     }
-    
-    .tw-node:hover .tw-node-text {
-        opacity: 1;
-        transform: translateX(0);
-    }
-    
-    /* Cuando el Radio está seleccionado (ACTIVO) - SOLO afecta al icono, no al texto */
+    .tw-node:hover .tw-node-text,
+    .tw-node.near .tw-node-text { opacity: 1; transform: translateX(0); color: var(--nexum-cyan); }
+
     #rad-linea:checked ~ .tw-sidebar label[for="rad-linea"] .tw-node-icon,
     #rad-maq1:checked ~ .tw-sidebar label[for="rad-maq1"] .tw-node-icon,
     #rad-maq2:checked ~ .tw-sidebar label[for="rad-maq2"] .tw-node-icon,
     #rad-maq3:checked ~ .tw-sidebar label[for="rad-maq3"] .tw-node-icon,
     #rad-maq4:checked ~ .tw-sidebar label[for="rad-maq4"] .tw-node-icon,
     #rad-maq5:checked ~ .tw-sidebar label[for="rad-maq5"] .tw-node-icon {
-        border-color: #3f51b5;
-        box-shadow: 0 0 0 4px rgba(63, 81, 181, 0.15), 0 0 25px rgba(63, 81, 181, 0.3);
-        transform: scale(1.15);
+        border-color: var(--nexum-cyan);
+        box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.18), 0 0 25px rgba(14, 165, 233, 0.4);
     }
 
-    /* NODOS FANTASMA (Insinuaciones de red) */
-    .ghost-dot {
-        position: absolute;
-        background: #b0b8d1;
-        border-radius: 50%;
-    }
+    .ghost-dot { position: absolute; background: var(--nexum-purple); opacity: 0.4; border-radius: 50%; }
     .ghost-dot.small { width: 5px; height: 5px; }
-    .ghost-dot.medium { width: 8px; height: 8px; opacity: 0.6; }
-
+    .ghost-dot.medium { width: 8px; height: 8px; opacity: 0.5; }
 
     /* =========================================
        COLUMNA DERECHA: CONTENIDO VISUAL
        ========================================= */
-    .tw-main-content {
-        flex-grow: 1;
-        min-width: 0;
-        padding-left: 30px; 
-    }
+    .tw-main-content { flex-grow: 1; min-width: 0; padding-left: 30px; }
 
-    .tw-content { 
-        display: none; 
-        padding: 25px; 
-        border: 1px solid rgba(0,0,0,0.05); 
-        border-radius: 12px; 
-        background: #ffffff;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.02);
+    .tw-content {
+        display: none; padding: 25px; border: 1px solid var(--border-node); border-radius: 12px;
+        background: var(--node-bg); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); box-shadow: var(--shadow-node);
         animation: contentFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
-    
+
     @keyframes contentFadeIn { from { opacity: 0; transform: scale(0.98) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-    
+
     #rad-linea:checked ~ .tw-main-content #content-linea,
     #rad-maq1:checked ~ .tw-main-content #content-maq1,
     #rad-maq2:checked ~ .tw-main-content #content-maq2,
     #rad-maq3:checked ~ .tw-main-content #content-maq3,
     #rad-maq4:checked ~ .tw-main-content #content-maq4,
     #rad-maq5:checked ~ .tw-main-content #content-maq5 { display: block; }
-    
-    .tw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
-    @media (max-width: 1000px) { .tw-grid { grid-template-columns: 1fr; } }
-    
-    .tw-iframe-container { 
-        position: relative; 
-        padding-bottom: 56.25%; /* 16:9 */
-        height: 0; overflow: hidden; 
-        border-radius: 8px; border: 1px solid #e2e8f0; background: #f1f5f9; 
+
+    .tw-station-title { margin-top: 0; color: var(--nexum-blue); border-bottom: 1px solid var(--border-node); padding-bottom: 10px; font-weight: 700; }
+    .tw-caption { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin: 22px 0 8px 0; color: var(--nexum-cyan); opacity: 0.8; }
+    .tw-caption:first-of-type { margin-top: 0; }
+
+    .tw-iframe-container {
+        position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+        border-radius: 8px; border: 1px solid var(--border-node); background: rgba(142,142,147,0.08);
     }
     .tw-iframe-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 </style>
 
-<!-- ESTRUCTURA HTML PRINCIPAL -->
 <div class="twin-wrapper">
-    
-    <!-- RADIOS OCULTOS -->
+
     <input type="radio" id="rad-linea" name="tw-tabs" class="tw-radio" checked>
     <input type="radio" id="rad-maq1" name="tw-tabs" class="tw-radio">
     <input type="radio" id="rad-maq2" name="tw-tabs" class="tw-radio">
     <input type="radio" id="rad-maq3" name="tw-tabs" class="tw-radio">
     <input type="radio" id="rad-maq4" name="tw-tabs" class="tw-radio">
     <input type="radio" id="rad-maq5" name="tw-tabs" class="tw-radio">
-    
-    <!-- BARRA LATERAL (EL MINI-HUB) -->
-    <div class="tw-sidebar" id="mini-constellation">
-        
-        <!-- Líneas de la red -->
-        <svg class="tw-network-canvas">
-            <line x1="50%" y1="5%" x2="50%" y2="95%" class="tw-line-main" />
-            <line x1="50%" y1="18%" x2="15%" y2="28%" class="tw-line-ghost" />
-            <line x1="50%" y1="42%" x2="85%" y2="35%" class="tw-line-ghost" />
-            <line x1="50%" y1="72%" x2="20%" y2="82%" class="tw-line-ghost" />
-        </svg>
 
-        <!-- Nodos Fantasma -->
+    <div class="tw-sidebar" id="mini-constellation">
+        <!-- SVG Limpio: JS dibujará las líneas aquí -->
+        <svg class="tw-network-canvas"></svg>
+
         <div class="ghost-dot medium parallax-el" data-speed="0.08" style="top: 28%; left: 15%;"></div>
         <div class="ghost-dot small parallax-el" data-speed="0.12" style="top: 35%; left: 85%;"></div>
         <div class="ghost-dot medium parallax-el" data-speed="0.05" style="top: 82%; left: 20%;"></div>
 
-        <!-- Eje central de Nodos interactivos -->
         <div class="tw-timeline">
-            
             <label for="rad-linea" class="tw-node parallax-el" data-speed="0.06">
                 <div class="tw-node-icon">🏭</div>
                 <div class="tw-node-text">Línea Principal</div>
             </label>
-            
             <label for="rad-maq1" class="tw-node parallax-el" data-speed="0.1">
                 <div class="tw-node-icon">⚙️</div>
                 <div class="tw-node-text">Formadora</div>
             </label>
-            
             <label for="rad-maq2" class="tw-node parallax-el" data-speed="0.04">
                 <div class="tw-node-icon">💦</div>
                 <div class="tw-node-text">Lavadora</div>
             </label>
-            
             <label for="rad-maq3" class="tw-node parallax-el" data-speed="0.08">
                 <div class="tw-node-icon">🍾</div>
                 <div class="tw-node-text">Llenadora y Tapadora</div>
             </label>
-            
             <label for="rad-maq4" class="tw-node parallax-el" data-speed="0.05">
                 <div class="tw-node-icon">🚫</div>
                 <div class="tw-node-text">Rechazadora</div>
             </label>
-            
             <label for="rad-maq5" class="tw-node parallax-el" data-speed="0.12">
                 <div class="tw-node-icon">📦</div>
                 <div class="tw-node-text">Empaquetadora</div>
             </label>
-
         </div>
     </div>
-    
-    <!-- ÁREA PRINCIPAL (CONTENIDO VISUAL) -->
+
     <div class="tw-main-content">
-        
-        <!-- CONTENIDO: LÍNEA COMPLETA -->
+
         <div id="content-linea" class="tw-content">
-            <h4 style="margin-top: 0; color: var(--accent-blue, #3f51b5); border-bottom: 1px solid #eee; padding-bottom: 10px;">🏭 Visión General: Línea Principal</h4>
-            <div class="tw-grid">
-                <div>
-                    <p style="font-size: 13px; font-weight: 600; text-align: center; margin: 0 0 10px 0; color: #555;">Modelo 3D (Onshape)</p>
-                    <div class="tw-iframe-container"><iframe src="" title="Línea Completa 3D"></iframe></div>
-                </div>
-                <div>
-                    <p style="font-size: 13px; font-weight: 600; text-align: center; margin: 0 0 10px 0; color: #555;">Video de Funcionamiento</p>
-                    <div class="tw-iframe-container"><iframe src="" title="Video Línea Completa"></iframe></div>
-                </div>
-            </div>
+            <h4 class="tw-station-title">🏭 Visión General: Línea Principal</h4>
+            <p class="panel-text">Breve descripción de la línea completa: qué productos maneja, cuántas estaciones la componen y su función dentro del proceso.</p>
+            <p class="tw-caption">▶ Video de Funcionamiento</p>
+            <div class="tw-iframe-container"><iframe src="" title="Video Línea Completa"></iframe></div>
+            <p class="tw-caption">◈ Modelo 3D (OnShape)</p>
+            <div class="tw-iframe-container"><iframe src="" title="Línea Completa 3D"></iframe></div>
         </div>
 
-        <!-- CONTENIDO: FORMADORA -->
         <div id="content-maq1" class="tw-content">
-            <h4 style="margin-top: 0; color: var(--accent-blue, #3f51b5); border-bottom: 1px solid #eee; padding-bottom: 10px;">⚙️ Estación: Formadora</h4>
-            <div class="tw-grid">
-                <div><div class="tw-iframe-container"><iframe src="" title="Formadora 3D"></iframe></div></div>
-                <div><div class="tw-iframe-container"><iframe src="" title="Video Formadora"></iframe></div></div>
-            </div>
+            <h4 class="tw-station-title">⚙️ Estación: Formadora</h4>
+            <p class="panel-text">Breve descripción de la Formadora: qué hace en el proceso, con qué material trabaja y por qué es crítica para la línea.</p>
+            <p class="tw-caption">▶ Video de Funcionamiento</p>
+            <div class="tw-iframe-container"><iframe src="" title="Video Formadora"></iframe></div>
+            <p class="tw-caption">◈ Modelo 3D (OnShape)</p>
+            <div class="tw-iframe-container"><iframe src="" title="Formadora 3D"></iframe></div>
         </div>
 
-        <!-- CONTENIDO: LAVADORA -->
         <div id="content-maq2" class="tw-content">
-            <h4 style="margin-top: 0; color: var(--accent-blue, #3f51b5); border-bottom: 1px solid #eee; padding-bottom: 10px;">💦 Estación: Lavadora</h4>
-            <div class="tw-grid">
-                <div><div class="tw-iframe-container"><iframe src="" title="Lavadora 3D"></iframe></div></div>
-                <div><div class="tw-iframe-container"><iframe src="" title="Video Lavadora"></iframe></div></div>
-            </div>
+            <h4 class="tw-station-title">💦 Estación: Lavadora</h4>
+            <p class="panel-text">Breve descripción de la Lavadora: su función de limpieza/preparación antes del llenado y sus parámetros clave.</p>
+            <p class="tw-caption">▶ Video de Funcionamiento</p>
+            <div class="tw-iframe-container"><iframe src="" title="Video Lavadora"></iframe></div>
+            <p class="tw-caption">◈ Modelo 3D (OnShape)</p>
+            <div class="tw-iframe-container"><iframe src="" title="Lavadora 3D"></iframe></div>
         </div>
 
-        <!-- CONTENIDO: LLENADORA Y TAPADORA -->
         <div id="content-maq3" class="tw-content">
-            <h4 style="margin-top: 0; color: var(--accent-blue, #3f51b5); border-bottom: 1px solid #eee; padding-bottom: 10px;">🍾 Estación: Llenadora y Tapadora</h4>
-            <div class="tw-grid">
-                <div><div class="tw-iframe-container"><iframe src="" title="Llenadora 3D"></iframe></div></div>
-                <div><div class="tw-iframe-container"><iframe src="" title="Video Llenadora"></iframe></div></div>
-            </div>
+            <h4 class="tw-station-title">🍾 Estación: Llenadora y Tapadora</h4>
+            <p class="panel-text">Breve descripción de la Llenadora y Tapadora: precisión de dosificación, tipo de tapado y su rol como estación crítica de calidad.</p>
+            <p class="tw-caption">▶ Video de Funcionamiento</p>
+            <div class="tw-iframe-container"><iframe src="" title="Video Llenadora"></iframe></div>
+            <p class="tw-caption">◈ Modelo 3D (OnShape)</p>
+            <div class="tw-iframe-container"><iframe src="" title="Llenadora 3D"></iframe></div>
         </div>
 
-        <!-- CONTENIDO: RECHAZADORA -->
         <div id="content-maq4" class="tw-content">
-            <h4 style="margin-top: 0; color: var(--accent-blue, #3f51b5); border-bottom: 1px solid #eee; padding-bottom: 10px;">🚫 Estación: Rechazadora</h4>
-            <div class="tw-grid">
-                <div><div class="tw-iframe-container"><iframe src="" title="Rechazadora 3D"></iframe></div></div>
-                <div><div class="tw-iframe-container"><iframe src="" title="Video Rechazadora"></iframe></div></div>
-            </div>
+            <h4 class="tw-station-title">🚫 Estación: Rechazadora</h4>
+            <p class="panel-text">Breve descripción de la Rechazadora: criterio de inspección, cómo detecta no conformidades y qué hace con el producto rechazado.</p>
+            <p class="tw-caption">▶ Video de Funcionamiento</p>
+            <div class="tw-iframe-container"><iframe src="" title="Video Rechazadora"></iframe></div>
+            <p class="tw-caption">◈ Modelo 3D (OnShape)</p>
+            <div class="tw-iframe-container"><iframe src="" title="Rechazadora 3D"></iframe></div>
         </div>
 
-        <!-- CONTENIDO: EMPAQUETADORA -->
         <div id="content-maq5" class="tw-content">
-            <h4 style="margin-top: 0; color: var(--accent-blue, #3f51b5); border-bottom: 1px solid #eee; padding-bottom: 10px;">📦 Estación: Empaquetadora</h4>
-            <div class="tw-grid">
-                <div><div class="tw-iframe-container"><iframe src="" title="Empaquetadora 3D"></iframe></div></div>
-                <div><div class="tw-iframe-container"><iframe src="" title="Video Empaquetadora"></iframe></div></div>
-            </div>
+            <h4 class="tw-station-title">📦 Estación: Empaquetadora</h4>
+            <p class="panel-text">Breve descripción de la Empaquetadora: formato de empaque final, tasa de producción y su conexión con el despacho.</p>
+            <p class="tw-caption">▶ Video de Funcionamiento</p>
+            <div class="tw-iframe-container"><iframe src="" title="Video Empaquetadora"></iframe></div>
+            <p class="tw-caption">◈ Modelo 3D (OnShape)</p>
+            <div class="tw-iframe-container"><iframe src="" title="Empaquetadora 3D"></iframe></div>
         </div>
 
     </div>
 </div>
 
-<!-- SCRIPT DE PARALAJE (CORREGIDO PARA EVITAR CONFLICTOS CON CSS) -->
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const miniHub = document.getElementById('mini-constellation');
-        if (!miniHub) return;
-        
-        const parallaxElements = miniHub.querySelectorAll('.parallax-el');
+(function () {
+    const miniHub = document.getElementById('mini-constellation');
+    if (!miniHub) return;
 
-        miniHub.addEventListener('mousemove', (e) => {
-            const rect = miniHub.getBoundingClientRect();
-            // Calculamos la posición del mouse respecto al centro del contenedor
-            const mouseX = e.clientX - rect.left - (rect.width / 2);
-            const mouseY = e.clientY - rect.top - (rect.height / 2);
+    const svgCanvas = miniHub.querySelector('.tw-network-canvas');
+    const stationNodes = Array.from(miniHub.querySelectorAll('.tw-node'));
+    const ghostDots = Array.from(miniHub.querySelectorAll('.ghost-dot'));
+    
+    // Arrays para guardar la data de la red local
+    const netNodes = [];
+    const netLines = [];
 
-            parallaxElements.forEach(el => {
-                const speed = parseFloat(el.getAttribute('data-speed')) || 0.1;
-                const x = mouseX * speed;
-                const y = mouseY * speed;
-                
-                // Quitamos la transición temporalmente para que siga al mouse en tiempo real
-                el.style.transition = 'none';
-                el.style.transform = `translate(${x}px, ${y}px)`;
-            });
-        });
-
-        miniHub.addEventListener('mouseleave', () => {
-            // Devolvemos la transición suave solo cuando el mouse sale del contenedor
-            parallaxElements.forEach(el => {
-                el.style.transition = 'transform 0.4s ease-out';
-                el.style.transform = `translate(0px, 0px)`;
-            });
+    // 1. Inicializar entidades
+    stationNodes.forEach(node => {
+        const icon = node.querySelector('.tw-node-icon');
+        icon.style.transition = 'border-color 0.4s, box-shadow 0.4s'; // Quitar 'transform' del CSS
+        netNodes.push({ 
+            el: node, target: icon, isGhost: false, 
+            currX: 0, currY: 0, targetX: 0, targetY: 0,
+            currScale: 1, targetScale: 1
         });
     });
+
+    ghostDots.forEach(dot => {
+        dot.style.transition = 'none'; // Importante para que JS controle fluido
+        netNodes.push({ 
+            el: dot, target: dot, isGhost: true, 
+            currX: 0, currY: 0, targetX: 0, targetY: 0,
+            currScale: 1, targetScale: 1,
+            seed: Math.random() * 10 
+        });
+    });
+
+    // 2. Función para crear líneas dinámicas
+    function connect(nodeA, nodeB, lineClass) {
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('class', lineClass);
+        svgCanvas.appendChild(line);
+        netLines.push({ el: line, n1: nodeA, n2: nodeB });
+    }
+
+    // Dibujar backbone (conexión entre las estaciones)
+    for (let i = 0; i < stationNodes.length - 1; i++) {
+        connect(netNodes[i], netNodes[i + 1], 'tw-line-main');
+    }
+    
+    // Conectar puntos fantasma a la red (Estación 2 -> Fantasma 1, Estación 4 -> Fantasma 2, etc.)
+    if (ghostDots.length >= 3) {
+        connect(netNodes[1], netNodes[stationNodes.length], 'tw-line-ghost');     // Formadora -> Ghost 1
+        connect(netNodes[3], netNodes[stationNodes.length + 1], 'tw-line-ghost'); // Llenadora -> Ghost 2
+        connect(netNodes[5], netNodes[stationNodes.length + 2], 'tw-line-ghost'); // Empaquetadora -> Ghost 3
+    }
+
+    // 3. Capturar estado del ratón
+    let mouseX = -1000, mouseY = -1000;
+    let isHovering = false;
+    let loopTime = 0;
+
+    const influenceRadius = 85;
+    const maxDisplacement = 9;
+
+    miniHub.addEventListener('mousemove', (e) => {
+        const rect = miniHub.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
+        isHovering = true;
+    });
+
+    miniHub.addEventListener('mouseleave', () => {
+        isHovering = false;
+    });
+
+    // 4. Motor Neuronal Mini (Bucle a 60 FPS)
+    function runMiniEngine() {
+        loopTime += 0.02;
+
+        netNodes.forEach(item => {
+            const elRect = item.el.getBoundingClientRect();
+            const hubRect = miniHub.getBoundingClientRect();
+            
+            // Hallar el centro absoluto del contenedor original, sin su desplazamiento
+            const originalCX = (elRect.left - hubRect.left) + (elRect.width / 2) - item.currX;
+            const originalCY = (elRect.top - hubRect.top) + (elRect.height / 2) - item.currY;
+
+            if (item.isGhost) {
+                if (isHovering) {
+                    // Parallax sutil como grupo
+                    const speed = parseFloat(item.el.getAttribute('data-speed')) || 0.1;
+                    const cX = hubRect.width / 2;
+                    const cY = hubRect.height / 2;
+                    item.targetX = (mouseX - cX) * speed;
+                    item.targetY = (mouseY - cY) * speed;
+                } else {
+                    // Si el ratón se va, flotan independientemente como en el motor principal
+                    item.targetX = Math.sin(loopTime + item.seed) * 4;
+                    item.targetY = Math.cos(loopTime * 0.8 + item.seed) * 3;
+                }
+            } else {
+                // Cálculo para estaciones
+                const dx = mouseX - originalCX;
+                const dy = mouseY - originalCY;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (isHovering && dist < influenceRadius) {
+                    const pushForce = 1 - (dist / influenceRadius);
+                    const angle = Math.atan2(dy, dx);
+                    item.targetX = Math.cos(angle) * maxDisplacement * pushForce;
+                    item.targetY = Math.sin(angle) * maxDisplacement * pushForce;
+                    item.targetScale = 1.15;
+                    item.el.classList.add('near');
+                } else {
+                    item.targetX = 0;
+                    item.targetY = 0;
+                    item.targetScale = 1.0;
+                    item.el.classList.remove('near');
+                }
+            }
+
+            // Aplicar física/inercia (Suavizado interpolado)
+            item.currX += (item.targetX - item.currX) * 0.12;
+            item.currY += (item.targetY - item.currY) * 0.12;
+            item.currScale += (item.targetScale - item.currScale) * 0.15;
+
+            item.target.style.transform = `translate(${item.currX}px, ${item.currY}px) scale(${item.currScale})`;
+            
+            // Guardamos las coordenadas actualizadas para las líneas
+            item.svgX = originalCX + item.currX;
+            item.svgY = originalCY + item.currY;
+        });
+
+        // 5. Actualizar coordenadas de las líneas
+        netLines.forEach(line => {
+            line.el.setAttribute('x1', line.n1.svgX);
+            line.el.setAttribute('y1', line.n1.svgY);
+            line.el.setAttribute('x2', line.n2.svgX);
+            line.el.setAttribute('y2', line.n2.svgY);
+        });
+
+        requestAnimationFrame(runMiniEngine);
+    }
+
+    // Arrancar el motor local
+    requestAnimationFrame(runMiniEngine);
+})();
 </script>
