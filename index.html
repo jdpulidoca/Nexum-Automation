@@ -40,21 +40,45 @@
     </div>
 
     <div class="theme-toggle">
-        <label><input type="checkbox" id="mode-checkbox"><div class="slider"><span>☀️</span><span>🌙</span></div></label>
+        <label>
+            <input type="checkbox" id="mode-checkbox" />
+            <div class="slider">
+                <!-- Icono de Sol Vectorial (Tema Claro) -->
+                <span class="icon-light" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </span>
+                <!-- Icono de Luna Vectorial (Tema Oscuro) -->
+                <span class="icon-dark" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </span>
+            </div>
+        </label>
     </div>
     
     <!-- Botón Global (También configurado para abrir un archivo llamado bib-general.html) -->
     <button class="hud-global-ref-btn" onclick="cargarContenidoPanel('bib-general', event)">[ ACCESS_ALL_REFERENCES ]</button>
 
-    <div class="neural-container" id="space-container">
+   <div class="neural-container" id="space-container">
         
-        <div class="hud-sector-tag" style="top: 25px; left: 30px;">[ DEPT 01 // HUMAN CORE & METHODOLOGY ]</div>
-        <div class="hud-sector-tag" style="top: 25px; left: 420px;">[ DEPT 02 // COMMERCIAL STRATEGY ]</div>
-        <div class="hud-sector-tag" style="top: 25px; left: 690px;">[ DEPT 03 // ADVANCED ENGINEERING ]</div>
-
         <svg class="synaptic-space" id="canvas-synapses"></svg>
 
-        <a href="#" id="n-center" class="node node-hub-identity sec-human" style="top: 240px; left: 200px;">
+        <!-- ========================================== -->
+        <!-- SECTOR 1: HUMAN CORE                       -->
+        <!-- ========================================== -->
+        
+        <a href="#" id="n-center" class="node node-hub-identity sec-human" style="top: 250px; left: 120px;">
             <div class="logo-pupil" id="retina-eye">
                 <svg viewBox="0 0 400 400" width="100%" height="100%">
                     <polygon class="contorno-hexagono" points="200,60 321,130 321,270 200,340 79,270 79,130" />
@@ -68,70 +92,92 @@
                     <g class="cruz-calada"><line x1="192" y1="200" x2="208" y2="200" /><line x1="200" y1="192" x2="200" y2="208" /></g>
                 </svg>
             </div>
-            <span class="node-label" style="opacity: 1;">Equipo Consultor</span>
+            <span class="node-label" style="opacity: 1;">HUMAN CORE & METHODOLOGY</span>
         </a>
         
-        <!-- NODO 1: CONTEXTO OPERATIVO (Este es el que te abre el contexto.html) -->
-        <a href="#" id="n-contexto" class="node node-primary sec-human" style="top: 110px; left: 110px;" onclick="cargarContenidoPanel('contexto', event)">
+        <a href="#" id="n-contexto" class="node node-primary sec-human" style="top: 90px; left: 60px;" onclick="cargarContenidoPanel('contexto', event)">
             <span class="node-icon">🏭</span><span class="node-label">Contexto Operativo</span>
         </a>
-        
-        <a href="web/resumen.html" id="n-resumen" class="node node-support sec-human" style="top: 260px; left: 40px;">
-            <span class="node-icon">📋</span><span class="node-label">Resumen Ejecutivo</span>
+
+        <a href="#" id="n-equipo" class="node node-primary sec-human" style="top: 140px; left: 260px;" onclick="cargarContenidoPanel('equipo', event)">
+            <span class="node-icon">👥</span><span class="node-label">Equipo Consultor</span>
         </a>
-        <a href="web/reflexiones.html" id="n-reflexiones" class="node node-primary sec-human" style="top: 390px; left: 150px;">
+                
+        <a href="#" id="n-reflexiones" class="node node-primary sec-human" style="top: 420px; left: 90px;" onclick="cargarContenidoPanel('reflexiones', event)">
             <span class="node-icon">🧠</span><span class="node-label">Reflexiones Académicas</span>
         </a>
         
-        <!-- NODO BIBLIOGRAFÍA 1 (Configurado para abrir bib1.html) -->
-        <a href="#" id="bib-sector1" class="node node-satellite sec-human" style="top: 420px; left: 280px;" onclick="cargarContenidoPanel('bib1', event)">
+        <a href="#" id="bib-sector1" class="node node-satellite sec-human" style="top: 370px; left: 250px;" onclick="cargarContenidoPanel('bib1', event)">
             <span class="node-icon">📚₁</span><span class="node-label">Refs: Contexto</span>
         </a>
 
-        <a href="#" id="n-propuesta" class="node node-hub-commercial sec-commercial" style="top: 130px; left: 430px;">
-            <span class="node-icon">🎯</span><span class="node-label" style="opacity: 1;">Propuesta Comercial</span>
-        </a>
-        <a href="#" id="n-economia" class="node node-primary sec-commercial" style="top: 290px; left: 360px;" onclick="cargarContenidoPanel('modulo3', event)">
-            <span class="node-icon">💰</span><span class="node-label">Viabilidad Económica</span>
-        </a>
-       
-        <a href="#" id="n-isa" class="node node-primary sec-commercial" style="top: 290px; left: 520px;" onclick="cargarContenidoPanel('modulo1', event)">
-            <span class="node-icon">🏛️</span><span class="node-label">Arquitectura ISA-95</span>
-        </a>
-        <a href="#" id="n-gestion" class="node node-support sec-commercial" style="top: 430px; left: 450px;" onclick="cargarContenidoPanel('modulo2', event)">
-            <span class="node-icon">📈</span><span class="node-label">Gestión de Producción</span>
+        <!-- ========================================== -->
+        <!-- SECTOR 2: COMMERCIAL STRATEGY              -->
+        <!-- ========================================== -->
+
+        <a href="#" id="n-propuesta" class="node node-hub-commercial sec-commercial" style="top: 220px; left: 480px;">
+            <span class="node-icon">🎯</span><span class="node-label" style="opacity: 1;">COMMERCIAL STRATEGY</span>
         </a>
         
-        <!-- NODO BIBLIOGRAFÍA 2 (Configurado para abrir bib2.html) -->
-        <a href="#" id="bib-sector2" class="node node-satellite sec-commercial" style="top: 60px; left: 580px;" onclick="cargarContenidoPanel('bib2', event)">
+        <a href="#" id="n-propuesta-doc" class="node node-primary sec-commercial" style="top: 70px; left: 410px;" onclick="cargarContenidoPanel('propuesta', event)">
+            <span class="node-icon">📄</span><span class="node-label">Documento Propuesta</span>
+        </a>
+
+        <a href="#" id="bib-sector2" class="node node-satellite sec-commercial" style="top: 100px; left: 610px;" onclick="cargarContenidoPanel('bib2', event)">
             <span class="node-icon">📚₂</span><span class="node-label">Refs: Estrategia</span>
         </a>
 
-        <a href="#" id="n-digital" class="node node-hub-tech sec-tech" style="top: 280px; left: 740px;">
-            <span class="node-icon">🌐</span><span class="node-label" style="opacity: 1;">Digital Twin & SCADA</span>
+        <a href="#" id="n-economia" class="node node-primary sec-commercial" style="top: 360px; left: 380px;" onclick="cargarContenidoPanel('modulo3', event)">
+            <span class="node-icon">💰</span><span class="node-label">Viabilidad Económica</span>
         </a>
-        <a href="web/controladores.html" id="n-plc" class="node node-primary sec-tech" style="top: 140px; left: 790px;">
-            <span class="node-icon">💻</span><span class="node-label">Controladores PLC</span>
-        </a>
-        <a href="#" id="n-celda" class="node node-primary sec-tech" style="top: 290px; left: 880px;" onclick="cargarContenidoPanel('modulo4', event)">
-    <span class="node-icon">🤖</span><span class="node-label">Celda Robotizada</span>
+       
+        <a href="#" id="n-isa" class="node node-primary sec-commercial" style="top: 330px; left: 590px;" onclick="cargarContenidoPanel('modulo1', event)">
+            <span class="node-icon">🏛️</span><span class="node-label">Arquitectura ISA-95</span>
         </a>
         
-        <!-- NODO BIBLIOGRAFÍA 3 (Configurado para abrir bib3.html) -->
-        <a href="#" id="bib-sector3" class="node node-satellite sec-tech" style="top: 440px; left: 780px;" onclick="cargarContenidoPanel('bib3', event)">
+        <a href="#" id="n-gestion" class="node node-support sec-commercial" style="top: 480px; left: 490px;" onclick="cargarContenidoPanel('modulo2', event)">
+            <span class="node-icon">📈</span><span class="node-label">Gestión de Producción</span>
+        </a>
+
+       <!-- ========================================== -->
+        <!-- SECTOR 3: ADVANCED ENGINEERING             -->
+        <!-- ========================================== -->
+
+        <a href="#" id="n-digital" class="node node-hub-tech sec-tech" style="top: 240px; left: 820px;">
+            <span class="node-icon">🌐</span><span class="node-label" style="opacity: 1;">ADVANCED ENGINEERING</span>
+        </a>
+        
+        <a href="#" id="n-plc" class="node node-primary sec-tech" style="top: 110px; left: 750px;" onclick="cargarContenidoPanel('controladores', event)">
+            <span class="node-icon">💻</span><span class="node-label">Controladores PLC</span>
+        </a>
+        
+        <a href="#" id="n-scada" class="node node-primary sec-tech" style="top: 150px; left: 940px;" onclick="cargarContenidoPanel('modulo6', event)">
+            <span class="node-icon">🖥️</span><span class="node-label">Sistema SCADA</span>
+        </a>
+        
+        <a href="#" id="n-celda" class="node node-primary sec-tech" style="top: 310px; left: 960px;" onclick="cargarContenidoPanel('modulo4', event)">
+            <span class="node-icon">🤖</span><span class="node-label">Celda Robotizada</span>
+        </a>
+        
+        <a href="#" id="n-twin" class="node node-primary sec-tech" style="top: 450px; left: 850px;" onclick="cargarContenidoPanel('modulo5', event)">
+            <span class="node-icon">🪞</span><span class="node-label">Digital Twin</span>
+        </a>
+        
+        <a href="#" id="bib-sector3" class="node node-satellite sec-tech" style="top: 390px; left: 690px;" onclick="cargarContenidoPanel('bib3', event)">
             <span class="node-icon">📚₃</span><span class="node-label">Refs: Ingeniería</span>
         </a>
 
-        <div class="node-aesthetic syn-large" style="top: 120px; left: 340px;"></div>
-        <div class="node-aesthetic syn-medium" style="top: 220px; left: 320px;"></div>
-        <div class="node-aesthetic syn-small" style="top: 360px; left: 260px;"></div>
-        <div class="node-aesthetic syn-large" style="top: 180px; left: 650px;"></div>
-        <div class="node-aesthetic syn-medium" style="top: 380px; left: 620px;"></div>
-        <div class="node-aesthetic syn-small" style="top: 480px; left: 590px;"></div>
-        <div class="node-aesthetic syn-large" style="top: 240px; left: 710px;"></div>
-        <div class="node-aesthetic syn-medium" style="top: 100px; left: 900px;"></div>
-        <div class="node-aesthetic syn-small" style="top: 400px; left: 900px;"></div>
-
+        <!-- NODOS ESTÉTICOS (Redistribuidos para llenar los nuevos vacíos) -->
+        <div class="node-aesthetic syn-large" style="top: 80px; left: 200px;"></div>
+        <div class="node-aesthetic syn-medium" style="top: 280px; left: 320px;"></div>
+        <div class="node-aesthetic syn-small" style="top: 460px; left: 260px;"></div>
+        <div class="node-aesthetic syn-large" style="top: 160px; left: 680px;"></div>
+        <div class="node-aesthetic syn-medium" style="top: 400px; left: 550px;"></div>
+        <div class="node-aesthetic syn-small" style="top: 500px; left: 700px;"></div>
+        <div class="node-aesthetic syn-large" style="top: 200px; left: 900px;"></div>
+        <div class="node-aesthetic syn-medium" style="top: 60px; left: 800px;"></div>
+        <div class="node-aesthetic syn-small" style="top: 380px; left: 950px;"></div>
+        <div class="node-aesthetic syn-small" style="top: 20px; left: 500px;"></div>
     </div>
 
     <!-- AQUÍ SE INYECTA LA INFORMACIÓN -->

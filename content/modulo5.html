@@ -1,0 +1,219 @@
+<!-- ESTILOS DEL MENÚ Y SISTEMA DE PESTAÑAS (100% CSS) -->
+<style>
+    /* Ocultamos los selectores reales */
+    .tw-radio { display: none; }
+    
+    /* Contenedores de contenido ocultos por defecto */
+    .tw-content { 
+        display: none; 
+        padding: 20px; 
+        border: 1px solid var(--border-node, #ccc); 
+        border-radius: 8px; 
+        margin-top: 20px; 
+        background: rgba(142, 142, 147, 0.02);
+        animation: fadeIn 0.5s ease-in-out;
+    }
+    
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    
+    /* Lógica: Mostrar el contenido según el nodo seleccionado */
+    #rad-linea:checked ~ #content-linea,
+    #rad-maq1:checked ~ #content-maq1,
+    #rad-maq2:checked ~ #content-maq2,
+    #rad-maq3:checked ~ #content-maq3 {
+        display: block;
+    }
+    
+    /* Diseño del mapa de nodos en zigzag */
+    .tw-timeline {
+        position: relative;
+        max-width: 600px;
+        margin: 30px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
+    
+    /* Línea central del árbol */
+    .tw-timeline::before {
+        content: "";
+        position: absolute;
+        top: 0; bottom: 0; left: 50%;
+        width: 3px; 
+        background: var(--accent-blue, #3f51b5);
+        transform: translateX(-50%);
+        z-index: 1;
+        border-radius: 3px;
+        opacity: 0.5;
+    }
+    
+    /* Estilo de cada nodo/botón */
+    .tw-node {
+        position: relative;
+        z-index: 2;
+        width: 42%;
+        padding: 12px 15px;
+        background: #ffffff;
+        border: 2px solid var(--accent-blue, #3f51b5);
+        border-radius: 8px;
+        cursor: pointer;
+        text-align: center;
+        font-family: 'Segoe UI', sans-serif;
+        font-weight: bold;
+        font-size: 13px;
+        color: var(--text-main, #333);
+        transition: all 0.3s;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+    
+    .tw-node:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(63, 81, 181, 0.2);
+    }
+    
+    /* Alternar izquierda y derecha para el zigzag */
+    .tw-node:nth-of-type(odd) { align-self: flex-start; }
+    .tw-node:nth-of-type(even) { align-self: flex-end; }
+    
+    /* Punto conector hacia la línea central */
+    .tw-node::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 15px;
+        height: 3px;
+        background: var(--accent-blue, #3f51b5);
+        transform: translateY(-50%);
+    }
+    .tw-node:nth-of-type(odd)::after { right: -15px; }
+    .tw-node:nth-of-type(even)::after { left: -15px; }
+    
+    /* Estilo cuando el nodo está activo */
+    #rad-linea:checked ~ .tw-timeline label[for="rad-linea"],
+    #rad-maq1:checked ~ .tw-timeline label[for="rad-maq1"],
+    #rad-maq2:checked ~ .tw-timeline label[for="rad-maq2"],
+    #rad-maq3:checked ~ .tw-timeline label[for="rad-maq3"] {
+        background: var(--accent-blue, #3f51b5);
+        color: #ffffff;
+    }
+    
+    /* Grid para poner el 3D y el Video lado a lado */
+    .tw-grid { 
+        display: grid; 
+        grid-template-columns: 1fr 1fr; 
+        gap: 20px; 
+    }
+    @media (max-width: 800px) { 
+        .tw-grid { grid-template-columns: 1fr; } 
+    }
+    
+    /* Contenedor responsivo para Iframes (Onshape y Youtube) */
+    .tw-iframe-container { 
+        position: relative; 
+        padding-bottom: 65%; /* Proporción para que se vea bien el 3D */
+        height: 0; 
+        overflow: hidden; 
+        border-radius: 6px; 
+        border: 1px solid var(--border-node, #ccc); 
+        background: #eaeaea; 
+    }
+    .tw-iframe-container iframe { 
+        position: absolute; 
+        top: 0; left: 0; 
+        width: 100%; height: 100%; 
+        border: none; 
+    }
+</style>
+
+<!-- ESTRUCTURA HTML PRINCIPAL -->
+<div class="twin-wrapper" style="font-family: 'Segoe UI', sans-serif;">
+    
+    <!-- 1. LOS "RADIOS" OCULTOS (El motor del sistema) -->
+    <input type="radio" id="rad-linea" name="tw-tabs" class="tw-radio" checked>
+    <input type="radio" id="rad-maq1" name="tw-tabs" class="tw-radio">
+    <input type="radio" id="rad-maq2" name="tw-tabs" class="tw-radio">
+    <input type="radio" id="rad-maq3" name="tw-tabs" class="tw-radio">
+    
+    <!-- 2. EL MENÚ EN ZIGZAG -->
+    <h3 style="text-align: center; color: var(--accent-blue, #3f51b5); margin-bottom: 10px;">MAPA DEL GEMELO DIGITAL</h3>
+    <div class="tw-timeline">
+        <label for="rad-linea" class="tw-node">🏭 1. Línea Completa</label>
+        <label for="rad-maq1" class="tw-node">⚙️ 2. Máquina Ensamblaje</label>
+        <label for="rad-maq2" class="tw-node">📦 3. Celda Robótica</label>
+        <label for="rad-maq3" class="tw-node">🚚 4. Estación Final</label>
+    </div>
+    
+    <!-- 3. LOS CONTENEDORES DE INFORMACIÓN -->
+    
+    <!-- CONTENIDO: LÍNEA COMPLETA -->
+    <div id="content-linea" class="tw-content">
+        <h4 style="margin-top: 0; color: var(--accent-blue, #3f51b5); border-bottom: 1px solid #ccc; padding-bottom: 10px;">🏭 Visión General de la Línea</h4>
+        <div class="tw-grid">
+            <div>
+                <p style="font-size: 12px; text-align: center; margin: 0 0 5px 0;"><strong>Modelo 3D (Onshape)</strong></p>
+                <div class="tw-iframe-container">
+                    <iframe src="TU_ENLACE_DE_ONSHAPE_AQUI_PARA_LINEA_COMPLETA" title="Línea Completa 3D"></iframe>
+                </div>
+            </div>
+            <div>
+                <p style="font-size: 12px; text-align: center; margin: 0 0 5px 0;"><strong>Video de Funcionamiento</strong></p>
+                <div class="tw-iframe-container">
+                    <!-- Ejemplo de YouTube. Asegúrate de usar el enlace de "Insertar" (Embed) -->
+                    <iframe src="TU_ENLACE_DE_YOUTUBE_O_VIDEO_AQUI" title="Video Línea Completa"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENIDO: MÁQUINA 1 -->
+    <div id="content-maq1" class="tw-content">
+        <h4 style="margin-top: 0; color: var(--accent-blue, #3f51b5); border-bottom: 1px solid #ccc; padding-bottom: 10px;">⚙️ Detalle: Máquina de Ensamblaje</h4>
+        <div class="tw-grid">
+            <div>
+                <div class="tw-iframe-container">
+                    <iframe src="TU_ENLACE_DE_ONSHAPE_AQUI_PARA_MAQUINA_1" title="Máquina 1 3D"></iframe>
+                </div>
+            </div>
+            <div>
+                <div class="tw-iframe-container">
+                    <iframe src="TU_ENLACE_DE_VIDEO_AQUI" title="Video Máquina 1"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENIDO: CELDA ROBÓTICA -->
+    <div id="content-maq2" class="tw-content">
+        <h4 style="margin-top: 0; color: var(--accent-blue, #3f51b5); border-bottom: 1px solid #ccc; padding-bottom: 10px;">📦 Detalle: Celda Robótica</h4>
+        <div class="tw-grid">
+            <div>
+                <div class="tw-iframe-container">
+                    <iframe src="TU_ENLACE_DE_ONSHAPE_AQUI_PARA_MAQUINA_2" title="Celda Robótica 3D"></iframe>
+                </div>
+            </div>
+            <div>
+                <div class="tw-iframe-container">
+                    <iframe src="TU_ENLACE_DE_VIDEO_AQUI" title="Video Celda Robótica"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENIDO: ESTACIÓN FINAL -->
+    <div id="content-maq3" class="tw-content">
+        <h4 style="margin-top: 0; color: var(--accent-blue, #3f51b5); border-bottom: 1px solid #ccc; padding-bottom: 10px;">🚚 Detalle: Estación Final</h4>
+        <div class="tw-grid">
+            <div>
+                <div class="tw-iframe-container">
+                    <iframe src="TU_ENLACE_DE_ONSHAPE_AQUI_PARA_MAQUINA_3" title="Estación Final 3D"></iframe>
+                </div>
+            </div>
+            <div>
+                <div class="tw-iframe-container">
+                    <iframe src="TU_ENLACE_DE_VIDEO_AQUI" title="Video Estación Final"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

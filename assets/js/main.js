@@ -72,20 +72,24 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             registrarNodo('n-center', 'human', true, true);
-            registrarNodo('n-resumen', 'human', false, true);
+            registrarNodo('n-equipo', 'human', false, true);
             registrarNodo('n-contexto', 'human', false, true);
             registrarNodo('n-reflexiones', 'human', false, true);
             registrarNodo('bib-sector1', 'human', false, true);
 
             registrarNodo('n-propuesta', 'commercial', true, true);
+            registrarNodo('n-propuesta-doc', 'commercial', false, true);
             registrarNodo('n-economia', 'commercial', false, true);
             registrarNodo('n-isa', 'commercial', false, true);
             registrarNodo('n-gestion', 'commercial', false, true);
             registrarNodo('bib-sector2', 'commercial', false, true);
 
+            // SECTOR TECH CORREGIDO (Nuevos nodos agregados)
             registrarNodo('n-digital', 'tech', true, true);
             registrarNodo('n-plc', 'tech', false, true);
+            registrarNodo('n-scada', 'tech', false, true);
             registrarNodo('n-celda', 'tech', false, true);
+            registrarNodo('n-twin', 'tech', false, true);
             registrarNodo('bib-sector3', 'tech', false, true);
 
             const aesthetics = document.querySelectorAll('.node-aesthetic');
@@ -97,12 +101,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
 
+            // ESTRUCTURA DE LÍNEAS CORREGIDA (Nuevos nodos conectados)
             const structuralBackbone = [
-                { from: 'n-center', to: 'n-contexto' }, { from: 'n-center', to: 'n-resumen' }, { from: 'n-center', to: 'n-reflexiones' }, { from: 'n-center', to: 'bib-sector1' },
-                { from: 'n-center', to: 'n-propuesta' }, { from: 'n-propuesta', to: 'n-economia' }, { from: 'n-propuesta', to: 'bib-sector2' },
+                { from: 'n-center', to: 'n-equipo' }, { from: 'n-center', to: 'n-contexto' }, { from: 'n-center', to: 'n-reflexiones' }, { from: 'n-center', to: 'bib-sector1' },
+                { from: 'n-propuesta', to: 'n-propuesta-doc' }, { from: 'n-center', to: 'n-propuesta' }, { from: 'n-propuesta', to: 'n-economia' }, { from: 'n-propuesta', to: 'bib-sector2' },
                 { from: 'n-propuesta', to: 'n-digital' },
                 { from: 'n-economia', to: 'n-isa' }, { from: 'n-isa', to: 'n-gestion' },
-                { from: 'n-digital', to: 'n-plc' }, { from: 'n-digital', to: 'n-celda' }, { from: 'n-digital', to: 'bib-sector3' }
+                { from: 'n-digital', to: 'n-plc' }, { from: 'n-digital', to: 'n-scada' }, { from: 'n-digital', to: 'n-celda' }, { from: 'n-digital', to: 'n-twin' }, { from: 'n-digital', to: 'bib-sector3' }
             ];
 
             const nodesMap = {};
@@ -268,44 +273,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // PANELES
         function cargarContenidoPanel(target, event) {
-    if (event) event.preventDefault();
-    
-    const panel = document.getElementById('universal-panel');
-    const panelContainer = document.getElementById('panel-dynamic-content');
-    
-    // Configura de qué lado se abre el panel dependiendo de dónde se hizo clic
-    panel.classList.remove('panel-right', 'panel-left');
-    if (event && event.clientX < window.innerWidth / 2) {
-        panel.classList.add('panel-right');
-    } else {
-        panel.classList.add('panel-left');
-    }
-
-    // Muestra un estado de carga mientras trae el archivo
-    panelContainer.innerHTML = '<p style="padding: 20px; text-align: center; color: #666;">Cargando información...</p>';
-    panel.classList.add('open');
-
-    // Aquí está la magia: va y busca el archivo en la carpeta "content/"
-    fetch(`content/${target}.html`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Archivo no encontrado');
+            if (event) event.preventDefault();
+            
+            const panel = document.getElementById('universal-panel');
+            const panelContainer = document.getElementById('panel-dynamic-content');
+            
+            // Configura de qué lado se abre el panel dependiendo de dónde se hizo clic
+            panel.classList.remove('panel-right', 'panel-left');
+            if (event && event.clientX < window.innerWidth / 2) {
+                panel.classList.add('panel-right');
+            } else {
+                panel.classList.add('panel-left');
             }
-            return response.text(); // Convierte la respuesta a texto HTML
-        })
-        .then(html => {
-            // Inyecta el contenido del archivo externo en el panel
-            panelContainer.innerHTML = html;
-        })
-        .catch(error => {
-            console.error('Error cargando el panel:', error);
-            panelContainer.innerHTML = `
-                <div style="padding: 20px; text-align: center; color: red;">
-                    <h3>Error 404</h3>
-                    <p>No se pudo encontrar el archivo <b>content/${target}.html</b>.</p>
-                </div>`;
-        });
-}
+
+            // Muestra un estado de carga mientras trae el archivo
+            panelContainer.innerHTML = '<p style="padding: 20px; text-align: center; color: #666;">Cargando información...</p>';
+            panel.classList.add('open');
+
+            // Aquí está la magia: va y busca el archivo en la carpeta "content/"
+            fetch(`content/${target}.html`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Archivo no encontrado');
+                    }
+                    return response.text(); // Convierte la respuesta a texto HTML
+                })
+                .then(html => {
+                    // Inyecta el contenido del archivo externo en el panel
+                    panelContainer.innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error cargando el panel:', error);
+                    panelContainer.innerHTML = `
+                        <div style="padding: 20px; text-align: center; color: red;">
+                            <h3>Error 404</h3>
+                            <p>No se pudo encontrar el archivo <b>content/${target}.html</b>.</p>
+                        </div>`;
+                });
+        }
 
         function cerrarPanel() { document.getElementById('universal-panel').classList.remove('open'); }
         
