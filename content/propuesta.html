@@ -1,0 +1,150 @@
+<!-- ==========================================================================
+     FRAGMENTO DE PANEL: PROPUESTA DE AUTOMATIZACIÓN
+     Se inyecta dinámicamente en #panel-dynamic-content
+     ========================================================================== -->
+
+<h2 class="panel-title">Propuesta de Automatización</h2>
+<div class="panel-meta-strip">ESTRATEGIA COMERCIAL // INDUSTRIA 4.0 // ISA-95</div>
+
+<p class="panel-text">Con base en los diagnósticos operativos y las simulaciones preliminares, <strong>Nexum Automation</strong> ha diseñado un plan de modernización tecnológica. El objetivo es transicionar la planta hacia un modelo de <strong>Industria 4.0</strong>, eliminando restricciones de capacidad, mejorando la ergonomía y garantizando la trazabilidad bajo el estándar ISA-95.</p>
+
+<!-- Selector interactivo estilo constelación (Reemplaza las pestañas antiguas) -->
+<div class="mini-constellation">
+    <button class="mini-node panel-tablinks active" onclick="abrirPanelLinea(event, 'Monster')">
+        <span class="mini-icon">🔋</span>
+        <span class="mini-label">Monster</span>
+    </button>
+    <button class="mini-node panel-tablinks" onclick="abrirPanelLinea(event, 'Quatro')">
+        <span class="mini-icon">🥤</span>
+        <span class="mini-label">Quatro</span>
+    </button>
+    <button class="mini-node panel-tablinks" onclick="abrirPanelLinea(event, 'Brisa')">
+        <span class="mini-icon">💧</span>
+        <span class="mini-label">Brisa</span>
+    </button>
+</div>
+
+<!-- ========================================== -->
+<!-- SECCIÓN 1: MONSTER                         -->
+<!-- ========================================== -->
+<div id="Monster" class="panel-tabcontent" style="display: block;">
+    <h3 class="panel-subtitle">Rediseño y Automatización del Fin de Línea (Lata 473ml)</h3>
+    
+    <p class="panel-text">La propuesta consiste en rediseñar y estabilizar la línea de envasado de Monster atacando de forma directa los principales puntos de pérdida de eficiencia. Se plantea reorganizar el <em>dry-end</em> para hacer más fluido el paso de codificación a empaque y paletizado, incorporar acumulación estratégica, corregir transfers y conveyors, y automatizar parcialmente el fin de línea.</p>
+    
+    <div class="tab-horizontal-layout" style="margin: 20px 0;">
+        <div class="tab-info-container">
+            <p class="panel-text">A nivel operativo, se propone controlar la línea con una lógica centrada en el <em>filler</em> (llenadora), robustecer la sensorización, fortalecer el control de calidad del cierre y establecer una estrategia de mantenimiento más preventiva y predictiva.</p>
+            <p class="panel-text">Se propone la implementación del robot paletizador <strong>ABB IRB 460-110/2.4</strong>. Su selección se justifica porque es un robot de 4 ejes específicamente diseñado para aplicaciones de paletizado de fin de línea, con una capacidad de carga de 110 kg, alcance de 2.4 m y velocidad de hasta 2.190 ciclos por hora.</p>
+            
+            <div style="background: var(--axon-base); border-left: 3px solid var(--nexum-amber); padding: 12px; margin-top: 15px; border-radius: 0 4px 4px 0;">
+                <strong style="color: var(--nexum-amber); font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Impacto Proyectado:</strong>
+                <p class="panel-text" style="margin-bottom: 0; margin-top: 5px;">Reducción de la variabilidad operativa en el paletizado, disminución de microparadas, mejora en la estabilidad del flujo hacia despacho y eliminación de cuellos de botella en el <em>dry-end</em>.</p>
+            </div>
+        </div>
+        
+        <div class="tab-image-container" style="flex-direction: column; align-items: center; gap: 15px;">
+            <div class="hud-frame">
+                <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+                <img src="assets/img/PropuestaMonster.jpeg" alt="Esquema Monster" style="width: 100%;">
+                <figcaption>FIG 1. Reorganización Dry-End</figcaption>
+            </div>
+            <div class="hud-frame">
+                <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+                <img src="assets/img/Propuesta paletizadoMonster.png" alt="Robot ABB" style="width: 100%;">
+                <figcaption>FIG 2. Robot ABB IRB 460</figcaption>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ========================================== -->
+<!-- SECCIÓN 2: QUATRO                          -->
+<!-- ========================================== -->
+<div id="Quatro" class="panel-tabcontent">
+    <h3 class="panel-subtitle">Automatización de Paletizado con Robot KUKA (PET 1.5L)</h3>
+    
+    <p class="panel-text">Actualmente, el traslado de pallets de 6 productos desde la máquina hasta la bodega se realiza de forma manual. Cada pallet pesa aproximadamente 9 kg, y al hacer dos viajes por minuto, el operario moviliza cerca de 18 kg/min, llegando al límite recomendado de 20 kg. Esto genera riesgos de salud, disminuye eficiencia e impacta la calidad.</p>
+    
+    <div class="tab-horizontal-layout" style="margin: 20px 0;">
+        <div class="tab-info-container">
+            <p class="panel-text">Se propone implementar un <strong>Robot KUKA de paletizado</strong>. En términos de rendimiento, un operario mueve aproximadamente 12 productos por minuto, mientras que el robot puede movilizar hasta 270 productos por minuto, lo que representa una mejora cercana al <strong>2150%</strong>.</p>
+            <p class="panel-text">El costo del robot con su celda completa es de aprox. 150,000 USD (mantenimiento 10,000 USD/semestre). El retorno de inversión (ROI) en escenarios óptimos con 5 a 6 operarios puede reducirse a aproximadamente 2–3 años, operando hasta 3 turnos diarios.</p>
+            
+            <div style="background: var(--axon-base); border-left: 3px solid var(--nexum-cyan); padding: 12px; margin-top: 15px; border-radius: 0 4px 4px 0;">
+                <strong style="color: var(--nexum-cyan); font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Impacto Proyectado:</strong>
+                <p class="panel-text" style="margin-bottom: 0; margin-top: 5px;">Mejora de rendimiento del 2150%, erradicación de riesgos de salud ocupacional y un ROI competitivo (2 a 3 años) escalable en operación de tres turnos.</p>
+            </div>
+        </div>
+        
+        <div class="tab-image-container" style="flex-direction: column; align-items: center; gap: 15px; flex: 0 0 45%;">
+            <div class="hud-frame">
+                <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+                <img src="assets/img/propQuatro.jpeg" alt="Celda KUKA" style="width: 100%;">
+                <figcaption>FIG 3. Representación Celda KUKA</figcaption>
+            </div>
+            
+            <!-- Video enmarcado en el estilo HUD -->
+            <div class="hud-frame" style="width: 100%;">
+                <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+                <iframe width="100%" height="160" src="https://www.youtube.com/embed/vraW9u3921o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 2px;"></iframe>
+                <figcaption>VID 1. Demostración operativa</figcaption>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ========================================== -->
+<!-- SECCIÓN 3: BRISA                           -->
+<!-- ========================================== -->
+<div id="Brisa" class="panel-tabcontent">
+    <h3 class="panel-subtitle">Mejoras Estructurales y Robóticas (Garrafón 20L)</h3>
+    <p class="panel-text">Para la línea HOD (garrafones retornables), <strong>Nexum Automation</strong> ha desarrollado dos propuestas de mejora independientes para atacar desafíos específicos de la planta.</p>
+
+    <!-- PROPUESTA A -->
+    <h4 style="color: var(--nexum-blue); font-size: 14px; margin-top: 25px; text-transform: uppercase; letter-spacing: 1px;">A. Reorganización en Estructura Tipo U</h4>
+    <div class="tab-horizontal-layout" style="margin: 15px 0;">
+        <div class="tab-info-container">
+            <p class="panel-text">Se propone una reorganización de la línea bajo una estructura tipo U, integrando los procesos de forma más compacta y secuencial. Esto reduce distancias entre estaciones críticas (lavado, llenado, tapado, etiquetado), disminuye tiempos de transporte interno y evita la acumulación de inventario en proceso.</p>
+            <div style="background: var(--axon-base); border-left: 3px solid var(--nexum-purple); padding: 12px; margin-top: 15px; border-radius: 0 4px 4px 0;">
+                <strong style="color: var(--nexum-purple); font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Impacto A:</strong>
+                <p class="panel-text" style="margin-bottom: 0; margin-top: 5px;">Reducción de tiempos improductivos, optimización del espacio físico en planta y mejora en la supervisión visual del flujo continuo.</p>
+            </div>
+        </div>
+        <div class="tab-image-container">
+            <div class="hud-frame">
+                <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+                <img src="assets/img/Imagen de propuesta_garrafones.png" alt="Layout en U" style="width: 100%;">
+                <figcaption>FIG 4. Layout en forma de U</figcaption>
+            </div>
+        </div>
+    </div>
+
+    <hr style="border: none; border-top: 1px dashed var(--border-node); margin: 30px 0;">
+
+    <!-- PROPUESTA B -->
+    <h4 style="color: var(--nexum-blue); font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">B. Celda Robotizada para Paletización</h4>
+    <div class="tab-horizontal-layout" style="margin: 15px 0;">
+        <div class="tab-info-container">
+            <p class="panel-text">La paletización manual exige manipular 18-20 kg repetitivamente (6-10 segundos por unidad), lo que eleva el riesgo de lesiones musculoesqueléticas y afecta el OEE. Se propone una celda robotizada <strong>(ABB IRB 660 o FANUC M-410iC/185)</strong> para realizar el <em>pick and place</em> sin fatiga.</p>
+            <p class="panel-text">Esto reducirá el tiempo de paletizado de 2-3 minutos por pallet a menos de 40 segundos, disminuyendo la dependencia de mano de obra de 5-6 operarios a solo 1 de supervisión.</p>
+            
+            <div style="background: var(--axon-base); border-left: 3px solid var(--nexum-purple); padding: 12px; margin-top: 15px; border-radius: 0 4px 4px 0;">
+                <strong style="color: var(--nexum-purple); font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Impacto B:</strong>
+                <p class="panel-text" style="margin-bottom: 0; margin-top: 5px;">Eliminación del riesgo ergonómico, estabilización del Takt Time y reducción drástica del tiempo de paletizado.</p>
+            </div>
+        </div>
+        <div class="tab-image-container" style="flex-direction: column; align-items: center; gap: 15px;">
+            <div class="hud-frame">
+                <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+                <img src="assets/img/Celda_galones.png" alt="Celda Galones" style="width: 100%;">
+                <figcaption>FIG 5. Celda de Paletizado Robótico</figcaption>
+            </div>
+            <div class="hud-frame" style="width: 100%;">
+                <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+                <iframe width="100%" height="120" src="https://www.youtube.com/embed/9ODbrchDpEY" title="YouTube video" frameborder="0" allowfullscreen style="border-radius: 2px;"></iframe>
+                <figcaption>VID 2. Pick and place robótico</figcaption>
+            </div>
+        </div>
+    </div>
+</div>
