@@ -74,13 +74,13 @@ document.addEventListener('DOMContentLoaded', () => {
             registrarNodo('n-center', 'human', true, true);
             registrarNodo('n-equipo', 'human', false, true);
             registrarNodo('n-contexto', 'human', false, true);
+            registrarNodo('n-isa', 'human', false, true);
             registrarNodo('n-reflexiones', 'human', false, true);
             registrarNodo('bib-sector1', 'human', false, true);
 
             registrarNodo('n-propuesta', 'commercial', true, true);
             registrarNodo('n-propuesta-doc', 'commercial', false, true);
             registrarNodo('n-economia', 'commercial', false, true);
-            registrarNodo('n-isa', 'commercial', false, true);
             registrarNodo('n-gestion', 'commercial', false, true);
             registrarNodo('bib-sector2', 'commercial', false, true);
 
@@ -103,10 +103,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // ESTRUCTURA DE LÍNEAS CORREGIDA (Nuevos nodos conectados)
             const structuralBackbone = [
-                { from: 'n-center', to: 'n-equipo' }, { from: 'n-center', to: 'n-contexto' }, { from: 'n-center', to: 'n-reflexiones' }, { from: 'n-center', to: 'bib-sector1' },
-                { from: 'n-propuesta', to: 'n-propuesta-doc' }, { from: 'n-center', to: 'n-propuesta' }, { from: 'n-propuesta', to: 'n-economia' }, { from: 'n-propuesta', to: 'bib-sector2' },
-                { from: 'n-propuesta', to: 'n-digital' },
-                { from: 'n-economia', to: 'n-isa' }, { from: 'n-isa', to: 'n-gestion' },
+                // Conexiones del Sector 1 (Incluyendo a ISA)
+                { from: 'n-center', to: 'n-equipo' }, { from: 'n-center', to: 'n-contexto' }, { from: 'n-center', to: 'n-isa' }, { from: 'n-center', to: 'n-reflexiones' }, { from: 'n-center', to: 'bib-sector1' },
+                
+                // Conexiones del Sector 2
+                { from: 'n-center', to: 'n-propuesta' }, // Enlace principal entre sectores
+                { from: 'n-propuesta', to: 'n-propuesta-doc' }, { from: 'n-propuesta', to: 'n-economia' }, { from: 'n-propuesta', to: 'n-gestion' }, { from: 'n-propuesta', to: 'bib-sector2' },
+                
+                // Conexiones del Sector 3
+                { from: 'n-propuesta', to: 'n-digital' }, // Enlace principal entre sectores
                 { from: 'n-digital', to: 'n-plc' }, { from: 'n-digital', to: 'n-scada' }, { from: 'n-digital', to: 'n-celda' }, { from: 'n-digital', to: 'n-twin' }, { from: 'n-digital', to: 'bib-sector3' }
             ];
 
