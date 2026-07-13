@@ -135,8 +135,18 @@
     .tw-iframe-container model-viewer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; outline: none; }
 </style>
 
-<!-- Librería de Google para renderizado 3D Nativo de alto rendimiento -->
-<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+<script>
+    // Carga model-viewer solo si todavía no está registrado en la página —
+    // así el fragmento funciona por sí solo (no depende de que index.html
+    // también tenga el script) y de paso no se vuelve a descargar cada vez
+    // que abres este panel.
+    if (!customElements.get('model-viewer')) {
+        const mvScript = document.createElement('script');
+        mvScript.type = 'module';
+        mvScript.src = 'https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js';
+        document.head.appendChild(mvScript);
+    }
+</script>
 
 <div class="twin-wrapper">
 
@@ -321,14 +331,26 @@
     });
 
     function runMiniEngine() {
+        // Si el panel se cerró o se reemplazó, este contenedor ya no está en el
+        // documento — apagamos el loop en vez de dejarlo corriendo para siempre
+        // en segundo plano (antes se acumulaba uno nuevo cada vez que abrías el panel).
+        if (!document.body.contains(miniHub)) return;
+
         loopTime += 0.02;
+        const hubRect = miniHub.getBoundingClientRect(); // una sola vez por frame, no por nodo
 
         netNodes.forEach(item => {
             const elRect = item.el.getBoundingClientRect();
-            const hubRect = miniHub.getBoundingClientRect();
-            
-            const originalCX = (elRect.left - hubRect.left) + (elRect.width / 2) - item.currX;
-            const originalCY = (elRect.top - hubRect.top) + (elRect.height / 2) - item.currY;
+
+            // Solo los ghost-dots reciben el transform directamente sobre 'el'
+            // (item.el === item.target), así que solo a ellos hay que restarles
+            // el desplazamiento actual para recuperar su posición de reposo.
+            // En los nodos de estación el transform va sobre el ícono hijo;
+            // 'el' (el <label>) nunca se mueve, su rect ya es el original.
+            const correctionX = item.isGhost ? item.currX : 0;
+            const correctionY = item.isGhost ? item.currY : 0;
+            const originalCX = (elRect.left - hubRect.left) + (elRect.width / 2) - correctionX;
+            const originalCY = (elRect.top - hubRect.top) + (elRect.height / 2) - correctionY;
 
             if (item.isGhost) {
                 if (isHovering) {
