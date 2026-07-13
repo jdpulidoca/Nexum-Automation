@@ -1,488 +1,622 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Módulo 2 - Gestión de Producción | Nexum Automation</title>
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png"> 
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <style>
-        /* Estilos para los KPIs gerenciales (Sin fórmulas) */
-        .kpi-box {
-            background-color: #f4f7f6;
-            border-left: 4px solid #3F51B5;
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-        .kpi-title {
-            color: #3F51B5;
-            margin-top: 0;
-            font-size: 1.1em;
-            margin-bottom: 10px;
-        }
-        .kpi-result {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #333;
-            margin-top: 10px;
-            display: inline-block;
-        }
-        .kpi-placeholder {
-            color: #9e9e9e;
-            font-style: italic;
-        }
-    </style>
-</head>
-<body>
+<!-- =========================================================================
+     MÓDULO 2: GESTIÓN Y EVALUACIÓN DE LA PRODUCCIÓN (EDICIÓN CINÉTICA)
+     ========================================================================= -->
 
-    <header>
-        <img src="../assets/img/logo.png" alt="Logo Nexum Automation">
-    </header>
+<!-- SECCIÓN DE ESTILOS AVANZADOS (Física, Redes y Contenedores HUD) -->
+<style>
+    /* Reset de selectores interactivos */
+    .m2-kinetic-hub {
+        position: relative;
+        width: 100%;
+        background: rgba(142, 142, 147, 0.01);
+        border-radius: 12px;
+        border: 1px solid var(--border-node);
+        overflow: hidden;
+        margin: 25px 0;
+    }
 
-     <nav class="navbar">
-        <div class="nav-container">
-            <a href="../index.html" class="nav-link" style="background-color: #3F51B5; color: #ffffff;">Inicio</a>
-            
-            <div class="dropdown">
-                <button class="dropbtn">Módulos del Proyecto <span>&#9662;</span></button>
-                <div class="dropdown-content">
-                    <a href="../web/modulo1.html">Módulo 1: Introduccion a la Automatización</a>
-                    <a href="../web/modulo2.html">Módulo 2: Gestión de Producción</a>
-                    <a href="../web/modulo3.html">Módulo 3: Evaluación de Proyectos</a>
-                    <a href="../web/modulo4.html">Módulo 4: Celda de Manufactura</a>
-                </div>
-            </div>
-            
-            <a href="../web/simulacion.html" class="nav-link">Simulación</a>
-            <a href="../web/propuesta.html" class="nav-link">Propuesta</a>
-            <a href="../web/equipo.html" class="nav-link">Equipo y Contacto</a>
-            <a href="../web/reflexiones.html" class="nav-link">Reflexiones</a>
-            <a href="../web/reference.html" class="nav-link">Bibliografia</a>
+    /* Lienzos SVG para interconexión elástica */
+    .m2-svg-canvas {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        z-index: 1;
+        pointer-events: none;
+    }
+    .m2-line-main { stroke: var(--text-muted); stroke-width: 1.5; stroke-dasharray: 4 4; opacity: 0.4; }
+    .m2-line-ghost { stroke: var(--text-muted); stroke-width: 1; stroke-dasharray: 2 4; opacity: 0.25; }
+
+    /* --- MENU HORIZONTAL SUPERIOR (Productos) --- */
+    .m2-top-container {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 60px;
+        padding: 30px 0;
+    }
+    .m2-top-node {
+        position: relative;
+        cursor: pointer;
+        text-align: center;
+        width: 80px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .m2-top-node-icon {
+        width: 56px; height: 56px; border-radius: 50%;
+        background: var(--node-bg); border: 2px solid var(--border-node);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 24px; box-shadow: var(--shadow-node); backdrop-filter: blur(8px);
+        transition: border-color 0.4s, box-shadow 0.4s;
+        z-index: 3;
+    }
+    .m2-top-node-text {
+        font-size: 10px; font-weight: 700; display: block; margin-top: 8px;
+        color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+        transition: color 0.3s; z-index: 3; pointer-events: none;
+    }
+
+    /* Reglas de Activación/Hover para Menú Superior */
+    .m2-top-node:hover .m2-top-node-icon, .m2-top-node.near .m2-top-node-icon { border-color: var(--nexum-blue); }
+    .m2-top-node.active .m2-top-node-icon {
+        border-color: var(--nexum-cyan) !important;
+        box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15), 0 0 20px rgba(14, 165, 233, 0.35) !important;
+    }
+    .m2-top-node.active .m2-top-node-text { color: var(--text-main) !important; font-weight: 800; }
+
+    /* --- PIPELINE DE RUTAS VERTICALES (Diagramas) --- */
+    .m2-workspace {
+        display: flex; gap: 25px; margin-top: 25px; min-height: 440px; align-items: stretch;
+    }
+    .m2-sidebar-pipeline {
+        position: relative; width: 130px; flex-shrink: 0;
+        display: flex; flex-direction: column; justify-content: space-between;
+        align-items: center; padding: 30px 0; background: rgba(142,142,147,0.01);
+        border-radius: 10px; border: 1px solid rgba(142,142,147,0.05);
+    }
+    .m2-vert-node {
+        position: relative; cursor: pointer; text-align: center;
+        width: 100%; display: flex; flex-direction: column; align-items: center;
+    }
+    /* Romper simetría vertical */
+    .m2-vert-node:nth-of-type(1) { margin-left: -12px; }
+    .m2-vert-node:nth-of-type(2) { margin-left: 12px; }
+    .m2-vert-node:nth-of-type(3) { margin-left: -8px; }
+    .m2-vert-node:nth-of-type(4) { margin-left: 14px; }
+
+    .m2-vert-icon {
+        width: 38px; height: 38px; border-radius: 50%;
+        background: var(--node-bg); border: 1px solid var(--border-node);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 15px; box-shadow: var(--shadow-node); backdrop-filter: blur(8px);
+        z-index: 3; transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .m2-vert-text {
+        font-size: 9px; font-weight: 700; display: block; margin-top: 4px;
+        color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+        transition: color 0.3s; z-index: 3; pointer-events: none;
+    }
+
+    /* Reglas de Activación/Hover para Menú Vertical */
+    .m2-vert-node:hover .m2-vert-icon, .m2-vert-node.near .m2-vert-icon { border-color: var(--nexum-blue); }
+    .m2-vert-node.active .m2-vert-icon {
+        border-color: var(--accent-blue) !important;
+        box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.15), 0 0 15px rgba(63, 81, 181, 0.35) !important;
+    }
+    .m2-vert-node.active .m2-vert-text { color: var(--text-main) !important; }
+
+    /* Visor de Imágenes HUD */
+    .m2-viewer-panel {
+        flex: 1; border: 1px solid var(--border-node); border-radius: 8px; padding: 20px;
+        display: flex; flex-direction: column; justify-content: center; align-items: center;
+        background: var(--node-bg); overflow: hidden; position: relative; box-shadow: var(--shadow-node);
+    }
+    .m2-diagram-view { animation: m2Fade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    @keyframes m2Fade { from { opacity: 0; transform: scale(0.98) translateY(5px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+
+    /* Nodos fantasma */
+    .m2-ghost { position: absolute; background: var(--nexum-purple); opacity: 0.25; border-radius: 50%; pointer-events: none; z-index: 1; }
+</style>
+
+<h2 class="panel-title" style="text-align: center;">Gestión y Evaluación de la Producción</h2>
+<div class="panel-meta-strip">[ MÓDULO: 02 ] · [ NEXUM AUTOMATION ] · [ DIAGNÓSTICO OPERATIVO ]</div>
+
+<!-- Bloque Introductorio y Soportes -->
+<div style="margin: 20px 0;">
+    <p class="panel-text" style="margin-top: 0;">El equipo consultor de <strong>Nexum Automation</strong> presenta el diagnóstico operativo de la planta multilínea. A través del mapeo de procesos (VSM, DOP) y el cálculo de indicadores clave, identificamos las restricciones de capacidad y los cuellos de botella que justifican técnica y financieramente las propuestas de automatización posteriores.</p>
+    
+    <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+        <a href="docs/modulo2/documento Modulo 1.pdf" target="_blank" style="flex: 1; padding: 8px 12px; font-size: 12px; background-color: rgba(63, 81, 181, 0.08); color: var(--accent-blue); text-decoration: none; border: 1px solid var(--accent-blue); border-radius: 4px; text-align: center; font-weight: bold; transition: all 0.3s;">
+            📝 Informe Taller 1 (Cálculos Base)
+        </a>
+        <a href="docs/modulo2/Informe_Mercado_CocaCola.pdf" target="_blank" style="flex: 1; padding: 8px 12px; font-size: 12px; background-color: rgba(142, 142, 147, 0.08); color: var(--text-main); text-decoration: none; border: 1px solid var(--border-node); border-radius: 4px; text-align: center; font-weight: bold; transition: all 0.3s;">
+            📊 Análisis de Mercado y Demanda
+        </a>
+    </div>
+</div>
+
+<div style="margin-bottom: 25px; background-color: rgba(142, 142, 147, 0.02); border: 1px solid var(--border-node); padding: 12px; border-radius: 6px; text-align: center;">
+    <a href="docs/modulo2/Diagramas/Layout/Layout planta.png" target="_blank" style="color: var(--accent-blue); text-decoration: none; font-size: 13px; font-weight: bold;">
+        🗺️ Ver Layout Macro General de la Planta Completa (Nueva Ventana)
+    </a>
+</div>
+
+<!-- =========================================================================
+     HUB KINETIC SUPERIOR: SELECCIÓN DE PRODUCTO
+     ========================================================================= -->
+<div class="m2-kinetic-hub" id="m2-hub-top">
+    <svg class="m2-svg-canvas"></svg>
+    <!-- Nodos Fantasma Flotantes de Ambiente -->
+    <div class="m2-ghost" data-speed="0.1" style="width: 6px; height: 6px; top: 25%; left: 15%;"></div>
+    <div class="m2-ghost" data-speed="0.06" style="width: 8px; height: 8px; top: 70%; left: 85%;"></div>
+
+    <div class="m2-top-container">
+        <div id="node-tab-monster" onclick="switchProduct('monster')" class="m2-top-node active">
+            <div class="m2-top-node-icon" id="circle-monster">🔋</div>
+            <span class="m2-top-node-text">Monster</span>
         </div>
-    </nav>
+        <div id="node-tab-quatro" onclick="switchProduct('quatro')" class="m2-top-node">
+            <div class="m2-top-node-icon" id="circle-quatro">🥤</div>
+            <span class="m2-top-node-text">Quatro</span>
+        </div>
+        <div id="node-tab-brisa" onclick="switchProduct('brisa')" class="m2-top-node">
+            <div class="m2-top-node-icon" id="circle-brisa">💧</div>
+            <span class="m2-top-node-text">Brisa</span>
+        </div>
+    </div>
+</div>
 
-    <div class="container">
-        <main>
-            <h2 style="color: #3F51B5;">Módulo 2: Gestión y Evaluación de la Producción</h2>
-            
-            <p>En esta sección, el equipo consultor de <strong>Nexum Automation</strong> presenta el diagnóstico operativo de la planta multilínea. A través del mapeo de procesos (VSM, DOP) y el cálculo de indicadores clave, identificamos las restricciones de capacidad y los cuellos de botella que justifican técnica y financieramente las propuestas de automatización posteriores.</p>
+<!-- =========================================================================
+     CONTENEDOR DE CONTENIDOS DINÁMICOS
+     ========================================================================= -->
+<div id="m2-products-container">
 
-            <div class="docs-section">
-                <h3 style="margin-top: 0; color: #3F51B5;">📄 Soportes y Documentación Técnica</h3>
-                <p style="color: #757575;">Todos los cálculos de demanda, métricas de OEE y diagramas presentados a continuación tienen su origen en el levantamiento de información documentado en los siguientes archivos:</p>
-                <div style="display: flex; gap: 15px; margin-top: 15px; flex-wrap: wrap;">
-                    <a href="../docs/modulo2/documento Modulo 1.pdf" target="_blank" class="download-btn" style="padding: 10px 20px; font-size: 14px;">📝 Informe Taller 1 (Cálculos Base)</a>
-                    <a href="../docs/modulo2/Informe_Mercado_CocaCola.pdf" target="_blank" class="download-btn" style="padding: 10px 20px; font-size: 14px; background-color: #757575;">📊 Análisis de Mercado y Demanda</a>
-                </div>
+    <!-- CONTENIDO: MONSTER ENERGY -->
+    <div id="content-monster" class="m2-product-pane" style="display: block;">
+        <h3 class="panel-subtitle" style="color: #5a5a5a; margin-top: 10px;">Análisis: Monster Energy (Lata 473ml)</h3>
+        <p class="panel-text" style="font-size: 13px; margin-bottom: 15px;"><strong>Demanda Estimada:</strong> 20,000,000 unidades/año. Participación del 6% sobre mercado base.</p>
+
+        <!-- KPIs Cards -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-bottom: 15px;">
+            <div style="padding: 8px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.03); border-left: 3px solid #5a5a5a; border-radius: 4px;">
+                <strong style="color: #5a5a5a; font-size: 10px; display: block;">Takt Time</strong>
+                <span style="font-size: 12px; font-weight: bold;">0.0049 min/lata</span>
             </div>
-           <div id="layout-general" style="margin-bottom: 30px; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                <h3 style="margin-top: 0; color: #3F51B5; border-bottom: 2px solid #3F51B5; padding-bottom: 5px;">📍 Layout General de la Planta</h3>
-                <p>Distribución macro de las áreas de producción, almacenamiento y servicios industriales de Nexum Automation. <strong>(Haz clic en la imagen para ampliarla)</strong></p>
-                
-                <div style="text-align: center; border: 1px solid #eee; border-radius: 8px; padding: 10px;">
-                    <a href="#zoom_layout_planta">
-                        <img src="../docs/modulo2/Diagramas/Layout/Layout planta.png" alt="Layout General de la Planta" style="max-width: 100%; height: auto; border-radius: 4px; cursor: zoom-in;">
-                    </a>
-                    
-                    <div id="zoom_layout_planta" class="lightbox">
-                        <a href="#layout-general" class="close-lightbox">&times;</a>
-                        <img src="../docs/modulo2/Diagramas/Layout/Layout planta.png" alt="Layout General de la Planta">
-                    </div>
-                </div>
+            <div style="padding: 8px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.03); border-left: 3px solid #5a5a5a; border-radius: 4px;">
+                <strong style="color: #5a5a5a; font-size: 10px; display: block;">Cycle Time (Tc)</strong>
+                <span style="font-size: 12px; font-weight: bold;">0.004 min/lata</span>
             </div>
-            <div class="tab">
-                <button class="tablinks active" onclick="abrirLinea(event, 'Monster')">Línea: Monster (473ml)</button>
-                <button class="tablinks" onclick="abrirLinea(event, 'Quatro')">Línea: Quatro (1.5L)</button>
-                <button class="tablinks" onclick="abrirLinea(event, 'Brisa')">Línea: Galon Agua Brisa (20L)</button>
+            <div style="padding: 8px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.03); border-left: 3px solid #5a5a5a; border-radius: 4px;">
+                <strong style="color: #5a5a5a; font-size: 10px; display: block;">Prod. Rate (Rp)</strong>
+                <span style="font-size: 12px; font-weight: bold;">12,117 latas/hr</span>
             </div>
+            <div style="padding: 8px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.03); border-left: 3px solid #5a5a5a; border-radius: 4px;">
+                <strong style="color: #5a5a5a; font-size: 10px; display: block;">Utilización</strong>
+                <span style="font-size: 12px; font-weight: bold;">64.08%</span>
+            </div>
+        </div>
+        <div style="margin-bottom: 20px; padding: 10px; background-color: rgba(142, 142, 147, 0.02); border: 1px dashed #5a5a5a; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; font-size: 12px;">
+            <div>Disp: <strong>93.5%</strong> | Desemp: <strong>97.5%</strong> | Cal: <strong>98.0%</strong></div>
+            <div style="font-weight: bold; color: #5a5a5a;">OEE: 89.47% · MLT: 9.13 Hrs</div>
+        </div>
 
-            <div id="Monster" class="tabcontent" style="display: block;">
-                <h3 style="color: #3F51B5; border-bottom: 1px solid #eee; padding-bottom: 10px;">🔋 Análisis: Monster Energy (Lata 473ml)</h3>
-                
-                <h4>1. Cálculo de la Demanda</h4>
-                <p>La demanda de Monster Energy en Colombia se puede estimar a partir del tamaño del mercado de bebidas energéticas, el cual alcanzó aproximadamente 157,6 millones de litros en 2022 (<a href="https://www.larepublica.co/empresas/quienes-lideran-en-las-bebidas-energizantes-3578134" target="_blank" style="color: #3F51B5; text-decoration: none; font-weight: bold;">La República, 2023</a>). Considerando una participación de mercado cercana al 6% para la marca, se obtiene una demanda aproximada de 9,46 millones de litros anuales.</p>
-                <p>Al convertir este valor a unidades de consumo, tomando como referencia latas de 473 ml, se obtiene un volumen aproximado de 20 millones de latas al año. Esta aproximación es consistente con el crecimiento del sector y las tendencias de consumo en el país (<a href="https://www.informesdeexpertos.com/informes/mercado-de-bebidas-energizantes-en-colombia" target="_blank" style="color: #3F51B5; text-decoration: none; font-weight: bold;">Informes de Expertos, 2023</a>).</p>
-                <ul>
-                    <li><strong>Demanda estimada:</strong> 20,000,000 unidades/año.</li>
-                </ul>
+        <!-- PIPELINE CINÉTICO DE DIAGRAMAS MONSTER -->
+        <div class="m2-workspace">
+            <div class="m2-sidebar-pipeline" id="m2-hub-monster">
+                <svg class="m2-svg-canvas"></svg>
+                <div class="m2-ghost" data-speed="0.12" style="width: 5px; height: 5px; top: 45%; left: 80%;"></div>
 
-                <h4>2. Mapas y Diagramas de Ingeniería</h4>
-                <p>Análisis de flujo, recorridos y valor de la línea de producción. <strong>(Haz clic en cualquier imagen para ampliarla)</strong>:</p>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-bottom: 20px;">
-                    
-                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
-                        <h5 style="margin-top: 0; color: #3F51B5;">Layout de la Línea</h5>
-                        <a href="#zoom_layout_monster">
-                            <img src="../docs/modulo2/Diagramas/Layout/Layout Mosnter.png" alt="Layout Línea Monster" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
-                        </a>
-                        <div id="zoom_layout_monster" class="lightbox">
-                            <a href="#Monster" class="close-lightbox">&times;</a>
-                            <img src="../docs/modulo2/Diagramas/Layout/Layout Mosnter.png" alt="Layout Línea Monster">
-                        </div>
-                    </div>
-
-                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
-                        <h5 style="margin-top: 0; color: #3F51B5;">Diagrama Spaghetti</h5>
-                        <a href="#zoom_spagetti_monster">
-                            <img src="../docs/modulo2/Diagramas/Spaghetti/Monster_Spagetti.jpg" alt="Diagrama Spaghetti Monster" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
-                        </a>
-                        <div id="zoom_spagetti_monster" class="lightbox">
-                            <a href="#Monster" class="close-lightbox">&times;</a>
-                            <img src="../docs/modulo2/Diagramas/Spaghetti/Monster_Spagetti.jpg" alt="Diagrama Spaghetti Monster">
-                        </div>
-                    </div>
-
-                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
-                        <h5 style="margin-top: 0; color: #3F51B5;">DOP (Operaciones)</h5>
-                        <a href="#zoom_dop_monster">
-                            <img src="../docs/modulo2/Diagramas/DOP/DOP Monster.PNG" alt="DOP Monster" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
-                        </a>
-                        <div id="zoom_dop_monster" class="lightbox">
-                            <a href="#Monster" class="close-lightbox">&times;</a>
-                            <img src="../docs/modulo2/Diagramas/DOP/DOP Monster.PNG" alt="DOP Monster">
-                        </div>
-                    </div>
-
-                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
-                        <h5 style="margin-top: 0; color: #3F51B5;">VSM (Value Stream Map)</h5>
-                        <a href="#zoom_vsm_monster">
-                            <img src="../docs/modulo2/Diagramas/VSM/VMS Monster.png" alt="VSM Monster" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
-                        </a>
-                        <div id="zoom_vsm_monster" class="lightbox">
-                            <a href="#Monster" class="close-lightbox">&times;</a>
-                            <img src="../docs/modulo2/Diagramas/VSM/VMS Monster.png" alt="VSM Monster">
-                        </div>
-                    </div>
+                <div onclick="switchDiagram('monster', 'layout')" id="node-monster-layout" class="m2-vert-node active">
+                    <div class="m2-vert-icon">🏭</div>
+                    <span class="m2-vert-text">LAYOUT</span>
                 </div>
-
-                <h5 style="color: #3F51B5;">📋 Diagrama de Análisis de Proceso</h5>
-                <p>Resumen analítico de tiempos, distancias y tipos de operación (operación, transporte, inspección, demora y almacenaje):</p>
-                
-                <div style="text-align: center; margin-bottom: 25px; padding: 20px; border: 1px dashed #ccc; border-radius: 5px; background-color: #f9fbfc;">
-                    <p style="margin-bottom: 15px; color: #555;">Documento detallado en formato PDF</p>
-                    <a href="../docs/modulo2/Diagramas/DAP/Analisis de proceso Monster.pdf" target="_blank" style="display: inline-block; padding: 12px 24px; background-color: #3F51B5; color: #ffffff; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
-                        📄 Abrir Análisis de Proceso Monster (PDF)
-                    </a>
+                <div onclick="switchDiagram('monster', 'spaghetti')" id="node-monster-spaghetti" class="m2-vert-node">
+                    <div class="m2-vert-icon">⚙️</div>
+                    <span class="m2-vert-text">SPAGHETTI</span>
                 </div>
-
-                 <h4>3. Indicadores de Desempeño</h4>
-                
-                <div class="kpi-box">
-                    <h5 class="kpi-title">⏱️ Takt Time</h5>
-                    <p>Es el ritmo de producción estrictamente necesario para satisfacer la demanda sin generar retrasos. Asumiendo que esta línea opera 2.5 días (5 turnos) a la semana y que en un turno de 8 horas relamente se trabajan 6.3 horas, la tasa mínima requerida es de 12,206 latas/hora.</p>
-                    <span class="kpi-result">Resultado: 0.0049 minutos/lata</span>
+                <div onclick="switchDiagram('monster', 'dop')" id="node-monster-dop" class="m2-vert-node">
+                    <div class="m2-vert-icon">📊</div>
+                    <span class="m2-vert-text">DOP</span>
                 </div>
-
-                <div class="kpi-box">
-                    <h5 class="kpi-title">⚙️ Cycle Time (Tc) y Setup Time (Tsu)</h5>
-                    <p>Comparando el Takt Time con la velocidad nominal de la maquinaria (15,000 latas/hora), establecemos el tiempo físico de fabricación por unidad.</p>
-                    <ul>
-                        <li><strong>Tiempo de Ciclo (Tc):</strong> 0.004 minutos/lata.</li>
-                        <li><strong>Tiempo de Setup (Tsu):</strong> 90 minutos máximo.</li>
-                    </ul>
-                </div>
-
-                <div class="kpi-box">
-                    <h5 class="kpi-title">📈 Tasa y Capacidad de Producción</h5>
-                    <p>Calculado sobre un lote estándar de 94,500 latas por turno y evaluando la capacidad técnica instalada:</p>
-                    <ul>
-                        <li><strong>Production Rate (Rp):</strong> 12,117 latas/hora.</li>
-                        <li><strong>Capacidad Teórica (PC):</strong> 600,000 latas/semana.</li>
-                        <li><strong>Utilización:</strong> 64.08%. (La línea no está saturada).</li>
-                    </ul>
-                </div>
-
-                <div class="kpi-box">
-                    <h5 class="kpi-title">⏳ Manufacturing Lead Time (MLT)</h5>
-                    <p>Tiempo total que transcurre para procesar un lote completo de producción, incluyendo configuración y empaquetado final.</p>
-                    <span class="kpi-result">Resultado: 9.13 Horas / lote</span>
-                </div>
-
-                <div class="kpi-box">
-                    <h5 class="kpi-title">📊 Overall Equipment Effectiveness (OEE)</h5>
-                    <p>Indicador que evalúa la Disponibilidad (93.5%), el Desempeño (97.5%) y la Calidad (98.0%) del proceso de envasado.</p>
-                    <span class="kpi-result">OEE Consolidado: 89.47% (Desempeño Muy Bueno)</span>
+                <div onclick="switchDiagram('monster', 'vsm')" id="node-monster-vsm" class="m2-vert-node">
+                    <div class="m2-vert-icon">📈</div>
+                    <span class="m2-vert-text">VSM</span>
                 </div>
             </div>
 
-            <div id="Quatro" class="tabcontent" style="display: none;">
-                <h3 style="color: #3F51B5; border-bottom: 1px solid #eee; padding-bottom: 10px;">🥤 Análisis: Quatro (PET 1.5L)</h3>
-                
-                <h4>1. Cálculo de la Demanda</h4>
-                <p>Para la estimación de la demanda de la línea de PET, el equipo consultor partió del volumen total de producción del sistema Coca-Cola en Colombia, el cual asciende a 352 millones de cajas unidad anuales. Para segmentar este volumen hacia nuestro producto objetivo, se analizaron tres macrotendencias del portafolio: bebidas carbonatadas (76%), envases no retornables (74%) y presentaciones de tamaño familiar (70%).</p>
-                <p>Tomando un escenario base conservador, se asume que el 45% del volumen total cumple con las tres características. De este subsegmento, se estima de manera prudente que Quatro representa un 6%. Finalmente, proyectando al año 2026 y considerando una contracción en el mercado de bebidas azucaradas, la demanda resultante es de 53,58 millones de litros anuales.</p>
-                <ul>
-                    <li><strong>Demanda estimada:</strong> 35,720,000 unidades/año.</li>
-                </ul>
-
-                <h4>2. Mapas y Diagramas de Ingeniería</h4>
-                <p>Análisis de flujo, recorridos y valor de la línea de producción. <strong>(Haz clic en cualquier imagen para ampliarla)</strong>:</p>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-bottom: 20px;">
-                    
-                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
-                        <h5 style="margin-top: 0; color: #3F51B5;">Layout de la Línea</h5>
-                        <a href="#zoom_layout_quatro">
-                            <img src="../docs/modulo2/Diagramas/Layout/Layout Quatro.png" alt="Layout Línea Quatro" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
-                        </a>
-                        <div id="zoom_layout_quatro" class="lightbox">
-                            <a href="#Quatro" class="close-lightbox">&times;</a>
-                            <img src="../docs/modulo2/Diagramas/Layout/Layout Quatro.png" alt="Layout Línea Quatro">
-                        </div>
+            <div class="m2-viewer-panel">
+                <div id="viewer-monster-layout" class="monster-diagram-view" style="display: block; text-align: center; width: 100%;">
+                    <div style="overflow: hidden; border-radius: 4px; display: inline-block;">
+                        <img src="docs/modulo2/Diagramas/Layout/Layout Mosnter.png" alt="Layout Monster" style="max-height: 380px; width: auto; max-width: 100%; transition: transform 0.2s ease-out; cursor: zoom-in;" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
                     </div>
-
-                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
-                        <h5 style="margin-top: 0; color: #3F51B5;">Diagrama Spaghetti</h5>
-                        <a href="#zoom_spagetti_quatro">
-                            <img src="../docs/modulo2/Diagramas/Spaghetti/Quatro_Spagetti.jpg" alt="Diagrama Spaghetti Quatro" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
-                        </a>
-                        <div id="zoom_spagetti_quatro" class="lightbox">
-                            <a href="#Quatro" class="close-lightbox">&times;</a>
-                            <img src="../docs/modulo2/Diagramas/Spaghetti/Quatro_Spagetti.jpg" alt="Diagrama Spaghetti Quatro">
-                        </div>
+                    <div style="font-size: 11px; margin-top: 8px; color: var(--text-main); font-weight: bold;">Diagrama de Distribución en Planta (Layout) - Monster</div>
+                </div>
+                <div id="viewer-monster-spaghetti" class="monster-diagram-view" style="display: none; text-align: center; width: 100%;">
+                    <div style="overflow: hidden; border-radius: 4px; display: inline-block;">
+                        <img src="docs/modulo2/Diagramas/Spaghetti/Monster_Spagetti.jpg" alt="Spaghetti Monster" style="max-height: 380px; width: auto; max-width: 100%; transition: transform 0.2s ease-out; cursor: zoom-in;" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
                     </div>
-
-                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
-                        <h5 style="margin-top: 0; color: #3F51B5;">DOP (Operaciones)</h5>
-                        <a href="#zoom_dop_quatro">
-                            <img src="../docs/modulo2/Diagramas/DOP/DOP Quatro.PNG" alt="DOP Quatro" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
-                        </a>
-                        <div id="zoom_dop_quatro" class="lightbox">
-                            <a href="#Quatro" class="close-lightbox">&times;</a>
-                            <img src="../docs/modulo2/Diagramas/DOP/DOP Quatro.PNG" alt="DOP Quatro">
-                        </div>
+                    <div style="font-size: 11px; margin-top: 8px; color: var(--text-main); font-weight: bold;">Diagrama de Recorrido (Spaghetti) - Monster</div>
+                </div>
+                <div id="viewer-monster-dop" class="monster-diagram-view" style="display: none; text-align: center; width: 100%;">
+                    <div style="overflow: hidden; border-radius: 4px; display: inline-block;">
+                        <img src="docs/modulo2/Diagramas/DOP/DOP Monster.PNG" alt="DOP Monster" style="max-height: 380px; width: auto; max-width: 100%; transition: transform 0.2s ease-out; cursor: zoom-in;" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
                     </div>
-
-                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
-                        <h5 style="margin-top: 0; color: #3F51B5;">VSM (Value Stream Map)</h5>
-                        <a href="#zoom_vsm_quatro">
-                            <img src="../docs/modulo2/Diagramas/VSM/VMS Quatro.png" alt="VSM Quatro" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
-                        </a>
-                        <div id="zoom_vsm_quatro" class="lightbox">
-                            <a href="#Quatro" class="close-lightbox">&times;</a>
-                            <img src="../docs/modulo2/Diagramas/VSM/VMS Quatro.png" alt="VSM Quatro">
-                        </div>
+                    <div style="font-size: 11px; margin-top: 8px; color: var(--text-main); font-weight: bold;">Diagrama de Operaciones del Proceso (DOP) - Monster</div>
+                </div>
+                <div id="viewer-monster-vsm" class="monster-diagram-view" style="display: none; text-align: center; width: 100%;">
+                    <div style="overflow: hidden; border-radius: 4px; display: inline-block;">
+                        <img src="docs/modulo2/Diagramas/VSM/VMS Monster.png" alt="VSM Monster" style="max-height: 380px; width: auto; max-width: 100%; transition: transform 0.2s ease-out; cursor: zoom-in;" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
                     </div>
-                </div>
-                
-                <h5 style="color: #3F51B5;">📋 Diagrama de Análisis de Proceso</h5>
-                <p>Resumen analítico de tiempos, distancias y tipos de operación (operación, transporte, inspección, demora y almacenaje):</p>
-                
-                <div style="text-align: center; margin-bottom: 25px; padding: 20px; border: 1px dashed #ccc; border-radius: 5px; background-color: #f9fbfc;">
-                    <p style="margin-bottom: 15px; color: #555;">Documento detallado en formato PDF</p>
-                    <a href="../docs/modulo2/Diagramas/DAP/Analisis de proceso Quatro .pdf" target="_blank" style="display: inline-block; padding: 12px 24px; background-color: #3F51B5; color: #ffffff; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
-                        📄 Abrir Análisis de Proceso Quatro (PDF)
-                    </a>
-                </div>
-
-                <h4>3. Indicadores de Desempeño</h4>
-                
-                <div class="kpi-box">
-                    <h5 class="kpi-title">⏱️ Takt Time</h5>
-                    <p>Es el ritmo de producción estrictamente necesario para satisfacer la demanda sin generar retrasos. Asumiendo que esta línea opera 4 días (8 turnos) a la semana  y que en un turno de 8 horas relamente se trabajan 6.3 horas, la tasa mínima requerida es de 13,593 botellas/hora.</p>
-                    <span class="kpi-result">Resultado: 0.0044 minutos/botella</span>
-                </div>
-
-                <div class="kpi-box">
-                    <h5 class="kpi-title">⚙️ Cycle Time (Tc) y Setup Time (Tsu)</h5>
-                    <p>Comparando el Takt Time con la velocidad nominal de la maquinaria (15,000 botellas/hora), establecemos el tiempo físico de fabricación por unidad.</p>
-                    <ul>
-                        <li><strong>Tiempo de Ciclo (Tc):</strong> 0.004 minutos/botella.</li>
-                        <li><strong>Tiempo de Setup (Tsu):</strong> 90 minutos máximo.</li>
-                    </ul>
-                </div>
-
-                <div class="kpi-box">
-                    <h5 class="kpi-title">📈 Tasa y Capacidad de Producción</h5>
-                    <p>Calculado sobre un lote estándar de 85,636 botellas por turno y evaluando la capacidad técnica instalada:</p>
-                    <ul>
-                        <li><strong>Production Rate (Rp):</strong> 11,879 botellas/hora.</li>
-                        <li><strong>Capacidad Teórica (PC):</strong> 960,000 botellas/semana.</li>
-                        <li><strong>Utilización:</strong> 71.36%. (La línea no está saturada).</li>
-                    </ul>
-                </div>
-
-                <div class="kpi-box">
-                    <h5 class="kpi-title">⏳ Manufacturing Lead Time (MLT)</h5>
-                    <p>Tiempo total que transcurre para procesar un lote completo de producción, incluyendo configuración y empaquetado final.</p>
-                    <span class="kpi-result">Resultado: 8.95 Horas / lote</span>
-                </div>
-
-                <div class="kpi-box">
-                    <h5 class="kpi-title">📊 Overall Equipment Effectiveness (OEE)</h5>
-                    <p>Indicador que evalúa la Disponibilidad (93.5%), el Desempeño (100%) y la Calidad (98.0%) del proceso de envasado.</p>
-                    <span class="kpi-result">OEE Consolidado: 91.69% (Desempeño Muy Bueno)</span>
+                    <div style="font-size: 11px; margin-top: 8px; color: var(--text-main); font-weight: bold;">Mapa de Flujo de Valor (VSM) - Monster</div>
                 </div>
             </div>
-
-            <div id="Brisa" class="tabcontent" style="display: none;">
-                <h3 style="color: #3F51B5; border-bottom: 1px solid #eee; padding-bottom: 10px;">💧 Análisis: Agua Brisa (Garrafón 20L)</h3>
-                
-                <h4>1. Cálculo de la Demanda</h4>
-                <p>Para la Línea de Brissa, dedicada al envasado de agua purificada en formato HOD (<em>Home & Office Delivery</em> - retornables), la estimación de la demanda se fundamenta en los resultados consolidados de ventas en Colombia para el cierre del año 2024. Según los reportes financieros (<a href="../docs/modulo2/Informe_Mercado_CocaCola.pdf" target="_blank" style="color: #3F51B5; text-decoration: none; font-weight: bold;">Pág. 153 del Informe Anual</a>), el volumen de ventas nacional experimentó un crecimiento interanual del 1.4%, pasando de 347.6 a 352.3 millones de Cajas Unidad.</p>
-                <p>Para dimensionar correctamente la capacidad de la maquinaria, es imperativo estandarizar la unidad de medida corporativa. En la industria embotelladora, una "Caja Unidad" es una métrica estándar que equivale a 24 porciones de 8 onzas de bebida terminada; esto representa un volumen exacto de 192 onzas, 1.5 galones, o 5.678 litros.</p>
-                <p>De acuerdo con el desglose del mix de ventas (<a href="../docs/modulo2/Informe_Mercado_CocaCola.pdf" target="_blank" style="color: #3F51B5; text-decoration: none; font-weight: bold;">Pág. 163 del Informe Anual</a>), el formato de garrafones representa el 4% del volumen total comercializado en el país. Al aplicar esta proporción sobre los 352.3 millones de Cajas Unidad, se consolida un volumen de 14,092,000 Cajas Unidad destinadas exclusivamente a este formato. Lo que equivale a 21,138,000 galones anuales.</p>
-                <ul>
-                    <li><strong>Demanda estimada:</strong> 4,227,600 garrafones/año.</li>
-                </ul>
-
-                <h4>2. Mapas y Diagramas de Ingeniería</h4>
-                <p>Análisis de flujo, recorridos y valor de la línea de producción. <strong>(Haz clic en cualquier imagen para ampliarla)</strong>:</p>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-bottom: 20px;">
-                    
-                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
-                        <h5 style="margin-top: 0; color: #3F51B5;">Layout de la Línea</h5>
-                        <a href="#zoom_layout_brisa">
-                            <img src="../docs/modulo2/Diagramas/Layout/Layout Brissa.png" alt="Layout Línea Agua Brisa" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
-                        </a>
-                        <div id="zoom_layout_brisa" class="lightbox">
-                            <a href="#Brisa" class="close-lightbox">&times;</a>
-                            <img src="../docs/modulo2/Diagramas/Layout/Layout Brissa.png" alt="Layout Línea Agua Brisa">
-                        </div>
-                    </div>
-
-                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
-                        <h5 style="margin-top: 0; color: #3F51B5;">Diagrama Spaghetti</h5>
-                        <a href="#zoom_spagetti_brisa">
-                            <img src="../docs/modulo2/Diagramas/Spaghetti/Garrafon_Spagetti.jpg" alt="Diagrama Spaghetti Agua Brisa" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
-                        </a>
-                        <div id="zoom_spagetti_brisa" class="lightbox">
-                            <a href="#Brisa" class="close-lightbox">&times;</a>
-                            <img src="../docs/modulo2/Diagramas/Spaghetti/Garrafon_Spagetti.jpg" alt="Diagrama Spaghetti Agua Brisa">
-                        </div>
-                    </div>
-
-                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
-                        <h5 style="margin-top: 0; color: #3F51B5;">DOP (Operaciones)</h5>
-                        <a href="#zoom_dop_brisa">
-                            <img src="../docs/modulo2/Diagramas/DOP/DOP Brissa.PNG" alt="DOP Agua Brisa" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
-                        </a>
-                        <div id="zoom_dop_brisa" class="lightbox">
-                            <a href="#Brisa" class="close-lightbox">&times;</a>
-                            <img src="../docs/modulo2/Diagramas/DOP/DOP Brissa.PNG" alt="DOP Agua Brisa">
-                        </div>
-                    </div>
-
-                    <div style="background-color: #f4f7f6; padding: 15px; text-align: center; border: 1px solid #ddd; border-radius: 5px;">
-                        <h5 style="margin-top: 0; color: #3F51B5;">VSM (Value Stream Map)</h5>
-                        <a href="#zoom_vsm_brisa">
-                            <img src="../docs/modulo2/Diagramas/VSM/VSM Brissa.png" alt="VSM Agua Brisa" style="max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; cursor: zoom-in;">
-                        </a>
-                        <div id="zoom_vsm_brisa" class="lightbox">
-                            <a href="#Brisa" class="close-lightbox">&times;</a>
-                            <img src="../docs/modulo2/Diagramas/VSM/VSM Brissa.png" alt="VSM Agua Brisa">
-                        </div>
-                    </div>
-                </div>
-                
-                <h5 style="color: #3F51B5;">📋 Diagrama de Análisis de Proceso</h5>
-                <p>Resumen analítico de tiempos, distancias y tipos de operación (operación, transporte, inspección, demora y almacenaje):</p>
-                
-                <div style="text-align: center; margin-bottom: 25px; padding: 20px; border: 1px dashed #ccc; border-radius: 5px; background-color: #f9fbfc;">
-                    <p style="margin-bottom: 15px; color: #555;">Documento detallado en formato PDF</p>
-                    <a href="../docs/modulo2/Diagramas/DAP/Analisis de proceso Garrafones.pdf" target="_blank" style="display: inline-block; padding: 12px 24px; background-color: #3F51B5; color: #ffffff; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
-                        📄 Abrir Análisis de Proceso Brissa (PDF)
-                    </a>
-                </div>
-
-
-                <h4>3. Indicadores de Desempeño</h4>
-                
-                <div class="kpi-box">
-                    <h5 class="kpi-title">⏱️ Takt Time</h5>
-                    <p>Es el ritmo de producción estrictamente necesario para satisfacer la demanda sin generar retrasos. Asumiendo que esta línea opera 5 días (10 turnos) a la semana  y que en un turno de 8 horas relamente se trabajan 6.3 horas, la tasa mínima requerida es de 1,288 garrafones/hora.</p>
-                    <span class="kpi-result">Resultado: 0.0465 minutos/garrafón</span>
-                </div>
-
-                <div class="kpi-box">
-                    <h5 class="kpi-title">⚙️ Cycle Time (Tc) y Setup Time (Tsu)</h5>
-                    <p>Comparando el Takt Time con la velocidad nominal de la maquinaria (1,500 garrafones/hora), establecemos el tiempo físico de fabricación por unidad.</p>
-                    <ul>
-                        <li><strong>Tiempo de Ciclo (Tc):</strong> 0.04 minutos/garrafón.</li>
-                        <li><strong>Tiempo de Setup (Tsu):</strong> 90 minutos máximo.</li>
-                    </ul>
-                </div>
-
-                <div class="kpi-box">
-                    <h5 class="kpi-title">📈 Tasa y Capacidad de Producción</h5>
-                    <p>Calculado sobre un lote estándar de 8,115 garrafones por turno y evaluando la capacidad técnica instalada:</p>
-                    <ul>
-                        <li><strong>Production Rate (Rp):</strong> 1,175 garrafones/hora.</li>
-                        <li><strong>Capacidad Teórica (PC):</strong> 120,000 garrafones/semana.</li>
-                        <li><strong>Utilización:</strong> 67.62%. (La línea no está saturada).</li>
-                    </ul>
-                </div>
-
-                <div class="kpi-box">
-                    <h5 class="kpi-title">⏳ Manufacturing Lead Time (MLT)</h5>
-                    <p>Tiempo total que transcurre para procesar un lote completo de producción, incluyendo configuración y empaquetado final.</p>
-                    <span class="kpi-result">Resultado: 8.65 Horas / lote</span>
-                </div>
-
-                <div class="kpi-box">
-                    <h5 class="kpi-title">📊 Overall Equipment Effectiveness (OEE)</h5>
-                    <p>Indicador que evalúa la Disponibilidad (93.5%), el Desempeño (97.9%) y la Calidad (98.0%) del proceso de envasado.</p>
-                    <span class="kpi-result">OEE Consolidado: 89.77% (Desempeño Muy Bueno)</span>
-                </div>
-            </div>
-
-        </main>
+        </div>
+        <div style="text-align: center; margin-top: 15px; margin-bottom: 20px;">
+            <a href="docs/modulo2/Diagramas/DAP/Analisis de proceso Monster.pdf" target="_blank" style="display: inline-block; padding: 6px 12px; background: transparent; color: #5a5a5a; border: 1px solid #5a5a5a; text-decoration: none; border-radius: 4px; font-size: 11px; font-weight: bold;">[+] Ver DAP Monster (PDF)</a>
+        </div>
     </div>
 
-    <footer>
-        <p>Documentación Técnica &copy; 2026 - Nexum Automation | Universidad Nacional de Colombia</p>
-    </footer>
+    <!-- CONTENIDO: QUATRO -->
+    <div id="content-quatro" class="m2-product-pane" style="display: none;">
+        <h3 class="panel-subtitle" style="color: #d32f2f; margin-top: 10px;">Análisis: Quatro (PET 1.5L)</h3>
+        <p class="panel-text" style="font-size: 13px; margin-bottom: 15px;"><strong>Demanda Estimada:</strong> 35,720,000 unidades/año (53.58M litros). Proyección desde volumen base Coca-Cola.</p>
 
-   <script>
-        function abrirLinea(evt, nombreLinea) {
-            var i, tabcontent, tablinks;
-            
-            // Ocultar todo el contenido de las pestañas
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            
-            // Quitar la clase "active" de todos los botones
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            
-            // Mostrar la pestaña actual y añadir "active" al botón clickeado
-            document.getElementById(nombreLinea).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
+        <!-- KPIs Cards -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-bottom: 15px;">
+            <div style="padding: 8px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.03); border-left: 3px solid #d32f2f; border-radius: 4px;">
+                <strong style="color: #d32f2f; font-size: 10px; display: block;">Takt Time</strong>
+                <span style="font-size: 12px; font-weight: bold;">0.0044 min/bot</span>
+            </div>
+            <div style="padding: 8px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.03); border-left: 3px solid #d32f2f; border-radius: 4px;">
+                <strong style="color: #d32f2f; font-size: 10px; display: block;">Cycle Time (Tc)</strong>
+                <span style="font-size: 12px; font-weight: bold;">0.004 min/bot</span>
+            </div>
+            <div style="padding: 8px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.03); border-left: 3px solid #d32f2f; border-radius: 4px;">
+                <strong style="color: #d32f2f; font-size: 10px; display: block;">Prod. Rate (Rp)</strong>
+                <span style="font-size: 12px; font-weight: bold;">11,879 bot/hr</span>
+            </div>
+            <div style="padding: 8px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.03); border-left: 3px solid #d32f2f; border-radius: 4px;">
+                <strong style="color: #d32f2f; font-size: 10px; display: block;">Utilización</strong>
+                <span style="font-size: 12px; font-weight: bold;">71.36%</span>
+            </div>
+        </div>
+        <div style="margin-bottom: 20px; padding: 10px; background-color: rgba(142, 142, 147, 0.02); border: 1px dashed #d32f2f; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; font-size: 12px;">
+            <div>Disp: <strong>93.5%</strong> | Desemp: <strong>100%</strong> | Cal: <strong>98.0%</strong></div>
+            <div style="font-weight: bold; color: #d32f2f;">OEE: 91.69% · MLT: 8.95 Hrs</div>
+        </div>
 
-        // --- EFECTO LUPA CORREGIDO (SIN BUG AL SALIR) ---
-        document.addEventListener("DOMContentLoaded", function() {
-            const imagenesLightbox = document.querySelectorAll('.lightbox img');
-            
-            imagenesLightbox.forEach(img => {
-                // Aumentamos a 0.2s para que la salida sea más elegante
-                img.style.transition = "transform 0.2s ease-out";
-                
-                img.addEventListener('mousemove', function(e) {
-                    // Usar offsetX y offsetWidth evita temblores porque lee las medidas internas
-                    const x = (e.offsetX / img.offsetWidth) * 100;
-                    const y = (e.offsetY / img.offsetHeight) * 100;
-                    
-                    img.style.transformOrigin = `${x}% ${y}%`;
-                    img.style.transform = "scale(2.5)"; 
-                    img.style.cursor = "zoom-in";
-                });
-                
-                img.addEventListener('mouseleave', function() {
-                    // Solo le decimos que vuelva al tamaño original. 
-                    // Ya no forzamos el centro aquí, evitando el salto feo.
-                    img.style.transform = "scale(1)";
-                    img.style.cursor = "default";
+        <!-- PIPELINE CINÉTICO DE DIAGRAMAS QUATRO -->
+        <div class="m2-workspace">
+            <div class="m2-sidebar-pipeline" id="m2-hub-quatro">
+                <svg class="m2-svg-canvas"></svg>
+                <div class="m2-ghost" data-speed="0.08" style="width: 6px; height: 6px; top: 15%; left: 75%;"></div>
+
+                <div onclick="switchDiagram('quatro', 'layout')" id="node-quatro-layout" class="m2-vert-node active">
+                    <div class="m2-vert-icon">🏭</div>
+                    <span class="m2-vert-text">LAYOUT</span>
+                </div>
+                <div onclick="switchDiagram('quatro', 'spaghetti')" id="node-quatro-spaghetti" class="m2-vert-node">
+                    <div class="m2-vert-icon">⚙️</div>
+                    <span class="m2-vert-text">SPAGHETTI</span>
+                </div>
+                <div onclick="switchDiagram('quatro', 'dop')" id="node-quatro-dop" class="m2-vert-node">
+                    <div class="m2-vert-icon">📊</div>
+                    <span class="m2-vert-text">DOP</span>
+                </div>
+                <div onclick="switchDiagram('quatro', 'vsm')" id="node-quatro-vsm" class="m2-vert-node">
+                    <div class="m2-vert-icon">📈</div>
+                    <span class="m2-vert-text">VSM</span>
+                </div>
+            </div>
+
+            <div class="m2-viewer-panel">
+                <div id="viewer-quatro-layout" class="quatro-diagram-view" style="display: block; text-align: center; width: 100%;">
+                    <div style="overflow: hidden; border-radius: 4px; display: inline-block;">
+                        <img src="docs/modulo2/Diagramas/Layout/Layout Quatro.png" alt="Layout Quatro" style="max-height: 380px; width: auto; max-width: 100%; transition: transform 0.2s ease-out; cursor: zoom-in;" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
+                    </div>
+                    <div style="font-size: 11px; margin-top: 8px; color: var(--text-main); font-weight: bold;">Diagrama de Distribución en Planta (Layout) - Quatro</div>
+                </div>
+                <div id="viewer-quatro-spaghetti" class="quatro-diagram-view" style="display: none; text-align: center; width: 100%;">
+                    <div style="overflow: hidden; border-radius: 4px; display: inline-block;">
+                        <img src="docs/modulo2/Diagramas/Spaghetti/Quatro_Spagetti.jpg" alt="Spaghetti Quatro" style="max-height: 380px; width: auto; max-width: 100%; transition: transform 0.2s ease-out; cursor: zoom-in;" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
+                    </div>
+                    <div style="font-size: 11px; margin-top: 8px; color: var(--text-main); font-weight: bold;">Diagrama de Recorrido (Spaghetti) - Quatro</div>
+                </div>
+                <div id="viewer-quatro-dop" class="quatro-diagram-view" style="display: none; text-align: center; width: 100%;">
+                    <div style="overflow: hidden; border-radius: 4px; display: inline-block;">
+                        <img src="docs/modulo2/Diagramas/DOP/DOP Quatro.PNG" alt="DOP Quatro" style="max-height: 380px; width: auto; max-width: 100%; transition: transform 0.2s ease-out; cursor: zoom-in;" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
+                    </div>
+                    <div style="font-size: 11px; margin-top: 8px; color: var(--text-main); font-weight: bold;">Diagrama de Operaciones del Proceso (DOP) - Quatro</div>
+                </div>
+                <div id="viewer-quatro-vsm" class="quatro-diagram-view" style="display: none; text-align: center; width: 100%;">
+                    <div style="overflow: hidden; border-radius: 4px; display: inline-block;">
+                        <img src="docs/modulo2/Diagramas/VSM/VMS Quatro.png" alt="VSM Quatro" style="max-height: 380px; width: auto; max-width: 100%; transition: transform 0.2s ease-out; cursor: zoom-in;" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
+                    </div>
+                    <div style="font-size: 11px; margin-top: 8px; color: var(--text-main); font-weight: bold;">Mapa de Flujo de Valor (VSM) - Quatro</div>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 15px; margin-bottom: 20px;">
+            <a href="docs/modulo2/Diagramas/DAP/Analisis de proceso Quatro .pdf" target="_blank" style="display: inline-block; padding: 6px 12px; background: transparent; color: #d32f2f; border: 1px solid #d32f2f; text-decoration: none; border-radius: 4px; font-size: 11px; font-weight: bold;">[+] Ver DAP Quatro (PDF)</a>
+        </div>
+    </div>
+
+    <!-- CONTENIDO: AGUA BRISA -->
+    <div id="content-brisa" class="m2-product-pane" style="display: none;">
+        <h3 class="panel-subtitle" style="color: #0288d1; margin-top: 10px;">Análisis: Agua Brisa (Garrafón 20L)</h3>
+        <p class="panel-text" style="font-size: 13px; margin-bottom: 15px;"><strong>Demanda Estimada:</strong> 4,227,600 garrafones/año. 4% del volumen nacional en formato Hogar-Oficina (HOD).</p>
+
+        <!-- KPIs Cards -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-bottom: 15px;">
+            <div style="padding: 8px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.03); border-left: 3px solid #0288d1; border-radius: 4px;">
+                <strong style="color: #0288d1; font-size: 10px; display: block;">Takt Time</strong>
+                <span style="font-size: 12px; font-weight: bold;">0.0465 min/garr</span>
+            </div>
+            <div style="padding: 8px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.03); border-left: 3px solid #0288d1; border-radius: 4px;">
+                <strong style="color: #0288d1; font-size: 10px; display: block;">Cycle Time (Tc)</strong>
+                <span style="font-size: 12px; font-weight: bold;">0.04 min/garr</span>
+            </div>
+            <div style="padding: 8px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.03); border-left: 3px solid #0288d1; border-radius: 4px;">
+                <strong style="color: #0288d1; font-size: 10px; display: block;">Prod. Rate (Rp)</strong>
+                <span style="font-size: 12px; font-weight: bold;">1,175 garr/hr</span>
+            </div>
+            <div style="padding: 8px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.03); border-left: 3px solid #0288d1; border-radius: 4px;">
+                <strong style="color: #0288d1; font-size: 10px; display: block;">Utilización</strong>
+                <span style="font-size: 12px; font-weight: bold;">67.62%</span>
+            </div>
+        </div>
+        <div style="margin-bottom: 20px; padding: 10px; background-color: rgba(142, 142, 147, 0.02); border: 1px dashed #0288d1; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; font-size: 12px;">
+            <div>Disp: <strong>93.5%</strong> | Desemp: <strong>97.9%</strong> | Cal: <strong>98.0%</strong></div>
+            <div style="font-weight: bold; color: #0288d1;">OEE: 89.77% · MLT: 8.65 Hrs</div>
+        </div>
+
+        <!-- PIPELINE CINÉTICO DE DIAGRAMAS BRISA -->
+        <div class="m2-workspace">
+            <div class="m2-sidebar-pipeline" id="m2-hub-brisa">
+                <svg class="m2-svg-canvas"></svg>
+                <div class="m2-ghost" data-speed="0.1" style="width: 7px; height: 7px; top: 80%; left: 20%;"></div>
+
+                <div onclick="switchDiagram('brisa', 'layout')" id="node-brisa-layout" class="m2-vert-node active">
+                    <div class="m2-vert-icon">🏭</div>
+                    <span class="m2-vert-text">LAYOUT</span>
+                </div>
+                <div onclick="switchDiagram('brisa', 'spaghetti')" id="node-brisa-spaghetti" class="m2-vert-node">
+                    <div class="m2-vert-icon">⚙️</div>
+                    <span class="m2-vert-text">SPAGHETTI</span>
+                </div>
+                <div onclick="switchDiagram('brisa', 'dop')" id="node-brisa-dop" class="m2-vert-node">
+                    <div class="m2-vert-icon">📊</div>
+                    <span class="m2-vert-text">DOP</span>
+                </div>
+                <div onclick="switchDiagram('brisa', 'vsm')" id="node-brisa-vsm" class="m2-vert-node">
+                    <div class="m2-vert-icon">📈</div>
+                    <span class="m2-vert-text">VSM</span>
+                </div>
+            </div>
+
+            <div class="m2-viewer-panel">
+                <div id="viewer-brisa-layout" class="brisa-diagram-view" style="display: block; text-align: center; width: 100%;">
+                    <div style="overflow: hidden; border-radius: 4px; display: inline-block;">
+                        <img src="docs/modulo2/Diagramas/Layout/Layout Brissa.png" alt="Layout Brisa" style="max-height: 380px; width: auto; max-width: 100%; transition: transform 0.2s ease-out; cursor: zoom-in;" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
+                    </div>
+                    <div style="font-size: 11px; margin-top: 8px; color: var(--text-main); font-weight: bold;">Diagrama de Distribución en Planta (Layout) - Brisa</div>
+                </div>
+                <div id="viewer-brisa-spaghetti" class="brisa-diagram-view" style="display: none; text-align: center; width: 100%;">
+                    <div style="overflow: hidden; border-radius: 4px; display: inline-block;">
+                        <img src="docs/modulo2/Diagramas/Spaghetti/Garrafon_Spagetti.jpg" alt="Spaghetti Brisa" style="max-height: 380px; width: auto; max-width: 100%; transition: transform 0.2s ease-out; cursor: zoom-in;" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
+                    </div>
+                    <div style="font-size: 11px; margin-top: 8px; color: var(--text-main); font-weight: bold;">Diagrama de Recorrido (Spaghetti) - Brisa</div>
+                </div>
+                <div id="viewer-brisa-dop" class="brisa-diagram-view" style="display: none; text-align: center; width: 100%;">
+                    <div style="overflow: hidden; border-radius: 4px; display: inline-block;">
+                        <img src="docs/modulo2/Diagramas/DOP/DOP Brissa.PNG" alt="DOP Brisa" style="max-height: 380px; width: auto; max-width: 100%; transition: transform 0.2s ease-out; cursor: zoom-in;" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
+                    </div>
+                    <div style="font-size: 11px; margin-top: 8px; color: var(--text-main); font-weight: bold;">Diagrama de Operaciones del Proceso (DOP) - Brisa</div>
+                </div>
+                <div id="viewer-brisa-vsm" class="brisa-diagram-view" style="display: none; text-align: center; width: 100%;">
+                    <div style="overflow: hidden; border-radius: 4px; display: inline-block;">
+                        <img src="docs/modulo2/Diagramas/VSM/VSM Brissa.png" alt="VSM Brisa" style="max-height: 380px; width: auto; max-width: 100%; transition: transform 0.2s ease-out; cursor: zoom-in;" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
+                    </div>
+                    <div style="font-size: 11px; margin-top: 8px; color: var(--text-main); font-weight: bold;">Mapa de Flujo de Valor (VSM) - Brisa</div>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 15px; margin-bottom: 20px;">
+            <a href="docs/modulo2/Diagramas/DAP/Analisis de proceso Garrafones.pdf" target="_blank" style="display: inline-block; padding: 6px 12px; background: transparent; color: #0288d1; border: 1px solid #0288d1; text-decoration: none; border-radius: 4px; font-size: 11px; font-weight: bold;">[+] Ver DAP Brisa (PDF)</a>
+        </div>
+    </div>
+
+</div>
+
+<!-- =========================================================================
+     MOTOR DE INTERCONEXIÓN CINÉTICA & FÍSICA DE REPULSIÓN (MÓDULO 2 MASTER)
+     ========================================================================= -->
+<script>
+    // --- CONTROLADORES DE INTERFAZ TRADICIONAL UPGRADED ---
+    function switchProduct(prodId) {
+        document.querySelectorAll('.m2-product-pane').forEach(el => el.style.display = 'none');
+        document.getElementById('content-' + prodId).style.display = 'block';
+        
+        document.querySelectorAll('.m2-top-node').forEach(node => node.classList.remove('active'));
+        document.getElementById('node-tab-' + prodId).classList.add('active');
+    }
+
+    function switchDiagram(prodId, diagId) {
+        document.querySelectorAll('.' + prodId + '-diagram-view').forEach(el => el.style.display = 'none');
+        document.getElementById('viewer-' + prodId + '-' + diagId).style.display = 'block';
+        
+        var parentMenu = document.getElementById('content-' + prodId);
+        parentMenu.querySelectorAll('.m2-vert-node').forEach(node => node.classList.remove('active'));
+        document.getElementById('node-' + prodId + '-' + diagId).classList.add('active');
+    }
+
+    function zoomImg(e, img) {
+        var posX = e.offsetX;
+        var posY = e.offsetY;
+        img.style.transformOrigin = ((posX / img.offsetWidth) * 100) + '% ' + ((posY / img.offsetHeight) * 100) + '%';
+        img.style.transform = 'scale(2.2)';
+    }
+    function resetImg(img) { img.style.transform = 'scale(1)'; }
+
+    // --- MOTOR CINÉTICO POR REFRIGERACIÓN DE HARDWARE ---
+    (function () {
+        const hubIds = ['m2-hub-top', 'm2-hub-monster', 'm2-hub-quatro', 'm2-hub-brisa'];
+        const activeHubs = [];
+        let globalLoopTime = 0;
+
+        hubIds.forEach(id => {
+            const container = document.getElementById(id);
+            if (!container) return;
+
+            const svg = container.querySelector('.m2-svg-canvas');
+            const isHorizontal = id === 'm2-hub-top';
+            const nodeSelector = isHorizontal ? '.m2-top-node' : '.m2-vert-node';
+            const iconSelector = isHorizontal ? '.m2-top-node-icon' : '.m2-vert-icon';
+            const nodesElements = Array.from(container.querySelectorAll(nodeSelector));
+            const ghostsElements = Array.from(container.querySelectorAll('.m2-ghost'));
+
+            const trackedNodes = [];
+            const linesData = [];
+
+            nodesElements.forEach(el => {
+                const targetIcon = el.querySelector(iconSelector);
+                trackedNodes.push({
+                    el: el, target: targetIcon, isGhost: false,
+                    currX: 0, currY: 0, targetX: 0, targetY: 0,
+                    currScale: 1, targetScale: 1, seed: 0
                 });
             });
-        });
-    </script>
 
-</body>
-</html>
+            ghostsElements.forEach(el => {
+                trackedNodes.push({
+                    el: el, target: el, isGhost: true,
+                    currX: 0, currY: 0, targetX: 0, targetY: 0,
+                    currScale: 1, targetScale: 1, seed: Math.random() * 15
+                });
+            });
+
+            // Conectar estructuralmente los nodos con líneas vectoriales en SVG
+            function createLine(n1, n2, typeClass) {
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('class', typeClass);
+                svg.appendChild(line);
+                linesData.push({ el: line, nodeA: n1, nodeB: n2 });
+            }
+
+            // Enlace secuencial secuencial principal
+            for (let i = 0; i < nodesElements.length - 1; i++) {
+                createLine(trackedNodes[i], trackedNodes[i + 1], 'm2-line-main');
+            }
+
+            // Enlaces cruzados fantasma (Si existen)
+            if (ghostsElements.length > 0 && nodesElements.length > 1) {
+                ghostsElements.forEach((g, idx) => {
+                    const nodeIndex = idx % nodesElements.length;
+                    createLine(trackedNodes[nodeIndex], trackedNodes[nodesElements.length + idx], 'm2-line-ghost');
+                });
+            }
+
+            const hubInstance = {
+                container: container,
+                isHorizontal: isHorizontal,
+                nodes: trackedNodes,
+                lines: linesData,
+                mouseX: -2000,
+                mouseY: -2000,
+                isHovered: false
+            };
+
+            container.addEventListener('mousemove', (e) => {
+                const rect = container.getBoundingClientRect();
+                hubInstance.mouseX = e.clientX - rect.left;
+                hubInstance.mouseY = e.clientY - rect.top;
+                hubInstance.isHovered = true;
+            });
+
+            container.addEventListener('mouseleave', () => {
+                hubInstance.isHovered = false;
+            });
+
+            activeHubs.push(hubInstance);
+        });
+
+        // Bucle unificado de renderizado de alto rendimiento
+        function runEngineLoop() {
+            // Detener el bucle si el contenedor macro del Módulo 2 ya no está presente
+            if (!document.getElementById('m2-hub-top')) return;
+
+            globalLoopTime += 0.025;
+
+            activeHubs.forEach(hub => {
+                // Si el contenedor está oculto (pestaña inactiva), saltarse cálculos de físicas
+                if (hub.container.offsetWidth === 0) return;
+
+                const hubRect = hub.container.getBoundingClientRect();
+                const radius = hub.isHorizontal ? 80 : 65;
+                const forceMax = hub.isHorizontal ? 10 : 7;
+
+                hub.nodes.forEach(node => {
+                    const nodeRect = node.el.getBoundingClientRect();
+                    const corrX = node.isGhost ? node.currX : 0;
+                    const corrY = node.isGhost ? node.currY : 0;
+
+                    const centerX = (nodeRect.left - hubRect.left) + (nodeRect.width / 2) - corrX;
+                    const centerY = (nodeRect.top - hubRect.top) + (nodeRect.height / 2) - corrY;
+
+                    if (node.isGhost) {
+                        if (hub.isHovered) {
+                            const speed = parseFloat(node.el.getAttribute('data-speed')) || 0.08;
+                            node.targetX = (hub.mouseX - hubRect.width / 2) * speed;
+                            node.targetY = (hub.mouseY - hubRect.height / 2) * speed;
+                        } else {
+                            node.targetX = Math.sin(globalLoopTime + node.seed) * 5;
+                            node.targetY = Math.cos(globalLoopTime * 0.8 + node.seed) * 4;
+                        }
+                    } else {
+                        const dx = hub.mouseX - centerX;
+                        const dy = hub.mouseY - centerY;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (hub.isHovered && distance < radius) {
+                            const push = 1 - (distance / radius);
+                            const angle = Math.atan2(dy, dx);
+                            node.targetX = Math.cos(angle) * forceMax * push;
+                            node.targetY = Math.sin(angle) * forceMax * push;
+                            node.targetScale = hub.isHorizontal ? 1.14 : 1.12;
+                            node.el.classList.add('near');
+                        } else {
+                            node.targetX = 0;
+                            node.targetY = 0;
+                            node.targetScale = 1.0;
+                            node.el.classList.remove('near');
+                        }
+                    }
+
+                    // Ecuación Lerp elástica suave
+                    node.currX += (node.targetX - node.currX) * 0.14;
+                    node.currY += (node.targetY - node.currY) * 0.14;
+                    node.currScale += (node.targetScale - node.currScale) * 0.16;
+
+                    node.target.style.transform = `translate(${node.currX}px, ${node.currY}px) scale(${node.currScale})`;
+                    
+                    node.computedSvgX = centerX + node.currX;
+                    node.computedSvgY = centerY + node.currY;
+                });
+
+                // Repintar hilos SVG interactivos
+                hub.lines.forEach(line => {
+                    line.el.setAttribute('x1', line.nodeA.computedSvgX);
+                    line.el.setAttribute('y1', line.nodeA.computedSvgY);
+                    line.el.setAttribute('x2', line.nodeB.computedSvgX);
+                    line.el.setAttribute('y2', line.nodeB.computedSvgY);
+                });
+            });
+
+            requestAnimationFrame(runEngineLoop);
+        }
+
+        requestAnimationFrame(runEngineLoop);
+    })();
+</script>
