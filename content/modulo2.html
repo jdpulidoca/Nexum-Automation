@@ -26,9 +26,6 @@
 <!-- =========================================================================
      ESTILOS MODULARES: CONSTELLATION HUB (Horizontal y Vertical)
      ========================================================================= -->
-<!-- =========================================================================
-     ESTILOS MODULARES: CONSTELLATION HUB (Horizontal y Vertical)
-     ========================================================================= -->
 <style>
     .tw-radio { display: none; }
     
@@ -38,7 +35,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        /* Removido el overflow: hidden global para no cortar los tooltips */
     }
     
     .network-canvas {
@@ -87,7 +83,7 @@
        VARIANTE HORIZONTAL (Menú Principal)
        ========================================= */
     .hub-horizontal {
-        overflow: hidden; /* Mantenemos el hidden solo en el horizontal para los puntos fantasma */
+        overflow: hidden;
     }
     .hub-horizontal .hub-timeline {
         flex-direction: row;
@@ -131,19 +127,20 @@
         background: transparent;
         border: none;
         z-index: 10; 
-        overflow: visible; /* ESTO ES LO QUE ARREGLA EL PROBLEMA DEL TAG CORTADO */
+        overflow: visible;
     }
     .hub-vertical .hub-timeline {
         flex-direction: column;
-        gap: 40px; 
+        gap: 35px; /* Reducido ligeramente para acomodar cómodamente el 5º nodo */
         padding: 20px 0;
         width: 100%;
     }
-    /* Asimetría orgánica para la vertical */
+    /* Asimetría orgánica para la vertical (Actualizada para 5 elementos) */
     .hub-vertical .hub-node:nth-of-type(1) { margin-left: -15px; }
     .hub-vertical .hub-node:nth-of-type(2) { margin-left: 15px; }
     .hub-vertical .hub-node:nth-of-type(3) { margin-left: -10px; }
     .hub-vertical .hub-node:nth-of-type(4) { margin-left: 20px; }
+    .hub-vertical .hub-node:nth-of-type(5) { margin-left: -5px; }
 
     /* Textos convertidos en Tooltips emergentes */
     .hub-vertical .hub-text {
@@ -162,7 +159,7 @@
         opacity: 0; 
         transform: translateX(-15px);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-        z-index: 100; /* Asegura que flote muy por encima */
+        z-index: 100;
         text-align: left;
     }
 
@@ -220,6 +217,10 @@
     /* Estilo para ajustar las imágenes más grandes */
     .diagram-image-container { overflow: hidden; border-radius: 4px; display: inline-block; width: 100%; text-align: center; }
     .diagram-image-container img { max-height: 550px; width: 100%; object-fit: contain; transition: transform 0.2s ease-out; cursor: zoom-in; }
+
+    /* Contenedor del Visor PDF integrado */
+    .diagram-pdf-container { width: 100%; height: 550px; border-radius: 4px; overflow: hidden; border: 1px solid var(--border-node); }
+    .diagram-pdf-container iframe { width: 100%; height: 100%; border: none; background: #fff; }
 </style>
 
 <!-- Selectores Globales -->
@@ -306,6 +307,11 @@
                     <div class="hub-icon" style="width: 40px; height: 40px; font-size: 18px;">📈</div>
                     <div class="hub-text">VSM</div>
                 </div>
+                <!-- NUEVO NODO: DAP -->
+                <div class="hub-node parallax-el" id="node-monster-dap" data-speed="0.05" onclick="switchDiagram('monster', 'dap')">
+                    <div class="hub-icon" style="width: 40px; height: 40px; font-size: 18px;">📄</div>
+                    <div class="hub-text">DAP</div>
+                </div>
             </div>
         </div>
 
@@ -353,10 +359,19 @@
                     <img src="docs/modulo2/Diagramas/VSM/VMS Monster.png" alt="VSM Monster" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
                 </div>
             </div>
+
+            <!-- NUEVO VISOR: DAP INTEGRADO -->
+            <div id="viewer-monster-dap" class="monster-diagram-view" style="display: none; width: 100%;">
+                <div class="diagram-header">
+                    <h4><span>📄</span> Diagrama de Análisis de Procesos (DAP)</h4>
+                    <div class="divider"></div>
+                    <p>Desglose minucioso de actividades del operario y maquinaria, registrando traslados, demoras y almacenamientos en la cadena de Monster.</p>
+                </div>
+                <div class="diagram-pdf-container">
+                    <iframe src="docs/modulo2/Diagramas/DAP/Analisis de proceso Monster.pdf"></iframe>
+                </div>
+            </div>
         </div>
-    </div>
-    <div style="text-align: center; margin-top: 15px;">
-        <a href="docs/modulo2/Diagramas/DAP/Analisis de proceso Monster.pdf" target="_blank" style="display: inline-block; padding: 6px 12px; background: transparent; color: var(--text-main); border: 1px solid var(--border-node); text-decoration: none; border-radius: 4px; font-size: 11px; font-weight: bold;">[+] Ver DAP Completo Monster (PDF)</a>
     </div>
 </div>
 
@@ -369,7 +384,6 @@
 
     <!-- KPIs Quatro -->
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-bottom: 15px;">
-        <!-- ... (Contenido KPIs conservado intacto) ... -->
         <div style="padding: 8px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.03); border-left: 3px solid #d32f2f; border-radius: 4px;">
             <strong style="color: var(--text-muted); font-size: 10px; display: block;">Takt Time</strong>
             <span style="font-size: 12px; font-weight: bold; color: var(--text-main);">0.0044 min/bot</span>
@@ -415,6 +429,11 @@
                 <div class="hub-node parallax-el" id="node-quatro-vsm" data-speed="0.04" onclick="switchDiagram('quatro', 'vsm')">
                     <div class="hub-icon" style="width: 40px; height: 40px; font-size: 18px;">📈</div>
                     <div class="hub-text">VSM</div>
+                </div>
+                <!-- NUEVO NODO: DAP -->
+                <div class="hub-node parallax-el" id="node-quatro-dap" data-speed="0.05" onclick="switchDiagram('quatro', 'dap')">
+                    <div class="hub-icon" style="width: 40px; height: 40px; font-size: 18px;">📄</div>
+                    <div class="hub-text">DAP</div>
                 </div>
             </div>
         </div>
@@ -463,10 +482,19 @@
                     <img src="docs/modulo2/Diagramas/VSM/VMS Quatro.png" alt="VSM Quatro" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
                 </div>
             </div>
+
+            <!-- NUEVO VISOR: DAP INTEGRADO -->
+            <div id="viewer-quatro-dap" class="quatro-diagram-view" style="display: none; width: 100%;">
+                <div class="diagram-header">
+                    <h4><span>📄</span> Diagrama de Análisis de Procesos (DAP)</h4>
+                    <div class="divider"></div>
+                    <p>Identificación pormenorizada de los cuellos de botella logísticos y flujos de empaque asociados a las botellas de 1.5L.</p>
+                </div>
+                <div class="diagram-pdf-container">
+                    <iframe src="docs/modulo2/Diagramas/DAP/Analisis de proceso Quatro .pdf"></iframe>
+                </div>
+            </div>
         </div>
-    </div>
-    <div style="text-align: center; margin-top: 15px;">
-        <a href="docs/modulo2/Diagramas/DAP/Analisis de proceso Quatro .pdf" target="_blank" style="display: inline-block; padding: 6px 12px; background: transparent; color: #d32f2f; border: 1px solid var(--border-node); text-decoration: none; border-radius: 4px; font-size: 11px; font-weight: bold;">[+] Ver DAP Completo Quatro (PDF)</a>
     </div>
 </div>
 
@@ -525,6 +553,11 @@
                     <div class="hub-icon" style="width: 40px; height: 40px; font-size: 18px;">📈</div>
                     <div class="hub-text">VSM</div>
                 </div>
+                <!-- NUEVO NODO: DAP -->
+                <div class="hub-node parallax-el" id="node-brisa-dap" data-speed="0.05" onclick="switchDiagram('brisa', 'dap')">
+                    <div class="hub-icon" style="width: 40px; height: 40px; font-size: 18px;">📄</div>
+                    <div class="hub-text">DAP</div>
+                </div>
             </div>
         </div>
 
@@ -572,10 +605,19 @@
                     <img src="docs/modulo2/Diagramas/VSM/VSM Brissa.png" alt="VSM Brisa" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
                 </div>
             </div>
+
+            <!-- NUEVO VISOR: DAP INTEGRADO -->
+            <div id="viewer-brisa-dap" class="brisa-diagram-view" style="display: none; width: 100%;">
+                <div class="diagram-header">
+                    <h4><span>📄</span> Diagrama de Análisis de Procesos (DAP)</h4>
+                    <div class="divider"></div>
+                    <p>Auditoría de manipulación y transporte en los ciclos de higienización y rellenado de recipientes de 20 litros.</p>
+                </div>
+                <div class="diagram-pdf-container">
+                    <iframe src="docs/modulo2/Diagramas/DAP/Analisis de proceso Garrafones.pdf"></iframe>
+                </div>
+            </div>
         </div>
-    </div>
-    <div style="text-align: center; margin-top: 15px;">
-        <a href="docs/modulo2/Diagramas/DAP/Analisis de proceso Garrafones.pdf" target="_blank" style="display: inline-block; padding: 6px 12px; background: transparent; color: #0288d1; border: 1px solid var(--border-node); text-decoration: none; border-radius: 4px; font-size: 11px; font-weight: bold;">[+] Ver DAP Completo Brisa (PDF)</a>
     </div>
 </div>
 
