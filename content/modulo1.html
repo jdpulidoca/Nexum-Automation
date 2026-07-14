@@ -411,7 +411,16 @@
 
 <div id="content-m1-arquitectura" class="tw-content">
     <h3 class="panel-subtitle" style="margin-top: 0;">🔗 Arquitectura de Comunicaciones del Gemelo Digital</h3>
-    <p class="panel-text" style="font-size: 13px;">Pila de software utilizada para conectar la simulación de planta con el control y la supervisión, corriendo en un entorno de emulación local (mismo host, 127.0.0.1). Selecciona un nivel para ver el software correspondiente.</p>
+    <p class="panel-text" style="font-size: 13px;">Pila de software utilizada para conectar la simulación de planta con el control y la supervisión, corriendo en un entorno de emulación local (mismo host, 127.0.0.1).</p>
+
+    <figure class="hud-frame" style="display: block; width: 100%; max-width: 100%; margin: 15px 0 25px 0;">
+        <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+        <img id="arch-diagram-light" src="docs/modulo1/arquitectura-diagrama-claro.png" alt="Arquitectura de Comunicaciones Industriales — Gemelo Digital (tema claro)" style="width: 100%; height: auto; display: block;">
+        <img id="arch-diagram-dark" src="docs/modulo1/arquitectura-diagrama-oscuro.png" alt="Arquitectura de Comunicaciones Industriales — Gemelo Digital (tema oscuro)" style="width: 100%; height: auto; display: none;">
+        <figcaption>FIG. 02 — ARQUITECTURA DE COMUNICACIONES INDUSTRIALES</figcaption>
+    </figure>
+
+    <p class="panel-text" style="font-size: 13px;">Detalle por nivel — selecciona uno para ver el software correspondiente:</p>
 
     <div class="constellation-hub hub-horizontal" id="diag-hub-arch" style="background: rgba(142,142,147,0.02); border: 1px solid var(--border-node); border-radius: 8px; margin-bottom: 20px;">
         <svg class="network-canvas"></svg>
@@ -652,6 +661,23 @@ function switchCategory(mid, cat, event) {
     }
     if (event) event.currentTarget.classList.add('active');
 }
+
+// Diagrama de arquitectura: muestra la versión clara u oscura según el tema activo del sitio
+(function () {
+    const lightImg = document.getElementById('arch-diagram-light');
+    const darkImg = document.getElementById('arch-diagram-dark');
+    const themeSwitch = document.getElementById('mode-checkbox');
+    if (!lightImg || !darkImg) return;
+
+    function applyTheme() {
+        const isDark = !!(themeSwitch && themeSwitch.checked);
+        lightImg.style.display = isDark ? 'none' : 'block';
+        darkImg.style.display = isDark ? 'block' : 'none';
+    }
+
+    applyTheme();
+    if (themeSwitch) themeSwitch.addEventListener('change', applyTheme);
+})();
 
     (function () {
         const hubs = document.querySelectorAll('.constellation-hub');
