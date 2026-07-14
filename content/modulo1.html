@@ -298,8 +298,8 @@
     <div style="flex: 1; min-width: 250px; text-align: center;">
         <figure class="hud-frame">
             <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-            <img src="assets/img/isa95_pyramid.png" alt="Pirámide ISA-95" style="width: 100%; max-width: 300px; height: auto;">
-            <figcaption>FIG. 01 — MODELO ISA-95</figcaption>
+            <img src="docs/modulo1/piramide_automatizacion.jpeg" alt="Pirámide de Automatización — Nexum Automation" style="width: 100%; max-width: 300px; height: auto;">
+            <figcaption>FIG. 01 — PIRÁMIDE DE AUTOMATIZACIÓN</figcaption>
         </figure>
     </div>
 </div>
@@ -372,10 +372,18 @@
         </li>
     </ul>
 
-    <div style="padding: 15px; background-color: rgba(255, 193, 7, 0.05); border: 1px dashed #ffc107; border-radius: 4px;">
-        <p class="panel-text" style="margin: 0; color: var(--text-main);">
-            <strong style="color: #ffc107;">🚧 P&amp;ID en desarrollo:</strong> los planos de instrumentación de válvulas de llenado, túneles de lavado y sistemas de paletizado se encuentran en digitalización bajo la norma ISA-5.1 y se anexarán aquí.
-        </p>
+    <p class="panel-text" style="font-size: 13px; margin-bottom: 5px;">Evidencia fotográfica de la celda y de la máquina empacadora (diseño propio del equipo, sin referencia de catálogo comercial):</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-top: 10px;">
+        <figure class="hud-frame" style="flex: 1; min-width: 220px; margin: 0;">
+            <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+            <img src="docs/modulo1/celda_foto.jpeg" alt="Celda" style="width: 100%; max-height: 260px; object-fit: cover; display: block;">
+            <figcaption>FIG. 02 — CELDA</figcaption>
+        </figure>
+        <figure class="hud-frame" style="flex: 1; min-width: 220px; margin: 0;">
+            <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+            <img src="docs/modulo1/empaquetadora.jpeg" alt="Máquina Empacadora (diseño propio)" style="width: 100%; max-height: 260px; object-fit: cover; display: block;">
+            <figcaption>FIG. 03 — MÁQUINA EMPACADORA (DISEÑO PROPIO)</figcaption>
+        </figure>
     </div>
 </div>
 
@@ -415,7 +423,7 @@
 
     <figure class="hud-frame" style="display: block; width: 100%; max-width: 100%; margin: 15px 0 25px 0;">
         <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-        <img id="arch-diagram-light" src="docs/modulo1/arquitectura-diagrama-claro.jpeg" alt="Arquitectura de Comunicaciones Industriales — Gemelo Digital (tema claro)" style="width: 100%; height: auto; display: block;">
+        <img id="arch-diagram-light" src="docs/modulo1/arquitectura-diagrama-claro.png" alt="Arquitectura de Comunicaciones Industriales — Gemelo Digital (tema claro)" style="width: 100%; height: auto; display: block;">
         <img id="arch-diagram-dark" src="docs/modulo1/arquitectura-diagrama-oscuro.png" alt="Arquitectura de Comunicaciones Industriales — Gemelo Digital (tema oscuro)" style="width: 100%; height: auto; display: none;">
         <figcaption>FIG. 02 — ARQUITECTURA DE COMUNICACIONES INDUSTRIALES</figcaption>
     </figure>
@@ -574,6 +582,11 @@
         <div class="diagram-viewer-area">
             <div class="sens-diagram-view" id="viewer-sens-sopladora" style="display: block; width: 100%;">
                 <div class="diagram-header"><h4><span>⚙️</span>Sopladora (Formadora)</h4><div class="divider"></div></div>
+                <figure class="hud-frame" style="display: block; max-width: 320px; margin: 0 0 14px 0;">
+                    <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+                    <img src="docs/modulo1/maquinas/sopladora.jpeg" alt="Sopladora (Formadora)" style="width: 100%; height: auto; display: block;">
+                    <figcaption>FOTO — SOPLADORA (FORMADORA)</figcaption>
+                </figure>
                 <div class="cat-tabs" id="cat-tabs-sopladora">
                 <button class="cat-tab active" onclick="switchCategory('sopladora', 'anim', event)">🎬 Animación</button>
                 <button class="cat-tab" onclick="switchCategory('sopladora', 'act', event)">🔧 Actuadores</button>
@@ -584,6 +597,11 @@
             </div>
             <div class="sens-diagram-view" id="viewer-sens-lavadora" style="display: none; width: 100%;">
                 <div class="diagram-header"><h4><span>💦</span>Lavadora</h4><div class="divider"></div></div>
+                <figure class="hud-frame" style="display: block; max-width: 320px; margin: 0 0 14px 0;">
+                    <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+                    <img src="docs/modulo1/maquinas/lavadora.jpeg" alt="Lavadora" style="width: 100%; height: auto; display: block;">
+                    <figcaption>FOTO — LAVADORA</figcaption>
+                </figure>
                 <div class="cat-tabs" id="cat-tabs-lavadora">
                 <button class="cat-tab active" onclick="switchCategory('lavadora', 'act', event)">🔧 Actuadores</button>
                 <button class="cat-tab" onclick="switchCategory('lavadora', 'sens', event)">📡 Sensores</button>
@@ -593,6 +611,11 @@
             </div>
             <div class="sens-diagram-view" id="viewer-sens-llenadora" style="display: none; width: 100%;">
                 <div class="diagram-header"><h4><span>🍾</span>Llenadora y Tapadora</h4><div class="divider"></div></div>
+                <figure class="hud-frame" style="display: block; max-width: 320px; margin: 0 0 14px 0;">
+                    <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+                    <img src="docs/modulo1/maquinas/llenadora.jpeg" alt="Llenadora y Tapadora" style="width: 100%; height: auto; display: block;">
+                    <figcaption>FOTO — LLENADORA Y TAPADORA</figcaption>
+                </figure>
                 <div class="cat-tabs" id="cat-tabs-llenadora">
                 <button class="cat-tab active" onclick="switchCategory('llenadora', 'anim', event)">🎬 Animación</button>
                 <button class="cat-tab" onclick="switchCategory('llenadora', 'act', event)">🔧 Actuadores</button>
@@ -603,6 +626,11 @@
             </div>
             <div class="sens-diagram-view" id="viewer-sens-rechazadora" style="display: none; width: 100%;">
                 <div class="diagram-header"><h4><span>🚫</span>Rechazadora</h4><div class="divider"></div></div>
+                <figure class="hud-frame" style="display: block; max-width: 320px; margin: 0 0 14px 0;">
+                    <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+                    <img src="docs/modulo1/maquinas/rechazadora.jpeg" alt="Rechazadora" style="width: 100%; height: auto; display: block;">
+                    <figcaption>FOTO — RECHAZADORA</figcaption>
+                </figure>
                 <div class="cat-tabs" id="cat-tabs-rechazadora">
                 <button class="cat-tab active" onclick="switchCategory('rechazadora', 'act', event)">🔧 Actuadores</button>
                 <button class="cat-tab" onclick="switchCategory('rechazadora', 'sens', event)">📡 Sensores</button>
@@ -612,6 +640,12 @@
             </div>
             <div class="sens-diagram-view" id="viewer-sens-empaquetadora" style="display: none; width: 100%;">
                 <div class="diagram-header"><h4><span>📦</span>Empaquetadora</h4><div class="divider"></div></div>
+                <figure class="hud-frame" style="display: block; max-width: 320px; margin: 0 0 14px 0;">
+                    <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+                    <img src="docs/modulo1/maquinas/empaquetadora.jpeg" alt="Empaquetadora" style="width: 100%; height: auto; display: block;">
+                    <figcaption>FOTO — EMPAQUETADORA</figcaption>
+                </figure>
+                <p class="panel-text" style="font-size: 11.5px; margin-top: -4px;"><span class="scope-tag scope-yes" style="background: rgba(14,165,233,0.15); color: var(--nexum-cyan);">Diseño propio</span> — máquina diseñada por el equipo, sin referencia de catálogo comercial.</p>
                 <div class="cat-tabs" id="cat-tabs-empaquetadora">
                 <button class="cat-tab active" onclick="switchCategory('empaquetadora', 'anim', event)">🎬 Animación</button>
                 <button class="cat-tab" onclick="switchCategory('empaquetadora', 'act', event)">🔧 Actuadores</button>
