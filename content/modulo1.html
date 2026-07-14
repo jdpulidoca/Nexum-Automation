@@ -1,12 +1,271 @@
 <!-- Archivo: content/modulo1.html -->
-<h2 class="panel-title" style="text-align: center;">Propuesta de Automatización e Industria 4.0</h2>
-<div class="panel-meta-strip">[ MÓDULO: 01 ] · [ ESTÁNDAR: ISA-95 ] · [ ENFOQUE: INDUSTRIA 4.0 ]</div>
+<style>
+    .tw-radio { display: none; }
+    
+    /* Contenedor Base del Motor Físico */
+    .constellation-hub {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .network-canvas {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        z-index: 0; pointer-events: none;
+    }
+    
+    /* Líneas adaptativas según el contraste del tema */
+    .tw-line-main { stroke: var(--text-muted); stroke-width: 1.5; stroke-dasharray: 4 4; opacity: 0.35; }
+    .tw-line-ghost { stroke: var(--text-muted); stroke-width: 1.2; stroke-dasharray: 2 4; opacity: 0.2; }
 
-<!-- Bloque Introductorio -->
+    /* Puntos Fantasma (Partículas) */
+    .ghost-dot { position: absolute; background: #9c27b0; opacity: 0.4; border-radius: 50%; z-index: 1;}
+    .ghost-dot.small { width: 5px; height: 5px; }
+    .ghost-dot.medium { width: 8px; height: 8px; opacity: 0.5; }
+
+    /* Contenedor general de la línea de tiempo */
+    .hub-timeline {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Estructura Individual del Nodo (Base) */
+    .hub-node {
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hub-icon {
+        width: 55px; height: 55px; border-radius: 50%;
+        background: var(--node-bg); border: 2px solid var(--border-node);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 24px; box-shadow: var(--shadow-node); 
+        transition: border-color 0.4s, box-shadow 0.4s;
+        position: relative; z-index: 3;
+    }
+
+    /* =========================================
+       VARIANTE HORIZONTAL (Menú Principal)
+       ========================================= */
+    .hub-horizontal {
+        overflow: hidden;
+    }
+    .hub-horizontal .hub-timeline {
+        flex-direction: row;
+        gap: 80px;
+        padding: 30px 20px;
+        width: 100%;
+    }
+    .hub-horizontal .hub-node {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .hub-horizontal .hub-text {
+        font-size: 10px; font-weight: 700; 
+        color: var(--text-main); opacity: 0.5;
+        text-transform: uppercase; letter-spacing: 0.5px;
+        transition: color 0.3s, opacity 0.3s;
+        text-align: center;
+        pointer-events: none;
+    }
+    .hub-horizontal .hub-node:hover .hub-text,
+    .hub-horizontal .hub-node.near .hub-text { opacity: 0.9; }
+
+    #rad-monster:checked ~ .hub-horizontal label[for="rad-monster"] .hub-icon,
+    #rad-quatro:checked ~ .hub-horizontal label[for="rad-quatro"] .hub-icon,
+    #rad-brisa:checked ~ .hub-horizontal label[for="rad-brisa"] .hub-icon {
+        border-color: var(--nexum-blue);
+        box-shadow: 0 0 0 5px rgba(63, 81, 181, 0.15), 0 0 25px rgba(63, 81, 181, 0.3);
+    }
+    #rad-monster:checked ~ .hub-horizontal label[for="rad-monster"] .hub-text,
+    #rad-quatro:checked ~ .hub-horizontal label[for="rad-quatro"] .hub-text,
+    #rad-brisa:checked ~ .hub-horizontal label[for="rad-brisa"] .hub-text {
+        color: var(--nexum-blue); opacity: 1;
+    }
+
+    /* =========================================
+       VARIANTE VERTICAL (Estilo Módulo 5 / UI Dinámica)
+       ========================================= */
+    .hub-vertical {
+        width: 150px;
+        min-height: 400px;
+        background: transparent;
+        border: none;
+        z-index: 10; 
+        overflow: visible;
+    }
+    .hub-vertical .hub-timeline {
+        flex-direction: column;
+        gap: 35px; /* Reducido ligeramente para acomodar cómodamente el 5º nodo */
+        padding: 20px 0;
+        width: 100%;
+    }
+    /* Asimetría orgánica para la vertical (Actualizada para 5 elementos) */
+    .hub-vertical .hub-node:nth-of-type(1) { margin-left: -15px; }
+    .hub-vertical .hub-node:nth-of-type(2) { margin-left: 15px; }
+    .hub-vertical .hub-node:nth-of-type(3) { margin-left: -10px; }
+    .hub-vertical .hub-node:nth-of-type(4) { margin-left: 20px; }
+    .hub-vertical .hub-node:nth-of-type(5) { margin-left: -5px; }
+    .hub-vertical .hub-node:nth-of-type(6) { margin-left: 12px; }
+
+    /* Textos convertidos en Tooltips emergentes */
+    .hub-vertical .hub-text {
+        position: absolute; 
+        left: 60px;
+        width: 100px;
+        font-size: 11px; 
+        font-weight: 600; 
+        color: var(--text-muted);
+        background: var(--node-bg); 
+        padding: 6px 10px; 
+        border-radius: 6px;
+        pointer-events: none; 
+        box-shadow: var(--shadow-node);
+        border: 1px solid var(--border-node);
+        opacity: 0; 
+        transform: translateX(-15px);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+        z-index: 100;
+        text-align: left;
+    }
+
+    /* Interacciones Hover / Proximidad */
+    .hub-node:hover .hub-icon,
+    .hub-node.near .hub-icon {
+        border-color: var(--nexum-cyan);
+        box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.12), 0 8px 20px rgba(14, 165, 233, 0.2);
+    }
+    
+    .hub-vertical .hub-node:hover .hub-text,
+    .hub-vertical .hub-node.near .hub-text { 
+        opacity: 1; 
+        transform: translateX(0); 
+        color: var(--nexum-cyan); 
+    }
+
+    /* ESTADO ACTIVO - Menú Vertical Diagramas (Sólo afecta al icono) */
+    .hub-vertical .hub-node.active .hub-icon {
+        border-color: var(--nexum-blue);
+        box-shadow: 0 0 0 5px rgba(63, 81, 181, 0.15), 0 0 20px rgba(63, 81, 181, 0.3);
+    }
+
+    /* =========================================
+       CONTENEDORES Y ESPACIOS DE TRABAJO
+       ========================================= */
+    .tw-content {
+        display: none; padding: 25px; border: 1px solid var(--border-node); border-radius: 12px;
+        background: var(--node-bg); box-shadow: var(--shadow-node);
+        animation: contentFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        margin-top: 10px;
+    }
+
+    @keyframes contentFadeIn { from { opacity: 0; transform: scale(0.99) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+
+    #rad-monster:checked ~ #content-monster,
+    #rad-quatro:checked ~ #content-quatro,
+    #rad-brisa:checked ~ #content-brisa { display: block; }
+
+    .diagram-workspace { display: flex; gap: 20px; margin-top: 20px; align-items: stretch; position: relative; }
+    
+    .diagram-viewer-area { 
+        flex: 1; border: 1px solid var(--border-node); border-radius: 6px; padding: 20px; 
+        display: flex; flex-direction: column; justify-content: flex-start; align-items: center; 
+        background: rgba(142, 142, 147, 0.03); overflow: hidden; position: relative; z-index: 1;
+    }
+
+    /* Estilos para el encabezado de las imágenes */
+    .diagram-header { text-align: left; margin-bottom: 15px; width: 100%; }
+    .diagram-header h4 { color: #3f51b5; margin: 0; font-size: 15px; font-weight: bold; display: flex; align-items: center; }
+    .diagram-header h4 span { font-size: 16px; margin-right: 8px; }
+    .diagram-header .divider { height: 1px; background-color: var(--border-node); margin: 10px 0; }
+    .diagram-header p { color: var(--text-muted); font-size: 13px; margin: 0; line-height: 1.4; }
+
+    /* Estilo para ajustar las imágenes más grandes */
+    .diagram-image-container { overflow: hidden; border-radius: 4px; display: inline-block; width: 100%; text-align: center; }
+    .diagram-image-container img { max-height: 550px; width: 100%; object-fit: contain; transition: transform 0.2s ease-out; cursor: zoom-in; }
+
+    /* Contenedor del Visor PDF integrado */
+    .diagram-pdf-container { width: 100%; height: 550px; border-radius: 4px; overflow: hidden; border: 1px solid var(--border-node); }
+    .diagram-pdf-container iframe { width: 100%; height: 100%; border: none; background: #fff; }
+
+    /* ===== Estados generados para Módulo 1 ===== */
+    .m1-wrapper { display: flex; gap: 25px; align-items: flex-start; margin-top: 15px; }
+    .m1-sidebar { width: 150px; flex-shrink: 0; min-height: 480px; position: sticky; top: 10px; }
+    .m1-main { flex: 1; min-width: 0; }
+    .tw-content { display: none; padding: 5px; animation: contentFadeInM1 0.5s cubic-bezier(0.16,1,0.3,1) forwards; }
+    @keyframes contentFadeInM1 { from { opacity:0; transform: translateY(8px);} to {opacity:1; transform:translateY(0);} }
+    #rad-m1-isa95:checked ~ .m1-main #content-m1-isa95,
+    #rad-m1-lineas:checked ~ .m1-main #content-m1-lineas,
+    #rad-m1-arquitectura:checked ~ .m1-main #content-m1-arquitectura,
+    #rad-m1-gemelo:checked ~ .m1-main #content-m1-gemelo,
+    #rad-m1-sensorica:checked ~ .m1-main #content-m1-sensorica,
+    #rad-m1-conclusion:checked ~ .m1-main #content-m1-conclusion { display: block; }
+
+    @media (max-width: 700px) {
+        .m1-wrapper { flex-direction: column; }
+        .m1-sidebar { width: 100%; min-height: unset; position: static; }
+        .hub-vertical .hub-timeline { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 20px !important; }
+        .hub-vertical .hub-node:nth-of-type(n) { margin-left: 0 !important; }
+        .hub-vertical .hub-text { position: static; opacity: 1; transform: none; background: none; box-shadow: none; border: none; padding: 4px 0 0 0; width: auto; text-align: center; }
+    }
+
+    .scope-tag { font-size: 9px; font-weight: 700; padding: 2px 8px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.3px; }
+    .scope-yes { background: rgba(76,175,80,0.15); color: #4caf50; }
+    .scope-no { background: rgba(142,142,147,0.15); color: var(--text-muted); }
+
+    .logo-card { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: rgba(142,142,147,0.05); border: 1px solid var(--border-node); border-radius: 6px; margin-bottom: 10px; }
+    .logo-card img { width: 44px; height: 44px; object-fit: contain; flex-shrink: 0; border-radius: 4px; background: #fff; padding: 3px; }
+    .logo-card-text strong { font-size: 13px; color: var(--text-main); display: block; }
+    .logo-card-text span { font-size: 11px; color: var(--text-muted); }
+    .logo-card-text .conn-detail { font-family: monospace; font-size: 10px; color: var(--nexum-cyan); opacity: 0.8; display: block; margin-top: 3px; }
+
+    .sig-list { list-style: none; padding-left: 0; margin: 8px 0 16px 0; }
+    .sig-list li { font-size: 12px; padding: 5px 0 5px 14px; border-left: 2px solid var(--border-node); margin-bottom: 3px; color: var(--text-muted); }
+    .sig-list li strong { color: var(--text-main); font-family: monospace; font-size: 11.5px; }
+    .logic-steps { padding-left: 20px; margin: 10px 0; }
+    .logic-steps li { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; margin-bottom: 8px; }
+    .logic-steps li strong { color: var(--text-main); }
+
+    .hub-horizontal .hub-node.active .hub-icon {
+        border-color: var(--nexum-cyan);
+        box-shadow: 0 0 0 5px rgba(14, 165, 233, 0.15), 0 0 20px rgba(14, 165, 233, 0.3);
+    }
+    .hub-horizontal .hub-node.active .hub-text { color: var(--nexum-cyan); opacity: 1; }
+
+
+    /* Estado activo del menú lateral de módulo 1 */
+    #rad-m1-isa95:checked ~ .m1-sidebar label[for="rad-m1-isa95"] .hub-icon,
+#rad-m1-lineas:checked ~ .m1-sidebar label[for="rad-m1-lineas"] .hub-icon,
+#rad-m1-arquitectura:checked ~ .m1-sidebar label[for="rad-m1-arquitectura"] .hub-icon,
+#rad-m1-gemelo:checked ~ .m1-sidebar label[for="rad-m1-gemelo"] .hub-icon,
+#rad-m1-sensorica:checked ~ .m1-sidebar label[for="rad-m1-sensorica"] .hub-icon,
+#rad-m1-conclusion:checked ~ .m1-sidebar label[for="rad-m1-conclusion"] .hub-icon {
+    border-color: var(--nexum-cyan);
+    box-shadow: 0 0 0 5px rgba(14, 165, 233, 0.15), 0 0 20px rgba(14, 165, 233, 0.3);
+}
+#rad-m1-isa95:checked ~ .m1-sidebar label[for="rad-m1-isa95"] .hub-text,
+#rad-m1-lineas:checked ~ .m1-sidebar label[for="rad-m1-lineas"] .hub-text,
+#rad-m1-arquitectura:checked ~ .m1-sidebar label[for="rad-m1-arquitectura"] .hub-text,
+#rad-m1-gemelo:checked ~ .m1-sidebar label[for="rad-m1-gemelo"] .hub-text,
+#rad-m1-sensorica:checked ~ .m1-sidebar label[for="rad-m1-sensorica"] .hub-text,
+#rad-m1-conclusion:checked ~ .m1-sidebar label[for="rad-m1-conclusion"] .hub-text {
+    color: var(--nexum-cyan); opacity: 1;
+}
+</style>
+<h2 class="panel-title" style="text-align: center;">Propuesta de Automatización e Industria 4.0</h2>
+<div class="panel-meta-strip">[ MÓDULO: 01 ] · [ ESTÁNDAR: ISA-95 ] · [ ALCANCE: CAMPO &#8594; SCADA ]</div>
+
 <div style="display: flex; flex-wrap: wrap; gap: 30px; align-items: flex-start; margin: 20px 0;">
     <div style="flex: 3; min-width: 300px;">
-        <p class="panel-text" style="margin-top: 0;">En esta propuesta, <strong>Nexum Automation</strong> plantea una transformación integral de la planta multiproducto de bebidas, integrando tecnologías de Industria 4.0 para mejorar el desempeño operativo, reducir tiempos muertos y aumentar la eficiencia global (OEE)[cite: 5].</p>
-        <p class="panel-text">El objetivo es estructurar una arquitectura robusta que integre el proceso físico con los sistemas de gestión corporativa, garantizando la visibilidad en tiempo real y la interoperabilidad de los equipos.</p>
+        <p class="panel-text" style="margin-top: 0;"><strong>Nexum Automation</strong> plantea una transformación integral de la planta multiproducto de bebidas, integrando tecnologías de Industria 4.0 para mejorar el desempeño operativo, reducir tiempos muertos y aumentar la eficiencia global (OEE). Como equipo, el alcance cubre desde el <strong>Nivel 0 (Campo) hasta el Nivel 2 (SCADA)</strong> de la pirámide de automatización, con un gemelo digital pensado para escalar a las tres líneas pero centrado en la línea <strong>Quatro</strong>, identificada como la propuesta más viable.</p>
     </div>
     <div style="flex: 1; min-width: 250px; text-align: center;">
         <figure class="hud-frame">
@@ -17,104 +276,456 @@
     </div>
 </div>
 
-<!-- ==========================================
-     SECCIÓN 1 & 2: ISA-95 Y COMUNICACIONES
-     ========================================== -->
-<h3 class="panel-subtitle" style="margin-top: 30px; border-bottom: 1px solid var(--border-node); padding-bottom: 5px;">1. Arquitectura ISA-95 y Comunicaciones</h3>
-<p class="panel-text">El sistema se estructura bajo el modelo ISA-95, permitiendo integración vertical completa desde el sensor hasta la gestión empresarial, utilizando protocolos estándar para garantizar interoperabilidad[cite: 5]:</p>
+<div class="m1-wrapper">
+    <input type="radio" id="rad-m1-isa95" name="tw-tabs-m1" class="tw-radio" checked>
+    <input type="radio" id="rad-m1-lineas" name="tw-tabs-m1" class="tw-radio">
+    <input type="radio" id="rad-m1-arquitectura" name="tw-tabs-m1" class="tw-radio">
+    <input type="radio" id="rad-m1-gemelo" name="tw-tabs-m1" class="tw-radio">
+    <input type="radio" id="rad-m1-sensorica" name="tw-tabs-m1" class="tw-radio">
+    <input type="radio" id="rad-m1-conclusion" name="tw-tabs-m1" class="tw-radio">
 
-<ul style="list-style-type: none; padding-left: 0; margin-bottom: 25px;">
-    <li style="margin-bottom: 10px; background: rgba(142, 142, 147, 0.05); padding: 12px 15px; border-left: 3px solid var(--accent-blue); border-radius: 0 4px 4px 0;">
-        <span style="font-weight: bold; color: var(--accent-blue); display: inline-block; width: 130px;">[ Nivel 4 - ERP ]</span> Planeación de demanda y gestión logística (Integración SAP)[cite: 5].
-    </li>
-    <li style="margin-bottom: 10px; background: rgba(142, 142, 147, 0.05); padding: 12px 15px; border-left: 3px solid var(--accent-blue); border-radius: 0 4px 4px 0;">
-        <span style="font-weight: bold; color: var(--accent-blue); display: inline-block; width: 130px;">[ Nivel 3 - MES ]</span> Interfaz en Python (Vía REST API) para mostrar indicadores de planta[cite: 5].
-    </li>
-    <li style="margin-bottom: 10px; background: rgba(142, 142, 147, 0.05); padding: 12px 15px; border-left: 3px solid var(--accent-blue); border-radius: 0 4px 4px 0;">
-        <span style="font-weight: bold; color: var(--accent-blue); display: inline-block; width: 130px;">[ Nivel 2 - SCADA ]</span> Supervisión centralizada vía OPC-UA y Node-RED como pasarela IoT[cite: 5].
-    </li>
-    <li style="margin-bottom: 10px; background: rgba(142, 142, 147, 0.05); padding: 12px 15px; border-left: 3px solid var(--accent-blue); border-radius: 0 4px 4px 0;">
-        <span style="font-weight: bold; color: var(--accent-blue); display: inline-block; width: 130px;">[ Nivel 1 - PLC ]</span> Control secuencial (Siemens S7-1500 / Allen-Bradley)[cite: 5].
-    </li>
-    <li style="margin-bottom: 10px; background: rgba(142, 142, 147, 0.05); padding: 12px 15px; border-left: 3px solid var(--accent-blue); border-radius: 0 4px 4px 0;">
-        <span style="font-weight: bold; color: var(--accent-blue); display: inline-block; width: 130px;">[ Nivel 0 - Campo ]</span> Sensores y actuadores conectados vía IO-Link[cite: 5].
-    </li>
-</ul>
-
-<!-- ==========================================
-     SECCIÓN 3: PROPUESTAS POR LÍNEA
-     ========================================== -->
-<h3 class="panel-subtitle" style="margin-top: 40px; border-bottom: 1px solid var(--border-node); padding-bottom: 5px;">2. Propuestas de Automatización por Línea</h3>
-<p class="panel-text">Cada línea requiere una estrategia diferenciada en función de sus restricciones operativas[cite: 5]:</p>
-
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
-    <!-- Monster -->
-    <div style="padding: 15px; background-color: rgba(142, 142, 147, 0.05); border-radius: 6px; border-left: 4px solid #5a5a5a;">
-        <strong style="color: var(--text-main); font-size: 14px;">🔋 Línea Monster (473ml)</strong>
-        <ul class="panel-text" style="font-size: 13px; margin-top: 8px; padding-left: 15px;">
-            <li>Optimización del flujo productivo para reducir microparos[cite: 5].</li>
-            <li>Enfoque filler-centric para aumentar OEE[cite: 5].</li>
-        </ul>
+    <div class="constellation-hub hub-vertical m1-sidebar" id="m1-sidebar">
+        <svg class="network-canvas"></svg>
+        <div class="ghost-dot small parallax-el" data-speed="0.1" style="top: 12%; left: 80%;"></div>
+        <div class="ghost-dot medium parallax-el" data-speed="0.06" style="top: 55%; left: 15%;"></div>
+        <div class="ghost-dot small parallax-el" data-speed="0.08" style="top: 90%; left: 70%;"></div>
+        <div class="hub-timeline">
+            <label for="rad-m1-isa95" class="hub-node parallax-el" data-speed="0.05">
+                <div class="hub-icon">🏛️</div>
+                <div class="hub-text">ISA-95 y Alcance</div>
+            </label>
+            <label for="rad-m1-lineas" class="hub-node parallax-el" data-speed="0.06">
+                <div class="hub-icon">🎯</div>
+                <div class="hub-text">Propuesta por Línea</div>
+            </label>
+            <label for="rad-m1-arquitectura" class="hub-node parallax-el" data-speed="0.07">
+                <div class="hub-icon">🔗</div>
+                <div class="hub-text">Arquitectura de Comunicaciones</div>
+            </label>
+            <label for="rad-m1-gemelo" class="hub-node parallax-el" data-speed="0.08">
+                <div class="hub-icon">🤖</div>
+                <div class="hub-text">Gemelo Digital y KPIs</div>
+            </label>
+            <label for="rad-m1-sensorica" class="hub-node parallax-el" data-speed="0.09">
+                <div class="hub-icon">⚙️</div>
+                <div class="hub-text">Sensórica y Actuadores</div>
+            </label>
+            <label for="rad-m1-conclusion" class="hub-node parallax-el" data-speed="0.010">
+                <div class="hub-icon">✅</div>
+                <div class="hub-text">Conclusión</div>
+            </label>
+        </div>
     </div>
-    <!-- Quatro -->
-    <div style="padding: 15px; background-color: rgba(142, 142, 147, 0.05); border-radius: 6px; border-left: 4px solid #d32f2f;">
-        <strong style="color: var(--text-main); font-size: 14px;">🥤 Línea Quatro (PET 1.5L)</strong>
-        <ul class="panel-text" style="font-size: 13px; margin-top: 8px; padding-left: 15px;">
-            <li>Paletizado automático con robot articulado de 6 ejes[cite: 5].</li>
-            <li>Reducción de carga operativa manual en fin de línea[cite: 5].</li>
-        </ul>
-    </div>
-    <!-- Garrafón -->
-    <div style="padding: 15px; background-color: rgba(142, 142, 147, 0.05); border-radius: 6px; border-left: 4px solid #0288d1;">
-        <strong style="color: var(--text-main); font-size: 14px;">💧 Línea Garrafón (20L)</strong>
-        <ul class="panel-text" style="font-size: 13px; margin-top: 8px; padding-left: 15px;">
-            <li>Rediseño de layout tipo flujo continuo (U-Shape)[cite: 5].</li>
-            <li>Automatización de paletizado y manejo de cargas pesadas[cite: 5].</li>
-        </ul>
-    </div>
-</div>
+    <div class="m1-main">
+<div id="content-m1-isa95" class="tw-content">
+    <h3 class="panel-subtitle" style="margin-top: 0;">🏛️ Arquitectura ISA-95 y Alcance del Proyecto</h3>
+    <p class="panel-text">El sistema se estructura bajo el modelo ISA-95 para garantizar integración vertical e interoperabilidad. <strong>Como equipo, el alcance real del proyecto cubre desde el Nivel 0 (Campo) hasta el Nivel 2 (SCADA)</strong> — los niveles MES y ERP se dejan documentados a nivel conceptual, como marco de referencia para una futura ampliación, pero no fueron implementados ni simulados en esta entrega.</p>
 
-<!-- ==========================================
-     SECCIÓN 4: P&ID
-     ========================================== -->
-<h3 class="panel-subtitle" style="margin-top: 40px; border-bottom: 1px solid var(--border-node); padding-bottom: 5px;">3. Diagramas de Instrumentación (P&ID)</h3>
-<p class="panel-text">Esquemas de tuberías e instrumentación de procesos críticos, identificando lazos de control, sensores y actuadores[cite: 5].</p>
+    <ul style="list-style-type: none; padding-left: 0; margin-bottom: 20px;">
+        <li style="margin-bottom: 10px; background: rgba(142, 142, 147, 0.04); padding: 12px 15px; border-left: 3px solid var(--border-node); border-radius: 0 4px 4px 0; opacity: 0.75;">
+            <span style="font-weight: bold; color: var(--text-muted); display: inline-block; width: 130px;">[ Nivel 4 - ERP ]</span> Planeación de demanda y gestión logística (referencia conceptual, integración SAP).
+            <span class="scope-tag scope-no" style="float: right;">Fuera de alcance</span>
+        </li>
+        <li style="margin-bottom: 10px; background: rgba(142, 142, 147, 0.04); padding: 12px 15px; border-left: 3px solid var(--border-node); border-radius: 0 4px 4px 0; opacity: 0.75;">
+            <span style="font-weight: bold; color: var(--text-muted); display: inline-block; width: 130px;">[ Nivel 3 - MES ]</span> Interfaz de indicadores de planta vía REST API (referencia conceptual).
+            <span class="scope-tag scope-no" style="float: right;">Fuera de alcance</span>
+        </li>
+        <li style="margin-bottom: 10px; background: rgba(76,175,80,0.06); padding: 12px 15px; border-left: 3px solid #4caf50; border-radius: 0 4px 4px 0;">
+            <span style="font-weight: bold; color: #4caf50; display: inline-block; width: 130px;">[ Nivel 2 - SCADA ]</span> Supervisión centralizada vía OPC-UA y Node-RED como pasarela IoT.
+            <span class="scope-tag scope-yes" style="float: right;">Implementado</span>
+        </li>
+        <li style="margin-bottom: 10px; background: rgba(76,175,80,0.06); padding: 12px 15px; border-left: 3px solid #4caf50; border-radius: 0 4px 4px 0;">
+            <span style="font-weight: bold; color: #4caf50; display: inline-block; width: 130px;">[ Nivel 1 - PLC ]</span> Control secuencial en Studio 5000 / Logix Emulate.
+            <span class="scope-tag scope-yes" style="float: right;">Implementado</span>
+        </li>
+        <li style="margin-bottom: 10px; background: rgba(76,175,80,0.06); padding: 12px 15px; border-left: 3px solid #4caf50; border-radius: 0 4px 4px 0;">
+            <span style="font-weight: bold; color: #4caf50; display: inline-block; width: 130px;">[ Nivel 0 - Campo ]</span> Sensores y actuadores del gemelo digital (simulados en NX).
+            <span class="scope-tag scope-yes" style="float: right;">Implementado</span>
+        </li>
+    </ul>
 
-<div style="margin-top: 15px; padding: 15px; background-color: rgba(255, 193, 7, 0.05); border: 1px dashed #ffc107; border-radius: 4px;">
-    <p class="panel-text" style="margin: 0; color: var(--text-main);">
-        <strong style="color: #ffc107;">🚧 Evidencia en Desarrollo:</strong> Los planos P&ID correspondientes a las válvulas de llenado, túneles de lavado y sistemas de paletizado se encuentran en etapa de digitalización bajo la norma <strong>ISA-5.1</strong> y serán anexados aquí[cite: 5].
-    </p>
-</div>
-
-<!-- ==========================================
-     SECCIÓN 5 & 6: GEMELO DIGITAL Y KPIs
-     ========================================== -->
-<h3 class="panel-subtitle" style="margin-top: 40px; border-bottom: 1px solid var(--border-node); padding-bottom: 5px;">4. Gemelo Digital, Simulación y KPIs</h3>
-<p class="panel-text">Implementación de simulación en <strong>Plant Simulation (Tecnomatix)</strong> para validar diseños y evaluar indicadores en tiempo real[cite: 5]:</p>
-
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-top: 15px;">
-    <div style="padding: 12px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.03); border-radius: 4px;">
-        <strong style="color: var(--accent-blue); font-size: 13px;">🔍 Evaluación de Cuellos de Botella</strong>
-        <p class="panel-text" style="font-size: 12px; margin: 5px 0 0 0;">Identificación de restricciones en el throughput total[cite: 5].</p>
-    </div>
-    <div style="padding: 12px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.03); border-radius: 4px;">
-        <strong style="color: var(--accent-blue); font-size: 13px;">📦 Análisis de Inventarios (WIP)</strong>
-        <p class="panel-text" style="font-size: 12px; margin: 5px 0 0 0;">Modelado de acumulación para dimensionar buffers intermedios[cite: 5].</p>
-    </div>
-    <div style="padding: 12px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.03); border-radius: 4px;">
-        <strong style="color: var(--accent-blue); font-size: 13px;">📈 OEE (Meta: ≥ 85%)</strong>
-        <p class="panel-text" style="font-size: 12px; margin: 5px 0 0 0;">Disponibilidad × Desempeño × Calidad. KPI maestro de la mejora[cite: 5].</p>
-    </div>
-    <div style="padding: 12px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.03); border-radius: 4px;">
-        <strong style="color: var(--accent-blue); font-size: 13px;">🛑 Microparos</strong>
-        <p class="panel-text" style="font-size: 12px; margin: 5px 0 0 0;">El mayor potencial reside en reducirlos frente a aumentar la velocidad[cite: 5].</p>
+    <div style="padding: 15px; background-color: rgba(255, 193, 7, 0.05); border: 1px dashed #ffc107; border-radius: 4px;">
+        <p class="panel-text" style="margin: 0; color: var(--text-main);">
+            <strong style="color: #ffc107;">🚧 P&amp;ID en desarrollo:</strong> los planos de instrumentación de válvulas de llenado, túneles de lavado y sistemas de paletizado se encuentran en digitalización bajo la norma ISA-5.1 y se anexarán aquí.
+        </p>
     </div>
 </div>
 
-<!-- ==========================================
-     SECCIÓN 7: CONCLUSIÓN
-     ========================================== -->
-<div style="margin-top: 40px; padding: 20px; background-color: rgba(63, 81, 181, 0.1); border-left: 4px solid var(--accent-blue); border-radius: 4px;">
-    <h3 style="color: var(--accent-blue); margin-top: 0; margin-bottom: 10px; font-size: 15px;">✅ Conclusión</h3>
-    <p class="panel-text" style="margin: 0;">La implementación de esta propuesta permite evolucionar la planta hacia un sistema inteligente y conectado. La integración vertical, la instrumentación, el gemelo digital y el monitoreo de KPIs conforman un ecosistema que reduce riesgos, maximiza eficiencia y habilita decisiones basadas en datos[cite: 5].</p>
+<div id="content-m1-lineas" class="tw-content">
+    <h3 class="panel-subtitle" style="margin-top: 0;">🎯 Propuestas de Automatización por Línea</h3>
+    <p class="panel-text">Cada línea requiere una estrategia diferenciada según sus restricciones operativas. De las tres, <strong>la línea Quatro se identificó como la propuesta más viable</strong> — por eso es la que el equipo desarrolló en profundidad para el gemelo digital y la celda robotizada.</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+        <div style="padding: 15px; background-color: rgba(142, 142, 147, 0.05); border-radius: 6px; border-left: 4px solid #5a5a5a;">
+            <strong style="color: var(--text-main); font-size: 14px;">🔋 Línea Monster (473ml)</strong>
+            <ul class="panel-text" style="font-size: 13px; margin-top: 8px; padding-left: 15px;">
+                <li>Optimización del flujo productivo para reducir microparos.</li>
+                <li>Enfoque filler-centric para aumentar OEE.</li>
+            </ul>
+        </div>
+        <div style="padding: 18px; background-color: rgba(211, 47, 47, 0.06); border-radius: 6px; border-left: 4px solid #d32f2f; box-shadow: 0 0 0 1px rgba(211,47,47,0.15);">
+            <strong style="color: var(--text-main); font-size: 14px;">🥤 Línea Quatro (PET 1.5L) <span class="scope-tag" style="background: rgba(211,47,47,0.15); color: #d32f2f;">Línea seleccionada</span></strong>
+            <ul class="panel-text" style="font-size: 13px; margin-top: 8px; padding-left: 15px;">
+                <li>Paletizado automático con robot articulado de 6 ejes.</li>
+                <li>Reducción de carga operativa manual en fin de línea.</li>
+                <li>Base del gemelo digital y de la celda robotizada desarrollados por el equipo.</li>
+            </ul>
+        </div>
+        <div style="padding: 15px; background-color: rgba(142, 142, 147, 0.05); border-radius: 6px; border-left: 4px solid #0288d1;">
+            <strong style="color: var(--text-main); font-size: 14px;">💧 Línea Garrafón (20L)</strong>
+            <ul class="panel-text" style="font-size: 13px; margin-top: 8px; padding-left: 15px;">
+                <li>Rediseño de layout tipo flujo continuo (U-Shape).</li>
+                <li>Automatización de paletizado y manejo de cargas pesadas.</li>
+            </ul>
+        </div>
+    </div>
 </div>
+
+<div id="content-m1-arquitectura" class="tw-content">
+    <h3 class="panel-subtitle" style="margin-top: 0;">🔗 Arquitectura de Comunicaciones del Gemelo Digital</h3>
+    <p class="panel-text" style="font-size: 13px;">Pila de software utilizada para conectar la simulación de planta con el control y la supervisión, corriendo en un entorno de emulación local (mismo host, 127.0.0.1). Selecciona un nivel para ver el software correspondiente.</p>
+
+    <div class="constellation-hub hub-horizontal" id="diag-hub-arch" style="background: rgba(142,142,147,0.02); border: 1px solid var(--border-node); border-radius: 8px; margin-bottom: 20px;">
+        <svg class="network-canvas"></svg>
+        <div class="hub-timeline">
+            <div class="hub-node active parallax-el" id="node-arch-nivel1arch" data-speed="0.05" onclick="switchDiagram('arch', 'nivel1arch')">
+                <div class="hub-icon" style="width: 46px; height: 46px; font-size: 20px;">🖥️</div>
+                <div class="hub-text">Nivel de Supervisión</div>
+            </div>
+            <div class="hub-node parallax-el" id="node-arch-nivel2arch" data-speed="0.06" onclick="switchDiagram('arch', 'nivel2arch')">
+                <div class="hub-icon" style="width: 46px; height: 46px; font-size: 20px;">🔌</div>
+                <div class="hub-text">Nivel de Control e Integración</div>
+            </div>
+            <div class="hub-node parallax-el" id="node-arch-nivel3arch" data-speed="0.07" onclick="switchDiagram('arch', 'nivel3arch')">
+                <div class="hub-icon" style="width: 46px; height: 46px; font-size: 20px;">🏭</div>
+                <div class="hub-text">Nivel de Simulación / Planta Virtual</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="diagram-viewer-area">
+        <div class="arch-diagram-view" id="viewer-arch-nivel1arch" style="display: block;">
+            <div class="diagram-header">
+                <h4><span>🖥️</span> Nivel de Supervisión</h4>
+                <div class="divider"></div>
+            </div>
+            <div class="logo-card">
+                <img src="docs/modulo1/logos/nodered.png" alt="Node-RED / SCADA">
+                <div class="logo-card-text">
+                    <strong>Node-RED / SCADA</strong>
+                    <span>Visualización, integración y flujo de datos del proceso.</span>
+                    <span class="conn-detail">127.0.0.1:1880</span>
+                </div>
+            </div>
+            <div class="logo-card">
+                <img src="docs/modulo1/logos/studio5000.png" alt="Studio 5000 + Logix Emulate">
+                <div class="logo-card-text">
+                    <strong>Studio 5000 + Logix Emulate</strong>
+                    <span>Emulación del PLC y ejecución de la lógica de control.</span>
+                    <span class="conn-detail">127.0.0.1:2</span>
+                </div>
+            </div>
+        </div>
+        <div class="arch-diagram-view" id="viewer-arch-nivel2arch" style="display: none;">
+            <div class="diagram-header">
+                <h4><span>🔌</span> Nivel de Control e Integración</h4>
+                <div class="divider"></div>
+            </div>
+            <div class="logo-card">
+                <img src="docs/modulo1/logos/abb_iot.png" alt="ABB IoT Gateway — Servidor OPC UA">
+                <div class="logo-card-text">
+                    <strong>ABB IoT Gateway — Servidor OPC UA</strong>
+                    <span>Puente OPC UA entre RobotStudio y el resto de la arquitectura.</span>
+                    <span class="conn-detail">opc.tcp://desktop-pvk5kdq:61510/ABB.IoTGateway</span>
+                </div>
+            </div>
+            <div class="logo-card">
+                <img src="docs/modulo1/logos/rslinx.png" alt="RSLinx Classic — Servidor OPC">
+                <div class="logo-card-text">
+                    <strong>RSLinx Classic — Servidor OPC</strong>
+                    <span>Servidor OPC para las redes y dispositivos Rockwell Automation.</span>
+                    <span class="conn-detail">OPC DA / EtherNet-IP</span>
+                </div>
+            </div>
+        </div>
+        <div class="arch-diagram-view" id="viewer-arch-nivel3arch" style="display: none;">
+            <div class="diagram-header">
+                <h4><span>🏭</span> Nivel de Simulación / Planta Virtual</h4>
+                <div class="divider"></div>
+            </div>
+            <div class="logo-card">
+                <img src="docs/modulo1/logos/robotstudio.png" alt="ABB RobotStudio">
+                <div class="logo-card-text">
+                    <strong>ABB RobotStudio</strong>
+                    <span>Celda robotizada — simulación funcional del robot de paletizado.</span>
+                    <span class="conn-detail">OPC UA</span>
+                </div>
+            </div>
+            <div class="logo-card">
+                <img src="docs/modulo1/logos/nx_siemens.png" alt="Siemens NX / MCD">
+                <div class="logo-card-text">
+                    <strong>Siemens NX / MCD</strong>
+                    <span>Línea de producción — gemelo digital de las estaciones (Sopladora, Lavadora, Llenadora, Rechazadora, Empaquetadora).</span>
+                    <span class="conn-detail">OPC DA</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p class="panel-text" style="font-size: 11px; margin-top: 16px; opacity: 0.7;"><em>Protocolos usados entre niveles: EtherNet/IP, OPC DA y OPC UA — todo el entorno corre localmente sobre el mismo host durante la emulación.</em></p>
+</div>
+
+<div id="content-m1-gemelo" class="tw-content">
+    <h3 class="panel-subtitle" style="margin-top: 0;">🤖 Gemelo Digital, Simulación y KPIs</h3>
+
+    <div style="padding: 14px 16px; background: rgba(14, 165, 233, 0.06); border-left: 3px solid var(--nexum-cyan); border-radius: 0 4px 4px 0; margin-bottom: 18px;">
+        <p class="panel-text" style="margin: 0;"><strong>Enfoque de diseño:</strong> el gemelo digital se planteó desde el inicio con una arquitectura <strong>escalable a las tres líneas</strong> de producción. Sin embargo, el desarrollo, la instrumentación y la validación se centraron en la <strong>línea Quatro</strong>, por ser la propuesta que el equipo identificó como más viable para automatizar.</p>
+    </div>
+
+    <p class="panel-text">Implementación de simulación en <strong>Siemens NX (MCD)</strong>, integrada con Studio 5000/Logix Emulate y Node-RED, para validar el diseño y evaluar indicadores en tiempo real:</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-top: 15px;">
+        <div style="padding: 12px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.03); border-radius: 4px;">
+            <strong style="color: var(--nexum-blue); font-size: 13px;">🔍 Evaluación de Cuellos de Botella</strong>
+            <p class="panel-text" style="font-size: 12px; margin: 5px 0 0 0;">Identificación de restricciones en el throughput total de la línea Quatro.</p>
+        </div>
+        <div style="padding: 12px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.03); border-radius: 4px;">
+            <strong style="color: var(--nexum-blue); font-size: 13px;">📦 Análisis de Inventarios (WIP)</strong>
+            <p class="panel-text" style="font-size: 12px; margin: 5px 0 0 0;">Modelado de acumulación para dimensionar buffers intermedios entre estaciones.</p>
+        </div>
+        <div style="padding: 12px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.03); border-radius: 4px;">
+            <strong style="color: var(--nexum-blue); font-size: 13px;">📈 OEE (Meta: ≥ 85%)</strong>
+            <p class="panel-text" style="font-size: 12px; margin: 5px 0 0 0;">Disponibilidad × Desempeño × Calidad. KPI maestro de la mejora.</p>
+        </div>
+        <div style="padding: 12px; border: 1px solid var(--border-node); background: rgba(142, 142, 147, 0.03); border-radius: 4px;">
+            <strong style="color: var(--nexum-blue); font-size: 13px;">🛑 Microparos</strong>
+            <p class="panel-text" style="font-size: 12px; margin: 5px 0 0 0;">El mayor potencial de mejora está en reducirlos, más que en aumentar la velocidad nominal.</p>
+        </div>
+    </div>
+</div>
+
+<div id="content-m1-sensorica" class="tw-content">
+    <h3 class="panel-subtitle" style="margin-top: 0;">⚙️ Sensórica y Actuadores del Gemelo Digital</h3>
+    <p class="panel-text" style="font-size: 13px;">Detalle de las señales de animación, actuadores y sensores modelados en NX para cada estación de la línea Quatro, junto con la lógica básica de funcionamiento de cada una.</p>
+
+    <div class="diagram-workspace">
+        <div class="constellation-hub hub-vertical" id="diag-hub-sens">
+            <svg class="network-canvas"></svg>
+            <div class="hub-timeline">
+                <div class="hub-node active parallax-el" id="node-sens-sopladora" data-speed="0.04" onclick="switchDiagram('sens', 'sopladora')">
+                <div class="hub-icon" style="width: 42px; height: 42px; font-size: 18px;">⚙️</div>
+                <div class="hub-text">Sopladora (Formadora)</div>
+            </div>
+            <div class="hub-node parallax-el" id="node-sens-lavadora" data-speed="0.05" onclick="switchDiagram('sens', 'lavadora')">
+                <div class="hub-icon" style="width: 42px; height: 42px; font-size: 18px;">💦</div>
+                <div class="hub-text">Lavadora</div>
+            </div>
+            <div class="hub-node parallax-el" id="node-sens-llenadora" data-speed="0.06" onclick="switchDiagram('sens', 'llenadora')">
+                <div class="hub-icon" style="width: 42px; height: 42px; font-size: 18px;">🍾</div>
+                <div class="hub-text">Llenadora y Tapadora</div>
+            </div>
+            <div class="hub-node parallax-el" id="node-sens-rechazadora" data-speed="0.07" onclick="switchDiagram('sens', 'rechazadora')">
+                <div class="hub-icon" style="width: 42px; height: 42px; font-size: 18px;">🚫</div>
+                <div class="hub-text">Rechazadora</div>
+            </div>
+            <div class="hub-node parallax-el" id="node-sens-empaquetadora" data-speed="0.08" onclick="switchDiagram('sens', 'empaquetadora')">
+                <div class="hub-icon" style="width: 42px; height: 42px; font-size: 18px;">📦</div>
+                <div class="hub-text">Empaquetadora</div>
+            </div>
+            </div>
+        </div>
+        <div class="diagram-viewer-area">
+            <div class="sens-diagram-view" id="viewer-sens-sopladora" style="display: block; width: 100%;">
+                <div class="diagram-header"><h4><span>⚙️</span>Sopladora (Formadora)</h4><div class="divider"></div></div>
+                <p class="panel-text" style="font-size:12px; margin-bottom:4px;"><strong>🎬 Señales de animación (NX):</strong></p><ul class="sig-list"><li><strong>BotFin</strong> — Genera botella formada</li><li><strong>BorrarBotPre</strong> — Borra botellas sin formar</li><li><strong>BotPre</strong> — Genera botella sin formar</li></ul>
+                <p class="panel-text" style="font-size:12px; margin-bottom:4px;"><strong>🔧 Actuadores:</strong></p><ul class="sig-list"><li><strong>Bandeja</strong> — Retrae/extiende la bandeja</li><li><strong>Grib</strong> — Agarra/suelta botellas</li><li><strong>BrazoEx</strong> — Extiende/retrae el brazo hacia el molde</li><li><strong>BandaSopladora</strong> — Activa/apaga la banda</li><li><strong>Piston</strong> — Extiende/retrae la inyectora de aire</li><li><strong>AbrirMoldes</strong> — Abre/cierra los moldes de formado</li></ul>
+                <p class="panel-text" style="font-size:12px; margin-bottom:4px;"><strong>📡 Sensores:</strong></p><ul class="sig-list"><li><strong>BandejaAtras</strong> — bandeja recogida (Bandeja activo y al máximo)</li><li><strong>BandejaFrente</strong> — bandeja extendida (Bandeja inactivo y al máximo)</li><li><strong>BotAtGrip</strong> — hay una botella en el gripper</li><li><strong>BotAtMolde</strong> — hay una botella en posición en el molde</li><li><strong>BrazoExtendido</strong> — el brazo alcanzó su posición máxima</li><li><strong>BrazoRecogido</strong> — el brazo alcanzó su posición mínima</li><li><strong>PistonAbajo</strong> — inyectora conectada al molde</li><li><strong>PistoArriba</strong> — inyectora desconectada del molde</li><li><strong>PuertaAbierta</strong> — puertas del molde abiertas</li><li><strong>PuertaCerrada</strong> — puertas del molde cerradas</li><li><strong>Salida</strong> — una botella está saliendo de la máquina</li></ul>
+                <p class="panel-text" style="font-size:12px; margin-bottom:4px;"><strong>🧠 Lógica de funcionamiento:</strong></p><ol class="logic-steps"><li>Se mantiene siempre encendida <strong>BandaSopladora</strong>.</li><li>Se activan <strong>Bandeja</strong> y <strong>AbrirMolde</strong>; se espera <strong>BandejaAtras</strong> y <strong>PuertaAbierta</strong> para cargar la botella sin formar.</li><li>Se activa <strong>Grib</strong> y, tras un tiempo, <strong>BotPre</strong> (se apaga con <strong>BotAtGrip</strong>).</li><li>Con <strong>BotAtGrip</strong> se apaga <strong>Bandeja</strong> y se activa <strong>BrazoEx</strong>; se espera <strong>BandejaFrente</strong> y <strong>BrazoExtendido</strong>, hasta <strong>BotAtMolde</strong>.</li><li>Con <strong>BotAtMolde</strong> se activa <strong>BorrarBotPre</strong>; se apaga <strong>BrazoEx</strong> (hasta <strong>BrazoRecogido</strong>) y <strong>AbrirMolde</strong> (se espera <strong>PuertaCerrada</strong>).</li><li>Se activa <strong>Piston</strong>, se espera <strong>PistonAbajo</strong> + tiempo X, se apaga y se espera <strong>PistonArriba</strong>.</li><li>Con <strong>PistonArriba</strong> se activa <strong>AbrirMolde</strong> (espera <strong>PuertaAbierta</strong>) y <strong>BrazoEx</strong> (espera <strong>BrazoExtendido</strong>).</li><li>Con el brazo extendido se activa <strong>BotFin</strong> (genera la botella formada); se apaga con <strong>BotAtGrip</strong> y <strong>BotAtMolde</strong>.</li><li>Se apaga <strong>BrazoEx</strong> (hasta <strong>BrazoRecogido</strong>) y se apaga <strong>Grib</strong> — la botella cae a la banda y se registra con <strong>Salida</strong>.</li></ol>
+            </div>
+            <div class="sens-diagram-view" id="viewer-sens-lavadora" style="display: none; width: 100%;">
+                <div class="diagram-header"><h4><span>💦</span>Lavadora</h4><div class="divider"></div></div>
+                <p class="panel-text" style="font-size:12px; margin-bottom:4px;"><strong>🔧 Actuadores:</strong></p><ul class="sig-list"><li><strong>Banda</strong> — activa/apaga la banda de ingreso</li><li><strong>Alineacion</strong> — introduce/retira las botellas al mecanismo de vuelta</li><li><strong>CierrePinzas</strong> — cierra/abre el mecanismo que sujeta las botellas</li><li><strong>Detencion</strong> — frena/desbloquea el flujo de botellas</li><li><strong>GiroLavado</strong> — gira/devuelve los brazos que soportan las botellas</li></ul>
+                <p class="panel-text" style="font-size:12px; margin-bottom:4px;"><strong>📡 Sensores:</strong></p><ul class="sig-list"><li><strong>EntradaBotellas</strong> — una botella entra al alineador</li><li><strong>ConteoBotellas</strong> — las botellas salen de la máquina</li><li><strong>CierrePinzas</strong> — las pinzas están cerradas</li><li><strong>ConDetecion</strong> — el brazo de detención está extendido</li><li><strong>Alineado</strong> — el alineador está extendido</li><li><strong>SinAlinear</strong> — el alineador está retraído</li><li><strong>Giro</strong> — el brazo de soporte está sobre las cabezas de lavado</li><li><strong>SinGiro</strong> — el brazo de soporte está retraído</li></ul>
+                <p class="panel-text" style="font-size:12px; margin-bottom:4px;"><strong>🧠 Lógica de funcionamiento:</strong></p><ol class="logic-steps"><li>Se enciende <strong>Banda</strong>, asegurando <strong>Detencion</strong> extendido; con <strong>EntradaBotellas</strong> se cuentan 7 botellas y se espera a que estén en posición.</li><li>Se apaga <strong>Banda</strong> y se activa <strong>Alineacion</strong>; se espera <strong>Alineado</strong> y se activa <strong>CierrePinzas</strong>; se espera el sensor <strong>CierrePinzas</strong>.</li><li>Se activa <strong>GiroLavado</strong>; se espera <strong>Giro</strong> y se corre un temporizador por un tiempo X.</li><li>Pasado el tiempo, se apaga <strong>Giro</strong> (se espera <strong>SinGiro</strong>), se apaga <strong>CierrePinzas</strong>, se apaga <strong>Alineacion</strong> (se espera <strong>SinAlinear</strong>).</li><li>Se enciende <strong>Detencion</strong> y se espera su liberación antes de reactivar <strong>Banda</strong>.</li><li>Se activa <strong>Banda</strong> y se espera a que <strong>ConteoBotellas</strong> cuente 7 botellas; al completarse, se apaga <strong>Detencion</strong>.</li></ol>
+            </div>
+            <div class="sens-diagram-view" id="viewer-sens-llenadora" style="display: none; width: 100%;">
+                <div class="diagram-header"><h4><span>🍾</span>Llenadora y Tapadora</h4><div class="divider"></div></div>
+                <p class="panel-text" style="font-size:12px; margin-bottom:4px;"><strong>🎬 Señales de animación (NX):</strong></p><ul class="sig-list"><li><strong>Botella</strong> — genera botella sin tapa</li><li><strong>RB_LLT_Bot</strong> — genera botella con tapa</li></ul>
+                <p class="panel-text" style="font-size:12px; margin-bottom:4px;"><strong>🔧 Actuadores:</strong></p><ul class="sig-list"><li><strong>ACT_LLT_Banda</strong> — activa/apaga la banda de ingreso</li><li><strong>ACT_LLT_AlineadorLlenado</strong> — alinea/sujeta botellas con las boquillas</li><li><strong>ACT_LLT_BoquillaLlenado</strong> — baja/sube el mecanismo de llenado</li><li><strong>ACT_LLT_DetencionLlenado</strong> — frena/desbloquea el flujo hacia el llenado</li><li><strong>ACT_LLT_PosicionamientoTapado</strong> — gira el carrusel hacia la zona de tapado</li><li><strong>ACT_LLT_Remachadora</strong> — baja/sube el mecanismo de ajuste de tapa</li></ul>
+                <p class="panel-text" style="font-size:12px; margin-bottom:4px;"><strong>📡 Sensores:</strong></p><ul class="sig-list"><li><strong>SE_LLT_ContadorEntrada</strong> — una botella entra al mecanismo de llenado</li><li><strong>SE_LLT_AlineadorLlenadoRetraido / Extendido</strong> — posición del alineador</li><li><strong>SE_LLT_BoquillaArriba / Abajo</strong> — posición del mecanismo de llenado</li><li><strong>SE_LLT_Sindetencion</strong> — permite el paso hacia el tapado</li><li><strong>SE_LLT_DeteccionBotellaTapado</strong> — botella en posición para el carrusel</li><li><strong>SE_LLT_AgregarTapa / AparecerTapa</strong> — cambio de modelo de botella</li><li><strong>SE_LLT_ParadaRemache</strong> — botella en posición para el remache</li><li><strong>SE_LLT_RemachadoraArriba / Abajo</strong> — posición del remachador</li></ul>
+                <p class="panel-text" style="font-size:12px; margin-bottom:4px;"><strong>🧠 Lógica de funcionamiento:</strong></p><ol class="logic-steps"><li>Se enciende <strong>ACT_LLT_Banda</strong>; con <strong>SE_LLT_ContadorEntrada</strong> se cuentan 4 botellas posicionadas y se detiene la banda.</li><li>Se activa <strong>ACT_LLT_AlineadorLlenado</strong>; con <strong>SE_LLT_AlineadorLlenadoExtendido</strong> se activa <strong>ACT_LLT_BoquillaLlenado</strong>.</li><li>Con <strong>SE_LLT_BoquillaAbajo</strong> se desactiva la boquilla; con <strong>SE_LLT_BoquillaArriba</strong> se desactiva el alineador.</li><li>Con <strong>SE_LLT_AlineadorLlenadoRetraido</strong> se desactiva <strong>ACT_LLT_DetencionLlenado</strong>; con <strong>SE_LLT_Sindetencion</strong> se reactiva la banda.</li><li>Con <strong>SE_LLT_DeteccionBotellaTapado</strong> se activa <strong>ACT_LLT_PosicionamientoTapado</strong>; se desactiva con <strong>SE_LLT_AgregarTapa</strong>.</li><li>Con <strong>AparecerTapa</strong> se reactiva el posicionamiento; con <strong>SE_LLT_ParadaRemache</strong> se desactiva y se activa <strong>ACT_LLT_Remachadora</strong>.</li><li>Con <strong>SE_LLT_RemachadoraAbajo</strong> se desactiva el remachador; con <strong>SE_LLT_RemachadoraArriba</strong> se reactiva el posicionamiento, reiniciando el ciclo.</li></ol>
+            </div>
+            <div class="sens-diagram-view" id="viewer-sens-rechazadora" style="display: none; width: 100%;">
+                <div class="diagram-header"><h4><span>🚫</span>Rechazadora</h4><div class="divider"></div></div>
+                <p class="panel-text" style="font-size:12px; margin-bottom:4px;"><strong>🔧 Actuadores:</strong></p><ul class="sig-list"><li><strong>ConPrincipal</strong> — enciende/apaga la banda de la máquina</li><li><strong>Pusher</strong> — extiende/retrae el cilindro de rechazo</li></ul>
+                <p class="panel-text" style="font-size:12px; margin-bottom:4px;"><strong>📡 Sensores:</strong></p><ul class="sig-list"><li><strong>BotDescartada</strong> — una botella descartada sale de la banda principal</li><li><strong>Pusher</strong> — una botella está frente al pusher</li><li><strong>Salida</strong> — una botella aprobada sale de la máquina</li></ul>
+                <p class="panel-text" style="font-size:12px; margin-bottom:4px;"><strong>🧠 Lógica de funcionamiento:</strong></p><ol class="logic-steps"><li>Se activa la banda (<strong>ConPrincipal</strong>).</li><li>Cuando una botella activa el sensor <strong>Pusher</strong>, según el criterio de rechazo, el actuador <strong>Pusher</strong> se extiende brevemente y regresa — o no se activa, si la botella se aprueba.</li><li><strong>BotDescartada</strong> cuenta las botellas rechazadas que salen de la banda principal.</li><li><strong>Salida</strong> registra el número de botellas aprobadas que salen de la máquina.</li></ol>
+            </div>
+            <div class="sens-diagram-view" id="viewer-sens-empaquetadora" style="display: none; width: 100%;">
+                <div class="diagram-header"><h4><span>📦</span>Empaquetadora</h4><div class="divider"></div></div>
+                <p class="panel-text" style="font-size:12px; margin-bottom:4px;"><strong>🎬 Señales de animación (NX):</strong></p><ul class="sig-list"><li><strong>BorrarBotApilado</strong> — borra el pack sin cinta que entró al túnel</li><li><strong>BorrarBotIND</strong> — borra las botellas individuales en el pusher</li><li><strong>BorrarLinea4Bot</strong> — borra las filas de 4 botellas apiladas</li><li><strong>GenBotApilado</strong> — genera el pack de botellas en la caja</li><li><strong>GenFila4</strong> — genera un grupo de 4 botellas frente al pusher</li><li><strong>GenPack</strong> — genera el pack final con cinta en el túnel</li><li><strong>S_BotTunel</strong> — punto de borrado del modelo que ingresa al túnel</li></ul>
+                <p class="panel-text" style="font-size:12px; margin-bottom:4px;"><strong>🔧 Actuadores:</strong></p><ul class="sig-list"><li><strong>Barreras</strong> — retrae/extiende las guías hacia el pusher</li><li><strong>BrazoCelofan</strong> — ubica la película de celofán sobre el pack</li><li><strong>Caja</strong> — sube/baja para formar y liberar el pack</li><li><strong>ConveyorIngreso</strong> — banda de ingreso de botellas individuales</li><li><strong>ConveyorSalida</strong> — banda que mueve el pack apilado hacia el celofán y el túnel</li><li><strong>Cuchillas</strong> — cortan la película de celofán a medida</li><li><strong>Freno</strong> — detiene el ingreso de botellas mientras se ubican 4 en el pusher</li><li><strong>Pusher</strong> — introduce una fila de 4 botellas en la caja (3 distancias: 525, 415 y 368 mm)</li></ul>
+                <p class="panel-text" style="font-size:12px; margin-bottom:4px;"><strong>📡 Sensores:</strong></p><ul class="sig-list"><li><strong>EntradaBotelllas / SalidaPackApilado</strong> — entrada y salida del pack de la caja</li><li><strong>Fila1 / Fila2 / Fila3</strong> — cada fila del pack en posición</li><li><strong>CajaArriba / CajaAbajo</strong> — posición de la caja de apilado</li><li><strong>IngresoCuchillas / PosCuchillas</strong> — posición del pack frente al celofán</li><li><strong>4BotellaAlineada</strong> — la cuarta botella alineada con el soporte</li><li><strong>BarreraExtendida / BarreraRecogida</strong> — posición de las guías de entrada</li><li><strong>BrazoCelofanExtendido / Recogido</strong> — posición del brazo de celofán</li><li><strong>CuchillasAbiertas / Cerradas</strong> — posición de las cuchillas</li><li><strong>EntradaTunel / SalidaTunel</strong> — paso del pack por el túnel de calor</li><li><strong>FrenoAbajo / FrenoArriba</strong> — posición de la placa de frenado</li><li><strong>PusherRecogido</strong> — el pusher está en posición de home</li></ul>
+                <p class="panel-text" style="font-size:12px; margin-bottom:4px;"><strong>🧠 Lógica de funcionamiento:</strong></p><ol class="logic-steps"><li>Se activa <strong>ConveyorIngreso</strong>; con <strong>EntradaBotellas</strong> se cuentan 4 botellas.</li><li>Al contar 4, se activa <strong>Freno</strong> y se confirma <strong>4BotellaAlineada</strong> estable.</li><li>Se apagan <strong>ConveyorIngreso</strong> y <strong>Freno</strong>; pulso <strong>BorrarBotIND</strong> y pulso <strong>GenFila4</strong> (se regeneran como un solo cuerpo).</li><li>Se activa <strong>Barreras</strong> para mover la fila a la caja; se espera el flanco de bajada de <strong>BarreraRecogida</strong>.</li><li>Se activa <strong>Pusher</strong> (se apaga con <strong>Fila1</strong>); se espera <strong>PusherRecogido</strong>; se apaga <strong>Barreras</strong> y se espera <strong>BarreraExtendida</strong>.</li><li>Se repite el ciclo banda→fila→pusher para <strong>Fila2</strong> y <strong>Fila3</strong>.</li><li>Confirmados <strong>BarreraExtendida</strong> y <strong>Fila3</strong>: pulso <strong>BorrarLinea4Bot</strong> y pulso <strong>GenBotApilado</strong> (pack de 12 como un solo elemento).</li><li>Se activa <strong>Caja</strong>; con <strong>CajaArriba</strong> se activa <strong>ConveyorSalida</strong>; con el flanco de bajada de <strong>SalidaPackApilado</strong> se baja la caja (se espera <strong>CajaAbajo</strong> para el nuevo ciclo).</li><li>En paralelo, el pack avanza hacia el celofán: con el flanco de bajada de <strong>PosCuchillas</strong> se activan <strong>Cuchillas</strong>; con <strong>CuchillasCerradas</strong> se activa <strong>BrazoCelofan</strong>; con <strong>BrazoCelofanExtendido</strong> se apagan ambos.</li><li>Si no se han dado <strong>BrazoCelofanRecogido</strong> y <strong>CuchillasAbiertas</strong> y se activa <strong>IngresoCuchillas</strong>, se detiene <strong>ConveyorSalida</strong> hasta que se den esas señales.</li><li>El pack con celofán entra al túnel (<strong>EntradaTunel</strong>); con <strong>S_BotTunel</strong>, pulso <strong>BorrarBotApilado</strong> y, tras un tiempo, pulso <strong>GenPack</strong> (modelo final). La salida se registra con <strong>SalidaTunel</strong>.</li></ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="content-m1-conclusion" class="tw-content">
+    <div style="padding: 20px; background-color: rgba(63, 81, 181, 0.1); border-left: 4px solid var(--nexum-blue); border-radius: 4px;">
+        <h3 style="color: var(--nexum-blue); margin-top: 0; margin-bottom: 10px; font-size: 15px;">✅ Conclusión</h3>
+        <p class="panel-text" style="margin: 0;">Esta propuesta evoluciona la planta hacia un sistema conectado, con integración vertical desde el Nivel 0 (Campo) hasta el Nivel 2 (SCADA) — el alcance real desarrollado y validado por el equipo. El gemelo digital, diseñado como una arquitectura escalable a las tres líneas, se centró en la línea Quatro por ser la propuesta más viable, y junto con la instrumentación y el monitoreo de KPIs conforma un ecosistema que reduce riesgos, maximiza eficiencia y habilita decisiones basadas en datos.</p>
+    </div>
+</div>
+
+    </div>
+</div>
+
+<script>
+function switchDiagram(prodId, diagId) {
+    document.querySelectorAll('.' + prodId + '-diagram-view').forEach(el => el.style.display = 'none');
+    document.getElementById('viewer-' + prodId + '-' + diagId).style.display = 'block';
+    const parentHub = document.getElementById('diag-hub-' + prodId);
+    if (parentHub) { parentHub.querySelectorAll('.hub-node').forEach(node => node.classList.remove('active')); }
+    document.getElementById('node-' + prodId + '-' + diagId).classList.add('active');
+}
+function zoomImg(e, img) {
+    var posX = e.offsetX, posY = e.offsetY;
+    img.style.transformOrigin = ((posX / img.offsetWidth) * 100) + '% ' + ((posY / img.offsetHeight) * 100) + '%';
+    img.style.transform = 'scale(2.2)';
+}
+function resetImg(img) { img.style.transform = 'scale(1)'; }
+
+    (function () {
+        const hubs = document.querySelectorAll('.constellation-hub');
+        
+        hubs.forEach(hub => {
+            const svgCanvas = hub.querySelector('.network-canvas');
+            const nodes = Array.from(hub.querySelectorAll('.hub-node'));
+            const ghosts = Array.from(hub.querySelectorAll('.ghost-dot'));
+            
+            const netNodes = [];
+            const netLines = [];
+
+            nodes.forEach(node => {
+                const icon = node.querySelector('.hub-icon');
+                netNodes.push({ 
+                    el: node, target: icon || node, isGhost: false, 
+                    currX: 0, currY: 0, targetX: 0, targetY: 0,
+                    currScale: 1, targetScale: 1
+                });
+            });
+
+            ghosts.forEach(dot => {
+                netNodes.push({ 
+                    el: dot, target: dot, isGhost: true, 
+                    currX: 0, currY: 0, targetX: 0, targetY: 0,
+                    currScale: 1, targetScale: 1,
+                    seed: Math.random() * 10 
+                });
+            });
+
+            function connect(nodeA, nodeB, lineClass) {
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('class', lineClass);
+                svgCanvas.appendChild(line);
+                netLines.push({ el: line, n1: nodeA, n2: nodeB });
+            }
+
+            for (let i = 0; i < nodes.length - 1; i++) {
+                connect(netNodes[i], netNodes[i + 1], 'tw-line-main');
+            }
+            
+            if (ghosts.length > 0) {
+                ghosts.forEach((ghost, index) => {
+                    const targetNodeIndex = index % nodes.length;
+                    connect(netNodes[targetNodeIndex], netNodes[nodes.length + index], 'tw-line-ghost');
+                });
+            }
+
+            let mouseX = -1000, mouseY = -1000;
+            let isHovering = false;
+            let loopTime = 0;
+            const influenceRadius = 75;
+            const maxDisplacement = 9;
+
+            hub.addEventListener('mousemove', (e) => {
+                const rect = hub.getBoundingClientRect();
+                mouseX = e.clientX - rect.left;
+                mouseY = e.clientY - rect.top;
+                isHovering = true;
+            });
+
+            hub.addEventListener('mouseleave', () => {
+                isHovering = false;
+            });
+
+            function runHubEngine() {
+                if (!document.body.contains(hub)) return;
+                
+                const hubRect = hub.getBoundingClientRect();
+
+                if (hubRect.width > 0 && hubRect.height > 0) {
+                    loopTime += 0.02;
+
+                    netNodes.forEach(item => {
+                        const elRect = item.el.getBoundingClientRect();
+                        
+                        const correctionX = item.isGhost ? item.currX : 0;
+                        const correctionY = item.isGhost ? item.currY : 0;
+                        const originalCX = (elRect.left - hubRect.left) + (elRect.width / 2) - correctionX;
+                        const originalCY = (elRect.top - hubRect.top) + (elRect.height / 2) - correctionY;
+
+                        if (item.isGhost) {
+                            if (isHovering) {
+                                const speed = parseFloat(item.el.getAttribute('data-speed')) || 0.1;
+                                item.targetX = (mouseX - (hubRect.width / 2)) * speed;
+                                item.targetY = (mouseY - (hubRect.height / 2)) * speed;
+                            } else {
+                                item.targetX = Math.sin(loopTime + item.seed) * 3;
+                                item.targetY = Math.cos(loopTime * 0.8 + item.seed) * 2.5;
+                            }
+                        } else {
+                            const dx = mouseX - originalCX;
+                            const dy = mouseY - originalCY;
+                            const dist = Math.sqrt(dx * dx + dy * dy);
+
+                            if (isHovering && dist < influenceRadius) {
+                                const pushForce = 1 - (dist / influenceRadius);
+                                const angle = Math.atan2(dy, dx);
+                                item.targetX = Math.cos(angle) * maxDisplacement * pushForce;
+                                item.targetY = Math.sin(angle) * maxDisplacement * pushForce;
+                                item.targetScale = 1.15; 
+                                item.el.classList.add('near');
+                            } else {
+                                item.targetX = 0;
+                                item.targetY = 0;
+                                item.targetScale = 1.0;
+                                item.el.classList.remove('near');
+                            }
+                        }
+
+                        item.currX += (item.targetX - item.currX) * 0.12;
+                        item.currY += (item.targetY - item.currY) * 0.12;
+                        item.currScale += (item.targetScale - item.currScale) * 0.15;
+                        
+                        item.target.style.transform = `translate(${item.currX}px, ${item.currY}px) scale(${item.currScale})`;
+                        
+                        item.svgX = originalCX + item.currX;
+                        item.svgY = originalCY + item.currY;
+                    });
+
+                    netLines.forEach(line => {
+                        line.el.setAttribute('x1', line.n1.svgX);
+                        line.el.setAttribute('y1', line.n1.svgY);
+                        line.el.setAttribute('x2', line.n2.svgX);
+                        line.el.setAttribute('y2', line.n2.svgY);
+                    });
+                }
+                requestAnimationFrame(runHubEngine);
+            }
+            requestAnimationFrame(runHubEngine);
+        });
+    })();
+</script>
