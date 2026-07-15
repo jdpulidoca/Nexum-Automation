@@ -82,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
             registrarNodo('n-propuesta-doc', 'commercial', false, true);
             registrarNodo('n-economia', 'commercial', false, true);
             registrarNodo('n-gestion', 'commercial', false, true);
+            registrarNodo('n-simulacion', 'commercial', false, true);
             registrarNodo('bib-sector2', 'commercial', false, true);
 
             // SECTOR TECH CORREGIDO (Nuevos nodos agregados)
@@ -109,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Conexiones del Sector 2
                 { from: 'n-center', to: 'n-propuesta' }, // Enlace principal entre sectores
                 { from: 'n-propuesta', to: 'n-propuesta-doc' }, { from: 'n-propuesta', to: 'n-economia' }, { from: 'n-propuesta', to: 'n-gestion' }, { from: 'n-propuesta', to: 'bib-sector2' },
+                { from: 'n-gestion', to: 'n-simulacion' },
                 
                 // Conexiones del Sector 3
                 { from: 'n-propuesta', to: 'n-digital' }, // Enlace principal entre sectores

@@ -1,0 +1,129 @@
+<!-- Archivo: content/simulacion.html -->
+<style>
+    .hud-frame img { transition: transform 0.2s ease; cursor: zoom-in; }
+</style>
+<h2 class="panel-title" style="text-align: center;">Simulación Preliminar de Líneas</h2>
+<div class="panel-meta-strip">[ TECNOMATIX PLANT SIMULATION V23 ] · [ 03 LÍNEAS ]</div>
+
+<p class="panel-text">El equipo consultor de <strong>Nexum Automation</strong> presenta los modelos preliminares desarrollados en <strong>Tecnomatix Plant Simulation</strong>. El objetivo de esta fase es validar la lógica de flujo continuo, dimensionar capacidades operativas y establecer los tiempos de ciclo requeridos para alcanzar las metas de <em>Throughput</em> en cada una de las tres líneas de producción.</p>
+
+<div class="mini-constellation">
+    <button class="mini-node panel-tablinks active" onclick="abrirPanelLinea(event, 'sim-monster')">
+        <span class="mini-icon">🔋</span><span class="mini-label">Monster</span>
+    </button>
+    <button class="mini-node panel-tablinks" onclick="abrirPanelLinea(event, 'sim-quatro')">
+        <span class="mini-icon">🥤</span><span class="mini-label">Quatro</span>
+    </button>
+    <button class="mini-node panel-tablinks" onclick="abrirPanelLinea(event, 'sim-brisa')">
+        <span class="mini-icon">💧</span><span class="mini-label">Brisa</span>
+    </button>
+</div>
+
+<!-- MONSTER -->
+<div id="sim-monster" class="panel-tabcontent active" style="display: block;">
+    <h3 class="panel-subtitle">🔋 Simulación: Monster Energy (Lata 473ml)</h3>
+    <p class="panel-text">Simulación digital de una línea de envasado de latas desarrollada para analizar el desempeño integral del proceso productivo. El modelo representa cada estación de trabajo con parámetros reales de disponibilidad, tiempos de setup y tiempos de proceso, permitiendo evaluar capacidades, identificar cuellos de botella y validar mejoras operativas antes de su implementación en planta.</p>
+    <ul class="panel-text" style="padding-left: 18px;">
+        <li><strong>Objetivo de simulación:</strong> validar el flujo frente a la demanda.</li>
+        <li><strong>Software:</strong> Tecnomatix Plant Simulation v23.</li>
+    </ul>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 20px 0;">
+        <div style="flex: 1; min-width: 280px; text-align: center;">
+            <p class="panel-text" style="font-weight: 700; font-size: 12px;">Layout de simulación (pasa el mouse para ampliar)</p>
+            <figure class="hud-frame" style="margin: 0;">
+                <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+                <img src="simulacion/Monster/Monster_Simulacion.png" alt="Layout Simulación Monster" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
+            </figure>
+        </div>
+        <div style="flex: 1; min-width: 280px; text-align: center;">
+            <p class="panel-text" style="font-weight: 700; font-size: 12px;">Demostración del flujo</p>
+            <video width="100%" controls style="border-radius: 6px; border: 1px solid var(--border-node); background: #000;">
+                <source src="simulacion/Monster/Linea monster.mp4" type="video/mp4">
+                Tu navegador no soporta la reproducción de video.
+            </video>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 15px;">
+        <a href="simulacion/Monster/Linea_1_chart.spp" download class="team-github" style="background: #4caf50; padding: 10px 20px; font-size: 13px;">💾 Descargar archivo de simulación</a>
+    </div>
+</div>
+
+<!-- QUATRO -->
+<div id="sim-quatro" class="panel-tabcontent" style="display: none;">
+    <h3 class="panel-subtitle">🥤 Simulación: Quatro (PET 1.5L)</h3>
+    <p class="panel-text">Simulación de la línea de productos no retornables, enfocada en envases PET de 1.5L de la gaseosa Quatro, producto ampliamente representativo del mercado colombiano.</p>
+    <p class="panel-text">El proceso inicia con la recepción de PET, seguido del soplado para la formación de envases y una inspección electrónica de calidad — las unidades no conformes se rechazan hacia análisis de calidad. Las botellas aprobadas pasan por limpieza interna con aire ionizado, llenado integrado con mezcla y carbonatación, y tapado en la misma máquina.</p>
+    <p class="panel-text">Una segunda inspección electrónica valida nivel de llenado y sellado. En la etapa final se realiza etiquetado, conteo y paletización en packs de seis unidades, para su traslado manual a bodega.</p>
+    <ul class="panel-text" style="padding-left: 18px;">
+        <li><strong>Objetivo de simulación:</strong> balanceo de línea para envases de formato familiar.</li>
+        <li><strong>Software:</strong> Tecnomatix Plant Simulation v23.</li>
+    </ul>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 20px 0;">
+        <div style="flex: 1; min-width: 280px; text-align: center;">
+            <p class="panel-text" style="font-weight: 700; font-size: 12px;">Layout de simulación (pasa el mouse para ampliar)</p>
+            <figure class="hud-frame" style="margin: 0;">
+                <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+                <img src="simulacion/Quatro/Quatro_Simulacion.png" alt="Layout Simulación Quatro" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
+            </figure>
+        </div>
+        <div style="flex: 1; min-width: 280px; text-align: center;">
+            <p class="panel-text" style="font-weight: 700; font-size: 12px;">Demostración del flujo</p>
+            <video width="100%" controls style="border-radius: 6px; border: 1px solid var(--border-node); background: #000;">
+                <source src="simulacion/Quatro/Quatro_Simulation.mp4" type="video/mp4">
+                Tu navegador no soporta la reproducción de video.
+            </video>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 15px;">
+        <a href="simulacion/Quatro/Planta Quatro.spp" download class="team-github" style="background: #4caf50; padding: 10px 20px; font-size: 13px;">💾 Descargar archivo de simulación</a>
+    </div>
+</div>
+
+<!-- BRISA -->
+<div id="sim-brisa" class="panel-tabcontent" style="display: none;">
+    <h3 class="panel-subtitle">💧 Simulación: Agua Brisa (Garrafón 20L)</h3>
+    <p class="panel-text">Simulación de la línea 3 de garrafones de agua de 20L de la marca Agua Brisa: una planta automatizada organizada mediante una línea de transporte que conecta diversas estaciones de trabajo.</p>
+    <p class="panel-text">El proceso inicia en recepción, donde un operario ingresa los garrafones a la banda transportadora. Los envases pasan por destapadora y lavado interno, avanzan hacia llenado y tapado, y luego etiquetado. A lo largo del recorrido hay puntos de inspección manual y automática para garantizar la calidad.</p>
+    <p class="panel-text">Finalmente, los garrafones se paletizan manualmente antes de trasladarse a almacenamiento. La simulación integra sensores, un sistema tipo <em>broker</em> y un <em>worker pool</em>, para la gestión coordinada de tareas y el monitoreo del flujo.</p>
+    <ul class="panel-text" style="padding-left: 18px;">
+        <li><strong>Objetivo de simulación:</strong> escalar capacidad y evidenciar la saturación en el fin de línea (paletizado).</li>
+        <li><strong>Software:</strong> Tecnomatix Plant Simulation v23.</li>
+    </ul>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 20px 0;">
+        <div style="flex: 1; min-width: 280px; text-align: center;">
+            <p class="panel-text" style="font-weight: 700; font-size: 12px;">Layout de simulación (pasa el mouse para ampliar)</p>
+            <figure class="hud-frame" style="margin: 0;">
+                <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+                <img src="simulacion/Brissa/Brisa_Simulacion.png" alt="Layout Simulación Brisa" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
+            </figure>
+        </div>
+        <div style="flex: 1; min-width: 280px; text-align: center;">
+            <p class="panel-text" style="font-weight: 700; font-size: 12px;">Demostración del flujo</p>
+            <video width="100%" controls style="border-radius: 6px; border: 1px solid var(--border-node); background: #000;">
+                <source src="simulacion/Brissa/Simulación_Galones.mp4" type="video/mp4">
+                Tu navegador no soporta la reproducción de video.
+            </video>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 15px;">
+        <a href="simulacion/Brissa/Gallones_Line1.spp" download class="team-github" style="background: #4caf50; padding: 10px 20px; font-size: 13px;">💾 Descargar archivo de simulación</a>
+    </div>
+</div>
+
+<script>
+(function () {
+    // Zoom local por mouse — mismo mecanismo que módulo 2/6, autocontenido aquí
+    window.zoomImg = function (e, img) {
+        var posX = e.offsetX, posY = e.offsetY;
+        img.style.transformOrigin = ((posX / img.offsetWidth) * 100) + '% ' + ((posY / img.offsetHeight) * 100) + '%';
+        img.style.transform = 'scale(2.2)';
+    };
+    window.resetImg = function (img) { img.style.transform = 'scale(1)'; };
+})();
+</script>
