@@ -221,7 +221,7 @@
 </style>
 <h2 class="panel-title" style="text-align: center;">Controladores Industriales</h2>
 <div class="panel-meta-strip">[ MÓDULO: 06 ] · [ GRAFCET ] · [ LÓGICA LADDER ]</div>
-<p class="panel-text" style="font-size: 13px;">Selecciona una máquina de la línea para ver el diseño de su control secuencial: los tres niveles de Grafcet y, como cuarto nodo, el video de explicación del código Ladder implementado en Logix Emulate.</p>
+<p class="panel-text" style="font-size: 13px;">Selecciona una máquina de la línea para ver el diseño de su control secuencial: los dos niveles de Grafcet desarrollados y, como tercer nodo, el código Ladder implementado en Logix Emulate.</p>
 
 <input type="radio" id="rad-formadora" name="tw-tabs-m6" class="tw-radio" checked>
 <input type="radio" id="rad-lavadora" name="tw-tabs-m6" class="tw-radio">
@@ -260,7 +260,7 @@
 
 <div id="content-formadora" class="tw-content">
     <h3 class="panel-subtitle" style="color: var(--text-main); margin-top: 0;">⚙️ Control Secuencial: Formadora</h3>
-    <p class="panel-text" style="font-size: 13px; margin-bottom: 15px;">Diseño del Grafcet en sus tres niveles de abstracción para la estación <strong>Formadora</strong>, base directa de la lógica Ladder implementada en Logix Emulate. El último nodo abre el video explicativo a mayor tamaño.</p>
+    <p class="panel-text" style="font-size: 13px; margin-bottom: 15px;">Diseño del Grafcet en sus dos niveles desarrollados para la estación <strong>Formadora</strong>, base directa de la lógica Ladder implementada en Logix Emulate. El último nodo abre el PDF del código Ladder a mayor tamaño.</p>
 
     <div class="constellation-hub hub-horizontal grafcet-hub" id="diag-hub-formadora" style="background: rgba(142,142,147,0.02); border: 1px solid var(--border-node); border-radius: 8px;">
         <svg class="network-canvas"></svg>
@@ -273,13 +273,9 @@
                 <div class="hub-icon" style="width: 42px; height: 42px; font-size: 18px;">⚙️</div>
                 <div class="hub-text">N2</div>
             </div>
-            <div class="hub-node parallax-el" id="node-formadora-nivel3" data-speed="0.06" onclick="switchDiagram('formadora', 'nivel3')">
-                <div class="hub-icon" style="width: 42px; height: 42px; font-size: 18px;">🔌</div>
-                <div class="hub-text">N3</div>
-            </div>
-            <div class="hub-node parallax-el" id="node-formadora-video" data-speed="0.07" onclick="switchDiagram('formadora', 'video')">
-                <div class="hub-icon" style="width: 42px; height: 42px; font-size: 18px;">▶️</div>
-                <div class="hub-text">VIDEO</div>
+            <div class="hub-node parallax-el" id="node-formadora-ladder" data-speed="0.07" onclick="switchDiagram('formadora', 'ladder')">
+                <div class="hub-icon" style="width: 42px; height: 42px; font-size: 18px;">📄</div>
+                <div class="hub-text">LADDER</div>
             </div>
         </div>
     </div>
@@ -291,8 +287,8 @@
                     <p>Descripción del comportamiento secuencial sin hacer referencia a la tecnología de implementación (sensores/actuadores genéricos).</p>
                     <div class="divider"></div>
                 </div>
-                <div class="diagram-image-container">
-                    <img src="docs/modulo6/Grafcet/formadora_nivel1.png" alt="Grafcet Formadora - Especificación Funcional" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
+                <div class="diagram-pdf-container">
+                    <iframe src="docs/modulo6/PDF/formadora_nivel1.pdf"></iframe>
                 </div>
             </div>
             <div class="formadora-diagram-view" id="viewer-formadora-nivel2" style="display: none; width: 100%;">
@@ -301,28 +297,18 @@
                     <p>Incorpora la tecnología de los actuadores y pre-actuadores reales (electroválvulas, contactores, variadores).</p>
                     <div class="divider"></div>
                 </div>
-                <div class="diagram-image-container">
-                    <img src="docs/modulo6/Grafcet/formadora_nivel2.png" alt="Grafcet Formadora - Nivel Tecnológico" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
+                <div class="diagram-pdf-container">
+                    <iframe src="docs/modulo6/PDF/formadora_nivel2.pdf"></iframe>
                 </div>
             </div>
-            <div class="formadora-diagram-view" id="viewer-formadora-nivel3" style="display: none; width: 100%;">
+            <div class="formadora-diagram-view" id="viewer-formadora-ladder" style="display: none; width: 100%;">
                 <div class="diagram-header">
-                    <h4><span>🔌</span>Nivel Operativo</h4>
-                    <p>Direccionamiento de entradas/salidas físicas — listo para su traducción directa a lógica Ladder en el PLC.</p>
+                    <h4><span>📄</span>Código Ladder</h4>
+                    <p>Lógica Ladder implementada en Logix Emulate para esta estación.</p>
                     <div class="divider"></div>
                 </div>
-                <div class="diagram-image-container">
-                    <img src="docs/modulo6/Grafcet/formadora_nivel3.png" alt="Grafcet Formadora - Nivel Operativo" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
-                </div>
-            </div>
-            <div class="formadora-diagram-view" id="viewer-formadora-video" style="display: none; width: 100%;">
-                <div class="diagram-header">
-                    <h4><span>▶️</span>Explicación en Video</h4>
-                    <p>Recorrido narrado del código Ladder implementado en Logix Emulate para esta estación.</p>
-                    <div class="divider"></div>
-                </div>
-                <div class="diagram-video-container">
-                    <iframe src="https://www.youtube.com/embed/EJEMPLO_VIDEO_LADDER_FORMADORA" title="Ladder Formadora" allowfullscreen></iframe>
+                <div class="diagram-pdf-container">
+                    <iframe src="docs/modulo6/PDF/formadora_ladder.pdf"></iframe>
                 </div>
             </div>
     </div>
@@ -330,7 +316,7 @@
 
 <div id="content-lavadora" class="tw-content">
     <h3 class="panel-subtitle" style="color: var(--text-main); margin-top: 0;">💦 Control Secuencial: Lavadora</h3>
-    <p class="panel-text" style="font-size: 13px; margin-bottom: 15px;">Diseño del Grafcet en sus tres niveles de abstracción para la estación <strong>Lavadora</strong>, base directa de la lógica Ladder implementada en Logix Emulate. El último nodo abre el video explicativo a mayor tamaño.</p>
+    <p class="panel-text" style="font-size: 13px; margin-bottom: 15px;">Diseño del Grafcet en sus dos niveles desarrollados para la estación <strong>Lavadora</strong>, base directa de la lógica Ladder implementada en Logix Emulate. El último nodo abre el PDF del código Ladder a mayor tamaño.</p>
 
     <div class="constellation-hub hub-horizontal grafcet-hub" id="diag-hub-lavadora" style="background: rgba(142,142,147,0.02); border: 1px solid var(--border-node); border-radius: 8px;">
         <svg class="network-canvas"></svg>
@@ -343,13 +329,9 @@
                 <div class="hub-icon" style="width: 42px; height: 42px; font-size: 18px;">⚙️</div>
                 <div class="hub-text">N2</div>
             </div>
-            <div class="hub-node parallax-el" id="node-lavadora-nivel3" data-speed="0.06" onclick="switchDiagram('lavadora', 'nivel3')">
-                <div class="hub-icon" style="width: 42px; height: 42px; font-size: 18px;">🔌</div>
-                <div class="hub-text">N3</div>
-            </div>
-            <div class="hub-node parallax-el" id="node-lavadora-video" data-speed="0.07" onclick="switchDiagram('lavadora', 'video')">
-                <div class="hub-icon" style="width: 42px; height: 42px; font-size: 18px;">▶️</div>
-                <div class="hub-text">VIDEO</div>
+            <div class="hub-node parallax-el" id="node-lavadora-ladder" data-speed="0.07" onclick="switchDiagram('lavadora', 'ladder')">
+                <div class="hub-icon" style="width: 42px; height: 42px; font-size: 18px;">📄</div>
+                <div class="hub-text">LADDER</div>
             </div>
         </div>
     </div>
@@ -361,8 +343,8 @@
                     <p>Descripción del comportamiento secuencial sin hacer referencia a la tecnología de implementación (sensores/actuadores genéricos).</p>
                     <div class="divider"></div>
                 </div>
-                <div class="diagram-image-container">
-                    <img src="docs/modulo6/Grafcet/lavadora_nivel1.png" alt="Grafcet Lavadora - Especificación Funcional" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
+                <div class="diagram-pdf-container">
+                    <iframe src="docs/modulo6/Grafcet/GRAFCET_Lavadora_Nivel_1.pdf"></iframe>
                 </div>
             </div>
             <div class="lavadora-diagram-view" id="viewer-lavadora-nivel2" style="display: none; width: 100%;">
@@ -371,28 +353,18 @@
                     <p>Incorpora la tecnología de los actuadores y pre-actuadores reales (electroválvulas, contactores, variadores).</p>
                     <div class="divider"></div>
                 </div>
-                <div class="diagram-image-container">
-                    <img src="docs/modulo6/Grafcet/lavadora_nivel2.png" alt="Grafcet Lavadora - Nivel Tecnológico" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
+                <div class="diagram-pdf-container">
+                    <iframe src="docs/modulo6/Grafcet/GRAFCET_Lavadora_Nivel_2.pdf"></iframe>
                 </div>
             </div>
-            <div class="lavadora-diagram-view" id="viewer-lavadora-nivel3" style="display: none; width: 100%;">
+            <div class="lavadora-diagram-view" id="viewer-lavadora-ladder" style="display: none; width: 100%;">
                 <div class="diagram-header">
-                    <h4><span>🔌</span>Nivel Operativo</h4>
-                    <p>Direccionamiento de entradas/salidas físicas — listo para su traducción directa a lógica Ladder en el PLC.</p>
+                    <h4><span>📄</span>Código Ladder</h4>
+                    <p>Lógica Ladder implementada en Logix Emulate para esta estación.</p>
                     <div class="divider"></div>
                 </div>
-                <div class="diagram-image-container">
-                    <img src="docs/modulo6/Grafcet/lavadora_nivel3.png" alt="Grafcet Lavadora - Nivel Operativo" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
-                </div>
-            </div>
-            <div class="lavadora-diagram-view" id="viewer-lavadora-video" style="display: none; width: 100%;">
-                <div class="diagram-header">
-                    <h4><span>▶️</span>Explicación en Video</h4>
-                    <p>Recorrido narrado del código Ladder implementado en Logix Emulate para esta estación.</p>
-                    <div class="divider"></div>
-                </div>
-                <div class="diagram-video-container">
-                    <iframe src="https://www.youtube.com/embed/EJEMPLO_VIDEO_LADDER_LAVADORA" title="Ladder Lavadora" allowfullscreen></iframe>
+                <div class="diagram-pdf-container">
+                    <iframe src="docs/modulo6/PDF/lavadora_ladder.pdf"></iframe>
                 </div>
             </div>
     </div>
@@ -400,7 +372,7 @@
 
 <div id="content-llenadora" class="tw-content">
     <h3 class="panel-subtitle" style="color: var(--text-main); margin-top: 0;">🍾 Control Secuencial: Llenadora y Tapadora</h3>
-    <p class="panel-text" style="font-size: 13px; margin-bottom: 15px;">Diseño del Grafcet en sus tres niveles de abstracción para la estación <strong>Llenadora y Tapadora</strong>, base directa de la lógica Ladder implementada en Logix Emulate. El último nodo abre el video explicativo a mayor tamaño.</p>
+    <p class="panel-text" style="font-size: 13px; margin-bottom: 15px;">Diseño del Grafcet en sus dos niveles desarrollados para la estación <strong>Llenadora y Tapadora</strong>, base directa de la lógica Ladder implementada en Logix Emulate. El último nodo abre el PDF del código Ladder a mayor tamaño.</p>
 
     <div class="constellation-hub hub-horizontal grafcet-hub" id="diag-hub-llenadora" style="background: rgba(142,142,147,0.02); border: 1px solid var(--border-node); border-radius: 8px;">
         <svg class="network-canvas"></svg>
@@ -413,13 +385,9 @@
                 <div class="hub-icon" style="width: 42px; height: 42px; font-size: 18px;">⚙️</div>
                 <div class="hub-text">N2</div>
             </div>
-            <div class="hub-node parallax-el" id="node-llenadora-nivel3" data-speed="0.06" onclick="switchDiagram('llenadora', 'nivel3')">
-                <div class="hub-icon" style="width: 42px; height: 42px; font-size: 18px;">🔌</div>
-                <div class="hub-text">N3</div>
-            </div>
-            <div class="hub-node parallax-el" id="node-llenadora-video" data-speed="0.07" onclick="switchDiagram('llenadora', 'video')">
-                <div class="hub-icon" style="width: 42px; height: 42px; font-size: 18px;">▶️</div>
-                <div class="hub-text">VIDEO</div>
+            <div class="hub-node parallax-el" id="node-llenadora-ladder" data-speed="0.07" onclick="switchDiagram('llenadora', 'ladder')">
+                <div class="hub-icon" style="width: 42px; height: 42px; font-size: 18px;">📄</div>
+                <div class="hub-text">LADDER</div>
             </div>
         </div>
     </div>
@@ -431,8 +399,8 @@
                     <p>Descripción del comportamiento secuencial sin hacer referencia a la tecnología de implementación (sensores/actuadores genéricos).</p>
                     <div class="divider"></div>
                 </div>
-                <div class="diagram-image-container">
-                    <img src="docs/modulo6/Grafcet/llenadora_nivel1.png" alt="Grafcet Llenadora y Tapadora - Especificación Funcional" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
+                <div class="diagram-pdf-container">
+                    <iframe src="docs/modulo6/Grafcet/GRAFCET_Llenado_Nivel_1.pdf"></iframe>
                 </div>
             </div>
             <div class="llenadora-diagram-view" id="viewer-llenadora-nivel2" style="display: none; width: 100%;">
@@ -441,28 +409,18 @@
                     <p>Incorpora la tecnología de los actuadores y pre-actuadores reales (electroválvulas, contactores, variadores).</p>
                     <div class="divider"></div>
                 </div>
-                <div class="diagram-image-container">
-                    <img src="docs/modulo6/Grafcet/llenadora_nivel2.png" alt="Grafcet Llenadora y Tapadora - Nivel Tecnológico" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
+                <div class="diagram-pdf-container">
+                    <iframe src="docs/modulo6/Grafcet/GRAFCET_Llenado_Nivel_2.pdf"></iframe>
                 </div>
             </div>
-            <div class="llenadora-diagram-view" id="viewer-llenadora-nivel3" style="display: none; width: 100%;">
+            <div class="llenadora-diagram-view" id="viewer-llenadora-ladder" style="display: none; width: 100%;">
                 <div class="diagram-header">
-                    <h4><span>🔌</span>Nivel Operativo</h4>
-                    <p>Direccionamiento de entradas/salidas físicas — listo para su traducción directa a lógica Ladder en el PLC.</p>
+                    <h4><span>📄</span>Código Ladder</h4>
+                    <p>Lógica Ladder implementada en Logix Emulate para esta estación.</p>
                     <div class="divider"></div>
                 </div>
-                <div class="diagram-image-container">
-                    <img src="docs/modulo6/Grafcet/llenadora_nivel3.png" alt="Grafcet Llenadora y Tapadora - Nivel Operativo" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
-                </div>
-            </div>
-            <div class="llenadora-diagram-view" id="viewer-llenadora-video" style="display: none; width: 100%;">
-                <div class="diagram-header">
-                    <h4><span>▶️</span>Explicación en Video</h4>
-                    <p>Recorrido narrado del código Ladder implementado en Logix Emulate para esta estación.</p>
-                    <div class="divider"></div>
-                </div>
-                <div class="diagram-video-container">
-                    <iframe src="https://www.youtube.com/embed/EJEMPLO_VIDEO_LADDER_LLENADORA" title="Ladder Llenadora y Tapadora" allowfullscreen></iframe>
+                <div class="diagram-pdf-container">
+                    <iframe src="docs/modulo6/PDF/llenadora_ladder.pdf"></iframe>
                 </div>
             </div>
     </div>
@@ -470,7 +428,7 @@
 
 <div id="content-rechazadora" class="tw-content">
     <h3 class="panel-subtitle" style="color: var(--text-main); margin-top: 0;">🚫 Control Secuencial: Rechazadora</h3>
-    <p class="panel-text" style="font-size: 13px; margin-bottom: 15px;">Diseño del Grafcet en sus tres niveles de abstracción para la estación <strong>Rechazadora</strong>, base directa de la lógica Ladder implementada en Logix Emulate. El último nodo abre el video explicativo a mayor tamaño.</p>
+    <p class="panel-text" style="font-size: 13px; margin-bottom: 15px;">Diseño del Grafcet en sus dos niveles desarrollados para la estación <strong>Rechazadora</strong>, base directa de la lógica Ladder implementada en Logix Emulate. El último nodo abre el PDF del código Ladder a mayor tamaño.</p>
 
     <div class="constellation-hub hub-horizontal grafcet-hub" id="diag-hub-rechazadora" style="background: rgba(142,142,147,0.02); border: 1px solid var(--border-node); border-radius: 8px;">
         <svg class="network-canvas"></svg>
@@ -483,13 +441,9 @@
                 <div class="hub-icon" style="width: 42px; height: 42px; font-size: 18px;">⚙️</div>
                 <div class="hub-text">N2</div>
             </div>
-            <div class="hub-node parallax-el" id="node-rechazadora-nivel3" data-speed="0.06" onclick="switchDiagram('rechazadora', 'nivel3')">
-                <div class="hub-icon" style="width: 42px; height: 42px; font-size: 18px;">🔌</div>
-                <div class="hub-text">N3</div>
-            </div>
-            <div class="hub-node parallax-el" id="node-rechazadora-video" data-speed="0.07" onclick="switchDiagram('rechazadora', 'video')">
-                <div class="hub-icon" style="width: 42px; height: 42px; font-size: 18px;">▶️</div>
-                <div class="hub-text">VIDEO</div>
+            <div class="hub-node parallax-el" id="node-rechazadora-ladder" data-speed="0.07" onclick="switchDiagram('rechazadora', 'ladder')">
+                <div class="hub-icon" style="width: 42px; height: 42px; font-size: 18px;">📄</div>
+                <div class="hub-text">LADDER</div>
             </div>
         </div>
     </div>
@@ -501,8 +455,8 @@
                     <p>Descripción del comportamiento secuencial sin hacer referencia a la tecnología de implementación (sensores/actuadores genéricos).</p>
                     <div class="divider"></div>
                 </div>
-                <div class="diagram-image-container">
-                    <img src="docs/modulo6/Grafcet/rechazadora_nivel1.png" alt="Grafcet Rechazadora - Especificación Funcional" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
+                <div class="diagram-pdf-container">
+                    <iframe src="docs/modulo6/PDF/rechazadora_nivel1.pdf"></iframe>
                 </div>
             </div>
             <div class="rechazadora-diagram-view" id="viewer-rechazadora-nivel2" style="display: none; width: 100%;">
@@ -511,28 +465,18 @@
                     <p>Incorpora la tecnología de los actuadores y pre-actuadores reales (electroválvulas, contactores, variadores).</p>
                     <div class="divider"></div>
                 </div>
-                <div class="diagram-image-container">
-                    <img src="docs/modulo6/Grafcet/rechazadora_nivel2.png" alt="Grafcet Rechazadora - Nivel Tecnológico" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
+                <div class="diagram-pdf-container">
+                    <iframe src="docs/modulo6/PDF/rechazadora_nivel2.pdf"></iframe>
                 </div>
             </div>
-            <div class="rechazadora-diagram-view" id="viewer-rechazadora-nivel3" style="display: none; width: 100%;">
+            <div class="rechazadora-diagram-view" id="viewer-rechazadora-ladder" style="display: none; width: 100%;">
                 <div class="diagram-header">
-                    <h4><span>🔌</span>Nivel Operativo</h4>
-                    <p>Direccionamiento de entradas/salidas físicas — listo para su traducción directa a lógica Ladder en el PLC.</p>
+                    <h4><span>📄</span>Código Ladder</h4>
+                    <p>Lógica Ladder implementada en Logix Emulate para esta estación.</p>
                     <div class="divider"></div>
                 </div>
-                <div class="diagram-image-container">
-                    <img src="docs/modulo6/Grafcet/rechazadora_nivel3.png" alt="Grafcet Rechazadora - Nivel Operativo" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
-                </div>
-            </div>
-            <div class="rechazadora-diagram-view" id="viewer-rechazadora-video" style="display: none; width: 100%;">
-                <div class="diagram-header">
-                    <h4><span>▶️</span>Explicación en Video</h4>
-                    <p>Recorrido narrado del código Ladder implementado en Logix Emulate para esta estación.</p>
-                    <div class="divider"></div>
-                </div>
-                <div class="diagram-video-container">
-                    <iframe src="https://www.youtube.com/embed/EJEMPLO_VIDEO_LADDER_RECHAZADORA" title="Ladder Rechazadora" allowfullscreen></iframe>
+                <div class="diagram-pdf-container">
+                    <iframe src="docs/modulo6/PDF/rechazadora_ladder.pdf"></iframe>
                 </div>
             </div>
     </div>
@@ -540,7 +484,7 @@
 
 <div id="content-empaquetadora" class="tw-content">
     <h3 class="panel-subtitle" style="color: var(--text-main); margin-top: 0;">📦 Control Secuencial: Empaquetadora</h3>
-    <p class="panel-text" style="font-size: 13px; margin-bottom: 15px;">Diseño del Grafcet en sus tres niveles de abstracción para la estación <strong>Empaquetadora</strong>, base directa de la lógica Ladder implementada en Logix Emulate. El último nodo abre el video explicativo a mayor tamaño.</p>
+    <p class="panel-text" style="font-size: 13px; margin-bottom: 15px;">Diseño del Grafcet en sus dos niveles desarrollados para la estación <strong>Empaquetadora</strong>, base directa de la lógica Ladder implementada en Logix Emulate. El último nodo abre el PDF del código Ladder a mayor tamaño.</p>
 
     <div class="constellation-hub hub-horizontal grafcet-hub" id="diag-hub-empaquetadora" style="background: rgba(142,142,147,0.02); border: 1px solid var(--border-node); border-radius: 8px;">
         <svg class="network-canvas"></svg>
@@ -553,13 +497,9 @@
                 <div class="hub-icon" style="width: 42px; height: 42px; font-size: 18px;">⚙️</div>
                 <div class="hub-text">N2</div>
             </div>
-            <div class="hub-node parallax-el" id="node-empaquetadora-nivel3" data-speed="0.06" onclick="switchDiagram('empaquetadora', 'nivel3')">
-                <div class="hub-icon" style="width: 42px; height: 42px; font-size: 18px;">🔌</div>
-                <div class="hub-text">N3</div>
-            </div>
-            <div class="hub-node parallax-el" id="node-empaquetadora-video" data-speed="0.07" onclick="switchDiagram('empaquetadora', 'video')">
-                <div class="hub-icon" style="width: 42px; height: 42px; font-size: 18px;">▶️</div>
-                <div class="hub-text">VIDEO</div>
+            <div class="hub-node parallax-el" id="node-empaquetadora-ladder" data-speed="0.07" onclick="switchDiagram('empaquetadora', 'ladder')">
+                <div class="hub-icon" style="width: 42px; height: 42px; font-size: 18px;">📄</div>
+                <div class="hub-text">LADDER</div>
             </div>
         </div>
     </div>
@@ -571,8 +511,8 @@
                     <p>Descripción del comportamiento secuencial sin hacer referencia a la tecnología de implementación (sensores/actuadores genéricos).</p>
                     <div class="divider"></div>
                 </div>
-                <div class="diagram-image-container">
-                    <img src="docs/modulo6/Grafcet/empaquetadora_nivel1.png" alt="Grafcet Empaquetadora - Especificación Funcional" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
+                <div class="diagram-pdf-container">
+                    <iframe src="docs/modulo6/PDF/empaquetadora_nivel1.pdf"></iframe>
                 </div>
             </div>
             <div class="empaquetadora-diagram-view" id="viewer-empaquetadora-nivel2" style="display: none; width: 100%;">
@@ -581,28 +521,18 @@
                     <p>Incorpora la tecnología de los actuadores y pre-actuadores reales (electroválvulas, contactores, variadores).</p>
                     <div class="divider"></div>
                 </div>
-                <div class="diagram-image-container">
-                    <img src="docs/modulo6/Grafcet/empaquetadora_nivel2.png" alt="Grafcet Empaquetadora - Nivel Tecnológico" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
+                <div class="diagram-pdf-container">
+                    <iframe src="docs/modulo6/PDF/empaquetadora_nivel2.pdf"></iframe>
                 </div>
             </div>
-            <div class="empaquetadora-diagram-view" id="viewer-empaquetadora-nivel3" style="display: none; width: 100%;">
+            <div class="empaquetadora-diagram-view" id="viewer-empaquetadora-ladder" style="display: none; width: 100%;">
                 <div class="diagram-header">
-                    <h4><span>🔌</span>Nivel Operativo</h4>
-                    <p>Direccionamiento de entradas/salidas físicas — listo para su traducción directa a lógica Ladder en el PLC.</p>
+                    <h4><span>📄</span>Código Ladder</h4>
+                    <p>Lógica Ladder implementada en Logix Emulate para esta estación.</p>
                     <div class="divider"></div>
                 </div>
-                <div class="diagram-image-container">
-                    <img src="docs/modulo6/Grafcet/empaquetadora_nivel3.png" alt="Grafcet Empaquetadora - Nivel Operativo" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
-                </div>
-            </div>
-            <div class="empaquetadora-diagram-view" id="viewer-empaquetadora-video" style="display: none; width: 100%;">
-                <div class="diagram-header">
-                    <h4><span>▶️</span>Explicación en Video</h4>
-                    <p>Recorrido narrado del código Ladder implementado en Logix Emulate para esta estación.</p>
-                    <div class="divider"></div>
-                </div>
-                <div class="diagram-video-container">
-                    <iframe src="https://www.youtube.com/embed/EJEMPLO_VIDEO_LADDER_EMPAQUETADORA" title="Ladder Empaquetadora" allowfullscreen></iframe>
+                <div class="diagram-pdf-container">
+                    <iframe src="docs/modulo6/PDF/empaquetadora_ladder.pdf"></iframe>
                 </div>
             </div>
     </div>
