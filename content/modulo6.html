@@ -274,18 +274,10 @@
 
     <div id="content-general" class="tw-content">
         <h3 class="panel-subtitle" style="color: var(--text-main); margin-top: 0;">🗺️ Grafcet General de la Línea</h3>
-        <p class="panel-text" style="font-size: 13px; margin-bottom: 15px;">Visión global de la secuencia completa, integrando las 5 estaciones de la línea. Selecciona la versión según el nivel de detalle de las etapas.</p>
-
-        <div class="ladder-doc-select">
-            <label for="select-general-grafcet">🗺️ Versión:</label>
-            <select id="select-general-grafcet" onchange="document.getElementById('pdf-general-grafcet').src = this.value;">
-                <option value="docs/modulo6/Grafcet/General/Grafcet_General_E0-E27.pdf">E0 – E27 (detallado)</option>
-                <option value="docs/modulo6/Grafcet/General/Grafcet_General_E0-E19.pdf">E0 – E19 (resumido)</option>
-            </select>
-        </div>
+        <p class="panel-text" style="font-size: 13px; margin-bottom: 15px;">Visión global de la secuencia completa, integrando las 5 estaciones de la línea.</p>
 
         <div class="diagram-pdf-container">
-            <iframe id="pdf-general-grafcet" src="docs/modulo6/Grafcet/General.pdf"></iframe>
+            <iframe src="docs/modulo6/Grafcet/General.pdf"></iframe>
         </div>
     </div>
 
