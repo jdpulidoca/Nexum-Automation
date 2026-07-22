@@ -42,5 +42,3 @@ Este directorio contiene los documentos y recursos utilizados para planear, pres
 | `documento Modulo 2.pdf` | Documento base del Taller 2 |
 
 
-
-> 🔗 Estos recursos son utilizados por `content/modulo3.html` mediante rutas `docs/modulo3/...`.
