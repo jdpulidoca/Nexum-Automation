@@ -1,47 +1,77 @@
-# Nexum Automation
+<div align="center">
 
-**Propuesta de Automatización de Procesos de Manufactura para una planta multiproducto de Coca-Cola FEMSA**
+# ⚙️ Nexum Automation
 
-Proyecto integrador de la asignatura *Automatización de Procesos de Manufactura* (APM 2026-1), Universidad Nacional de Colombia — Facultad de Ingeniería Mecánica y Mecatrónica, Sede Bogotá.
+### Propuesta de automatización para una planta multiproducto de bebidas
 
-🔗 **Sitio interactivo:** [jdpulidoca.github.io/Nexum-Automation](https://jdpulidoca.github.io/Nexum-Automation/)
+`Industria 4.0` · `Gemelo digital` · `Robótica` · `PLC` · `SCADA`
+
+Proyecto integrador de **Automatización de Procesos de Manufactura — APM 2026-I**
+
+**Universidad Nacional de Colombia**  
+Facultad de Ingeniería · Departamento de Ingeniería Mecánica y Mecatrónica · Sede Bogotá
+
+[🌐 Explorar sitio interactivo](https://jdpulidoca.github.io/Nexum-Automation/)
+
+</div>
 
 ---
 
-## 📌 Descripción del proyecto
+## 📌 Descripción
 
-**Nexum Automation** es una consultora académica conformada por seis estudiantes de ingeniería, creada para diagnosticar y proponer la automatización de tres líneas de producción de una planta embotelladora de Coca-Cola FEMSA:
+**Nexum Automation** es una consultora académica conformada por seis estudiantes de ingeniería. El proyecto diagnostica y propone soluciones de automatización para tres líneas de producción de una planta embotelladora de Coca-Cola FEMSA.
 
 | Línea | Producto | Formato | Enfoque |
-|---|---|---|---|
-| 🔋 Monster | Monster Energy | Lata 473 ml | Reducción de microparos, enfoque *filler-centric* |
-| 🥤 Quatro | Gaseosa Quatro | PET 2 L | **Línea seleccionada** — paletizado robotizado de fin de línea |
-| 💧 Brisa | Agua Brisa | Garrafón 20 L | Rediseño de layout, automatización de paletizado |
+|---|---|---:|---|
+| 🔋 Monster | Monster Energy | Lata de 473 ml | Reducción de microparos y enfoque *filler-centric*. |
+| 🥤 Quatro | Gaseosa Quatro | PET de 1,5 L | **Línea seleccionada:** automatización y paletizado robotizado. |
+| 💧 Brisa | Agua Brisa | Garrafón de 20 L | Rediseño del layout y automatización del manejo de cargas. |
 
-De las tres, **Quatro** se identificó como la propuesta más viable y es sobre la que se desarrollaron a fondo el gemelo digital y la celda robotizada.
+La línea **Quatro** fue seleccionada como la alternativa más viable y constituye la base del gemelo digital, la celda robotizada y la evaluación económica desarrollada.
 
-### Alcance real
+### 🧱 Alcance ISA-95
 
-El proyecto cubre integración vertical desde el **Nivel 0 (Campo)** hasta el **Nivel 2 (SCADA)** de la pirámide de automatización. Los niveles MES y ERP quedan documentados como marco conceptual, pero no fueron implementados ni simulados en esta entrega.
+El proyecto implementa la integración vertical desde el **Nivel 0 (Campo)** hasta el **Nivel 2 (SCADA)**:
+
+- 📡 **Nivel 0:** sensores y actuadores del entorno simulado.
+- 🎛️ **Nivel 1:** control mediante PLC y lógica Ladder.
+- 🖥️ **Nivel 2:** supervisión, alarmas e indicadores.
+
+Los niveles **MES** y **ERP** se presentan como referencia conceptual, pero no fueron implementados ni simulados.
 
 ---
 
 ## 🧩 Módulos del proyecto
 
-El sitio es un **hub interactivo** (constelación de nodos animados) donde cada módulo se abre como un panel dinámico — no hay navegación a páginas separadas.
+El sitio funciona como un **hub interactivo**: cada nodo abre su contenido en un panel dinámico, sin navegar hacia páginas independientes.
 
 | Módulo | Contenido |
 |---|---|
-| **1 — Propuesta e Industria 4.0** | Arquitectura ISA-95 y alcance, propuesta por línea, arquitectura de comunicaciones (Node-RED/SCADA, Studio 5000, ABB IoT Gateway, RSLinx, RobotStudio, Siemens NX), gemelo digital y KPIs, sensórica y actuadores por máquina |
-| **2 — Gestión de Producción** | VSM, DOP, layout de planta y diagramas de análisis por línea |
-| **3 — Evaluación de Proyectos** | Modelo Canvas, EDP/EDT, cronograma y análisis financiero (CAPEX, flujo de caja) |
-| **4 — Celda de Manufactura Robotizada** | Video explicativo, visor 3D de la celda (robot ABB IRB460-110/2.40), justificación económica (ROI, OEE) e informe técnico (diseño, gripper, análisis de riesgos ISO) |
-| **5 — Digital Twin** | Gemelo digital 3D de la línea completa y de cada estación (Sopladora, Lavadora, Llenadora y Tapadora, Rechazadora, Empaquetadora), con video de funcionamiento por máquina |
-| **6 — Controladores Industriales** | Grafcet (Niveles 1 y 2, y Nivel 3 para Llenadora), código Ladder en Logix Emulate y video de cada máquina en funcionamiento |
-| **7 — Sistema SCADA** | Supervisión y control desarrollado en Node-RED |
-| **Simulación** | Modelos de Tecnomatix Plant Simulation por línea, con layout, video y archivo descargable |
+| **1 — 🏭 Automatización e Industria 4.0** | Arquitectura ISA-95, alcance, propuestas por línea, comunicaciones, KPIs, sensórica y actuadores. |
+| **2 — 📊 Gestión de la Producción** | Layout, VSM, DOP, DAP y diagramas Spaghetti para Monster, Quatro y Brisa. |
+| **3 — 💰 Evaluación de Proyectos** | Canvas, EDP, EDT, cronograma, CAPEX/OPEX, flujo de caja y viabilidad financiera. |
+| **4 — 🤖 Celda Robotizada** | Visor 3D, robot ABB IRB460-110/2.40, diseño del gripper, seguridad y justificación económica. |
+| **5 — 🧊 Gemelo Digital** | Modelos 3D y videos de la línea completa y de sus cinco estaciones. |
+| **6 — 🎛️ Controladores Industriales** | GRAFCET por niveles, lógica Ladder en Logix Emulate y demostraciones de funcionamiento. |
+| **7 — 🖥️ Sistema SCADA** | Demo de supervisión, estados, alarmas ISA-18.2, eventos, históricos y KPI simulados. |
+| **🔬 Simulación** | Modelos de Tecnomatix Plant Simulation con layouts, videos y archivos editables por línea. |
 
-Además: **Equipo Consultor**, **Reflexiones Académicas** (grupales e individuales) y **Bibliografía** organizada por sector.
+El proyecto también incluye las secciones **Equipo consultor**, **Reflexiones académicas** y **Bibliografía**.
+
+---
+
+## 🛠️ Tecnologías utilizadas
+
+| Área | Tecnologías |
+|---|---|
+| 🌐 Sitio web | HTML, CSS y JavaScript |
+| 🎛️ Control industrial | Studio 5000 y Logix Emulate |
+| 🖥️ Supervisión | Node-RED y demo SCADA interactiva |
+| 🤖 Robótica | ABB RobotStudio |
+| 🧊 Gemelo digital | Siemens NX / MCD |
+| 🏭 Simulación productiva | Tecnomatix Plant Simulation v23 |
+| 🎨 Modelos interactivos | Onshape → glTF/GLB → `model-viewer` |
+| 🔗 Comunicaciones | OPC UA, OPC DA y EtherNet/IP |
 
 ---
 
@@ -49,49 +79,47 @@ Además: **Equipo Consultor**, **Reflexiones Académicas** (grupales e individua
 
 | Integrante | Rol |
 |---|---|
-| Ariadna Contreras Nossa | Gerente Ejecutiva |
-| Johan Camilo Patiño Mogollón | Gerente de Proyectos y Relaciones |
-| Esteban Durán Jiménez | Líder de Diseño |
-| Juliana Góngora Rasmussen | Gerente Financiero |
-| Oscar Jhondairo Siabato León | Líder de Diseño |
-| Julián David Pulido Castañeda | Gerente de Automatización |
-
----
-
-## 🛠️ Stack tecnológico
-
-- **Sitio web:** HTML / CSS / JavaScript vanilla — hub tipo constelación con física de proximidad al mouse
-- **Control (PLC):** Studio 5000 + Logix Emulate
-- **Supervisión (SCADA):** Node-RED
-- **Robótica:** ABB RobotStudio (celda robotizada)
-- **Gemelo digital de línea:** Siemens NX / MCD
-- **Simulación de producción:** Tecnomatix Plant Simulation v23
-- **Modelos 3D interactivos:** OnShape → glTF/GLB → `<model-viewer>`
-- **Comunicaciones industriales:** OPC UA (ABB IoT Gateway) y OPC DA / EtherNet-IP (RSLinx Classic)
+| Ariadna Contreras Nossa | Gerente ejecutiva |
+| Johan Camilo Patiño Mogollón | Gerente de proyectos y relaciones |
+| Esteban Durán Jiménez | Líder de diseño |
+| Juliana Góngora Rasmussen | Gerente financiera |
+| Oscar Jhondairo Siabato León | Líder de diseño |
+| Julián David Pulido Castañeda | Gerente de automatización |
 
 ---
 
 ## 📁 Estructura del repositorio
 
-```
+```text
 Nexum-Automation/
-├── index.html          # Punto de entrada — el hub interactivo
-├── assets/              # Imágenes, íconos, CSS y JS del sitio
-│   ├── css/
-│   ├── img/
-│   └── js/
-├── content/             # Fragmentos HTML que se cargan dinámicamente en los paneles del hub
-│   ├── modulo1.html … modulo7.html
-│   ├── equipo.html, propuesta.html, contexto.html, simulacion.html, reflexiones.html
-│   └── bib1.html, bib2.html, bib3.html, bib-general.html
-├── docs/                # Evidencia técnica por módulo (PDFs de Grafcet, informes, diagramas)
-│   ├── modulo1/ … modulo6/
-├── simulacion/          # Modelos, layouts y videos de Tecnomatix Plant Simulation por línea
-│   ├── Monster/, Quatro/, Brissa/
-├── ViejaPagina/         # Versión anterior del sitio (páginas HTML separadas) — reemplazada por el hub
+├── index.html              # Entrada al hub interactivo
+├── assets/
+│   ├── css/                # Estilos del sitio
+│   ├── img/                # Imágenes e iconos
+│   └── js/                 # Lógica e interacciones
+├── content/
+│   ├── modulo1.html ... modulo7.html
+│   ├── simulacion.html
+│   ├── equipo.html
+│   ├── propuesta.html
+│   ├── contexto.html
+│   └── reflexiones.html
+├── docs/
+│   └── modulo1/ ... modulo7/
+├── simulacion/
+│   ├── Monster/
+│   ├── Quatro/
+│   └── Brissa/
+├── ViejaPagina/            # Versión anterior del sitio
 └── README.md
 ```
 
 ---
 
-Universidad Nacional de Colombia — Facultad de Ingeniería Mecánica y Mecatrónica, Sede Bogotá · Semestre 2026-I
+<div align="center">
+
+### 🎓 Proyecto académico · Semestre 2026-I
+
+**Nexum Automation — Ingeniería, automatización y decisiones basadas en datos**
+
+</div>
