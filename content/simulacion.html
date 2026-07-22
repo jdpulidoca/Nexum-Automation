@@ -31,6 +31,11 @@
     .quatro-kpi-table td { padding: 9px; border: 1px solid var(--border-node); text-align: center; vertical-align: middle; }
     .quatro-scenario.after .quatro-kpi-table th { background: rgba(76,175,80,0.09); color: #4caf50; }
     .quatro-kpi-value { font-weight: 700; color: var(--text-main); }
+    .quatro-scenario.before .quatro-kpi-table th:nth-child(1) { width: 28%; }
+    .quatro-scenario.before .quatro-kpi-table th:nth-child(2) { width: 22%; text-align: right; }
+    .quatro-scenario.before .quatro-kpi-table th:nth-child(3) { width: 50%; text-align: left; }
+    .quatro-scenario.before .quatro-kpi-table td:nth-child(2) { text-align: right; white-space: nowrap; }
+    .quatro-scenario.before .quatro-kpi-table td:nth-child(3) { text-align: left; }
     @media (max-width: 960px) {
         .quatro-media-grid { grid-template-columns: 1fr; }
         .quatro-media-card .hud-frame, .quatro-media-card video { height: 260px; }
@@ -130,17 +135,18 @@
             </div>
         </div>
 
-        <h5 style="color: var(--text-main); font-size: 13px; margin: 20px 0 8px;">Resumen de KPI — escenario original</h5>
+        <h5 style="color: var(--text-main); font-size: 13px; margin: 20px 0 8px;">Resumen de KPI — antes de la automatización</h5>
         <div class="quatro-kpi-wrap">
             <table class="quatro-kpi-table">
-                <thead><tr><th>KPI</th><th>Resultado</th><th>Lectura operativa</th></tr></thead>
+                <thead><tr><th>KPI</th><th>Resultado</th><th>Sustento</th></tr></thead>
                 <tbody>
-                    <tr><td><strong>OEE</strong></td><td class="quatro-kpi-value">72 %</td><td>Desempeño base del proceso manual</td></tr>
-                    <tr><td><strong>Disponibilidad</strong></td><td class="quatro-kpi-value">78,26 %</td><td>Mayor afectación por paradas y variabilidad</td></tr>
-                    <tr><td><strong>Capacidad efectiva anual</strong></td><td class="quatro-kpi-value">6.676.800 botellas</td><td>Producción estimada del escenario original</td></tr>
-                    <tr><td><strong>Paradas no planificadas</strong></td><td class="quatro-kpi-value">504 h/año</td><td>Tiempo improductivo estimado</td></tr>
-                    <tr><td><strong>Calidad del proceso</strong></td><td class="quatro-kpi-value">93 %</td><td>Tasa de rechazo equivalente al 7 %</td></tr>
-                    <tr><td><strong>Agrupado y paletizado</strong></td><td class="quatro-kpi-value">Manual</td><td>Dependiente del ritmo y disponibilidad del operario</td></tr>
+                    <tr><td><strong>OEE</strong></td><td class="quatro-kpi-value">72,11 %</td><td>(78,26 % × 98,90 % × 93,16 %)</td></tr>
+                    <tr><td><strong>Disponibilidad</strong></td><td class="quatro-kpi-value">78,26 %</td><td>MTBF = 180 min y MTTR = 50 min</td></tr>
+                    <tr><td><strong>Desempeño</strong></td><td class="quatro-kpi-value">98,90 %</td><td>Ciclo ideal 0,90 s y ciclo real 0,91 s</td></tr>
+                    <tr><td><strong>Calidad</strong></td><td class="quatro-kpi-value">93,16 %</td><td>Rechazos acumulados de 2 %, 3 % y 2 %</td></tr>
+                    <tr><td><strong>Capacidad efectiva anual</strong></td><td class="quatro-kpi-value">6.676.800 botellas</td><td>4.000 bot/h × 2.318,33 h/año × 72 %</td></tr>
+                    <tr><td><strong>Paradas no planificadas</strong></td><td class="quatro-kpi-value">504 h/año</td><td>2.318,33 h × (1 − 78,26 %)</td></tr>
+                    <tr><td><strong>Agrupado y paletizado</strong></td><td class="quatro-kpi-value">Manual</td><td>Operarios y cambios manuales modelados</td></tr>
                 </tbody>
             </table>
         </div>
