@@ -52,8 +52,8 @@ Además: **Equipo Consultor**, **Reflexiones Académicas** (grupales e individua
 | Ariadna Contreras Nossa | Gerente Ejecutiva |
 | Johan Camilo Patiño Mogollón | Gerente de Proyectos y Relaciones |
 | Esteban Durán Jiménez | Líder de Diseño |
-| Juliana Góngora Rasmussen | Líder de Diseño |
-| Oscar Jhondairo Siabato León | Gerente Financiero |
+| Juliana Góngora Rasmussen | Gerente Financiero |
+| Oscar Jhondairo Siabato León | Lider de Diseño |
 | Julián David Pulido Castañeda | Gerente de Automatización |
 
 ---
