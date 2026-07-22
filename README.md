@@ -15,7 +15,7 @@ Proyecto integrador de la asignatura *Automatización de Procesos de Manufactura
 | Línea | Producto | Formato | Enfoque |
 |---|---|---|---|
 | 🔋 Monster | Monster Energy | Lata 473 ml | Reducción de microparos, enfoque *filler-centric* |
-| 🥤 Quatro | Gaseosa Quatro | PET 1.5 L | **Línea seleccionada** — paletizado robotizado de fin de línea |
+| 🥤 Quatro | Gaseosa Quatro | PET 2 L | **Línea seleccionada** — paletizado robotizado de fin de línea |
 | 💧 Brisa | Agua Brisa | Garrafón 20 L | Rediseño de layout, automatización de paletizado |
 
 De las tres, **Quatro** se identificó como la propuesta más viable y es sobre la que se desarrollaron a fondo el gemelo digital y la celda robotizada.
