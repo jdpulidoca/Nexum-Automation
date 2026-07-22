@@ -36,6 +36,16 @@
     .quatro-scenario.before .quatro-kpi-table th:nth-child(3) { width: 50%; text-align: left; }
     .quatro-scenario.before .quatro-kpi-table td:nth-child(2) { text-align: right; white-space: nowrap; }
     .quatro-scenario.before .quatro-kpi-table td:nth-child(3) { text-align: left; }
+    .quatro-scenario.after .quatro-kpi-table th:nth-child(1) { width: 28%; }
+    .quatro-scenario.after .quatro-kpi-table th:nth-child(2) { width: 22%; text-align: right; }
+    .quatro-scenario.after .quatro-kpi-table th:nth-child(3) { width: 50%; text-align: left; }
+    .quatro-scenario.after .quatro-kpi-table td:nth-child(2) { text-align: right; white-space: nowrap; }
+    .quatro-scenario.after .quatro-kpi-table td:nth-child(3) { text-align: left; }
+    .quatro-comparison { margin: 30px 0 20px; padding: 18px; border: 1px solid var(--border-node); border-radius: 8px; background: rgba(63,81,181,0.035); }
+    .quatro-comparison .quatro-kpi-table th { background: rgba(63,81,181,0.12); color: var(--nexum-blue); }
+    .quatro-comparison .quatro-kpi-table th:first-child, .quatro-comparison .quatro-kpi-table td:first-child { text-align: left; }
+    .quatro-comparison .quatro-kpi-table td:not(:first-child), .quatro-comparison .quatro-kpi-table th:not(:first-child) { text-align: center; }
+    .quatro-comparison .improvement { color: #4caf50; font-weight: 700; }
     @media (max-width: 960px) {
         .quatro-media-grid { grid-template-columns: 1fr; }
         .quatro-media-card .hud-frame, .quatro-media-card video { height: 260px; }
@@ -186,18 +196,37 @@
             </div>
         </div>
 
-        <h5 style="color: var(--text-main); font-size: 13px; margin: 20px 0 8px;">Resumen de KPI — escenario automatizado</h5>
+        <h5 style="color: var(--text-main); font-size: 13px; margin: 20px 0 8px;">Resumen de KPI — después de la automatización</h5>
         <div class="quatro-kpi-wrap">
             <table class="quatro-kpi-table">
-                <thead><tr><th>KPI</th><th>Resultado</th><th>Lectura operativa</th></tr></thead>
+                <thead><tr><th>KPI</th><th>Resultado</th><th>Sustento</th></tr></thead>
                 <tbody>
-                    <tr><td><strong>OEE</strong></td><td class="quatro-kpi-value">80 %</td><td>Incremento de 8 puntos porcentuales</td></tr>
-                    <tr><td><strong>Disponibilidad</strong></td><td class="quatro-kpi-value">85,22 %</td><td>Mayor continuidad del proceso</td></tr>
-                    <tr><td><strong>Capacidad efectiva anual</strong></td><td class="quatro-kpi-value">7.418.667 botellas</td><td>741.867 botellas adicionales por año</td></tr>
-                    <tr><td><strong>Paradas no planificadas</strong></td><td class="quatro-kpi-value">343 h/año</td><td>Reducción estimada de 161 h/año</td></tr>
-                    <tr><td><strong>Calidad del proceso</strong></td><td class="quatro-kpi-value">94 %</td><td>Tasa de rechazo reducida al 6 %</td></tr>
-                    <tr><td><strong>Rechazos evitados</strong></td><td class="quatro-kpi-value">61.000 botellas/año</td><td>Menor desperdicio y reproceso</td></tr>
-                    <tr><td><strong>Agrupado y paletizado</strong></td><td class="quatro-kpi-value">Automático</td><td>Proceso programable, repetible y trazable</td></tr>
+                    <tr><td><strong>OEE</strong></td><td class="quatro-kpi-value">75,07 %</td><td>(80,65 % × 98,90 % × 94,12 %)</td></tr>
+                    <tr><td><strong>Disponibilidad</strong></td><td class="quatro-kpi-value">80,65 %</td><td>MTBF equivalente = 200 min y MTTR = 48 min</td></tr>
+                    <tr><td><strong>Desempeño</strong></td><td class="quatro-kpi-value">98,90 %</td><td>Ciclo ideal de 0,90 s y ciclo real de 0,91 s</td></tr>
+                    <tr><td><strong>Calidad</strong></td><td class="quatro-kpi-value">94,12 %</td><td>Rechazos acumulados de 2 %, 2 % y 2 %</td></tr>
+                    <tr><td><strong>Capacidad efectiva anual</strong></td><td class="quatro-kpi-value">6.961.350 botellas</td><td>4.000 bot/h × 2.318,33 h/año × 75,07 %</td></tr>
+                    <tr><td><strong>Paradas no planificadas</strong></td><td class="quatro-kpi-value">448,71 h/año</td><td>2.318,33 h × (1 − 80,65 %)</td></tr>
+                    <tr><td><strong>Agrupado y paletizado</strong></td><td class="quatro-kpi-value">Automatizado</td><td>Agrupadora automática y celda robotizada ABB IRB 460</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- COMPARACIÓN ANTES Y DESPUÉS -->
+    <section class="quatro-comparison">
+        <h4 class="quatro-scenario-title">3. Comparación antes y después</h4>
+        <div class="quatro-kpi-wrap">
+            <table class="quatro-kpi-table">
+                <thead><tr><th>Indicador</th><th>Antes</th><th>Después</th><th>Mejora</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>OEE</strong></td><td>72,11 %</td><td>75,07 %</td><td class="improvement">+2,96 puntos</td></tr>
+                    <tr><td><strong>Disponibilidad</strong></td><td>78,26 %</td><td>80,65 %</td><td class="improvement">+2,39 puntos</td></tr>
+                    <tr><td><strong>Desempeño</strong></td><td>98,90 %</td><td>98,90 %</td><td>Sin cambio</td></tr>
+                    <tr><td><strong>Calidad</strong></td><td>93,16 %</td><td>94,12 %</td><td class="improvement">+0,96 puntos</td></tr>
+                    <tr><td><strong>Paradas no planificadas</strong></td><td>504 h/año</td><td>448,71 h/año</td><td class="improvement">−55,29 h/año</td></tr>
+                    <tr><td><strong>Capacidad efectiva</strong></td><td>6.676.800 botellas/año</td><td>6.961.350 botellas/año</td><td class="improvement">+284.550 botellas/año</td></tr>
+                    <tr><td><strong>Final de línea</strong></td><td>Manual</td><td>Automatizado</td><td class="improvement">Menor variabilidad</td></tr>
                 </tbody>
             </table>
         </div>
