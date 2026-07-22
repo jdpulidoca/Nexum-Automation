@@ -162,6 +162,7 @@
     .hub-vertical .hub-node:nth-of-type(3) { margin-left: -10px; }
     .hub-vertical .hub-node:nth-of-type(4) { margin-left: 20px; }
     .hub-vertical .hub-node:nth-of-type(5) { margin-left: -5px; }
+    .hub-vertical .hub-node:nth-of-type(6) { margin-left: 15px; }
 
     /* Textos convertidos en Tooltips emergentes */
     .hub-vertical .hub-text {
@@ -212,7 +213,8 @@
     #rad-m3-edp:checked ~ .tw-main-content #content-m3-edp,
     #rad-m3-edt:checked ~ .tw-main-content #content-m3-edt,
     #rad-m3-crono:checked ~ .tw-main-content #content-m3-crono,
-    #rad-m3-fin:checked ~ .tw-main-content #content-m3-fin { display: block; }
+    #rad-m3-fin:checked ~ .tw-main-content #content-m3-fin,
+    #rad-m3-propuesta:checked ~ .tw-main-content #content-m3-propuesta { display: block; }
     .m3-wrapper { display: flex; gap: 25px; align-items: flex-start; margin-top: 10px; }
     .m3-sidebar { width: 130px; flex-shrink: 0; min-height: 420px; position: sticky; top: 10px; }
     .m3-main { flex: 1; min-width: 0; }
@@ -240,6 +242,7 @@
     <input type="radio" id="rad-m3-edt" name="tw-tabs-m3" class="tw-radio">
     <input type="radio" id="rad-m3-crono" name="tw-tabs-m3" class="tw-radio">
     <input type="radio" id="rad-m3-fin" name="tw-tabs-m3" class="tw-radio">
+    <input type="radio" id="rad-m3-propuesta" name="tw-tabs-m3" class="tw-radio">
 
     <div class="constellation-hub hub-vertical m3-sidebar">
         <svg class="network-canvas"></svg>
@@ -267,6 +270,10 @@
             <label for="rad-m3-fin" class="hub-node parallax-el" data-speed="0.09">
                 <div class="hub-icon">💰</div>
                 <div class="hub-text">Análisis Financiero</div>
+            </label>
+            <label for="rad-m3-propuesta" class="hub-node parallax-el" data-speed="0.06">
+                <div class="hub-icon">🏆</div>
+                <div class="hub-text">Propuesta de valor</div>
             </label>
         </div>
     </div>
@@ -722,10 +729,152 @@
 
 <div style="text-align: center; margin-top: 35px; border-top: 1px solid var(--border-node); padding-top: 20px;">
     <p style="margin-bottom: 15px; font-size: 12px; color: #888;"><em>Consulte el archivo fuente para revisar el presupuesto técnico-comercial, los supuestos, los beneficios y el flujo de caja completo.</em></p>
-    <a href="docs/modulo3/Evaluacion_economica_Automatizacion_Quatro_1_5L.xlsx" download style="display: inline-block; padding: 10px 20px; font-size: 13px; background-color: rgba(76, 175, 80, 0.15); color: #4caf50; text-decoration: none; border: 1px solid #4caf50; border-radius: 4px; font-weight: bold; transition: all 0.3s;">
+    <a href="docs/modulo3/Evaluacion_economica_Automatizacion_Quatro_1_5L.xlsm" download style="display: inline-block; padding: 10px 20px; font-size: 13px; background-color: rgba(76, 175, 80, 0.15); color: #4caf50; text-decoration: none; border: 1px solid #4caf50; border-radius: 4px; font-weight: bold; transition: all 0.3s;">
         📥 Descargar evaluación económica de Quatro 1,5 L
     </a>
 </div>
+        </div>
+        <div id="content-m3-propuesta" class="tw-content">
+<h3 class="panel-subtitle" style="margin-top: 50px; border-bottom: 1px solid var(--border-node); padding-bottom: 5px; color: #ffc107;">🏆 6. Propuesta de valor — Automatización de la línea Quatro 1,5 L</h3>
+
+<div style="background-color: rgba(255, 193, 7, 0.07); padding: 14px; border-left: 3px solid #ffc107; border-radius: 4px; margin: 18px 0 25px; color: var(--text-main);">
+    <strong style="color: #ffc107;">Propuesta central:</strong> Nexum Automation integra automatización mecánica, sensórica, robótica, control PLC, supervisión SCADA y seguridad industrial para convertir el final de la línea Quatro 1,5 L en un proceso estable, repetible, seguro, medible y preparado para crecer.
+</div>
+
+<h4 style="color: var(--text-main); font-size: 14px; margin-top: 20px;">6.1. Problema del cliente</h4>
+<p class="panel-text" style="font-size: 13px;">Las operaciones finales de agrupado, empaque y paletizado dependen en gran medida de actividades manuales. Esto puede limitar la continuidad del flujo, aumentar la variabilidad entre turnos y dificultar la respuesta ante picos de demanda.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(205px, 1fr)); gap: 12px; margin-bottom: 25px;">
+    <div style="background: rgba(244, 67, 54, 0.05); border: 1px solid var(--border-node); border-radius: 6px; padding: 14px; border-left: 3px solid #f44336;"><strong style="color: #f44336; font-size: 12px;">Dependencia manual</strong><p style="font-size: 11px; line-height: 1.55; color: #888; margin: 7px 0 0;">El desempeño depende de la disponibilidad, experiencia y velocidad de los operarios.</p></div>
+    <div style="background: rgba(255, 152, 0, 0.05); border: 1px solid var(--border-node); border-radius: 6px; padding: 14px; border-left: 3px solid #ff9800;"><strong style="color: #ff9800; font-size: 12px;">Ergonomía y SST</strong><p style="font-size: 11px; line-height: 1.55; color: #888; margin: 7px 0 0;">La manipulación repetitiva de cargas puede generar fatiga, ausentismo y costos de reemplazo.</p></div>
+    <div style="background: rgba(156, 39, 176, 0.05); border: 1px solid var(--border-node); border-radius: 6px; padding: 14px; border-left: 3px solid #9c27b0;"><strong style="color: #9c27b0; font-size: 12px;">Variabilidad del proceso</strong><p style="font-size: 11px; line-height: 1.55; color: #888; margin: 7px 0 0;">Los paquetes y pallets pueden presentar diferencias de alineación, estabilidad y calidad.</p></div>
+    <div style="background: rgba(33, 150, 243, 0.05); border: 1px solid var(--border-node); border-radius: 6px; padding: 14px; border-left: 3px solid #2196f3;"><strong style="color: #2196f3; font-size: 12px;">Información limitada</strong><p style="font-size: 11px; line-height: 1.55; color: #888; margin: 7px 0 0;">Faltan registros integrados de producción, rechazo, alarmas, paradas y desempeño por turno.</p></div>
+</div>
+
+<h4 style="color: var(--text-main); font-size: 14px;">6.2. Solución propuesta</h4>
+<p class="panel-text" style="font-size: 13px;">La solución automatiza y sincroniza las operaciones finales como un único sistema, desde la recepción de las botellas hasta la conformación del pallet.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin-bottom: 25px;">
+    <div style="background: rgba(142, 142, 147, 0.03); border: 1px solid var(--border-node); border-radius: 6px; padding: 14px;"><h5 style="margin: 0 0 7px; color: var(--nexum-blue); font-size: 12px;">📦 Agrupado y empaque</h5><p style="font-size: 11px; line-height: 1.55; margin: 0; color: #888;">Transportadores, posicionamiento y empaque termoplástico para formar paquetes uniformes y mantener el flujo continuo.</p></div>
+    <div style="background: rgba(142, 142, 147, 0.03); border: 1px solid var(--border-node); border-radius: 6px; padding: 14px;"><h5 style="margin: 0 0 7px; color: var(--nexum-blue); font-size: 12px;">📡 Sensórica industrial</h5><p style="font-size: 11px; line-height: 1.55; margin: 0; color: #888;">Detección, conteo, posición, acumulación, temperatura, estado de actuadores y condiciones de seguridad.</p></div>
+    <div style="background: rgba(142, 142, 147, 0.03); border: 1px solid var(--border-node); border-radius: 6px; padding: 14px;"><h5 style="margin: 0 0 7px; color: var(--nexum-blue); font-size: 12px;">🧠 PLC y SCADA</h5><p style="font-size: 11px; line-height: 1.55; margin: 0; color: #888;">Control centralizado, recetas, modos manual y automático, alarmas, históricos y seguimiento de OEE.</p></div>
+    <div style="background: rgba(142, 142, 147, 0.03); border: 1px solid var(--border-node); border-radius: 6px; padding: 14px;"><h5 style="margin: 0 0 7px; color: var(--nexum-blue); font-size: 12px;">🤖 Paletizado robotizado</h5><p style="font-size: 11px; line-height: 1.55; margin: 0; color: #888;">Robot ABB IRB 460 o equivalente, gripper de vacío, manejo de pallets y patrones de paletizado programables.</p></div>
+    <div style="background: rgba(142, 142, 147, 0.03); border: 1px solid var(--border-node); border-radius: 6px; padding: 14px;"><h5 style="margin: 0 0 7px; color: var(--nexum-blue); font-size: 12px;">🛡️ Seguridad integral</h5><p style="font-size: 11px; line-height: 1.55; margin: 0; color: #888;">Cerramiento, puertas enclavadas, paradas de emergencia, señalización y lógica de seguridad.</p></div>
+    <div style="background: rgba(142, 142, 147, 0.03); border: 1px solid var(--border-node); border-radius: 6px; padding: 14px;"><h5 style="margin: 0 0 7px; color: var(--nexum-blue); font-size: 12px;">🖥️ Validación virtual</h5><p style="font-size: 11px; line-height: 1.55; margin: 0; color: #888;">Simulación, RobotStudio y gemelo digital para verificar capacidad, trayectorias, secuencias e interferencias antes del montaje.</p></div>
+</div>
+
+<h4 style="color: var(--text-main); font-size: 14px;">6.3. Valor generado</h4>
+<p class="panel-text" style="font-size: 13px;">La propuesta busca aumentar la capacidad de respuesta, estabilizar el proceso, reducir pérdidas y convertir los datos operativos en información útil. El personal podrá orientarse hacia supervisión, calidad, mantenimiento y control de producción.</p>
+<div style="overflow-x: auto; margin-bottom: 25px;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 11px; color: var(--text-main); text-align: center;">
+        <thead><tr style="background-color: rgba(76, 175, 80, 0.1); color: #4caf50;"><th style="padding: 8px; border: 1px solid var(--border-node); text-align: left;">KPI</th><th style="padding: 8px; border: 1px solid var(--border-node);">Situación actual</th><th style="padding: 8px; border: 1px solid var(--border-node);">Situación proyectada</th><th style="padding: 8px; border: 1px solid var(--border-node);">Valor generado</th></tr></thead>
+        <tbody>
+            <tr><td style="padding: 8px; border: 1px solid var(--border-node); text-align: left;"><strong>OEE</strong></td><td style="padding: 8px; border: 1px solid var(--border-node);">72 %</td><td style="padding: 8px; border: 1px solid var(--border-node);">80 %</td><td style="padding: 8px; border: 1px solid var(--border-node);">Mejor aprovechamiento de equipos</td></tr>
+            <tr><td style="padding: 8px; border: 1px solid var(--border-node); text-align: left;"><strong>Capacidad efectiva</strong></td><td style="padding: 8px; border: 1px solid var(--border-node);">6.676.800 botellas/año</td><td style="padding: 8px; border: 1px solid var(--border-node);">7.418.667 botellas/año</td><td style="padding: 8px; border: 1px solid var(--border-node);">+741.867 botellas/año</td></tr>
+            <tr><td style="padding: 8px; border: 1px solid var(--border-node); text-align: left;"><strong>Disponibilidad</strong></td><td style="padding: 8px; border: 1px solid var(--border-node);">78,26 %</td><td style="padding: 8px; border: 1px solid var(--border-node);">85,22 %</td><td style="padding: 8px; border: 1px solid var(--border-node);">Menor impacto de paradas</td></tr>
+            <tr><td style="padding: 8px; border: 1px solid var(--border-node); text-align: left;"><strong>Paradas no planificadas</strong></td><td style="padding: 8px; border: 1px solid var(--border-node);">504 h/año</td><td style="padding: 8px; border: 1px solid var(--border-node);">343 h/año</td><td style="padding: 8px; border: 1px solid var(--border-node);">−161 h/año</td></tr>
+            <tr><td style="padding: 8px; border: 1px solid var(--border-node); text-align: left;"><strong>Tasa de rechazo</strong></td><td style="padding: 8px; border: 1px solid var(--border-node);">7 %</td><td style="padding: 8px; border: 1px solid var(--border-node);">6 %</td><td style="padding: 8px; border: 1px solid var(--border-node);">61.000 rechazos evitados/año</td></tr>
+            <tr><td style="padding: 8px; border: 1px solid var(--border-node); text-align: left;"><strong>Registro operativo</strong></td><td style="padding: 8px; border: 1px solid var(--border-node);">Parcial o manual</td><td style="padding: 8px; border: 1px solid var(--border-node);">Automático mediante PLC y SCADA</td><td style="padding: 8px; border: 1px solid var(--border-node);">Trazabilidad y decisiones basadas en datos</td></tr>
+        </tbody>
+    </table>
+</div>
+<div style="background-color: rgba(255, 193, 7, 0.07); padding: 11px; border-left: 3px solid #ffc107; font-size: 11px; color: var(--text-main); margin-bottom: 25px;"><strong style="color: #ffc107;">Nota:</strong> Los KPI son objetivos del proyecto y deberán validarse mediante pruebas FAT, SAT y seguimiento posterior. El beneficio laboral y de SST estimado en $24,4 millones/año requiere verificación con registros de nómina, ARL, ausentismo y producción.</div>
+
+<h4 style="color: var(--text-main); font-size: 14px;">6.4. Diferencial de Nexum para este proyecto</h4>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 25px;">
+    <div style="background: rgba(33, 150, 243, 0.05); border: 1px solid var(--border-node); border-radius: 6px; padding: 14px;"><strong style="color: #2196f3; font-size: 12px;">Integrador único</strong><p style="font-size: 11px; line-height: 1.55; color: #888; margin: 7px 0 0;">Responsabilidad centralizada sobre mecánica, control, robótica, SCADA y seguridad.</p></div>
+    <div style="background: rgba(76, 175, 80, 0.05); border: 1px solid var(--border-node); border-radius: 6px; padding: 14px;"><strong style="color: #4caf50; font-size: 12px;">Menor riesgo técnico</strong><p style="font-size: 11px; line-height: 1.55; color: #888; margin: 7px 0 0;">Validación anticipada de trayectorias, secuencias, capacidad y comunicaciones.</p></div>
+    <div style="background: rgba(156, 39, 176, 0.05); border: 1px solid var(--border-node); border-radius: 6px; padding: 14px;"><strong style="color: #9c27b0; font-size: 12px;">Arquitectura escalable</strong><p style="font-size: 11px; line-height: 1.55; color: #888; margin: 7px 0 0;">Admite nuevos productos, recetas, sensores, patrones, indicadores y futuras conexiones MES o Power BI.</p></div>
+    <div style="background: rgba(255, 152, 0, 0.05); border: 1px solid var(--border-node); border-radius: 6px; padding: 14px;"><strong style="color: #ff9800; font-size: 12px;">Ciclo de vida completo</strong><p style="font-size: 11px; line-height: 1.55; color: #888; margin: 7px 0 0;">Diagnóstico, diseño, simulación, programación, FAT, SAT, capacitación, documentación y soporte.</p></div>
+</div>
+
+<h4 style="color: var(--text-main); font-size: 14px;">6.5. Propuesta de valor general de Nexum</h4>
+<p class="panel-text" style="font-size: 13px;">Nexum convierte necesidades productivas en soluciones industriales modulares, seguras, medibles y escalables. Su propuesta no consiste solamente en instalar tecnología, sino en diagnosticar pérdidas, reducir riesgos, integrar datos y acompañar al cliente hasta lograr una operación estable.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-bottom: 25px;">
+    <div style="border: 1px solid var(--border-node); border-radius: 6px; padding: 12px; text-align: center;"><div style="font-size: 18px;">📈</div><strong style="font-size: 11px; color: var(--text-main);">Productividad medible</strong></div>
+    <div style="border: 1px solid var(--border-node); border-radius: 6px; padding: 12px; text-align: center;"><div style="font-size: 18px;">🧩</div><strong style="font-size: 11px; color: var(--text-main);">Automatización modular</strong></div>
+    <div style="border: 1px solid var(--border-node); border-radius: 6px; padding: 12px; text-align: center;"><div style="font-size: 18px;">📊</div><strong style="font-size: 11px; color: var(--text-main);">Sensórica y datos</strong></div>
+    <div style="border: 1px solid var(--border-node); border-radius: 6px; padding: 12px; text-align: center;"><div style="font-size: 18px;">🖥️</div><strong style="font-size: 11px; color: var(--text-main);">Simulación previa</strong></div>
+    <div style="border: 1px solid var(--border-node); border-radius: 6px; padding: 12px; text-align: center;"><div style="font-size: 18px;">🛡️</div><strong style="font-size: 11px; color: var(--text-main);">Seguridad y ergonomía</strong></div>
+    <div style="border: 1px solid var(--border-node); border-radius: 6px; padding: 12px; text-align: center;"><div style="font-size: 18px;">🤝</div><strong style="font-size: 11px; color: var(--text-main);">Acompañamiento integral</strong></div>
+</div>
+
+<div style="text-align: center; margin-top: 30px; border-top: 1px solid var(--border-node); padding-top: 20px;">
+    <p style="margin-bottom: 14px; font-size: 12px; color: #888;"><em>Consulte el documento para revisar la argumentación completa y las tablas detalladas de KPI y diferenciales.</em></p>
+    <a href="docs/modulo3/Propuesta de Valor Automatización linea Quatro 1.5L.docx" target="_blank" style="display: inline-block; padding: 10px 20px; font-size: 13px; background-color: rgba(255, 193, 7, 0.12); color: #ffc107; text-decoration: none; border: 1px solid #ffc107; border-radius: 4px; font-weight: bold; transition: all 0.3s;">📄 Abrir propuesta de valor completa (.docx)</a>
+</div>
+
+<!-- Contenido anterior reemplazado
+<h3 class="panel-subtitle" style="margin-top: 50px; border-bottom: 1px solid var(--border-node); padding-bottom: 5px; color: #ffc107;">🏆 6. Propuesta de valor y económica — Línea Quatro 1,5 L</h3>
+
+<div style="background-color: rgba(255, 193, 7, 0.07); padding: 14px; border-left: 3px solid #ffc107; border-radius: 4px; margin: 18px 0 25px; color: var(--text-main);">
+    <strong style="color: #ffc107;">Propuesta central:</strong> Nexum Automation transforma el empacado y paletizado de Quatro 1,5 L en un proceso automático, seguro y medible, aumentando la capacidad efectiva y reduciendo pérdidas operativas con una solución integrada de ingeniería, control y robótica.
+</div>
+
+<h4 style="color: var(--text-main); font-size: 14px; margin-top: 20px;">6.1. Valor generado para la operación</h4>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 15px; margin-bottom: 25px;">
+    <div style="background: rgba(33, 150, 243, 0.06); border: 1px solid var(--border-node); border-radius: 6px; padding: 15px; border-left: 3px solid #2196f3;">
+        <h5 style="margin: 0 0 8px; color: #2196f3; font-size: 13px;">📈 Productividad</h5>
+        <div style="font-size: 18px; font-weight: bold; color: var(--text-main);">OEE: 72 % → 80 %</div>
+        <p style="font-size: 11px; margin: 8px 0 0; color: #888;">Hasta 741.867 botellas/año adicionales de capacidad efectiva.</p>
+    </div>
+    <div style="background: rgba(76, 175, 80, 0.06); border: 1px solid var(--border-node); border-radius: 6px; padding: 15px; border-left: 3px solid #4caf50;">
+        <h5 style="margin: 0 0 8px; color: #4caf50; font-size: 13px;">✅ Calidad</h5>
+        <div style="font-size: 18px; font-weight: bold; color: var(--text-main);">Rechazo: 7 % → 6 %</div>
+        <p style="font-size: 11px; margin: 8px 0 0; color: #888;">Reducción estimada de 61.000 botellas rechazadas por año.</p>
+    </div>
+    <div style="background: rgba(156, 39, 176, 0.06); border: 1px solid var(--border-node); border-radius: 6px; padding: 15px; border-left: 3px solid #9c27b0;">
+        <h5 style="margin: 0 0 8px; color: #9c27b0; font-size: 13px;">🛡️ Seguridad y continuidad</h5>
+        <div style="font-size: 18px; font-weight: bold; color: var(--text-main);">Menor exposición manual</div>
+        <p style="font-size: 11px; margin: 8px 0 0; color: #888;">Automatización de tareas repetitivas y beneficios laborales estimados en $24,4 millones/año.</p>
+    </div>
+</div>
+
+<h4 style="color: var(--text-main); font-size: 14px;">6.2. Solución y diferenciadores</h4>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; margin-bottom: 25px;">
+    <div style="background: rgba(142, 142, 147, 0.03); border: 1px solid var(--border-node); border-radius: 6px; padding: 15px;">
+        <h5 style="margin: 0 0 10px; color: var(--nexum-blue); font-size: 13px;">⚙️ Alcance integrado</h5>
+        <p style="font-size: 12px; line-height: 1.6; margin: 0; color: var(--text-main);">Formación de packs, túnel térmico, celda robotizada, transporte de pallets, control, sensórica y seguridad industrial.</p>
+    </div>
+    <div style="background: rgba(142, 142, 147, 0.03); border: 1px solid var(--border-node); border-radius: 6px; padding: 15px;">
+        <h5 style="margin: 0 0 10px; color: var(--nexum-blue); font-size: 13px;">🧩 Integración de punta a punta</h5>
+        <p style="font-size: 12px; line-height: 1.6; margin: 0; color: var(--text-main);">Una sola propuesta reúne diseño, suministro, programación, instalación, pruebas, capacitación y puesta en marcha.</p>
+    </div>
+    <div style="background: rgba(142, 142, 147, 0.03); border: 1px solid var(--border-node); border-radius: 6px; padding: 15px;">
+        <h5 style="margin: 0 0 10px; color: var(--nexum-blue); font-size: 13px;">📊 Decisión sustentada</h5>
+        <p style="font-size: 12px; line-height: 1.6; margin: 0; color: var(--text-main);">La inversión se respalda con indicadores de productividad, calidad, flujo de caja y recuperación económica.</p>
+    </div>
+</div>
+
+<h4 style="color: var(--text-main); font-size: 14px;">6.3. Resumen económico</h4>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 12px; margin-bottom: 25px;">
+    <div style="background: rgba(255, 193, 7, 0.07); border: 1px solid var(--border-node); border-radius: 6px; padding: 14px; text-align: center;"><div style="font-size: 11px; color: #888;">Inversión estimada</div><div style="font-size: 15px; color: #ffc107; font-weight: bold; margin-top: 6px;">$ 1.224.597.310</div></div>
+    <div style="background: rgba(76, 175, 80, 0.07); border: 1px solid var(--border-node); border-radius: 6px; padding: 14px; text-align: center;"><div style="font-size: 11px; color: #888;">VPN</div><div style="font-size: 15px; color: #4caf50; font-weight: bold; margin-top: 6px;">$ 797.768.473</div></div>
+    <div style="background: rgba(76, 175, 80, 0.07); border: 1px solid var(--border-node); border-radius: 6px; padding: 14px; text-align: center;"><div style="font-size: 11px; color: #888;">TIR</div><div style="font-size: 15px; color: #4caf50; font-weight: bold; margin-top: 6px;">37,64 % EA</div></div>
+    <div style="background: rgba(33, 150, 243, 0.07); border: 1px solid var(--border-node); border-radius: 6px; padding: 14px; text-align: center;"><div style="font-size: 11px; color: #888;">Payback descontado</div><div style="font-size: 15px; color: #2196f3; font-weight: bold; margin-top: 6px;">2,80 años</div></div>
+    <div style="background: rgba(156, 39, 176, 0.07); border: 1px solid var(--border-node); border-radius: 6px; padding: 14px; text-align: center;"><div style="font-size: 11px; color: #888;">ROI acumulado</div><div style="font-size: 15px; color: #9c27b0; font-weight: bold; margin-top: 6px;">144,21 %</div></div>
+    <div style="background: rgba(156, 39, 176, 0.07); border: 1px solid var(--border-node); border-radius: 6px; padding: 14px; text-align: center;"><div style="font-size: 11px; color: #888;">Beneficio / costo</div><div style="font-size: 15px; color: #9c27b0; font-weight: bold; margin-top: 6px;">2,02 veces</div></div>
+</div>
+
+<div style="overflow-x: auto; margin-bottom: 25px;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 12px; color: var(--text-main);">
+        <thead>
+            <tr style="background-color: rgba(255, 193, 7, 0.08); color: #ffc107;">
+                <th style="padding: 9px; border: 1px solid var(--border-node); text-align: left;">Condición principal</th>
+                <th style="padding: 9px; border: 1px solid var(--border-node); text-align: left;">Propuesta</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td style="padding: 8px; border: 1px solid var(--border-node);">Oferente</td><td style="padding: 8px; border: 1px solid var(--border-node);">Nexum Automation</td></tr>
+            <tr><td style="padding: 8px; border: 1px solid var(--border-node);">Plazo estimado</td><td style="padding: 8px; border: 1px solid var(--border-node);">16 a 24 semanas</td></tr>
+            <tr><td style="padding: 8px; border: 1px solid var(--border-node);">Vigencia de la oferta</td><td style="padding: 8px; border: 1px solid var(--border-node);">30 días</td></tr>
+            <tr><td style="padding: 8px; border: 1px solid var(--border-node);">Precio</td><td style="padding: 8px; border: 1px solid var(--border-node);">Estimado antes de definir el tratamiento final del IVA</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<div style="background-color: rgba(76, 175, 80, 0.05); padding: 12px; border-left: 3px solid #4caf50; font-size: 12px; color: var(--text-main);">
+    <strong style="color: #4caf50;">Resultado:</strong> La propuesta combina mejora operativa y rentabilidad. Bajo los supuestos del escenario base, el proyecto es viable porque genera un VPN positivo, supera la tasa de descuento del 14 % y recupera la inversión dentro del horizonte evaluado.
+</div>
+-->
         </div>
     </div>
 </div>
