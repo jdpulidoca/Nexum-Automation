@@ -1182,8 +1182,53 @@ body.dark-mode #modulo7-scada .demo-process img,
         M04:{name:'Inspeccionadora',alarm:'Rechazo detenido (demostración)',prio:3,rate:4,acts:['Banda transportadora','Pusher de rechazo'],sens:['Botella presente','Inspección conforme','Rechazo activo']},
         M05:{name:'Empaquetadora',alarm:'Cuchillas no responden',prio:2,rate:2,acts:['Banda transportadora','Placa de freno','Barreras guía','Caja apiladora','Cuchillas','Brazo de celofán'],sens:['Entrada de botellas','Pack formado','Salida de paquete']}
     };
-    var ids=Object.keys(defs), state={}, alarms=[], events=[], activeView='general', selected='M01', started=Date.now();
-    function init(){ids.forEach(function(id){state[id]={mode:'stop',count:0,fault:false};});alarms=[];events=[];started=Date.now();log('SISTEMA','—','Demostración inicializada');render();}
+    if (typeof window.__nexumScadaCleanup === 'function') {
+        window.__nexumScadaCleanup();
+    }
+
+    var ids=Object.keys(defs),
+        state={},
+        alarms=[],
+        events=[],
+        activeView='general',
+        selected='M01',
+        started=Date.now(),
+        scadaTimer=null,
+        destroyed=false;
+
+    function getScadaRoot(){
+        return document.getElementById('modulo7-scada');
+    }
+
+    function byId(id){
+        var root=getScadaRoot();
+        return root ? root.querySelector('#'+id) : null;
+    }
+
+    window.__nexumScadaCleanup=function(){
+        destroyed=true;
+        if(scadaTimer!==null){
+            clearInterval(scadaTimer);
+            scadaTimer=null;
+        }
+        window.__nexumScadaCleanup=null;
+    };
+    function init(){
+        ids.forEach(function(id){
+            state[id]={mode:'stop',count:0,fault:false};
+        });
+        alarms=[];
+        events=[];
+        activeView='general';
+        selected='M01';
+        started=Date.now();
+
+        var select=byId('demoMachineSelect');
+        if(select)select.value='M01';
+
+        log('SISTEMA','—','Demostración inicializada');
+        render();
+    }
     function now(){return new Date().toLocaleTimeString('es-CO',{hour12:false});}
     function log(type,id,detail){events.unshift({time:now(),type:type,id:id,detail:detail});events=events.slice(0,40);}
     function modeText(m){return m==='run'?'EN MARCHA':m==='pause'?'PAUSADA':'DETENIDA';}
@@ -1264,8 +1309,26 @@ body.dark-mode #modulo7-scada .demo-process img,
         else setMode(document.getElementById('demoMachineSelect').value,'stop');
     };
     document.getElementById('demoFail').onclick=function(){fail(document.getElementById('demoMachineSelect').value);};
-    document.getElementById('demoAck').onclick=ack;document.getElementById('demoReset').onclick=function(){clearFaults();init();showView('general');};
-    setInterval(function(){document.getElementById('demoClock').textContent=now();ids.forEach(function(id){var s=state[id];if(s.mode==='run'&&!s.fault)s.count+=defs[id].rate;});render();},1000);
+    document.getElementById('demoAck').onclick=ack;document.getElementById('demoReset').onclick=function(){init();showView('general');};
+    scadaTimer=setInterval(function(){
+        if(destroyed || !getScadaRoot()){
+            if(scadaTimer!==null){
+                clearInterval(scadaTimer);
+                scadaTimer=null;
+            }
+            return;
+        }
+
+        var clock=byId('demoClock');
+        if(clock)clock.textContent=now();
+
+        ids.forEach(function(id){
+            var s=state[id];
+            if(s.mode==='run'&&!s.fault)s.count+=defs[id].rate;
+        });
+
+        render();
+    },1000);
     init();
     showView('general');
     })();
@@ -1346,4 +1409,44 @@ body.dark-mode #modulo7-scada .demo-process img,
     }
     requestAnimationFrame(draw);
 })();
+
+document.querySelectorAll('#demoNav button').forEach(function (button) {
+    button.onclick = function () {
+        showView(button.dataset.view);
+    };
+});
+
+const demoMachineSelect = document.getElementById('demoMachineSelect');
+
+demoMachineSelect.addEventListener('change', function () {
+    selected = this.value;
+    showView(selected);
+});
+
+document.getElementById('demoRun').onclick = function () {
+    if (activeView === 'general') {
+        setAllModes('run');
+    } else {
+        setMode(demoMachineSelect.value, 'run');
+    }
+};
+
+document.getElementById('demoStop').onclick = function () {
+    if (activeView === 'general') {
+        setAllModes('stop');
+    } else {
+        setMode(demoMachineSelect.value, 'stop');
+    }
+};
+
+document.getElementById('demoFail').onclick = function () {
+    fail(demoMachineSelect.value);
+};
+
+document.getElementById('demoAck').onclick = ack;
+
+document.getElementById('demoReset').onclick = function () {
+    init();
+    showView('general');
+};
 </script></div>

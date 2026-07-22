@@ -296,6 +296,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 panel.classList.add('panel-left');
             }
 
+            // Detiene cualquier instancia anterior del SCADA
+            if (typeof window.__nexumScadaCleanup === 'function') {
+                window.__nexumScadaCleanup();
+            }
+
             // Muestra un estado de carga mientras trae el archivo
             panelContainer.innerHTML = '<p style="padding: 20px; text-align: center; color: #666;">Cargando información...</p>';
             panel.classList.add('open');
