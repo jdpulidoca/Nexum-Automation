@@ -6,6 +6,7 @@
     }
     .team-lines { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
     .team-line { stroke: var(--axon-base); stroke-width: 1.5; stroke-dasharray: 4 6; }
+    .team-line-cross { stroke: var(--axon-base); stroke-width: 1; stroke-dasharray: 2 5; opacity: 0.5; }
     .team-ghost { position: absolute; border-radius: 50%; background: var(--nexum-purple); opacity: 0.35; }
 
     /* ===== NODO CENTRAL — SOLO LA FOTO, GRANDE ===== */
@@ -26,7 +27,7 @@
         backdrop-filter: blur(10px); box-shadow: 0 0 30px rgba(14, 165, 233, 0.12);
         overflow: hidden;
     }
-    .team-center-front svg { width: 62%; height: 62%; opacity: 0.9; }
+    .team-center-front svg { width: 62%; height: 62%; opacity: 0.9; transition: transform 0.1s ease-out; }
     .team-center-back { transform: rotateY(180deg); border-color: var(--nexum-cyan); padding: 0; transition: transform 0.35s ease, opacity 0.35s ease; }
     .team-center-back img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block; }
 
@@ -88,7 +89,7 @@
         background: #c0392b; padding: 2px 7px; border-radius: 3px; margin-bottom: 6px; display: inline-block;
     }
 
-    @media (max-width: 700px) { .team-network { height: 720px; } }
+    @media (max-width: 700px) { .team-network { height: 900px; } }
 </style>
 
 <h2 class="panel-title" style="text-align: center;">Equipo Consultor</h2>
@@ -109,23 +110,28 @@
 
 <div class="team-network" id="team-network">
     <svg class="team-lines" viewBox="0 0 820 480" preserveAspectRatio="none">
-        <line x1="385" y1="230" x2="130" y2="210" class="team-line" />
-        <line x1="385" y1="230" x2="240" y2="380" class="team-line" />
-        <line x1="385" y1="230" x2="625" y2="100" class="team-line" />
-        <line x1="385" y1="230" x2="565" y2="360" class="team-line" />
-        <line x1="385" y1="230" x2="700" y2="240" class="team-line" />
-        <line x1="385" y1="230" x2="355" y2="65" class="team-line" />
+        <!-- Radios desde el centro -->
+        <line x1="385" y1="230" x2="120" y2="60"  class="team-line" />
+        <line x1="385" y1="230" x2="100" y2="420" class="team-line" />
+        <line x1="385" y1="230" x2="90"  y2="250" class="team-line" />
+        <line x1="385" y1="230" x2="690" y2="65"  class="team-line" />
+        <line x1="385" y1="230" x2="670" y2="410" class="team-line" />
+        <line x1="385" y1="230" x2="720" y2="240" class="team-line" />
+        <!-- Conexiones cruzadas entre satélites: rompe el look de "una sola rueda" -->
+        <line x1="120" y1="60"  x2="90"  y2="250" class="team-line-cross" />
+        <line x1="690" y1="65"  x2="720" y2="240" class="team-line-cross" />
+        <line x1="100" y1="420" x2="670" y2="410" class="team-line-cross" />
     </svg>
 
-    <div class="team-ghost" style="width: 6px; height: 6px; top: 15%; left: 45%;"></div>
-    <div class="team-ghost" style="width: 9px; height: 9px; top: 78%; left: 60%;"></div>
-    <div class="team-ghost" style="width: 5px; height: 5px; top: 45%; left: 80%;"></div>
+    <div class="team-ghost" style="width: 6px; height: 6px; top: 10%; left: 40%;"></div>
+    <div class="team-ghost" style="width: 9px; height: 9px; top: 85%; left: 55%;"></div>
+    <div class="team-ghost" style="width: 5px; height: 5px; top: 40%; left: 60%;"></div>
 
-    <!-- NODO CENTRAL: SOLO FOTO -->
+    <!-- NODO CENTRAL: SOLO FOTO (con efecto de ojo, igual al n-center del hub principal) -->
     <div class="team-center" id="team-center">
         <div class="team-center-inner">
             <div class="team-center-front">
-                <svg viewBox="0 0 400 400" width="100%" height="100%">
+                <svg id="team-eye" viewBox="0 0 400 400" width="100%" height="100%">
                     <polygon class="contorno-hexagono" points="200,60 321,130 321,270 200,340 79,270 79,130" />
                     <g class="lineas-estructurales"><line x1="79" y1="185" x2="104" y2="185" /><line x1="79" y1="215" x2="104" y2="215" /><line x1="321" y1="185" x2="296" y2="185" /><line x1="321" y1="215" x2="296" y2="215" /></g>
                     <polygon class="hexagono-punteado" points="200,110 285,159 285,241 200,290 115,241 115,159" />
@@ -145,7 +151,7 @@
     <!-- NODOS SATÉLITE -->
     <div class="team-node" data-name="Ariadna Contreras Nossa" data-role="Gerente Ejecutiva" data-color="var(--nexum-blue)"
          data-photo="assets/img/equipo/Ariadna.png"
-         style="top: 20px; left: 335px;">
+         style="top: 20px; left: 80px;">
         <div class="team-node-icon" style="border-color: var(--nexum-blue);">🎯</div>
         <div class="team-node-tag">Gerente Ejecutiva</div>
         <div class="team-idcard" style="border-color: var(--nexum-blue);">
@@ -158,7 +164,7 @@
 
     <div class="team-node" data-name="Johan Camilo Patiño Mogollón" data-role="Gerente de Proyectos y Relaciones" data-color="var(--nexum-cyan)"
          data-photo="assets/img/equipo/Camilo.jpeg"
-         style="top: 165px; left: 30px;">
+         style="top: 380px; left: 60px;">
         <div class="team-node-icon" style="border-color: var(--nexum-cyan);">🗂️</div>
         <div class="team-node-tag">Gerente de Proyectos</div>
         <div class="team-idcard" style="border-color: var(--nexum-cyan);">
@@ -171,7 +177,7 @@
 
     <div class="team-node" data-name="Esteban Durán Jiménez" data-role="Líder de Diseño" data-color="var(--nexum-purple)"
          data-photo="assets/img/equipo/Esteban.png"
-         style="top: 340px; left: 160px;">
+         style="top: 210px; left: 50px;">
         <div class="team-node-icon" style="border-color: var(--nexum-purple);">📐</div>
         <div class="team-node-tag">Líder de Diseño</div>
         <div class="team-idcard" style="border-color: var(--nexum-purple);">
@@ -184,7 +190,7 @@
 
     <div class="team-node" data-ex="true" data-name="Juliana Góngora Rasmussen" data-role="Líder de Diseño" data-color="#c0392b"
          data-photo="assets/img/equipo/JulianaGR.png"
-         style="top: 45px; left: 615px;">
+         style="top: 25px; left: 650px;">
         <div class="team-node-icon" style="border-color: #c0392b; opacity: 0.85;">🎨</div>
         <div class="team-node-tag" style="color: #c0392b;">Ex-Líder de Diseño</div>
         <div class="team-idcard" style="border-color: #c0392b;">
@@ -198,7 +204,7 @@
 
     <div class="team-node" data-name="Julián David Pulido Castañeda" data-role="Gerente de Automatización" data-color="var(--nexum-amber)"
          data-photo="assets/img/equipo/JuliPulido.jpeg"
-         style="top: 330px; left: 555px;">
+         style="top: 370px; left: 630px;">
         <div class="team-node-icon" style="border-color: var(--nexum-amber);">⚙️</div>
         <div class="team-node-tag">Gerente de Automatización</div>
         <div class="team-idcard" style="border-color: var(--nexum-amber);">
@@ -211,7 +217,7 @@
 
     <div class="team-node" data-name="Oscar Jhondairo Siabato León" data-role="Gerente Financiero" data-color="#4caf50"
          data-photo="assets/img/equipo/Oscar.jpeg"
-         style="top: 220px; left: 700px;">
+         style="top: 200px; left: 680px;">
         <div class="team-node-icon" style="border-color: #4caf50;">💹</div>
         <div class="team-node-tag">Gerente Financiero</div>
         <div class="team-idcard" style="border-color: #4caf50;">
@@ -231,9 +237,11 @@
     const nodes = network.querySelectorAll('.team-node');
     const center = document.getElementById('team-center');
     const centerBack = document.getElementById('team-center-back');
+    const eye = document.getElementById('team-eye');
     const hint = document.getElementById('team-center-hint');
     const influenceRadius = 110;
     const maxDisplacement = 12;
+    const eyeRadius = 9;
 
     function setPhoto(d) {
         centerBack.innerHTML = '<img src="' + d.photo + '" alt="' + d.name + '">';
@@ -248,9 +256,8 @@
         node.style.transform = 'translate(0px, 0px)';
 
         if (alreadyFlipped) {
-            // Ya había alguien mostrándose: reproducir el mini-flip al cambiar directo
             centerBack.classList.remove('swap');
-            void centerBack.offsetWidth; // fuerza reflow para poder re-disparar la animación
+            void centerBack.offsetWidth;
             centerBack.classList.add('swap');
             setTimeout(() => setPhoto(d), 200);
         } else {
@@ -279,8 +286,8 @@
         }
     });
 
-    // Movimiento real hacia el cursor (no solo brillo), igual que el resto del sitio
     network.addEventListener('mousemove', (e) => {
+        // Movimiento real hacia el cursor para cada nodo satélite
         nodes.forEach(node => {
             if (node.classList.contains('selected')) return;
             const r = node.getBoundingClientRect();
@@ -304,7 +311,19 @@
                 node.classList.remove('near');
             }
         });
+
+        // Efecto de ojo: el logo central sigue al cursor, igual que n-center en el hub principal
+        if (!center.classList.contains('flipped')) {
+            const cRect = center.getBoundingClientRect();
+            const ecx = cRect.left + cRect.width / 2;
+            const ecy = cRect.top + cRect.height / 2;
+            const edx = e.clientX - ecx;
+            const edy = e.clientY - ecy;
+            const eangle = Math.atan2(edy, edx);
+            eye.style.transform = `translate(${Math.cos(eangle) * eyeRadius}px, ${Math.sin(eangle) * eyeRadius}px)`;
+        }
     });
+
     network.addEventListener('mouseleave', () => {
         nodes.forEach(node => {
             if (node.classList.contains('selected')) return;
@@ -312,6 +331,8 @@
             node.style.transform = 'translate(0px, 0px)';
             node.classList.remove('near');
         });
+        eye.style.transition = 'transform 0.3s ease-out';
+        eye.style.transform = 'translate(0px, 0px)';
     });
 })();
 </script>
