@@ -39,14 +39,7 @@ modulo5/
 └── Readme.md
 ```
 
-> 📌 Solo los archivos de `ModelosPagina/` son referenciados directamente por `content/modulo5.html`.
 
 ## 🔧 Integración web
 
 Los modelos se visualizan mediante **`model-viewer` 3.5.0**, con rotación automática, control de cámara, iluminación y entorno neutro.
-
-Las rutas siguen el formato:
-
-```text
-docs/modulo5/ModelosPagina/[modelo].glb
-```
