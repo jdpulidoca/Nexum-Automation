@@ -24,7 +24,7 @@ Facultad de Ingeniería · Departamento de Ingeniería Mecánica y Mecatrónica 
 | Línea | Producto | Formato | Enfoque |
 |---|---|---:|---|
 | 🔋 Monster | Monster Energy | Lata de 473 ml | Reducción de microparos y enfoque *filler-centric*. |
-| 🥤 Quatro | Gaseosa Quatro | PET de 1,5 L | **Línea seleccionada:** automatización y paletizado robotizado. |
+| 🥤 Quatro | Gaseosa Quatro | PET de 2 L | **Línea seleccionada:** automatización y paletizado robotizado. |
 | 💧 Brisa | Agua Brisa | Garrafón de 20 L | Rediseño del layout y automatización del manejo de cargas. |
 
 La línea **Quatro** fue seleccionada como la alternativa más viable y constituye la base del gemelo digital, la celda robotizada y la evaluación económica desarrollada.
