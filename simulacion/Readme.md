@@ -1,11 +1,38 @@
-# Simulaciones de líneas de producción
+<div align="center">
 
-Esta carpeta contiene modelos preliminares desarrollados en **Tecnomatix Plant Simulation v23** para validar flujos, capacidades, tiempos de ciclo y posibles cuellos de botella.
+# 🏭 Simulaciones de producción
 
-## Modelos incluidos
+**Modelos digitales para análisis y optimización de líneas industriales**
 
-- **Monster:** línea de envasado de latas de 473 ml.
-- **Quatro:** comparación del proceso de botellas PET de 2 L antes y después de automatizar el final de línea.
-- **Brissa:** línea de garrafones de agua de 20 L, desde la recepción hasta el paletizado.
+`Tecnomatix Plant Simulation` · `Versión 23` · `3 líneas`
 
-Cada carpeta incluye el archivo de simulación (`.spp`) y material de apoyo, como imágenes del layout, videos y resultados del modelo.
+</div>
+
+---
+
+## 🎯 Propósito
+
+Esta carpeta contiene simulaciones preliminares desarrolladas para evaluar:
+
+- ⚙️ Flujo y capacidad de producción.
+- ⏱️ Tiempos de ciclo.
+- 🚧 Cuellos de botella.
+- 📈 Oportunidades de automatización y mejora.
+
+## 📂 Modelos disponibles
+
+| Carpeta | Línea simulada | Alcance |
+|---|---|---|
+| 🔋 `Monster/` | Latas Monster de 473 ml | Análisis del flujo y desempeño de la línea de envasado. |
+| 🥤 `Quatro/` | Botellas PET de 2 L | Comparación del proceso antes y después de automatizar el final de línea. |
+| 💧 `Brissa/` | Garrafones de agua de 20 L | Simulación desde la recepción hasta el paletizado. |
+
+## 🧩 Contenido
+
+Cada modelo puede incluir:
+
+- 💾 Archivo editable de simulación `.spp`
+- 🗺️ Imágenes del layout
+- 🎬 Videos de funcionamiento
+- 📊 Estadísticas y resultados del proceso
+
