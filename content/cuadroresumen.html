@@ -1,0 +1,57 @@
+<!-- Archivo: content/cuadroresumen.html -->
+<style>
+    .resumen-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin: 14px 0; }
+    .resumen-table th, .resumen-table td { border: 1px solid var(--border-node); padding: 8px 10px; text-align: left; }
+    .resumen-table th { background: rgba(76,175,80,0.08); color: #4caf50; font-weight: 700; }
+    .resumen-scope-badge { font-size: 9px; font-weight: 700; padding: 2px 8px; border-radius: 10px; text-transform: uppercase; }
+    .scope-yes-r { background: rgba(76,175,80,0.15); color: #4caf50; }
+    .scope-no-r { background: rgba(142,142,147,0.15); color: var(--text-muted); }
+    .resumen-module-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin: 16px 0; }
+    .resumen-module-card { border: 1px solid var(--border-node); border-radius: 6px; padding: 12px 14px; background: rgba(142,142,147,0.03); border-left: 3px solid #4caf50; }
+    .resumen-module-card strong { display: block; font-size: 13px; color: var(--text-main); margin-bottom: 4px; }
+    .resumen-module-card span { font-size: 11.5px; color: var(--text-muted); line-height: 1.4; }
+</style>
+
+<h2 class="panel-title" style="text-align: center;">📋 Cuadro Resumen del Proyecto</h2>
+<div class="panel-meta-strip">[ NEXUM AUTOMATION ] · [ APM 2026-1 ] · [ PUNTO DE PARTIDA ]</div>
+
+<p class="panel-text" style="margin-top: 0;"><strong>Nexum Automation</strong> es la consultora académica encargada de diagnosticar y proponer la automatización de tres líneas de producción de una planta embotelladora de Coca-Cola FEMSA. Este panel resume el alcance completo del proyecto — úsalo como punto de partida antes de explorar los módulos del hub.</p>
+
+<h3 class="panel-subtitle">Líneas evaluadas</h3>
+<table class="resumen-table">
+    <tr><th>Línea</th><th>Formato</th><th>Enfoque</th></tr>
+    <tr><td>🔋 Monster Energy</td><td>Lata 473 ml</td><td>Reducción de microparos</td></tr>
+    <tr style="background: rgba(76,175,80,0.05);"><td>🥤 <strong>Quatro</strong></td><td>PET 2 L</td><td><strong>Línea seleccionada</strong> — paletizado robotizado de fin de línea</td></tr>
+    <tr><td>💧 Agua Brisa</td><td>Garrafón 20 L</td><td>Rediseño de layout y paletizado</td></tr>
+</table>
+
+<h3 class="panel-subtitle">Alcance real (Pirámide de Automatización)</h3>
+<p class="panel-text" style="font-size: 13px;">
+    <span class="resumen-scope-badge scope-yes-r">Implementado</span> Nivel 0 (Campo) · Nivel 1 (PLC) · Nivel 2 (SCADA)<br>
+    <span class="resumen-scope-badge scope-no-r" style="margin-top: 6px; display: inline-block;">Fuera de alcance</span> Nivel 3 (MES) · Nivel 4 (ERP) — quedan solo como marco conceptual.
+</p>
+
+<h3 class="panel-subtitle">Módulos del hub</h3>
+<div class="resumen-module-grid">
+    <div class="resumen-module-card"><strong>1 · Propuesta e Industria 4.0</strong><span>ISA-95, arquitectura de comunicaciones, gemelo digital y KPIs, sensórica y actuadores.</span></div>
+    <div class="resumen-module-card"><strong>2 · Gestión de Producción</strong><span>VSM, DOP y layout por línea.</span></div>
+    <div class="resumen-module-card"><strong>3 · Evaluación de Proyectos</strong><span>Canvas, EDP/EDT, cronograma y análisis financiero.</span></div>
+    <div class="resumen-module-card"><strong>4 · Celda de Manufactura Robotizada</strong><span>Visor 3D, justificación económica e informe técnico.</span></div>
+    <div class="resumen-module-card"><strong>5 · Digital Twin</strong><span>Gemelo digital 3D de la línea y cada estación.</span></div>
+    <div class="resumen-module-card"><strong>6 · Controladores Industriales</strong><span>Grafcet general y por máquina, código Ladder.</span></div>
+    <div class="resumen-module-card"><strong>7 · Sistema SCADA</strong><span>Supervisión y control desarrollado en Node-RED.</span></div>
+    <div class="resumen-module-card"><strong>Simulación</strong><span>Tecnomatix Plant Simulation por línea.</span></div>
+</div>
+
+<h3 class="panel-subtitle">Equipo</h3>
+<table class="resumen-table">
+    <tr><th>Integrante</th><th>Rol</th></tr>
+    <tr><td>Ariadna Contreras Nossa</td><td>Gerente Ejecutiva</td></tr>
+    <tr><td>Johan Camilo Patiño Mogollón</td><td>Gerente de Proyectos y Relaciones</td></tr>
+    <tr><td>Esteban Durán Jiménez</td><td>Líder de Diseño</td></tr>
+    <tr><td>Juliana Góngora Rasmussen</td><td>Líder de Diseño</td></tr>
+    <tr><td>Oscar Jhondairo Siabato León</td><td>Gerente Financiero</td></tr>
+    <tr><td>Julián David Pulido Castañeda</td><td>Gerente de Automatización</td></tr>
+</table>
+
+<p class="panel-text" style="text-align: center; font-size: 11.5px; margin-top: 20px; opacity: 0.7;">Universidad Nacional de Colombia — Facultad de Ingeniería Mecánica y Mecatrónica, Sede Bogotá · Semestre 2026-I</p>

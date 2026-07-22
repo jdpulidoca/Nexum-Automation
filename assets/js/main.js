@@ -78,6 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
             registrarNodo('n-reflexiones', 'human', false, true);
             registrarNodo('bib-sector1', 'human', false, true);
 
+            // Nodo aparte de los 3 supernodos de sector: siempre visible, guía la navegación inicial
+            registrarNodo('n-resumen', 'summary', true, true);
+
             registrarNodo('n-propuesta', 'commercial', true, true);
             registrarNodo('n-propuesta-doc', 'commercial', false, true);
             registrarNodo('n-economia', 'commercial', false, true);

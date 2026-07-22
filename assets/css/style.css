@@ -123,6 +123,7 @@
         .node-hub-identity { width: 105px; height: 105px; box-shadow: var(--shadow-identity); border-color: rgba(58, 82, 179, 0.4); }
         .node-hub-commercial { width: 105px; height: 105px; box-shadow: var(--shadow-commercial); border-color: rgba(245, 158, 11, 0.4); }
         .node-hub-tech { width: 105px; height: 105px; box-shadow: var(--shadow-tech); border-color: rgba(139, 92, 246, 0.4); }
+        .node-hub-summary { width: 72px; height: 72px; box-shadow: 0 0 20px rgba(76, 175, 80, 0.25); border-color: rgba(76, 175, 80, 0.4); border-width: 2px; }
         .node-primary { width: 80px; height: 80px; }
         .node-support { width: 68px; height: 68px; }
         .node-satellite { width: 54px; height: 54px; border-style: dashed; }
@@ -130,11 +131,22 @@
         .node-hub-identity.near, .node-hub-identity.selected-hub { box-shadow: 0 0 35px rgba(14, 165, 233, 0.6), var(--shadow-identity); border-color: var(--nexum-cyan); }
         .node-hub-commercial.near, .node-hub-commercial.selected-hub { box-shadow: 0 0 35px rgba(245, 158, 11, 0.6), var(--shadow-commercial); border-color: var(--nexum-amber); }
         .node-hub-tech.near, .node-hub-tech.selected-hub { box-shadow: 0 0 35px rgba(139, 92, 246, 0.6), var(--shadow-tech); border-color: var(--nexum-purple); }
+        .node-hub-summary.near, .node-hub-summary.selected-hub { box-shadow: 0 0 35px rgba(76, 175, 80, 0.6); border-color: #4caf50; }
 
         .node-icon { font-size: 19px; transition: transform 0.3s; z-index: 2; }
         .node-primary .node-icon { font-size: 21px; }
         .node-hub-identity .node-icon, .node-hub-commercial .node-icon, .node-hub-tech .node-icon { font-size: 26px; }
+        .node-hub-summary .node-icon { font-size: 20px; }
         .node-satellite .node-icon { font-size: 15px; opacity: 0.8; }
+
+        /* NODO "CUADRO RESUMEN" — parpadeo de bienvenida hasta que se abre por primera vez.
+           Nota: solo box-shadow/border-color, NUNCA transform aquí — main.js ya controla
+           transform de este nodo cuadro a cuadro (proximidad al mouse) y lo pisaría. */
+        @keyframes blinkAttention {
+            0%, 100% { box-shadow: 0 0 10px 2px rgba(76, 175, 80, 0.25); border-color: rgba(76, 175, 80, 0.35); }
+            50% { box-shadow: 0 0 34px 16px rgba(76, 175, 80, 0.9), 0 0 0 5px rgba(76, 175, 80, 0.55); border-color: #2e7d32; }
+        }
+        .node-hub-summary.blink-attention { animation: blinkAttention 1.1s ease-in-out infinite; border-width: 3px; }
 
         /* LOGO INTERACTIVO VECTORIAL KINÉTICO (Ojo central del HUD) */
         .logo-pupil { width: 66px; height: 66px; display: flex; justify-content: center; align-items: center; z-index: 2; will-change: transform; }
@@ -185,8 +197,12 @@
         input:checked + .slider { background-color: var(--nexum-blue); }
         input:checked + .slider:before { transform: translateX(24px); }
 
+        .hud-global-btn-row {
+            position: absolute; bottom: 45px; left: 15px; z-index: 100;
+            display: flex; gap: 10px; flex-wrap: wrap;
+        }
         .hud-global-ref-btn {
-            position: absolute; bottom: 15px; left: 15px; z-index: 100;
+            position: static;
             background: transparent; border: 1px dashed var(--text-muted); color: var(--text-muted);
             font-family: monospace; font-size: 10px; padding: 6px 12px; border-radius: 4px; cursor: pointer; letter-spacing: 1px; transition: all 0.3s;
         }

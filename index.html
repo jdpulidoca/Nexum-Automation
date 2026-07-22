@@ -69,12 +69,25 @@
         </label>
     </div>
     
-    <!-- Botón Global (También configurado para abrir un archivo llamado bib-general.html) -->
-    <button class="hud-global-ref-btn" onclick="cargarContenidoPanel('bib-general', event)">[ ACCESS_ALL_REFERENCES ]</button>
+    <!-- Botones Globales (Referencias y Repositorio) -->
+    <div class="hud-global-btn-row">
+        <button class="hud-global-ref-btn" onclick="cargarContenidoPanel('bib-general', event)">[ ACCESS_ALL_REFERENCES ]</button>
+        <button class="hud-global-ref-btn" onclick="window.open('https://github.com/jdpulidoca/Nexum-Automation', '_blank')">[ VER_REPOSITORIO_GITHUB ]</button>
+    </div>
 
    <div class="neural-container" id="space-container">
         
         <svg class="synaptic-space" id="canvas-synapses"></svg>
+
+        <!-- ========================================== -->
+        <!-- NODO INDEPENDIENTE: CUADRO RESUMEN         -->
+        <!-- Parpadea al iniciar para guiar la navegación; deja de parpadear al abrirse -->
+        <!-- ========================================== -->
+
+        <a href="#" id="n-resumen" class="node node-hub-summary blink-attention" style="top: 0px; left: 495px;"
+           onclick="document.getElementById('n-resumen').classList.remove('blink-attention'); cargarContenidoPanel('cuadroresumen', event);">
+            <span class="node-icon">📋</span><span class="node-label" style="opacity: 1;">CUADRO RESUMEN</span>
+        </a>
 
         <!-- ========================================== -->
         <!-- SECTOR 1: HUMAN CORE & METHODOLOGY         -->
