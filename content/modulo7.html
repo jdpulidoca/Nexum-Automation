@@ -703,5 +703,44 @@
 
     document.querySelectorAll('section[id]').forEach(function (s) { obs.observe(s); });
     })();
+
+        /* =========================================================
+        SINCRONIZACIÓN SELECTOR ↔ VISTAS DE MÁQUINAS
+        ========================================================= */
+
+        const scadaRoot = document.getElementById("modulo7-scada");
+        const machineSelect = scadaRoot?.querySelector("#demoMachineSelect");
+
+        if (machineSelect && !machineSelect.dataset.initialized) {
+            machineSelect.dataset.initialized = "true";
+
+            machineSelect.addEventListener("change", function () {
+                const machineId = this.value;
+
+                const machineButton = scadaRoot.querySelector(
+                    `.demo-nav button[data-view="${machineId}"]`
+                );
+
+                if (machineButton) {
+                    machineButton.click();
+                }
+            });
+        }
+
+        const machineTabs = scadaRoot?.querySelectorAll(
+            '.demo-nav button[data-view^="M"]'
+        );
+
+        machineTabs?.forEach((button) => {
+            if (button.dataset.selectSyncInitialized) return;
+
+            button.dataset.selectSyncInitialized = "true";
+
+            button.addEventListener("click", function () {
+                if (machineSelect) {
+                    machineSelect.value = this.dataset.view;
+                }
+            });
+        });
     </script>
 </div>
