@@ -163,6 +163,7 @@
     .hub-vertical .hub-node:nth-of-type(4) { margin-left: 20px; }
     .hub-vertical .hub-node:nth-of-type(5) { margin-left: -5px; }
     .hub-vertical .hub-node:nth-of-type(6) { margin-left: 15px; }
+    .hub-vertical .hub-node:nth-of-type(7) { margin-left: -10px; }
 
     /* Textos convertidos en Tooltips emergentes */
     .hub-vertical .hub-text {
@@ -214,7 +215,8 @@
     #rad-m3-edt:checked ~ .tw-main-content #content-m3-edt,
     #rad-m3-crono:checked ~ .tw-main-content #content-m3-crono,
     #rad-m3-fin:checked ~ .tw-main-content #content-m3-fin,
-    #rad-m3-propuesta:checked ~ .tw-main-content #content-m3-propuesta { display: block; }
+    #rad-m3-propuesta:checked ~ .tw-main-content #content-m3-propuesta,
+    #rad-m3-economica:checked ~ .tw-main-content #content-m3-economica { display: block; }
     .m3-wrapper { display: flex; gap: 25px; align-items: flex-start; margin-top: 10px; }
     .m3-sidebar { width: 130px; flex-shrink: 0; min-height: 420px; position: sticky; top: 10px; }
     .m3-main { flex: 1; min-width: 0; }
@@ -243,6 +245,7 @@
     <input type="radio" id="rad-m3-crono" name="tw-tabs-m3" class="tw-radio">
     <input type="radio" id="rad-m3-fin" name="tw-tabs-m3" class="tw-radio">
     <input type="radio" id="rad-m3-propuesta" name="tw-tabs-m3" class="tw-radio">
+    <input type="radio" id="rad-m3-economica" name="tw-tabs-m3" class="tw-radio">
 
     <div class="constellation-hub hub-vertical m3-sidebar">
         <svg class="network-canvas"></svg>
@@ -274,6 +277,10 @@
             <label for="rad-m3-propuesta" class="hub-node parallax-el" data-speed="0.06">
                 <div class="hub-icon">🏆</div>
                 <div class="hub-text">Propuesta de valor</div>
+            </label>
+            <label for="rad-m3-economica" class="hub-node parallax-el" data-speed="0.08">
+                <div class="hub-icon">$</div>
+                <div class="hub-text">Propuesta Económica</div>
             </label>
         </div>
     </div>
@@ -876,6 +883,7 @@
 </div>
 -->
         </div>
+        <div id="content-m3-economica" class="tw-content"></div>
     </div>
 </div>
 
