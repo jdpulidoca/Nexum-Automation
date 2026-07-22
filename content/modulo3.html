@@ -337,6 +337,124 @@
 
         </div>
         <div id="content-m3-crono" class="tw-content">
+<style>
+    .phase-summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(205px, 1fr)); gap: 12px; margin: 18px 0 25px; }
+    .phase-summary-card { border: 1px solid var(--border-node); border-radius: 7px; padding: 13px; background: rgba(142,142,147,0.035); border-left: 3px solid var(--nexum-blue); }
+    .phase-summary-title { color: var(--nexum-blue); font-size: 12px; font-weight: 700; margin-bottom: 6px; }
+    .phase-summary-meta { color: var(--text-muted); font-size: 10px; line-height: 1.5; }
+    .phase-summary-owner { color: var(--text-main); font-size: 10px; line-height: 1.45; margin-top: 6px; }
+    .phase-detail { border: 1px solid var(--border-node); border-radius: 7px; margin-bottom: 10px; overflow: hidden; background: rgba(142,142,147,0.025); }
+    .phase-detail summary { cursor: pointer; padding: 12px 14px; color: var(--text-main); font-size: 12px; font-weight: 700; background: rgba(63,81,181,0.06); }
+    .phase-detail summary:hover { color: var(--nexum-cyan); }
+    .phase-table-wrap { overflow-x: auto; padding: 10px; }
+    .phase-table { width: 100%; border-collapse: collapse; color: var(--text-main); font-size: 10.5px; }
+    .phase-table th { padding: 8px; border: 1px solid var(--border-node); color: var(--nexum-blue); background: rgba(63,81,181,0.06); text-align: left; white-space: nowrap; }
+    .phase-table td { padding: 8px; border: 1px solid var(--border-node); vertical-align: top; line-height: 1.4; }
+    .phase-status { display: inline-block; border-radius: 10px; padding: 2px 7px; font-size: 9px; font-weight: 700; white-space: nowrap; }
+    .phase-status.done { color: #4caf50; background: rgba(76,175,80,0.12); }
+    .phase-status.progress { color: #f9a825; background: rgba(249,168,37,0.12); }
+    @media (max-width: 700px) { .phase-table { min-width: 650px; } }
+</style>
+
+<h3 class="panel-subtitle" style="margin-top: 40px; border-bottom: 1px solid var(--border-node); padding-bottom: 5px; color: var(--nexum-blue);">🗓️ 4. Cronograma por fases — Línea Quatro 1,5 L</h3>
+<p class="panel-text" style="font-size: 13px;">El proyecto se organizó en nueve fases parcialmente superpuestas. A continuación se muestra <strong>qué se realizó, cuándo se ejecutó y qué rol fue responsable</strong>, con corte al 7 de julio de 2026.</p>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(165px, 1fr)); gap: 12px; margin: 18px 0 22px;">
+    <div style="border: 1px solid var(--border-node); border-radius: 6px; padding: 13px; text-align: center; background: rgba(63,81,181,0.06);"><div style="font-size: 10px; color: var(--text-muted);">Periodo</div><div style="font-size: 13px; font-weight: 700; color: var(--nexum-blue); margin-top: 5px;">10 feb – 7 jul 2026</div></div>
+    <div style="border: 1px solid var(--border-node); border-radius: 6px; padding: 13px; text-align: center; background: rgba(33,150,243,0.06);"><div style="font-size: 10px; color: var(--text-muted);">Estructura</div><div style="font-size: 13px; font-weight: 700; color: #2196f3; margin-top: 5px;">9 fases · 40 actividades</div></div>
+    <div style="border: 1px solid var(--border-node); border-radius: 6px; padding: 13px; text-align: center; background: rgba(76,175,80,0.06);"><div style="font-size: 10px; color: var(--text-muted);">Completadas</div><div style="font-size: 13px; font-weight: 700; color: #4caf50; margin-top: 5px;">38 actividades</div></div>
+    <div style="border: 1px solid var(--border-node); border-radius: 6px; padding: 13px; text-align: center; background: rgba(249,168,37,0.06);"><div style="font-size: 10px; color: var(--text-muted);">Avance global</div><div style="font-size: 13px; font-weight: 700; color: #f9a825; margin-top: 5px;">99,75 %</div></div>
+</div>
+
+<h4 style="color: var(--text-main); font-size: 14px;">4.1. Vista general de las fases</h4>
+<div class="phase-summary-grid">
+    <div class="phase-summary-card"><div class="phase-summary-title">1. Planeación</div><div class="phase-summary-meta">10 feb – 20 mar · 5 actividades · 100 %</div><div class="phase-summary-owner"><strong>Resultado:</strong> alcance, caracterización, análisis de proceso y KPI.<br><strong>Responsables:</strong> Líder, Automatización e Industrial.</div></div>
+    <div class="phase-summary-card"><div class="phase-summary-title">2. Diagnóstico</div><div class="phase-summary-meta">16 mar – 10 abr · 4 actividades · 100 %</div><div class="phase-summary-owner"><strong>Resultado:</strong> señales, cuello de botella, agrupado y ergonomía.<br><strong>Responsables:</strong> Automatización, Líder, Mecatrónica e Industrial.</div></div>
+    <div class="phase-summary-card"><div class="phase-summary-title">3. Simulación</div><div class="phase-summary-meta">6 abr – 15 may · 4 actividades · 100 %</div><div class="phase-summary-owner"><strong>Resultado:</strong> modelo actual, capacidad de packs y OEE base.<br><strong>Responsables:</strong> Simulación e Industrial.</div></div>
+    <div class="phase-summary-card"><div class="phase-summary-title">4. Diseño de solución</div><div class="phase-summary-meta">4 may – 12 jun · 6 actividades · 100 %</div><div class="phase-summary-owner"><strong>Resultado:</strong> agrupado, túnel, robot, gripper, conveyors y seguridad.<br><strong>Responsables:</strong> Mecatrónica, CAD, Robótica y Automatización.</div></div>
+    <div class="phase-summary-card"><div class="phase-summary-title">5. Sensórica y control</div><div class="phase-summary-meta">25 may – 3 jul · 4 actividades · 100 %</div><div class="phase-summary-owner"><strong>Resultado:</strong> sensores, E/S, PLC, SCADA y OPC UA.<br><strong>Responsables:</strong> Automatización y SCADA.</div></div>
+    <div class="phase-summary-card"><div class="phase-summary-title">6. Validación</div><div class="phase-summary-meta">1 jun – 3 jul · 3 actividades · 100 %</div><div class="phase-summary-owner"><strong>Resultado:</strong> escenario automatizado y comparación antes/después.<br><strong>Responsables:</strong> Simulación e Industrial.</div></div>
+    <div class="phase-summary-card"><div class="phase-summary-title">7. Economía</div><div class="phase-summary-meta">8 jun – 7 jul · 6 actividades · 100 %</div><div class="phase-summary-owner"><strong>Resultado:</strong> presupuesto, flujo, indicadores y rentabilidad contractual.<br><strong>Responsables:</strong> Equipo Nexum, Industrial y Líder.</div></div>
+    <div class="phase-summary-card"><div class="phase-summary-title">8. Negocio</div><div class="phase-summary-meta">29 jun – 7 jul · 4 actividades · 100 %</div><div class="phase-summary-owner"><strong>Resultado:</strong> Canvas, propuestas de valor y oferta comercial.<br><strong>Responsables:</strong> Equipo Nexum y Líder.</div></div>
+    <div class="phase-summary-card" style="border-left-color:#f9a825;"><div class="phase-summary-title" style="color:#f9a825;">9. Entrega</div><div class="phase-summary-meta">22 jun – 7 jul · 4 actividades · 97,5 %</div><div class="phase-summary-owner"><strong>Resultado:</strong> sitio, informe, revisión y sustentación.<br><strong>Responsables:</strong> Comunicación, Equipo Nexum y Líder.</div></div>
+</div>
+
+<h4 style="color: var(--text-main); font-size: 14px; margin-top: 28px;">4.2. Actividades, fechas y responsables</h4>
+<p class="panel-text" style="font-size: 12px; margin-bottom: 14px;">Abre cada fase para consultar sus actividades. Las fechas corresponden al inicio y fin registrados en el cronograma Gantt.</p>
+
+<details class="phase-detail"><summary>1. Planeación · 10 de febrero – 20 de marzo · Completada</summary><div class="phase-table-wrap"><table class="phase-table"><thead><tr><th>Actividad realizada</th><th>Periodo</th><th>Responsable</th><th>Estado</th></tr></thead><tbody>
+<tr><td>Definición del alcance y objetivos de la línea Quatro</td><td>10–20 feb</td><td>Líder</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>Investigación del proceso industrial de bebidas</td><td>16–27 feb</td><td>Ing. Automatización</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>Caracterización de la línea Quatro 1,5 L</td><td>23 feb–6 mar</td><td>Ing. Industrial</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>DOP, DAP, VSM y análisis de tiempos</td><td>2–13 mar</td><td>Ing. Industrial</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>Definición de KPI: OEE, takt, capacidad y bloqueos</td><td>9–20 mar</td><td>Ing. Industrial</td><td><span class="phase-status done">100 %</span></td></tr>
+</tbody></table></div></details>
+
+<details class="phase-detail"><summary>2. Diagnóstico · 16 de marzo – 10 de abril · Completada</summary><div class="phase-table-wrap"><table class="phase-table"><thead><tr><th>Actividad realizada</th><th>Periodo</th><th>Responsable</th><th>Estado</th></tr></thead><tbody>
+<tr><td>Levantamiento de sensores, actuadores y señales</td><td>16–27 mar</td><td>Ing. Automatización</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>Identificación del cuello de botella de final de línea</td><td>23 mar–3 abr</td><td>Líder</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>Evaluación del agrupado termoencogible manual</td><td>30 mar–10 abr</td><td>Ing. Mecatrónica</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>Evaluación del paletizado manual y riesgos ergonómicos</td><td>30 mar–10 abr</td><td>Ing. Industrial</td><td><span class="phase-status done">100 %</span></td></tr>
+</tbody></table></div></details>
+
+<details class="phase-detail"><summary>3. Simulación · 6 de abril – 15 de mayo · Completada</summary><div class="phase-table-wrap"><table class="phase-table"><thead><tr><th>Actividad realizada</th><th>Periodo</th><th>Responsable</th><th>Estado</th></tr></thead><tbody>
+<tr><td>Construcción del modelo actual en Plant Simulation</td><td>6–24 abr</td><td>Ing. Simulación</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>Configuración de workers, broker y workplaces</td><td>13–30 abr</td><td>Ing. Simulación</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>Validación de capacidad para packs de 12 botellas</td><td>20 abr–8 may</td><td>Ing. Simulación</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>Cálculo del OEE del escenario actual</td><td>4–15 may</td><td>Ing. Industrial</td><td><span class="phase-status done">100 %</span></td></tr>
+</tbody></table></div></details>
+
+<details class="phase-detail"><summary>4. Diseño de solución · 4 de mayo – 12 de junio · Completada</summary><div class="phase-table-wrap"><table class="phase-table"><thead><tr><th>Actividad realizada</th><th>Periodo</th><th>Responsable</th><th>Estado</th></tr></thead><tbody>
+<tr><td>Diseño conceptual del sistema de agrupado mejorado</td><td>4–22 may</td><td>Ing. Mecatrónica</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>Selección del túnel de termoencogido y transportadores</td><td>11–29 may</td><td>Ing. Mecatrónica</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>Diseño de empujadores, guías y flujo de packs</td><td>18 may–5 jun</td><td>Ing. CAD</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>Diseño de la celda robotizada de paletizado</td><td>11–29 may</td><td>Ing. Robótica</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>Selección del robot ABB, gripper y conveyor de pallets</td><td>18 may–5 jun</td><td>Ing. Robótica</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>Diseño de cerramiento, accesos y seguridad industrial</td><td>25 may–12 jun</td><td>Ing. Automatización</td><td><span class="phase-status done">100 %</span></td></tr>
+</tbody></table></div></details>
+
+<details class="phase-detail"><summary>5. Sensórica y control · 25 de mayo – 3 de julio · Completada</summary><div class="phase-table-wrap"><table class="phase-table"><thead><tr><th>Actividad realizada</th><th>Periodo</th><th>Responsable</th><th>Estado</th></tr></thead><tbody>
+<tr><td>Definición de sensórica para presencia, conteo y atascos</td><td>25 may–12 jun</td><td>Ing. Automatización</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>Lista de entradas/salidas y arquitectura PLC</td><td>1–19 jun</td><td>Ing. Automatización</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>Diseño de monitoreo de paradas, rechazo y OEE</td><td>8–26 jun</td><td>Ing. SCADA</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>Integración conceptual PLC, SCADA y OPC UA</td><td>15 jun–3 jul</td><td>Ing. SCADA</td><td><span class="phase-status done">100 %</span></td></tr>
+</tbody></table></div></details>
+
+<details class="phase-detail"><summary>6. Validación · 1 de junio – 3 de julio · Completada</summary><div class="phase-table-wrap"><table class="phase-table"><thead><tr><th>Actividad realizada</th><th>Periodo</th><th>Responsable</th><th>Estado</th></tr></thead><tbody>
+<tr><td>Modelado del escenario automatizado</td><td>1–19 jun</td><td>Ing. Simulación</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>Simulación del agrupado y paletizado automático</td><td>8–26 jun</td><td>Ing. Simulación</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>Comparación antes/después: capacidad, OEE y bloqueos</td><td>22 jun–3 jul</td><td>Ing. Industrial</td><td><span class="phase-status done">100 %</span></td></tr>
+</tbody></table></div></details>
+
+<details class="phase-detail"><summary>7. Economía · 8 de junio – 7 de julio · Completada</summary><div class="phase-table-wrap"><table class="phase-table"><thead><tr><th>Actividad realizada</th><th>Periodo</th><th>Responsable</th><th>Estado</th></tr></thead><tbody>
+<tr><td>Cotización de equipos, sensórica y materiales</td><td>8–26 jun</td><td>Equipo Nexum</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>Presupuesto técnico-comercial de la línea Quatro</td><td>15 jun–3 jul</td><td>Equipo Nexum</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>Cálculo de beneficios y costos operativos</td><td>22 jun–3 jul</td><td>Ing. Industrial</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>Flujo de caja del cliente y EBITDA incremental</td><td>29 jun–7 jul</td><td>Ing. Industrial</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>VPN, TIR, payback y relación beneficio/costo</td><td>29 jun–7 jul</td><td>Ing. Industrial</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>Rentabilidad contractual para Nexum Automation</td><td>29 jun–7 jul</td><td>Líder</td><td><span class="phase-status done">100 %</span></td></tr>
+</tbody></table></div></details>
+
+<details class="phase-detail"><summary>8. Negocio · 29 de junio – 7 de julio · Completada</summary><div class="phase-table-wrap"><table class="phase-table"><thead><tr><th>Actividad realizada</th><th>Periodo</th><th>Responsable</th><th>Estado</th></tr></thead><tbody>
+<tr><td>Modelo Canvas orientado a sensórica y final de línea</td><td>29 jun–7 jul</td><td>Equipo Nexum</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>Propuesta de valor particular para Quatro</td><td>29 jun–7 jul</td><td>Equipo Nexum</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>Propuesta de valor general de Nexum</td><td>29 jun–7 jul</td><td>Equipo Nexum</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>Estructuración de la oferta comercial</td><td>29 jun–7 jul</td><td>Líder</td><td><span class="phase-status done">100 %</span></td></tr>
+</tbody></table></div></details>
+
+<details class="phase-detail" open><summary>9. Entrega · 22 de junio – 7 de julio · 97,5 %</summary><div class="phase-table-wrap"><table class="phase-table"><thead><tr><th>Actividad realizada</th><th>Periodo</th><th>Responsable</th><th>Estado</th></tr></thead><tbody>
+<tr><td>Actualización del sitio web y repositorio</td><td>22 jun–7 jul</td><td>Ing. Comunicación</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>Integración del informe técnico-económico</td><td>29 jun–7 jul</td><td>Equipo Nexum</td><td><span class="phase-status done">100 %</span></td></tr>
+<tr><td>Revisión de coherencia técnica y financiera</td><td>1–7 jul</td><td>Líder</td><td><span class="phase-status progress">En curso · 95 %</span></td></tr>
+<tr><td>Preparación de presentación y sustentación</td><td>1–7 jul</td><td>Equipo Nexum</td><td><span class="phase-status progress">En curso · 95 %</span></td></tr>
+</tbody></table></div></details>
+
+<div style="margin-top: 20px; text-align: center; border-top: 1px solid var(--border-node); padding-top: 18px;">
+    <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;"><em>Fuente: Cronograma Gantt Nexum–Quatro, actualizado con corte al 7 de julio de 2026.</em></p>
+    <a href="docs/modulo3/Cronograma Gantt Nexum - Quatro - 07 julio 2026.xlsm" target="_blank" style="display: inline-block; padding: 8px 16px; font-size: 12px; background-color: rgba(63,81,181,0.1); color: var(--nexum-blue); text-decoration: none; border: 1px solid var(--nexum-blue); border-radius: 4px; font-weight: bold;">📊 Abrir cronograma Gantt completo</a>
+</div>
+
+<!-- Cronograma anterior reemplazado
 <h3 class="panel-subtitle" style="margin-top: 40px; border-bottom: 1px solid var(--border-node); padding-bottom: 5px; color: var(--nexum-blue);">🗓️ 4. Cronograma del Proyecto</h3>
 <p class="panel-text" style="font-size: 13px; margin-bottom: 5px;">Navega entre los meses del proyecto y haz clic en cualquier fecha marcada para ver el detalle de sus actividades.</p>
 <div class="cal-legend">
@@ -515,6 +633,7 @@
     renderMonth(currentIdx);
 })();
 </script>
+-->
 
         </div>
         <div id="content-m3-fin" class="tw-content">
@@ -1099,7 +1218,7 @@
                         
                         item.svgX = originalCX + item.currX;
                         item.svgY = originalCY + item.currY;
-                    });
+                    });s
 
                     netLines.forEach(line => {
                         line.el.setAttribute('x1', line.n1.svgX);
