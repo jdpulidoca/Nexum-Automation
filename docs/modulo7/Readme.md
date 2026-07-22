@@ -40,20 +40,3 @@ La interfaz utiliza un enfoque **HP-HMI en escala de grises**, reservando el col
 
 También permite reconocer alarmas, registrar eventos y consultar tendencias de producción.
 
-## 📂 Contenido
-
-| Archivo | Uso en el panel |
-|---|---|
-| `Scada - Final.json` | ⚠️ No está referenciado por `content/modulo7.html`. |
-| `Readme.md` | Documentación de la carpeta. |
-
-## 🔎 Nota técnica
-
-La demo está implementada directamente dentro de `content/modulo7.html`:
-
-- No carga archivos desde `docs/modulo7/`.
-- No utiliza `fetch`, WebSocket, MQTT ni solicitudes externas de datos.
-- Los estados, señales, alarmas y KPI se generan localmente con JavaScript.
-- El uso de `Scada - Final.json` no puede determinarse únicamente desde la página.
-
-> 🔌 En un despliegue real, la interfaz debe integrarse con los PLC, históricos y señales reales de la planta.
