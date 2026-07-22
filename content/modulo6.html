@@ -218,6 +218,15 @@
         .diagram-video-container { position: relative; padding-bottom: 52%; height: 0; width: 100%; overflow: hidden; border-radius: 6px; }
         .diagram-video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
+        /* Menú desplegable para elegir el documento Ladder (máquinas con varias rutinas en PDF) */
+        .ladder-doc-select { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; width: 100%; flex-wrap: wrap; }
+        .ladder-doc-select label { font-size: 12px; font-weight: 700; color: var(--text-muted); white-space: nowrap; }
+        .ladder-doc-select select {
+            flex: 1; min-width: 220px; max-width: 360px; padding: 7px 10px; border-radius: 6px;
+            border: 1px solid var(--border-node); background: var(--node-bg); color: var(--text-main);
+            font-size: 12px; cursor: pointer;
+        }
+
     </style>
     <h2 class="panel-title" style="text-align: center;">Controladores Industriales</h2>
     <div class="panel-meta-strip">[ MÓDULO: 06 ] · [ GRAFCET ] · [ LÓGICA LADDER ]</div>
@@ -378,11 +387,23 @@
                 <div class="lavadora-diagram-view" id="viewer-lavadora-ladder" style="display: none; width: 100%;">
                     <div class="diagram-header">
                         <h4><span>📄</span>Código Ladder</h4>
-                        <p>Lógica Ladder implementada en Logix Emulate para esta estación.</p>
+                        <p>Lógica Ladder implementada en Logix Emulate para esta estación — selecciona la rutina.</p>
                         <div class="divider"></div>
                     </div>
+                    <div class="ladder-doc-select">
+                        <label for="select-lavadora-ladder">📄 Rutina:</label>
+                        <select id="select-lavadora-ladder" onchange="switchLadderDoc('lavadora', this.value)">
+                            <option value="docs/modulo6/Ladder/Lavadora/R00_Main.pdf">R00 — Main</option>
+                            <option value="docs/modulo6/Ladder/Lavadora/R01_Mando_Reinicio.pdf">R01 — Mando / Reinicio</option>
+                            <option value="docs/modulo6/Ladder/Lavadora/R02_Deteccion_Flancos.pdf">R02 — Detección de Flancos</option>
+                            <option value="docs/modulo6/Ladder/Lavadora/R03_Evaluacion_Transiciones.pdf">R03 — Evaluación de Transiciones</option>
+                            <option value="docs/modulo6/Ladder/Lavadora/R04_Actualizacion_Etapas.pdf">R04 — Actualización de Etapas</option>
+                            <option value="docs/modulo6/Ladder/Lavadora/R05_Contadores_Temporizadores.pdf">R05 — Contadores y Temporizadores</option>
+                            <option value="docs/modulo6/Ladder/Lavadora/R06_Salidas_NX.pdf">R06 — Salidas (NX)</option>
+                        </select>
+                    </div>
                     <div class="diagram-pdf-container">
-                        <iframe src="docs/modulo6/PDF/lavadora_ladder.pdf"></iframe>
+                        <iframe id="pdf-lavadora-ladder" src="docs/modulo6/Ladder/Lavadora/R00_Main.pdf"></iframe>
                     </div>
                 </div>
                 <div class="lavadora-diagram-view" id="viewer-lavadora-video" style="display: none; width: 100%;">
@@ -462,11 +483,23 @@
                 <div class="llenadora-diagram-view" id="viewer-llenadora-ladder" style="display: none; width: 100%;">
                     <div class="diagram-header">
                         <h4><span>📄</span>Código Ladder</h4>
-                        <p>Lógica Ladder implementada en Logix Emulate para esta estación.</p>
+                        <p>Lógica Ladder implementada en Logix Emulate para esta estación — selecciona la rutina.</p>
                         <div class="divider"></div>
                     </div>
+                    <div class="ladder-doc-select">
+                        <label for="select-llenadora-ladder">📄 Rutina:</label>
+                        <select id="select-llenadora-ladder" onchange="switchLadderDoc('llenadora', this.value)">
+                            <option value="docs/modulo6/Ladder/Llenadora/MainRoutine.pdf">Main Routine</option>
+                            <option value="docs/modulo6/Ladder/Llenadora/R01_Mandos_Reinicio.pdf">R01 — Mandos / Reinicio</option>
+                            <option value="docs/modulo6/Ladder/Llenadora/R02_Flancos_Procesos.pdf">R02 — Flancos de Procesos</option>
+                            <option value="docs/modulo6/Ladder/Llenadora/R03_Transiciones.pdf">R03 — Transiciones</option>
+                            <option value="docs/modulo6/Ladder/Llenadora/R04_Etapas.pdf">R04 — Etapas</option>
+                            <option value="docs/modulo6/Ladder/Llenadora/R05_Carrusel.pdf">R05 — Carrusel</option>
+                            <option value="docs/modulo6/Ladder/Llenadora/R06_Salidas.pdf">R06 — Salidas</option>
+                        </select>
+                    </div>
                     <div class="diagram-pdf-container">
-                        <iframe src="docs/modulo6/PDF/llenadora_ladder.pdf"></iframe>
+                        <iframe id="pdf-llenadora-ladder" src="docs/modulo6/Ladder/Llenadora/MainRoutine.pdf"></iframe>
                     </div>
                 </div>
                 <div class="llenadora-diagram-view" id="viewer-llenadora-video" style="display: none; width: 100%;">
@@ -642,6 +675,10 @@
     }
     function resetImg(img) {
         img.style.transform = 'scale(1)';
+    }
+
+    function switchLadderDoc(prodId, url) {
+        document.getElementById('pdf-' + prodId + '-ladder').src = url;
     }
 
         (function () {
