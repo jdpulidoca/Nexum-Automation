@@ -456,14 +456,349 @@
         gap:4px;
     }
 }
+
+/* ============================================================
+   PROTOTIPO VISUAL NEXUM — MÓDULO 7
+   La interfaz del módulo hereda las variables globales del index.
+   El simulador SCADA conserva su escala de grises como área funcional.
+   ============================================================ */
+
+#modulo7-scada {
+    background: transparent !important;
+    color: var(--text-main) !important;
+    font-family: inherit !important;
+    font-size: inherit !important;
+    line-height: 1.5;
+}
+
+#modulo7-scada .doc {
+    display: block;
+    max-width: none;
+    margin: 0;
+}
+
+#modulo7-scada .m7-page {
+    width: 100%;
+    padding: 0;
+    max-width: none;
+}
+
+#modulo7-scada .m7-module-header {
+    margin-bottom: 18px;
+}
+
+#modulo7-scada .m7-intro {
+    max-width: 760px;
+    margin: 16px auto 0;
+    text-align: center;
+    font-size: 13px;
+}
+
+#modulo7-scada .m7-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 25px;
+    margin-top: 10px;
+}
+
+#modulo7-scada .m7-radio {
+    display: none;
+}
+
+#modulo7-scada .m7-sidebar {
+    width: 132px;
+    min-height: 430px;
+    flex: 0 0 132px;
+    position: sticky;
+    top: 10px;
+    background: transparent;
+    border: 0;
+    overflow: visible;
+}
+
+#modulo7-scada .constellation-hub {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#modulo7-scada .network-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+#modulo7-scada .ghost-dot {
+    position: absolute;
+    border-radius: 50%;
+    z-index: 1;
+    background: var(--nexum-cyan);
+    opacity: .28;
+}
+
+#modulo7-scada .ghost-dot.small { width: 5px; height: 5px; }
+#modulo7-scada .ghost-dot.medium { width: 8px; height: 8px; }
+
+#modulo7-scada .hub-timeline {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 34px;
+    padding: 20px 0;
+    width: 100%;
+}
+
+#modulo7-scada .hub-node {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+#modulo7-scada .hub-node:nth-of-type(1) { margin-left: -14px; }
+#modulo7-scada .hub-node:nth-of-type(2) { margin-left: 14px; }
+#modulo7-scada .hub-node:nth-of-type(3) { margin-left: -8px; }
+#modulo7-scada .hub-node:nth-of-type(4) { margin-left: 18px; }
+#modulo7-scada .hub-node:nth-of-type(5) { margin-left: -5px; }
+
+#modulo7-scada .hub-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 3;
+    font-size: 23px;
+    color: var(--text-main);
+    background: var(--node-bg);
+    border: 2px solid var(--border-node);
+    box-shadow: var(--shadow-node);
+    transition: border-color .25s, box-shadow .25s, transform .2s;
+}
+
+#modulo7-scada .hub-text {
+    position: absolute;
+    left: 61px;
+    width: 112px;
+    padding: 6px 9px;
+    border-radius: 6px;
+    border: 1px solid var(--border-node);
+    background: var(--node-bg);
+    box-shadow: var(--shadow-node);
+    color: var(--text-muted);
+    font-size: 10px;
+    font-weight: 600;
+    text-align: left;
+    opacity: 0;
+    transform: translateX(-12px);
+    pointer-events: none;
+    transition: opacity .25s, transform .25s, color .25s;
+    z-index: 20;
+}
+
+#modulo7-scada .hub-node:hover .hub-icon {
+    border-color: var(--nexum-cyan);
+    box-shadow: 0 0 0 4px rgba(14,165,233,.12), 0 8px 20px rgba(14,165,233,.18);
+    transform: scale(1.05);
+}
+
+#modulo7-scada .hub-node:hover .hub-text {
+    opacity: 1;
+    transform: translateX(0);
+    color: var(--nexum-cyan);
+}
+
+#modulo7-scada #rad-m7-demo:checked ~ .m7-sidebar label[for="rad-m7-demo"] .hub-icon,
+#modulo7-scada #rad-m7-beneficios:checked ~ .m7-sidebar label[for="rad-m7-beneficios"] .hub-icon,
+#modulo7-scada #rad-m7-capacidades:checked ~ .m7-sidebar label[for="rad-m7-capacidades"] .hub-icon,
+#modulo7-scada #rad-m7-implementacion:checked ~ .m7-sidebar label[for="rad-m7-implementacion"] .hub-icon,
+#modulo7-scada #rad-m7-alcance:checked ~ .m7-sidebar label[for="rad-m7-alcance"] .hub-icon {
+    border-color: var(--nexum-blue);
+    box-shadow: 0 0 0 5px rgba(63,81,181,.15), 0 0 22px rgba(63,81,181,.24);
+}
+
+#modulo7-scada #rad-m7-demo:checked ~ .m7-sidebar label[for="rad-m7-demo"] .hub-text,
+#modulo7-scada #rad-m7-beneficios:checked ~ .m7-sidebar label[for="rad-m7-beneficios"] .hub-text,
+#modulo7-scada #rad-m7-capacidades:checked ~ .m7-sidebar label[for="rad-m7-capacidades"] .hub-text,
+#modulo7-scada #rad-m7-implementacion:checked ~ .m7-sidebar label[for="rad-m7-implementacion"] .hub-text,
+#modulo7-scada #rad-m7-alcance:checked ~ .m7-sidebar label[for="rad-m7-alcance"] .hub-text {
+    color: var(--nexum-blue);
+}
+
+#modulo7-scada .m7-main {
+    flex: 1;
+    min-width: 0;
+}
+
+#modulo7-scada .m7-content {
+    display: none;
+    animation: m7Fade .45s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+#modulo7-scada #rad-m7-demo:checked ~ .m7-main #content-m7-demo,
+#modulo7-scada #rad-m7-beneficios:checked ~ .m7-main #content-m7-beneficios,
+#modulo7-scada #rad-m7-capacidades:checked ~ .m7-main #content-m7-capacidades,
+#modulo7-scada #rad-m7-implementacion:checked ~ .m7-main #content-m7-implementacion,
+#modulo7-scada #rad-m7-alcance:checked ~ .m7-main #content-m7-alcance {
+    display: block;
+}
+
+@keyframes m7Fade {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Portada y contenido comercial alineados con el lenguaje visual del index */
+#modulo7-scada .m7-hero {
+    padding: 24px;
+    margin-bottom: 18px;
+    border: 1px solid var(--border-node);
+    border-radius: 8px;
+    background: rgba(142,142,147,.035);
+}
+
+#modulo7-scada .m7-hero h1 {
+    color: var(--text-main);
+    font-family: inherit;
+    font-size: clamp(30px,4vw,48px);
+    line-height: 1.05;
+    text-transform: none;
+}
+
+#modulo7-scada .m7-hero .eyebrow {
+    color: var(--nexum-cyan);
+    font-family: inherit;
+}
+
+#modulo7-scada .m7-hero .lead {
+    color: var(--text-muted);
+    font-size: 15px;
+}
+
+#modulo7-scada .m7-hero .meta {
+    color: var(--text-main);
+}
+
+#modulo7-scada .m7-hero .meta b {
+    color: var(--nexum-blue);
+}
+
+#modulo7-scada section {
+    padding-top: 10px;
+}
+
+#modulo7-scada section > h2 {
+    color: var(--nexum-blue);
+    font-family: inherit;
+    font-size: 22px;
+    text-transform: none;
+    border-bottom: 1px solid var(--border-node);
+}
+
+#modulo7-scada section > h2 i {
+    background: rgba(63,81,181,.1);
+    color: var(--nexum-blue);
+    border: 1px solid rgba(63,81,181,.22);
+    border-radius: 4px;
+}
+
+#modulo7-scada section > p {
+    color: var(--text-muted);
+}
+
+/* Tarjetas comerciales */
+#modulo7-scada .commercial-card,
+#modulo7-scada .implementation-step,
+#modulo7-scada .commercial-cta {
+    background: rgba(142,142,147,.035);
+    border-color: var(--border-node);
+    border-radius: 7px;
+}
+
+#modulo7-scada .commercial-card h3,
+#modulo7-scada .capability-item h3,
+#modulo7-scada .implementation-step h3,
+#modulo7-scada .commercial-cta h3 {
+    color: var(--nexum-blue);
+    font-family: inherit;
+    text-transform: none;
+}
+
+#modulo7-scada .commercial-card p,
+#modulo7-scada .capability-item p,
+#modulo7-scada .implementation-step p,
+#modulo7-scada .commercial-cta p {
+    color: var(--text-muted);
+}
+
+#modulo7-scada .capability-list,
+#modulo7-scada .capability-item {
+    border-color: var(--border-node);
+}
+
+/* El SCADA conserva su lenguaje HP-HMI en escala de grises */
+#modulo7-scada .demo-shell,
+#modulo7-scada .demo-shell * {
+    --text-main: #2a2a2a;
+    --text-muted: #5f5f5f;
+}
+
+#modulo7-scada .demo-shell {
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+@media (max-width: 760px) {
+    #modulo7-scada .m7-wrapper {
+        flex-direction: column;
+    }
+
+    #modulo7-scada .m7-sidebar {
+        position: static;
+        width: 100%;
+        min-height: auto;
+        flex-basis: auto;
+    }
+
+    #modulo7-scada .hub-timeline {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 18px;
+    }
+
+    #modulo7-scada .hub-node:nth-of-type(n) {
+        margin-left: 0;
+        flex-direction: column;
+    }
+
+    #modulo7-scada .hub-text {
+        position: static;
+        width: auto;
+        padding: 4px 0 0;
+        border: 0;
+        background: transparent;
+        box-shadow: none;
+        opacity: 1;
+        transform: none;
+        text-align: center;
+    }
+}
 </style>
 <div id="modulo7-scada">
 <div class="doc">
 <!-- ================= RIEL ================= -->
-<nav class="rail" id="rail"><div class="rail-brand">Sistema SCADA</div><div class="rail-sub">NEXUM · SOLUCIÓN INDUSTRIAL</div><a href="#demo"><span>0</span>Experiencia interactiva</a><a href="#beneficios"><span>1</span>Valor para su operación</a><a href="#capacidades"><span>2</span>Capacidades principales</a><a href="#implementacion"><span>3</span>Implementación</a><a href="#alcance"><span>4</span>Alcance de la solución</a></nav>
-<main class="page">
-<!-- ================= PORTADA ================= -->
-<header class="hero">
+
+<main class="m7-page"><div class="m7-module-header"><h2 class="panel-title" style="text-align:center;">Sistema SCADA para Planta de Embotellado</h2><div class="panel-meta-strip">[ MÓDULO: 07 ] · [ SUPERVISIÓN INDUSTRIAL ] · [ NEXUM AUTOMATION ]</div><p class="panel-text m7-intro">Supervisión centralizada, gestión de alarmas, históricos y análisis operativo para mejorar la visibilidad y la toma de decisiones en la línea de producción.</p></div><div class="m7-wrapper"><input checked="" class="m7-radio" id="rad-m7-demo" name="tw-tabs-m7" type="radio"/><input class="m7-radio" id="rad-m7-beneficios" name="tw-tabs-m7" type="radio"/><input class="m7-radio" id="rad-m7-capacidades" name="tw-tabs-m7" type="radio"/><input class="m7-radio" id="rad-m7-implementacion" name="tw-tabs-m7" type="radio"/><input class="m7-radio" id="rad-m7-alcance" name="tw-tabs-m7" type="radio"/><aside class="m7-sidebar constellation-hub hub-vertical"><svg aria-hidden="true" class="network-canvas"></svg><div class="ghost-dot medium m7-parallax" style="top:12%;left:20%;"></div><div class="ghost-dot small m7-parallax" style="top:48%;left:82%;"></div><div class="ghost-dot medium m7-parallax" style="top:84%;left:22%;"></div><div class="hub-timeline"><label class="hub-node m7-nav-node" for="rad-m7-demo"><div class="hub-icon">🖥️</div><div class="hub-text">Demo SCADA</div></label><label class="hub-node m7-nav-node" for="rad-m7-beneficios"><div class="hub-icon">📈</div><div class="hub-text">Valor operativo</div></label><label class="hub-node m7-nav-node" for="rad-m7-capacidades"><div class="hub-icon">⚙️</div><div class="hub-text">Capacidades</div></label><label class="hub-node m7-nav-node" for="rad-m7-implementacion"><div class="hub-icon">🧩</div><div class="hub-text">Implementación</div></label><label class="hub-node m7-nav-node" for="rad-m7-alcance"><div class="hub-icon">🚀</div><div class="hub-text">Escalabilidad</div></label></div></aside><div class="m7-main tw-main-content"><div class="m7-content" id="content-m7-demo"><header class="m7-hero hero">
 <p class="eyebrow">Solución de supervisión industrial · Nexum Automation</p>
 <h1>SCADA para<br/>una planta más<br/>visible y eficiente</h1>
 <p class="lead">Supervise su línea de embotellado desde una interfaz clara, detecte desviaciones con rapidez y convierta los datos de producción en decisiones operativas.</p>
@@ -513,8 +848,7 @@
 <div class="strip-cap">Una vista unificada de la línea permite reconocer estados, alarmas y puntos de atención sin saturar al operador con información innecesaria.</div>
 </div>
 <div class="meta"><div><b>Cobertura</b>5 máquinas integradas</div><div><b>Visibilidad</b>9 vistas operativas</div><div><b>Alertas</b>Priorización ISA-18.2</div><div><b>Información</b>Históricos y KPI</div><div><b>Escalabilidad</b>Preparado para PLC real</div></div>
-</header>
-<section id="demo">
+</header><section id="demo">
 <h2><i>00</i>Conozca la experiencia SCADA</h2>
 <p>Explore una demostración funcional del sistema. Navegue entre máquinas, consulte indicadores, genere una alarma de prueba y observe cómo la interfaz ayuda a interpretar el estado de la planta.</p>
 <div class="nota aviso">
@@ -595,41 +929,7 @@
 </div>
 </div>
 </div>
-</section><section id="beneficios"><h2><i>01</i>Valor para su operación</h2><p>La solución concentra la información crítica de la línea en un solo entorno para que operación, mantenimiento y supervisión trabajen con una visión común.</p><div class="commercial-grid"><article class="commercial-card"><h3>Decisiones más rápidas</h3><p>Visualice estados, producción y desviaciones sin recorrer múltiples sistemas.</p></article><article class="commercial-card"><h3>Menos tiempo de reacción</h3><p>Las alarmas se clasifican por prioridad para dirigir la atención a lo realmente urgente.</p></article><article class="commercial-card"><h3>Mejor trazabilidad</h3><p>Consulte históricos, eventos y tendencias para entender qué ocurrió y cuándo.</p></article><article class="commercial-card"><h3>Operación más clara</h3><p>La interfaz HP-HMI reduce adornos y destaca únicamente la información que requiere acción.</p></article></div></section><section id="capacidades"><h2><i>02</i>Capacidades principales</h2><p>El sistema combina supervisión en tiempo real, análisis operativo y una base preparada para crecer junto con la planta.</p><div class="capability-list"><div class="capability-item"><h3>Vista general de planta</h3><p>Estado de las cinco máquinas y sus alarmas desde una única pantalla.</p></div><div class="capability-item"><h3>Detalle por máquina</h3><p>Información específica para sopladora, lavadora, llenadora, inspección y empaque.</p></div><div class="capability-item"><h3>Gestión de alarmas</h3><p>Priorización, reconocimiento y seguimiento bajo criterios ISA-18.2.</p></div><div class="capability-item"><h3>Históricos y KPI</h3><p>Consulta de tendencias y desempeño para apoyar mejora continua.</p></div><div class="capability-item"><h3>Registro de eventos</h3><p>Trazabilidad de acciones y cambios relevantes del proceso.</p></div><div class="capability-item"><h3>Conectividad industrial</h3><p>Arquitectura preparada para integrarse con PLC y fuentes de datos reales.</p></div></div></section><section id="implementacion"><h2><i>03</i>Implementación orientada a resultados</h2><p>La puesta en marcha puede desarrollarse por etapas para reducir riesgos y validar valor desde el inicio.</p><div class="implementation-steps"><article class="implementation-step"><span>1</span><h3>Levantamiento</h3><p>Definición de variables, usuarios, alarmas y necesidades de visualización.</p></article><article class="implementation-step"><span>2</span><h3>Integración</h3><p>Conexión con PLC, pruebas de señales y configuración de almacenamiento.</p></article><article class="implementation-step"><span>3</span><h3>Validación</h3><p>Pruebas con operación y mantenimiento sobre escenarios normales y anormales.</p></article><article class="implementation-step"><span>4</span><h3>Despliegue</h3><p>Entrega, capacitación y acompañamiento para la adopción del sistema.</p></article></div></section><section id="alcance"><h2><i>04</i>Una solución demostrable y escalable</h2><p>La versión presentada permite experimentar la navegación y las funciones principales del SCADA. En un despliegue productivo, el sistema se conecta a las señales reales de planta y se ajusta a los estándares, permisos y objetivos operativos de cada organización.</p><div class="commercial-cta"><h3>Convierta los datos de su línea en una herramienta de gestión</h3><p>Nexum Automation integra visualización, alarmas, históricos y análisis operativo en una experiencia diseñada para facilitar el trabajo diario.</p></div></section>
-<!-- ================= 1 ================= -->
-
-<!-- ================= 2 ================= -->
-
-<!-- ================= 3 ================= -->
-
-<!-- ================= 4 ================= -->
-
-<!-- ================= 5 ================= -->
-
-<!-- ================= 6 ================= -->
-
-<!-- ================= 7 ================= -->
-
-<!-- ================= 8 ================= -->
-
-<!-- ================= 9 ================= -->
-
-<!-- ================= 10 ================= -->
-
-<!-- ================= 11 ================= -->
-
-<!-- ================= 12 ================= -->
-
-<!-- ================= 13 ================= -->
-
-<!-- ================= 14 ================= -->
-
-<footer>
-    SCADA Planta de Embotellado · Documentación técnica · Revisión 1.1<br/>
-    Node-RED · Dashboard 2.0 · SQLite · ISA-101 HP-HMI · ISA-18.2<br/>
-    Generada a partir del flow <span class="tag">Scada_Simulacion.json</span> — 102 nodos, 9 páginas, 5 máquinas, 28 alarmas. Incluye demostración interactiva autocontenida con los SVG reales de la línea y de las cinco máquinas.
-    </footer>
-</main>
+</section></div><div class="m7-content" id="content-m7-beneficios"><section id="beneficios"><h2><i>01</i>Valor para su operación</h2><p>La solución concentra la información crítica de la línea en un solo entorno para que operación, mantenimiento y supervisión trabajen con una visión común.</p><div class="commercial-grid"><article class="commercial-card"><h3>Decisiones más rápidas</h3><p>Visualice estados, producción y desviaciones sin recorrer múltiples sistemas.</p></article><article class="commercial-card"><h3>Menos tiempo de reacción</h3><p>Las alarmas se clasifican por prioridad para dirigir la atención a lo realmente urgente.</p></article><article class="commercial-card"><h3>Mejor trazabilidad</h3><p>Consulte históricos, eventos y tendencias para entender qué ocurrió y cuándo.</p></article><article class="commercial-card"><h3>Operación más clara</h3><p>La interfaz HP-HMI reduce adornos y destaca únicamente la información que requiere acción.</p></article></div></section></div><div class="m7-content" id="content-m7-capacidades"><section id="capacidades"><h2><i>02</i>Capacidades principales</h2><p>El sistema combina supervisión en tiempo real, análisis operativo y una base preparada para crecer junto con la planta.</p><div class="capability-list"><div class="capability-item"><h3>Vista general de planta</h3><p>Estado de las cinco máquinas y sus alarmas desde una única pantalla.</p></div><div class="capability-item"><h3>Detalle por máquina</h3><p>Información específica para sopladora, lavadora, llenadora, inspección y empaque.</p></div><div class="capability-item"><h3>Gestión de alarmas</h3><p>Priorización, reconocimiento y seguimiento bajo criterios ISA-18.2.</p></div><div class="capability-item"><h3>Históricos y KPI</h3><p>Consulta de tendencias y desempeño para apoyar mejora continua.</p></div><div class="capability-item"><h3>Registro de eventos</h3><p>Trazabilidad de acciones y cambios relevantes del proceso.</p></div><div class="capability-item"><h3>Conectividad industrial</h3><p>Arquitectura preparada para integrarse con PLC y fuentes de datos reales.</p></div></div></section></div><div class="m7-content" id="content-m7-implementacion"><section id="implementacion"><h2><i>03</i>Implementación orientada a resultados</h2><p>La puesta en marcha puede desarrollarse por etapas para reducir riesgos y validar valor desde el inicio.</p><div class="implementation-steps"><article class="implementation-step"><span>1</span><h3>Levantamiento</h3><p>Definición de variables, usuarios, alarmas y necesidades de visualización.</p></article><article class="implementation-step"><span>2</span><h3>Integración</h3><p>Conexión con PLC, pruebas de señales y configuración de almacenamiento.</p></article><article class="implementation-step"><span>3</span><h3>Validación</h3><p>Pruebas con operación y mantenimiento sobre escenarios normales y anormales.</p></article><article class="implementation-step"><span>4</span><h3>Despliegue</h3><p>Entrega, capacitación y acompañamiento para la adopción del sistema.</p></article></div></section></div><div class="m7-content" id="content-m7-alcance"><section id="alcance"><h2><i>04</i>Una solución demostrable y escalable</h2><p>La versión presentada permite experimentar la navegación y las funciones principales del SCADA. En un despliegue productivo, el sistema se conecta a las señales reales de planta y se ajusta a los estándares, permisos y objetivos operativos de cada organización.</p><div class="commercial-cta"><h3>Convierta los datos de su línea en una herramienta de gestión</h3><p>Nexum Automation integra visualización, alarmas, históricos y análisis operativo en una experiencia diseñada para facilitar el trabajo diario.</p></div></section></div></div></div></main>
 </div>
 <script>
     (function(){
@@ -703,44 +1003,58 @@
 
     document.querySelectorAll('section[id]').forEach(function (s) { obs.observe(s); });
     })();
-
-        /* =========================================================
-        SINCRONIZACIÓN SELECTOR ↔ VISTAS DE MÁQUINAS
-        ========================================================= */
-
-        const scadaRoot = document.getElementById("modulo7-scada");
-        const machineSelect = scadaRoot?.querySelector("#demoMachineSelect");
-
-        if (machineSelect && !machineSelect.dataset.initialized) {
-            machineSelect.dataset.initialized = "true";
-
-            machineSelect.addEventListener("change", function () {
-                const machineId = this.value;
-
-                const machineButton = scadaRoot.querySelector(
-                    `.demo-nav button[data-view="${machineId}"]`
-                );
-
-                if (machineButton) {
-                    machineButton.click();
-                }
-            });
-        }
-
-        const machineTabs = scadaRoot?.querySelectorAll(
-            '.demo-nav button[data-view^="M"]'
-        );
-
-        machineTabs?.forEach((button) => {
-            if (button.dataset.selectSyncInitialized) return;
-
-            button.dataset.selectSyncInitialized = "true";
-
-            button.addEventListener("click", function () {
-                if (machineSelect) {
-                    machineSelect.value = this.dataset.view;
-                }
-            });
-        });
     </script>
-</div>
+<script>
+(function initModulo7Sidebar(){
+    const root = document.getElementById('modulo7-scada');
+    if (!root) return;
+
+    const hub = root.querySelector('.m7-sidebar');
+    if (!hub || hub.dataset.engineReady === 'true') return;
+    hub.dataset.engineReady = 'true';
+
+    const svg = hub.querySelector('.network-canvas');
+    const nodes = Array.from(hub.querySelectorAll('.hub-node'));
+    const ghosts = Array.from(hub.querySelectorAll('.ghost-dot'));
+    if (!svg || !nodes.length) return;
+
+    const all = [...nodes, ...ghosts];
+    const lines = [];
+
+    function addLine(a, b, ghost){
+        const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+        line.setAttribute('stroke', 'var(--text-muted)');
+        line.setAttribute('stroke-width', ghost ? '1' : '1.4');
+        line.setAttribute('stroke-dasharray', ghost ? '2 5' : '4 4');
+        line.setAttribute('opacity', ghost ? '.16' : '.28');
+        svg.appendChild(line);
+        lines.push({line,a,b});
+    }
+
+    for(let i=0;i<nodes.length-1;i++) addLine(nodes[i],nodes[i+1],false);
+    ghosts.forEach((ghost,i)=>addLine(nodes[i % nodes.length],ghost,true));
+
+    function center(el, rect){
+        const r = el.getBoundingClientRect();
+        return {
+            x: r.left - rect.left + r.width/2,
+            y: r.top - rect.top + r.height/2
+        };
+    }
+
+    function draw(){
+        if (!document.body.contains(hub)) return;
+        const rect = hub.getBoundingClientRect();
+        lines.forEach(item=>{
+            const a = center(item.a,rect);
+            const b = center(item.b,rect);
+            item.line.setAttribute('x1',a.x);
+            item.line.setAttribute('y1',a.y);
+            item.line.setAttribute('x2',b.x);
+            item.line.setAttribute('y2',b.y);
+        });
+        requestAnimationFrame(draw);
+    }
+    requestAnimationFrame(draw);
+})();
+</script></div>
