@@ -234,14 +234,20 @@
     const network = document.getElementById('team-network');
     if (!network) return;
 
-    const nodes = network.querySelectorAll('.team-node');
+    const nodes = Array.from(network.querySelectorAll('.team-node'));
     const center = document.getElementById('team-center');
     const centerBack = document.getElementById('team-center-back');
     const eye = document.getElementById('team-eye');
     const hint = document.getElementById('team-center-hint');
     const influenceRadius = 110;
     const maxDisplacement = 12;
-    const eyeRadius = 9;
+    const floatAmplitude = 4;
+    const eyeRadius = 20;
+
+    const nodeData = nodes.map(node => ({
+        node, seed: Math.random() * 10, currX: 0, currY: 0
+    }));
+    let eyeCurrX = 0, eyeCurrY = 0;
 
     function setPhoto(d) {
         centerBack.innerHTML = '<img src="' + d.photo + '" alt="' + d.name + '">';
@@ -253,7 +259,6 @@
 
         nodes.forEach(n => n.classList.remove('selected'));
         node.classList.add('selected');
-        node.style.transform = 'translate(0px, 0px)';
 
         if (alreadyFlipped) {
             centerBack.classList.remove('swap');
@@ -286,53 +291,79 @@
         }
     });
 
-    network.addEventListener('mousemove', (e) => {
-        // Movimiento real hacia el cursor para cada nodo satélite
-        nodes.forEach(node => {
-            if (node.classList.contains('selected')) return;
-            const r = node.getBoundingClientRect();
-            const cx = r.left + r.width / 2;
-            const cy = r.top + r.height / 2;
-            const dx = e.clientX - cx;
-            const dy = e.clientY - cy;
-            const dist = Math.sqrt(dx * dx + dy * dy);
+    let mouseX = -1000, mouseY = -1000, isHovering = false, loopTime = 0;
 
-            if (dist < influenceRadius) {
-                const force = 1 - dist / influenceRadius;
-                const angle = Math.atan2(dy, dx);
-                const tx = Math.cos(angle) * maxDisplacement * force;
-                const ty = Math.sin(angle) * maxDisplacement * force;
-                node.style.transition = 'transform 0.15s ease-out';
-                node.style.transform = `translate(${tx}px, ${ty}px)`;
-                node.classList.add('near');
-            } else {
-                node.style.transition = 'transform 0.4s ease-out';
-                node.style.transform = 'translate(0px, 0px)';
-                node.classList.remove('near');
+    network.addEventListener('mousemove', (e) => {
+        const rect = network.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
+        isHovering = true;
+    });
+    network.addEventListener('mouseleave', () => { isHovering = false; });
+
+    function runNetworkEngine() {
+        if (!document.body.contains(network)) return; // el panel se cerró: apagar el loop
+
+        loopTime += 0.02;
+        const netRect = network.getBoundingClientRect();
+
+        nodeData.forEach(item => {
+            if (item.node.classList.contains('selected')) {
+                item.currX += (0 - item.currX) * 0.15;
+                item.currY += (0 - item.currY) * 0.15;
+                item.node.style.transform = `translate(${item.currX}px, ${item.currY}px)`;
+                item.node.classList.remove('near');
+                return;
             }
+
+            const r = item.node.getBoundingClientRect();
+            const ox = (r.left - netRect.left) + r.width / 2 - item.currX;
+            const oy = (r.top - netRect.top) + r.height / 2 - item.currY;
+
+            // Flotación ambiental tenue por defecto
+            let tx = Math.sin(loopTime + item.seed) * floatAmplitude;
+            let ty = Math.cos(loopTime * 0.8 + item.seed) * floatAmplitude;
+            let near = false;
+
+            if (isHovering) {
+                const dx = mouseX - ox;
+                const dy = mouseY - oy;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < influenceRadius) {
+                    const force = 1 - dist / influenceRadius;
+                    const angle = Math.atan2(dy, dx);
+                    tx = Math.cos(angle) * maxDisplacement * force;
+                    ty = Math.sin(angle) * maxDisplacement * force;
+                    near = true;
+                }
+            }
+            item.node.classList.toggle('near', near);
+
+            item.currX += (tx - item.currX) * 0.08;
+            item.currY += (ty - item.currY) * 0.08;
+            item.node.style.transform = `translate(${item.currX}px, ${item.currY}px)`;
         });
 
         // Efecto de ojo: el logo central sigue al cursor, igual que n-center en el hub principal
         if (!center.classList.contains('flipped')) {
             const cRect = center.getBoundingClientRect();
-            const ecx = cRect.left + cRect.width / 2;
-            const ecy = cRect.top + cRect.height / 2;
-            const edx = e.clientX - ecx;
-            const edy = e.clientY - ecy;
-            const eangle = Math.atan2(edy, edx);
-            eye.style.transform = `translate(${Math.cos(eangle) * eyeRadius}px, ${Math.sin(eangle) * eyeRadius}px)`;
+            const ccx = (cRect.left - netRect.left) + cRect.width / 2;
+            const ccy = (cRect.top - netRect.top) + cRect.height / 2;
+            let etx = 0, ety = 0;
+            if (isHovering) {
+                const edx = mouseX - ccx;
+                const edy = mouseY - ccy;
+                const eangle = Math.atan2(edy, edx);
+                etx = Math.cos(eangle) * eyeRadius;
+                ety = Math.sin(eangle) * eyeRadius;
+            }
+            eyeCurrX += (etx - eyeCurrX) * 0.18;
+            eyeCurrY += (ety - eyeCurrY) * 0.18;
+            eye.style.transform = `translate(${eyeCurrX}px, ${eyeCurrY}px)`;
         }
-    });
 
-    network.addEventListener('mouseleave', () => {
-        nodes.forEach(node => {
-            if (node.classList.contains('selected')) return;
-            node.style.transition = 'transform 0.4s ease-out';
-            node.style.transform = 'translate(0px, 0px)';
-            node.classList.remove('near');
-        });
-        eye.style.transition = 'transform 0.3s ease-out';
-        eye.style.transform = 'translate(0px, 0px)';
-    });
+        requestAnimationFrame(runNetworkEngine);
+    }
+    requestAnimationFrame(runNetworkEngine);
 })();
 </script>
