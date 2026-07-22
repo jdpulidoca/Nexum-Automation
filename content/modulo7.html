@@ -931,6 +931,246 @@
 </div>
 </section></div><div class="m7-content" id="content-m7-beneficios"><section id="beneficios"><h2><i>01</i>Valor para su operación</h2><p>La solución concentra la información crítica de la línea en un solo entorno para que operación, mantenimiento y supervisión trabajen con una visión común.</p><div class="commercial-grid"><article class="commercial-card"><h3>Decisiones más rápidas</h3><p>Visualice estados, producción y desviaciones sin recorrer múltiples sistemas.</p></article><article class="commercial-card"><h3>Menos tiempo de reacción</h3><p>Las alarmas se clasifican por prioridad para dirigir la atención a lo realmente urgente.</p></article><article class="commercial-card"><h3>Mejor trazabilidad</h3><p>Consulte históricos, eventos y tendencias para entender qué ocurrió y cuándo.</p></article><article class="commercial-card"><h3>Operación más clara</h3><p>La interfaz HP-HMI reduce adornos y destaca únicamente la información que requiere acción.</p></article></div></section></div><div class="m7-content" id="content-m7-capacidades"><section id="capacidades"><h2><i>02</i>Capacidades principales</h2><p>El sistema combina supervisión en tiempo real, análisis operativo y una base preparada para crecer junto con la planta.</p><div class="capability-list"><div class="capability-item"><h3>Vista general de planta</h3><p>Estado de las cinco máquinas y sus alarmas desde una única pantalla.</p></div><div class="capability-item"><h3>Detalle por máquina</h3><p>Información específica para sopladora, lavadora, llenadora, inspección y empaque.</p></div><div class="capability-item"><h3>Gestión de alarmas</h3><p>Priorización, reconocimiento y seguimiento bajo criterios ISA-18.2.</p></div><div class="capability-item"><h3>Históricos y KPI</h3><p>Consulta de tendencias y desempeño para apoyar mejora continua.</p></div><div class="capability-item"><h3>Registro de eventos</h3><p>Trazabilidad de acciones y cambios relevantes del proceso.</p></div><div class="capability-item"><h3>Conectividad industrial</h3><p>Arquitectura preparada para integrarse con PLC y fuentes de datos reales.</p></div></div></section></div><div class="m7-content" id="content-m7-implementacion"><section id="implementacion"><h2><i>03</i>Implementación orientada a resultados</h2><p>La puesta en marcha puede desarrollarse por etapas para reducir riesgos y validar valor desde el inicio.</p><div class="implementation-steps"><article class="implementation-step"><span>1</span><h3>Levantamiento</h3><p>Definición de variables, usuarios, alarmas y necesidades de visualización.</p></article><article class="implementation-step"><span>2</span><h3>Integración</h3><p>Conexión con PLC, pruebas de señales y configuración de almacenamiento.</p></article><article class="implementation-step"><span>3</span><h3>Validación</h3><p>Pruebas con operación y mantenimiento sobre escenarios normales y anormales.</p></article><article class="implementation-step"><span>4</span><h3>Despliegue</h3><p>Entrega, capacitación y acompañamiento para la adopción del sistema.</p></article></div></section></div><div class="m7-content" id="content-m7-alcance"><section id="alcance"><h2><i>04</i>Una solución demostrable y escalable</h2><p>La versión presentada permite experimentar la navegación y las funciones principales del SCADA. En un despliegue productivo, el sistema se conecta a las señales reales de planta y se ajusta a los estándares, permisos y objetivos operativos de cada organización.</p><div class="commercial-cta"><h3>Convierta los datos de su línea en una herramienta de gestión</h3><p>Nexum Automation integra visualización, alarmas, históricos y análisis operativo en una experiencia diseñada para facilitar el trabajo diario.</p></div></section></div></div></div></main>
 </div>
+
+<style>
+/* ============================================================
+   INTEGRACIÓN VISUAL DEL SCADA CON EL TEMA NEXUM
+   Se mantiene el principio HP-HMI: rojo/naranja/amarillo se
+   reservan para alarmas; la interfaz base usa los tokens del sitio.
+   ============================================================ */
+
+#modulo7-scada .demo-shell {
+    --scada-surface: var(--node-bg);
+    --scada-surface-soft: rgba(142, 142, 147, 0.055);
+    --scada-surface-hover: rgba(63, 81, 181, 0.08);
+    --scada-border: var(--border-node);
+    --scada-text: var(--text-main);
+    --scada-muted: var(--text-muted);
+    --scada-primary: var(--nexum-blue);
+    --scada-accent: var(--nexum-cyan);
+
+    background: var(--scada-surface);
+    color: var(--scada-text);
+    border: 1px solid var(--scada-border);
+    box-shadow: var(--shadow-node);
+}
+
+#modulo7-scada .demo-top {
+    background:
+        linear-gradient(90deg, rgba(63,81,181,.10), rgba(14,165,233,.045)),
+        var(--scada-surface);
+    border-bottom: 1px solid var(--scada-border);
+}
+
+#modulo7-scada .demo-brand,
+#modulo7-scada .demo-clock {
+    color: var(--scada-text);
+}
+
+#modulo7-scada .demo-nav button,
+#modulo7-scada .demo-actions button {
+    background: var(--scada-surface);
+    color: var(--scada-text);
+    border: 1px solid var(--scada-border);
+    border-radius: 5px;
+    transition: border-color .2s, color .2s, background .2s, transform .15s;
+}
+
+#modulo7-scada .demo-nav button:hover,
+#modulo7-scada .demo-actions button:hover {
+    background: var(--scada-surface-hover);
+    color: var(--scada-accent);
+    border-color: var(--scada-accent);
+    transform: translateY(-1px);
+}
+
+#modulo7-scada .demo-nav button.active {
+    background: rgba(63,81,181,.14);
+    color: var(--scada-primary);
+    border-color: var(--scada-primary);
+    box-shadow: inset 0 -2px 0 var(--scada-primary);
+}
+
+#modulo7-scada .demo-stage {
+    background: var(--scada-surface-soft);
+}
+
+#modulo7-scada .demo-toolbar {
+    border-bottom-color: var(--scada-border);
+}
+
+#modulo7-scada .demo-toolbar label,
+#modulo7-scada .demo-hint {
+    color: var(--scada-muted);
+}
+
+#modulo7-scada .demo-toolbar select {
+    background: var(--scada-surface);
+    color: var(--scada-text);
+    border: 1px solid var(--scada-border);
+    border-radius: 5px;
+}
+
+#modulo7-scada .demo-actions #demoRun {
+    border-color: rgba(76,175,80,.65);
+}
+
+#modulo7-scada .demo-actions #demoRun:hover {
+    color: #4caf50;
+    background: rgba(76,175,80,.08);
+}
+
+#modulo7-scada .demo-actions #demoStop,
+#modulo7-scada .demo-actions .danger {
+    border-color: rgba(244,67,54,.62);
+}
+
+#modulo7-scada .demo-actions #demoStop:hover,
+#modulo7-scada .demo-actions .danger:hover {
+    color: #f44336;
+    background: rgba(244,67,54,.08);
+}
+
+#modulo7-scada .demo-actions .ack {
+    border-color: rgba(249,168,37,.7);
+}
+
+#modulo7-scada .demo-actions .ack:hover {
+    color: #f9a825;
+    background: rgba(249,168,37,.08);
+}
+
+#modulo7-scada .demo-general-plan,
+#modulo7-scada .demo-process,
+#modulo7-scada .demo-mimic,
+#modulo7-scada .demo-card,
+#modulo7-scada .demo-chart {
+    background: var(--scada-surface);
+    border-color: var(--scada-border);
+}
+
+#modulo7-scada .demo-general-plan {
+    background:
+        radial-gradient(circle at 50% 30%, rgba(63,81,181,.06), transparent 48%),
+        var(--scada-surface);
+}
+
+#modulo7-scada .demo-general-plan img,
+#modulo7-scada .demo-process img {
+    opacity: .84;
+}
+
+#modulo7-scada .demo-summary div,
+#modulo7-scada .demo-machine {
+    background: var(--scada-surface);
+    border-color: var(--scada-border);
+    color: var(--scada-text);
+}
+
+#modulo7-scada .demo-machine:hover {
+    background: var(--scada-surface-hover);
+    border-color: var(--scada-accent);
+}
+
+#modulo7-scada .demo-machine h4,
+#modulo7-scada .demo-kpi b,
+#modulo7-scada .demo-summary b,
+#modulo7-scada .demo-mimic-head strong {
+    color: var(--scada-text);
+}
+
+#modulo7-scada .demo-machine small,
+#modulo7-scada .demo-summary em,
+#modulo7-scada .demo-mimic-head span {
+    color: var(--scada-muted);
+}
+
+#modulo7-scada .demo-card h4,
+#modulo7-scada .demo-table th {
+    background: rgba(63,81,181,.08);
+    color: var(--scada-primary);
+    border-color: var(--scada-border);
+}
+
+#modulo7-scada .demo-row,
+#modulo7-scada .demo-table td,
+#modulo7-scada .demo-table th {
+    border-color: var(--scada-border);
+}
+
+#modulo7-scada .demo-table {
+    background: transparent;
+    color: var(--scada-text);
+}
+
+#modulo7-scada .demo-table tr:hover td {
+    background: var(--scada-surface-hover);
+}
+
+#modulo7-scada .demo-indicator {
+    background: var(--scada-surface-soft);
+    color: var(--scada-muted);
+    border-color: var(--scada-border);
+}
+
+#modulo7-scada .demo-indicator.on {
+    background: rgba(76,175,80,.15);
+    color: #4caf50;
+    border-color: rgba(76,175,80,.55);
+}
+
+#modulo7-scada .demo-note {
+    background: var(--scada-surface-soft);
+    color: var(--scada-text);
+    border-left-color: var(--scada-primary);
+}
+
+#modulo7-scada .demo-bar {
+    background: linear-gradient(180deg, var(--scada-accent), var(--scada-primary));
+    border-color: var(--scada-primary);
+}
+
+/* Estados normales coherentes con el sitio; alarmas conservan color */
+#modulo7-scada .demo-state.run {
+    background: rgba(76,175,80,.14);
+    color: #3f9144;
+    border-color: rgba(76,175,80,.5);
+}
+
+#modulo7-scada .demo-state.stop {
+    background: rgba(142,142,147,.12);
+    color: var(--scada-muted);
+    border-color: var(--scada-border);
+}
+
+#modulo7-scada .demo-state.pause {
+    background: rgba(249,168,37,.16);
+    color: #b57900;
+    border-color: rgba(249,168,37,.55);
+}
+
+#modulo7-scada .demo-state.alarm,
+#modulo7-scada .demo-status.unack {
+    background: #f44336;
+    color: #fff;
+}
+
+#modulo7-scada .demo-general-plan-cap {
+    background: rgba(63,81,181,.88);
+    color: #fff;
+    border-radius: 4px;
+}
+
+/* En tema oscuro se evita que los SVG desaparezcan sobre el fondo */
+body.dark-mode #modulo7-scada .demo-general-plan img,
+body.dark-mode #modulo7-scada .demo-process img,
+[data-theme="dark"] #modulo7-scada .demo-general-plan img,
+[data-theme="dark"] #modulo7-scada .demo-process img {
+    filter: invert(.82) hue-rotate(180deg);
+    opacity: .9;
+}
+</style>
+
 <script>
     (function(){
     var root=document.getElementById('scadaDemo'); if(!root) return;
@@ -948,12 +1188,54 @@
     function log(type,id,detail){events.unshift({time:now(),type:type,id:id,detail:detail});events=events.slice(0,40);}
     function modeText(m){return m==='run'?'EN MARCHA':m==='pause'?'PAUSADA':'DETENIDA';}
     function setMode(id,mode){var prev=state[id].mode;state[id].mode=mode;if(prev!==mode)log('ESTADO',id,modeText(prev)+' → '+modeText(mode));render();}
+    function setAllModes(mode){
+        ids.forEach(function(id){
+            var prev=state[id].mode;
+            state[id].mode=mode;
+            if(prev!==mode)log('ESTADO',id,modeText(prev)+' → '+modeText(mode));
+        });
+        log('OPERACIÓN','LÍNEA',mode==='run'?'Arranque general de la línea':'Parada general de la línea');
+        render();
+    }
     function fail(id){if(state[id].fault)return;state[id].fault=true;state[id].mode='pause';var d=defs[id];alarms.unshift({id:id+'.DEMO',machine:id,desc:d.alarm,prio:d.prio,time:now(),status:'UNACK'});log('ALARMA',id,d.alarm+' (P'+d.prio+')');render();showView('alarmas');}
     function ack(){var any=false;alarms.forEach(function(a){if(a.status==='UNACK'){a.status='ACKED';any=true;log('RECONOCIMIENTO',a.machine,a.desc);}});if(!any)log('OPERACIÓN','—','No había alarmas nuevas para reconocer');render();}
     function clearFaults(){ids.forEach(function(id){state[id].fault=false;});alarms=[];log('SISTEMA','—','Fallos y alarmas restablecidos');render();}
-    function showView(view){activeView=view;if(ids.indexOf(view)>=0){selected=view;document.getElementById('demoMachineSelect').value=view;}
-        document.querySelectorAll('#demoNav button').forEach(function(b){b.classList.toggle('active',b.dataset.view===view);});
-        document.querySelectorAll('.demo-view').forEach(function(v){var key=v.dataset.demoView;v.hidden= ids.indexOf(view)>=0 ? key!=='machine' : key!==view;});render();}
+    function showView(view){
+        activeView=view;
+        if(ids.indexOf(view)>=0){
+            selected=view;
+            document.getElementById('demoMachineSelect').value=view;
+        }
+
+        document.querySelectorAll('#demoNav button').forEach(function(b){
+            b.classList.toggle('active',b.dataset.view===view);
+        });
+
+        document.querySelectorAll('.demo-view').forEach(function(v){
+            var key=v.dataset.demoView;
+            v.hidden=ids.indexOf(view)>=0 ? key!=='machine' : key!==view;
+        });
+
+        var runBtn=document.getElementById('demoRun');
+        var stopBtn=document.getElementById('demoStop');
+        var hint=document.querySelector('#scadaDemo .demo-hint');
+
+        if(view==='general'){
+            runBtn.textContent='Poner toda la línea en marcha';
+            stopBtn.textContent='Detener toda la línea';
+            if(hint)hint.textContent='En la vista GENERAL, marcha y parada actúan sobre las cinco máquinas.';
+        }else if(ids.indexOf(view)>=0){
+            runBtn.textContent='Poner '+view+' en marcha';
+            stopBtn.textContent='Detener '+view;
+            if(hint)hint.textContent='Los controles actúan únicamente sobre '+view+' · '+defs[view].name+'.';
+        }else{
+            runBtn.textContent='Poner en marcha';
+            stopBtn.textContent='Detener';
+            if(hint)hint.textContent='Seleccione una máquina o abra la vista GENERAL para operar toda la línea.';
+        }
+
+        render();
+    }
     function renderLine(){var line=document.getElementById('demoLine');line.innerHTML=ids.map(function(id){var s=state[id],d=defs[id],a=alarms.find(function(x){return x.machine===id;});return '<article class="demo-machine" data-machine="'+id+'"><div class="demo-state '+(s.fault?'alarm':s.mode)+'">'+modeText(s.mode)+'</div>'+(a?'<span class="demo-alarm-chip">'+a.prio+'</span>':'')+'<h4>'+id+' · '+d.name+'</h4><small>'+ (s.fault?'CONDICIÓN ANORMAL':'OPERACIÓN SIMULADA') +'</small><div class="demo-kpi"><span>Producción</span><b>'+s.count+'</b></div></article>';}).join('');
         line.querySelectorAll('[data-machine]').forEach(function(el){el.onclick=function(){showView(el.dataset.machine);};});}
     function renderDetail(){var id=selected,s=state[id],d=defs[id];document.getElementById('demoDetailName').textContent=id+' · '+d.name.toUpperCase();document.getElementById('demoDetailState').textContent=modeText(s.mode)+(s.fault?' · ALARMA ACTIVA':'');
@@ -973,12 +1255,19 @@
     function render(){renderLine();renderDetail();renderAlarms();renderEvents();renderChart();var total=ids.reduce(function(n,id){return n+state[id].count;},0),running=ids.filter(function(id){return state[id].mode==='run';}).length,elapsed=Math.max(1,(Date.now()-started)/1000),runScore=ids.reduce(function(n,id){return n+(state[id].mode==='run'?1:state[id].mode==='pause'?.45:0);},0);document.getElementById('demoTotal').textContent=total;document.getElementById('demoRunning').textContent=running+' / 5';document.getElementById('demoAlarms').textContent=alarms.length;document.getElementById('demoAvail').textContent=Math.round(runScore/5*100)+' %';var badge=document.getElementById('demoAlarmBadge');badge.textContent=alarms.length;badge.hidden=!alarms.length;}
     document.querySelectorAll('#demoNav button').forEach(function(b){b.onclick=function(){showView(b.dataset.view);};});
     document.getElementById('demoMachineSelect').onchange=function(){selected=this.value;if(ids.indexOf(activeView)>=0)showView(selected);else renderDetail();};
-    document.getElementById('demoRun').onclick=function(){setMode(document.getElementById('demoMachineSelect').value,'run');};
-    document.getElementById('demoStop').onclick=function(){setMode(document.getElementById('demoMachineSelect').value,'stop');};
+    document.getElementById('demoRun').onclick=function(){
+        if(activeView==='general')setAllModes('run');
+        else setMode(document.getElementById('demoMachineSelect').value,'run');
+    };
+    document.getElementById('demoStop').onclick=function(){
+        if(activeView==='general')setAllModes('stop');
+        else setMode(document.getElementById('demoMachineSelect').value,'stop');
+    };
     document.getElementById('demoFail').onclick=function(){fail(document.getElementById('demoMachineSelect').value);};
     document.getElementById('demoAck').onclick=ack;document.getElementById('demoReset').onclick=function(){clearFaults();init();showView('general');};
     setInterval(function(){document.getElementById('demoClock').textContent=now();ids.forEach(function(id){var s=state[id];if(s.mode==='run'&&!s.fault)s.count+=defs[id].rate;});render();},1000);
     init();
+    showView('general');
     })();
     </script>
 <script>
