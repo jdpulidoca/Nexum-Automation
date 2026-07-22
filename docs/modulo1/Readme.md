@@ -1,38 +1,57 @@
-# 📁 docs/modulo1/
+<div align="center">
 
-Assets de imagen del **Módulo 1 — Introducción a Automatización e Industria 4.0**, panel principal del hub [Nexum Automation](https://jdpulidoca.github.io/Nexum-Automation) (`content/modulo1.html`).
+# 📁 Módulo 1 — Automatización e Industria 4.0
 
-Este módulo presenta el marco conceptual del proyecto: el alcance real bajo el estándar **ISA-95**, la comparación entre las tres líneas de producción, la arquitectura de comunicaciones del gemelo digital, los KPIs de simulación y la sensórica de las cinco estaciones de la línea seleccionada.
+**Marco tecnológico y arquitectura del gemelo digital de Nexum Automation**
+
+`ISA-95` · `Gemelo digital` · `Campo → PLC → SCADA`
+
+[🌐 Ver proyecto](https://jdpulidoca.github.io/Nexum-Automation)
+
+</div>
+
+---
+
+## 🎯 Descripción
+
+Este directorio contiene los recursos gráficos del **Módulo 1**, donde se define el alcance ISA-95, se comparan las líneas de producción y se presenta la arquitectura, sensórica y simulación del gemelo digital.
+
+La solución es escalable a las tres líneas, pero su desarrollo se concentra en **Quatro PET 2 L**, seleccionada como base de la celda robotizada.
+
+## 🧱 Alcance ISA-95
+
+| Nivel | Función | Estado |
+|---|---|---|
+| 🖥️ Nivel 2 | SCADA y supervisión con Node-RED | ✅ Implementado |
+| 🎛️ Nivel 1 | Studio 5000 y Logix Emulate | ✅ Implementado |
+| 📡 Nivel 0 | Sensores y actuadores simulados en NX | ✅ Implementado |
+| 🗃️ Niveles 3 y 4 | MES y ERP | 📘 Referencia conceptual |
 
 ## 🖼️ Contenido
 
-| Archivo | Sección donde se usa | Descripción |
-|---|---|---|
-| `piramide_automatizacion.jpeg` | ISA-95 y Alcance | Pirámide de Automatización (Nexum Automation) — niveles 0–4 y el alcance cubierto (Campo → SCADA). |
-| `celda_foto.jpeg` | ISA-95 y Alcance | Foto de la celda robotizada, diseño propio del equipo. |
-| `arquitectura-diagrama-claro.jpeg` | Arquitectura de Comunicaciones | Diagrama de la arquitectura de comunicaciones del gemelo digital — versión tema claro. |
-| `arquitectura-diagrama-oscuro.jpeg` | Arquitectura de Comunicaciones | Misma diagrama — versión tema oscuro. Ambas se alternan automáticamente según el modo activo del sitio. |
-| `maquinas/` | Sensórica y Actuadores | Fotos individuales de las 5 estaciones de la línea Quatro (detalle abajo). |
-
-### 📂 `maquinas/`
-
-| Archivo | Estación |
+| Recurso | Descripción |
 |---|---|
-| `sopladora.jpeg` | Sopladora (Formadora) — moldeo por soplado PET |
-| `lavadora.jpeg` | Lavadora |
-| `llenadora.jpeg` | Llenadora y Tapadora |
-| `rechazadora.jpeg` | Rechazadora |
-| `empaquetadora.jpeg` | Empaquetadora (diseño propio del equipo, sin referencia de catálogo comercial) |
+| `piramide_automatizacion.jpeg` | Pirámide ISA-95 y alcance Campo–SCADA. |
+| `celda_foto.jpeg` | Evidencia de la celda robotizada diseñada por el equipo. |
+| `arquitectura-diagrama-claro.jpeg` | Arquitectura de comunicaciones para tema claro. |
+| `arquitectura-diagrama-oscuro.jpeg` | Versión del diagrama para tema oscuro. |
+| `maquinas/` | Imágenes de las cinco estaciones de la línea Quatro. |
 
-## 🧩 Estructura del panel (6 secciones)
+### ⚙️ Estaciones documentadas
 
-1. **ISA-95 y Alcance** — define el alcance real: Nivel 0 (Campo) a Nivel 2 (SCADA) implementados; Nivel 3 (MES) y Nivel 4 (ERP) quedan fuera de alcance, solo como referencia conceptual.
-2. **Propuesta por Línea** — Monster (473 ml), Quatro (PET 1.5 L) y Garrafón (20 L); **Quatro** es la línea seleccionada, base del gemelo digital y la celda robotizada.
-3. **Arquitectura de Comunicaciones** — pila de software en 3 niveles: Supervisión (Node-RED, Studio 5000 + Logix Emulate), Control e Integración (ABB IoT Gateway, RSLinx Classic) y Simulación/Planta Virtual (ABB RobotStudio, Siemens NX/MCD).
-4. **Gemelo Digital** — simulación en Siemens NX (MCD) para evaluar cuellos de botella, inventarios (WIP), OEE (meta ≥ 75%) y microparos.
-5. **Sensórica y Actuadores** — señales de Animación, Actuadores, Sensores y Lógica de funcionamiento para cada una de las 5 estaciones de la línea Quatro.
-6. **Conclusión** — síntesis del alcance logrado y del gemelo digital como ecosistema de datos para la toma de decisiones.
+`Sopladora` · `Lavadora` · `Llenadora y Tapadora` · `Rechazadora` · `Empaquetadora`
 
-## 🔗 Referenciado desde
+La sección de sensórica detalla para cada estación sus **señales de animación, actuadores, sensores y secuencia de funcionamiento**.
 
-- `content/modulo1.html` — todas las rutas de imagen usan `docs/modulo1/...` (rutas absolutas desde la raíz del sitio, sin `../`).
+## 🧩 Secciones del módulo
+
+1. 🏛️ **ISA-95 y alcance**
+2. 🎯 **Propuestas para Monster, Quatro y Garrafón**
+3. 🔗 **Arquitectura de comunicaciones**
+4. 🤖 **Gemelo digital y KPIs**
+5. ⚙️ **Sensórica y actuadores**
+6. ✅ **Conclusiones**
+
+La arquitectura integra **Siemens NX/MCD, ABB RobotStudio, Studio 5000, Logix Emulate, RSLinx y Node-RED** mediante OPC DA, OPC UA y EtherNet/IP.
+
+> 🔗 Los recursos son utilizados por `content/modulo1.html` mediante rutas `docs/modulo1/...`.
