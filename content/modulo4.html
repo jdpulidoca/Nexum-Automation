@@ -198,6 +198,7 @@
     /* ===== Estados generados para Módulo 4 ===== */
     #rad-video:checked ~ .hub-horizontal label[for="rad-video"] .hub-icon,
 #rad-celda:checked ~ .hub-horizontal label[for="rad-celda"] .hub-icon,
+#rad-fotos:checked ~ .hub-horizontal label[for="rad-fotos"] .hub-icon,
 #rad-integracion:checked ~ .hub-horizontal label[for="rad-integracion"] .hub-icon,
 #rad-justificacion:checked ~ .hub-horizontal label[for="rad-justificacion"] .hub-icon,
 #rad-informe:checked ~ .hub-horizontal label[for="rad-informe"] .hub-icon {
@@ -206,6 +207,7 @@
 }
     #rad-video:checked ~ .hub-horizontal label[for="rad-video"] .hub-text,
 #rad-celda:checked ~ .hub-horizontal label[for="rad-celda"] .hub-text,
+#rad-fotos:checked ~ .hub-horizontal label[for="rad-fotos"] .hub-text,
 #rad-integracion:checked ~ .hub-horizontal label[for="rad-integracion"] .hub-text,
 #rad-justificacion:checked ~ .hub-horizontal label[for="rad-justificacion"] .hub-text,
 #rad-informe:checked ~ .hub-horizontal label[for="rad-informe"] .hub-text {
@@ -213,6 +215,7 @@
 }
     #rad-video:checked ~ #content-video,
 #rad-celda:checked ~ #content-celda,
+#rad-fotos:checked ~ #content-fotos,
 #rad-integracion:checked ~ #content-integracion,
 #rad-justificacion:checked ~ #content-justificacion,
 #rad-informe:checked ~ #content-informe { display: block; }
@@ -241,6 +244,12 @@
     }
     .celda-viewer-container model-viewer { width: 100%; height: 100%; --poster-color: transparent; }
 
+    /* ===== Galería de fotos de referencia (sección propia) ===== */
+    /* Reutiliza el componente global .hud-frame (style.css); solo controla el layout en fila */
+    .m4-gallery { display: flex; gap: 28px; flex-wrap: wrap; justify-content: center; margin-top: 10px; }
+    .m4-gallery .hud-frame { background: rgba(142,142,147,0.04); border-radius: 6px; }
+    .m4-gallery .hud-frame img { width: 380px; height: 340px; object-fit: contain; }
+
 </style>
 <h2 class="panel-title" style="text-align: center;">Celda de Manufactura Robotizada</h2>
 <div class="panel-meta-strip">[ MÓDULO: 04 ] · [ ROBOTSTUDIO ] · [ ABB IRB460-110/2.40 ]</div>
@@ -248,6 +257,7 @@
 
 <input type="radio" id="rad-video" name="tw-tabs-m4" class="tw-radio" checked>
 <input type="radio" id="rad-celda" name="tw-tabs-m4" class="tw-radio">
+<input type="radio" id="rad-fotos" name="tw-tabs-m4" class="tw-radio">
 <input type="radio" id="rad-integracion" name="tw-tabs-m4" class="tw-radio">
 <input type="radio" id="rad-justificacion" name="tw-tabs-m4" class="tw-radio">
 <input type="radio" id="rad-informe" name="tw-tabs-m4" class="tw-radio">
@@ -265,6 +275,10 @@
         <label for="rad-celda" class="hub-node parallax-el" data-speed="0.055">
             <div class="hub-icon">🏭</div>
             <div class="hub-text">Visor de la Celda</div>
+        </label>
+        <label for="rad-fotos" class="hub-node parallax-el" data-speed="0.057">
+            <div class="hub-icon">📸</div>
+            <div class="hub-text">Fotos de Referencia</div>
         </label>
         <label for="rad-integracion" class="hub-node parallax-el" data-speed="0.058">
             <div class="hub-icon">🔗</div>
@@ -295,6 +309,28 @@
     <div class="celda-viewer-container">
         <model-viewer src="docs/modulo4/Archivos/Robot_APM.glb" alt="Celda robotizada de paletizado — ABB IRB460-110/2.40" camera-controls auto-rotate shadow-intensity="1" exposure="1" style="background-color: transparent;">
         </model-viewer>
+    </div>
+</div>
+
+<div id="content-fotos" class="tw-content">
+    <h3 class="panel-subtitle" style="margin-top: 0;">📸 Fotos de Referencia — Celda Robotizada</h3>
+    <p class="panel-text" style="font-size: 13px;">Vista isométrica, plano de distribución y diseño del gripper utilizados en el desarrollo de la celda.</p>
+    <div class="m4-gallery">
+        <figure class="hud-frame">
+            <img src="docs/modulo4/isometrico.jpeg" alt="Vista isométrica de la celda robotizada">
+            <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+            <figcaption>Vista isométrica</figcaption>
+        </figure>
+        <figure class="hud-frame">
+            <img src="docs/modulo4/plano.jpeg" alt="Plano de la celda robotizada">
+            <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+            <figcaption>Plano de la celda</figcaption>
+        </figure>
+        <figure class="hud-frame">
+            <img src="docs/modulo4/gripper.jpeg" alt="Gripper diseñado para el paletizado">
+            <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+            <figcaption>Gripper</figcaption>
+        </figure>
     </div>
 </div>
 
