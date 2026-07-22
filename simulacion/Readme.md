@@ -9,5 +9,3 @@ Esta carpeta contiene modelos preliminares desarrollados en **Tecnomatix Plant S
 - **Brissa:** línea de garrafones de agua de 20 L, desde la recepción hasta el paletizado.
 
 Cada carpeta incluye el archivo de simulación (`.spp`) y material de apoyo, como imágenes del layout, videos y resultados del modelo.
-
-> Los resultados son preliminares y deben validarse con datos reales de producción y pruebas en planta.
