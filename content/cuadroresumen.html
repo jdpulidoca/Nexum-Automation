@@ -1,57 +1,172 @@
 <!-- Archivo: content/cuadroresumen.html -->
 <style>
-    .resumen-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin: 14px 0; }
-    .resumen-table th, .resumen-table td { border: 1px solid var(--border-node); padding: 8px 10px; text-align: left; }
-    .resumen-table th { background: rgba(76,175,80,0.08); color: #4caf50; font-weight: 700; }
-    .resumen-scope-badge { font-size: 9px; font-weight: 700; padding: 2px 8px; border-radius: 10px; text-transform: uppercase; }
+    .resumen-shell { max-width: 1180px; margin: 0 auto; }
+    .resumen-section { margin-top: 28px; }
+
+    .resumen-table-wrap { width: 100%; overflow-x: auto; margin: 14px 0; border-radius: 7px; }
+    .resumen-table { width: 100%; min-width: 690px; border-collapse: collapse; font-size: 12.5px; color: var(--text-main); }
+    .resumen-table th, .resumen-table td { border: 1px solid var(--border-node); padding: 9px 11px; text-align: left; vertical-align: middle; }
+    .resumen-table th { background: rgba(76,175,80,0.09); color: #4caf50; font-weight: 700; }
+    .resumen-table tbody tr:hover td { background: rgba(76,175,80,0.035); }
+    .resumen-table .numeric { text-align: center; white-space: nowrap; }
+    .resumen-table .improvement { color: #4caf50; font-weight: 700; }
+    .resumen-scope-badge { display: inline-block; font-size: 9px; font-weight: 700; padding: 3px 8px; border-radius: 10px; text-transform: uppercase; }
     .scope-yes-r { background: rgba(76,175,80,0.15); color: #4caf50; }
-    .scope-no-r { background: rgba(142,142,147,0.15); color: var(--text-muted); }
+
+    .resumen-transform-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 13px; margin: 17px 0; }
+    .resumen-transform-card { position: relative; min-height: 190px; border: 1px solid var(--border-node); border-radius: 8px; padding: 16px; background: rgba(142,142,147,0.03); }
+    .resumen-transform-card::after { content: '›'; position: absolute; top: 50%; right: -12px; z-index: 2; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-node); border-radius: 50%; background: var(--panel-bg); color: var(--nexum-blue); font-size: 19px; transform: translateY(-50%); }
+    .resumen-transform-card:last-child::after { display: none; }
+    .resumen-transform-card.problem { border-top: 3px solid #ef4444; }
+    .resumen-transform-card.before { border-top: 3px solid #ff9800; }
+    .resumen-transform-card.solution { border-top: 3px solid var(--nexum-blue); }
+    .resumen-transform-card.after { border-top: 3px solid #4caf50; }
+    .resumen-transform-card .step { position: absolute; top: 10px; right: 12px; font-family: monospace; font-size: 9px; color: var(--text-muted); opacity: 0.6; }
+    .resumen-transform-card .icon { display: block; font-size: 23px; margin-bottom: 8px; }
+    .resumen-transform-card strong { display: block; color: var(--text-main); font-size: 13px; margin-bottom: 7px; }
+    .resumen-transform-card p, .resumen-transform-card li { color: var(--text-muted); font-size: 11px; line-height: 1.5; }
+    .resumen-transform-card p { margin: 0 0 9px; }
+    .resumen-transform-card ul { margin: 0; padding-left: 16px; }
+    .resumen-transform-card li { margin-bottom: 4px; }
+
+    .resumen-metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin: 15px 0; }
+    .resumen-metric-card { border: 1px solid var(--border-node); border-radius: 7px; padding: 15px 12px; text-align: center; background: rgba(142,142,147,0.035); }
+    .resumen-metric-card .label { display: block; color: var(--text-muted); font-size: 10.5px; margin-bottom: 7px; }
+    .resumen-metric-card .value { display: block; color: var(--text-main); font-size: 16px; font-weight: 700; }
+    .resumen-metric-card.green { background: rgba(76,175,80,0.07); }
+    .resumen-metric-card.green .value { color: #4caf50; }
+    .resumen-metric-card.blue { background: rgba(33,150,243,0.07); }
+    .resumen-metric-card.blue .value { color: #2196f3; }
+    .resumen-metric-card.purple { background: rgba(156,39,176,0.07); }
+    .resumen-metric-card.purple .value { color: #9c27b0; }
+
+    .resumen-callout { margin: 17px 0; padding: 12px 14px; border-left: 3px solid #4caf50; background: rgba(76,175,80,0.055); color: var(--text-muted); font-size: 12px; line-height: 1.55; }
+    .resumen-callout strong { color: #4caf50; }
+    .resumen-callout.warning { border-left-color: #ff9800; background: rgba(255,152,0,0.07); }
+    .resumen-callout.warning strong { color: #ff9800; }
+
     .resumen-module-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin: 16px 0; }
     .resumen-module-card { border: 1px solid var(--border-node); border-radius: 6px; padding: 12px 14px; background: rgba(142,142,147,0.03); border-left: 3px solid #4caf50; }
     .resumen-module-card strong { display: block; font-size: 13px; color: var(--text-main); margin-bottom: 4px; }
     .resumen-module-card span { font-size: 11.5px; color: var(--text-muted); line-height: 1.4; }
+
+    @media (max-width: 980px) {
+        .resumen-transform-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .resumen-transform-card { min-height: 210px; }
+        .resumen-transform-card::after { display: none; }
+    }
+    @media (max-width: 600px) {
+        .resumen-transform-grid { grid-template-columns: 1fr; }
+        .resumen-transform-card { min-height: auto; }
+        .resumen-metric-grid { grid-template-columns: 1fr 1fr; }
+    }
 </style>
 
-<h2 class="panel-title" style="text-align: center;">📋 Cuadro Resumen del Proyecto</h2>
-<div class="panel-meta-strip">[ NEXUM AUTOMATION ] · [ APM 2026-1 ] · [ PUNTO DE PARTIDA ]</div>
+<div class="resumen-shell">
+    <h2 class="panel-title" style="text-align: center;">📋 Cuadro Resumen del Proyecto</h2>
+    <div class="panel-meta-strip">[ NEXUM AUTOMATION ] · [ APM 2026-I ] · [ VISIÓN EJECUTIVA ]</div>
 
-<p class="panel-text" style="margin-top: 0;"><strong>Nexum Automation</strong> es la consultora académica encargada de diagnosticar y proponer la automatización de tres líneas de producción de una planta embotelladora de Coca-Cola FEMSA. Este panel resume el alcance completo del proyecto — úsalo como punto de partida antes de explorar los módulos del hub.</p>
+    <p class="panel-text" style="margin-top: 0;"><strong>Nexum Automation</strong> evaluó la automatización del final de la línea <strong>Quatro PET 1,5 L</strong>. Este panel resume el problema, la solución propuesta y sus resultados técnicos y económicos.</p>
 
-<h3 class="panel-subtitle">Líneas evaluadas</h3>
-<table class="resumen-table">
-    <tr><th>Línea</th><th>Formato</th><th>Enfoque</th></tr>
-    <tr><td>🔋 Monster Energy</td><td>Lata 473 ml</td><td>Reducción de microparos</td></tr>
-    <tr style="background: rgba(76,175,80,0.05);"><td>🥤 <strong>Quatro</strong></td><td>PET 2 L</td><td><strong>Línea seleccionada</strong> — paletizado robotizado de fin de línea</td></tr>
-    <tr><td>💧 Agua Brisa</td><td>Garrafón 20 L</td><td>Rediseño de layout y paletizado</td></tr>
-</table>
+    <section class="resumen-section">
+        <h3 class="panel-subtitle">Transformación del proyecto</h3>
+        <div class="resumen-transform-grid">
+            <article class="resumen-transform-card problem">
+                <span class="step">01</span><span class="icon">⚠️</span>
+                <strong>Problema</strong>
+                <p>El agrupado, termoencogido y paletizado manual generaban variabilidad, acumulaciones y exposición ergonómica.</p>
+            </article>
+            <article class="resumen-transform-card before">
+                <span class="step">02</span><span class="icon">🧑‍🏭</span>
+                <strong>Estado pasado</strong>
+                <p>Formación de packs y cambio de pallet manuales, con dependencia directa del ritmo de los operarios.</p>
+                <ul><li>OEE: 72,11 %.</li><li>504 h/año de paradas.</li></ul>
+            </article>
+            <article class="resumen-transform-card solution">
+                <span class="step">03</span><span class="icon">🤖</span>
+                <strong>Solución</strong>
+                <p>Agrupadora, túnel térmico, PLC, sensórica, SCADA y celda robotizada ABB IRB 460 para packs de 12 botellas.</p>
+            </article>
+            <article class="resumen-transform-card after">
+                <span class="step">04</span><span class="icon">📈</span>
+                <strong>Estado actual proyectado</strong>
+                <p>Escenario simulado con mayor estabilidad, capacidad y menor intervención manual.</p>
+                <ul><li>OEE: 75,07 %.</li><li>448,71 h/año de paradas.</li></ul>
+            </article>
+        </div>
+    </section>
 
-<h3 class="panel-subtitle">Alcance real (Pirámide de Automatización)</h3>
-<p class="panel-text" style="font-size: 13px;">
-    <span class="resumen-scope-badge scope-yes-r">Implementado</span> Nivel 0 (Campo) · Nivel 1 (PLC) · Nivel 2 (SCADA)<br>
-    <span class="resumen-scope-badge scope-no-r" style="margin-top: 6px; display: inline-block;">Fuera de alcance</span> Nivel 3 (MES) · Nivel 4 (ERP) — quedan solo como marco conceptual.
-</p>
+    <section class="resumen-section">
+        <h3 class="panel-subtitle">Comparación técnica de Quatro: antes y después</h3>
+        <div class="resumen-table-wrap">
+            <table class="resumen-table">
+                <thead><tr><th>Indicador</th><th class="numeric">Antes</th><th class="numeric">Después</th><th class="numeric">Mejora</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>OEE</strong></td><td class="numeric">72,11 %</td><td class="numeric">75,07 %</td><td class="numeric improvement">+2,96 puntos</td></tr>
+                    <tr><td><strong>Disponibilidad</strong></td><td class="numeric">78,26 %</td><td class="numeric">80,65 %</td><td class="numeric improvement">+2,39 puntos</td></tr>
+                    <tr><td><strong>Desempeño</strong></td><td class="numeric">98,90 %</td><td class="numeric">98,90 %</td><td class="numeric">Sin cambio</td></tr>
+                    <tr><td><strong>Calidad</strong></td><td class="numeric">93,16 %</td><td class="numeric">94,12 %</td><td class="numeric improvement">+0,96 puntos</td></tr>
+                    <tr><td><strong>Tasa de rechazo (redondeada)</strong></td><td class="numeric">7 %</td><td class="numeric">6 %</td><td class="numeric improvement">61.000 rechazos evitados/año</td></tr>
+                    <tr><td><strong>Paradas no planificadas</strong></td><td class="numeric">504 h/año</td><td class="numeric">448,71 h/año</td><td class="numeric improvement">−55,29 h/año</td></tr>
+                    <tr><td><strong>Capacidad efectiva</strong></td><td class="numeric">6.676.800 botellas/año</td><td class="numeric">6.961.350 botellas/año</td><td class="numeric improvement">+284.550 botellas/año</td></tr>
+                    <tr><td><strong>Final de línea</strong></td><td class="numeric">Manual</td><td class="numeric">Automatizado</td><td class="numeric improvement">Menor variabilidad</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="panel-text" style="text-align: center; font-size: 11px; opacity: 0.75;">Los KPI corresponden al escenario base del modelo y deben validarse con datos reales de producción y pruebas de aceptación.</p>
+    </section>
 
-<h3 class="panel-subtitle">Módulos del hub</h3>
-<div class="resumen-module-grid">
-    <div class="resumen-module-card"><strong>1 · Propuesta e Industria 4.0</strong><span>ISA-95, arquitectura de comunicaciones, gemelo digital y KPIs, sensórica y actuadores.</span></div>
-    <div class="resumen-module-card"><strong>2 · Gestión de Producción</strong><span>VSM, DOP y layout por línea.</span></div>
-    <div class="resumen-module-card"><strong>3 · Evaluación de Proyectos</strong><span>Canvas, EDP/EDT, cronograma y análisis financiero.</span></div>
-    <div class="resumen-module-card"><strong>4 · Celda de Manufactura Robotizada</strong><span>Visor 3D, justificación económica e informe técnico.</span></div>
-    <div class="resumen-module-card"><strong>5 · Digital Twin</strong><span>Gemelo digital 3D de la línea y cada estación.</span></div>
-    <div class="resumen-module-card"><strong>6 · Controladores Industriales</strong><span>Grafcet general y por máquina, código Ladder.</span></div>
-    <div class="resumen-module-card"><strong>7 · Sistema SCADA</strong><span>Supervisión y control desarrollado en Node-RED.</span></div>
-    <div class="resumen-module-card"><strong>Simulación</strong><span>Tecnomatix Plant Simulation por línea.</span></div>
+    <section class="resumen-section">
+        <h3 class="panel-subtitle">Indicadores económicos y decisión</h3>
+        <div class="resumen-metric-grid">
+            <div class="resumen-metric-card green"><span class="label">VPN</span><span class="value">$ 797.768.473</span></div>
+            <div class="resumen-metric-card green"><span class="label">TIR</span><span class="value">37,64 % EA</span></div>
+            <div class="resumen-metric-card blue"><span class="label">Payback simple</span><span class="value">2,19 años</span></div>
+            <div class="resumen-metric-card blue"><span class="label">Payback descontado</span><span class="value">2,80 años</span></div>
+            <div class="resumen-metric-card purple"><span class="label">ROI acumulado</span><span class="value">144,21 %</span></div>
+            <div class="resumen-metric-card purple"><span class="label">Beneficio / costo</span><span class="value">2,02 veces</span></div>
+        </div>
+        <div class="resumen-callout"><strong>Decisión:</strong> el VPN positivo, la TIR y la relación beneficio/costo respaldan la viabilidad del escenario automatizado.</div>
+        <div class="resumen-callout warning"><strong>CAPEX:</strong> <strong>$1.224.597.310 antes de IVA</strong>. El IVA no está incluido en el flujo de caja.</div>
+    </section>
+
+    <section class="resumen-section">
+        <h3 class="panel-subtitle">Pirámide de automatización</h3>
+        <p class="panel-text" style="font-size: 13px;">
+            <span class="resumen-scope-badge scope-yes-r">Desarrollado</span> Nivel 0 (campo) · Nivel 1 (PLC) · Nivel 2 (SCADA)
+        </p>
+    </section>
+
+    <section class="resumen-section">
+        <h3 class="panel-subtitle">Módulos del hub</h3>
+        <div class="resumen-module-grid">
+            <div class="resumen-module-card"><strong>1 · Propuesta e Industria 4.0</strong><span>Arquitectura, sensórica y actuadores.</span></div>
+            <div class="resumen-module-card"><strong>2 · Gestión de Producción</strong><span>KPI, VSM, procesos y layout de Quatro.</span></div>
+            <div class="resumen-module-card"><strong>3 · Evaluación de Proyectos</strong><span>Canvas, EDP/EDT, cronograma, presupuesto y flujo de caja.</span></div>
+            <div class="resumen-module-card"><strong>4 · Celda Robotizada</strong><span>ABB IRB 460, gripper y seguridad.</span></div>
+            <div class="resumen-module-card"><strong>5 · Digital Twin</strong><span>Gemelo digital 3D de la línea.</span></div>
+            <div class="resumen-module-card"><strong>6 · Controladores</strong><span>Grafcet, PLC y código Ladder.</span></div>
+            <div class="resumen-module-card"><strong>7 · SCADA</strong><span>Supervisión y control en Node-RED.</span></div>
+            <div class="resumen-module-card"><strong>Simulación</strong><span>Escenarios antes y después en Tecnomatix.</span></div>
+        </div>
+    </section>
+
+    <section class="resumen-section">
+        <h3 class="panel-subtitle">Equipo</h3>
+        <div class="resumen-table-wrap">
+            <table class="resumen-table">
+                <thead><tr><th>Integrante</th><th>Rol</th></tr></thead>
+                <tbody>
+                    <tr><td>Ariadna Contreras Nossa</td><td>Gerente Ejecutiva</td></tr>
+                    <tr><td>Johan Camilo Patiño Mogollón</td><td>Gerente de Proyectos y Relaciones</td></tr>
+                    <tr><td>Esteban Durán Jiménez</td><td>Líder de Diseño</td></tr>
+                    <tr><td>Juliana Góngora Rasmussen</td><td>Líder de Diseño</td></tr>
+                    <tr><td>Oscar Jhondairo Siabato León</td><td>Gerente Financiero</td></tr>
+                    <tr><td>Julián David Pulido Castañeda</td><td>Gerente de Automatización</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <p class="panel-text" style="text-align: center; font-size: 11.5px; margin-top: 24px; opacity: 0.7;">Universidad Nacional de Colombia — Facultad de Ingeniería Mecánica y Mecatrónica, Sede Bogotá · Semestre 2026-I</p>
 </div>
-
-<h3 class="panel-subtitle">Equipo</h3>
-<table class="resumen-table">
-    <tr><th>Integrante</th><th>Rol</th></tr>
-    <tr><td>Ariadna Contreras Nossa</td><td>Gerente Ejecutiva</td></tr>
-    <tr><td>Johan Camilo Patiño Mogollón</td><td>Gerente de Proyectos y Relaciones</td></tr>
-    <tr><td>Esteban Durán Jiménez</td><td>Líder de Diseño</td></tr>
-    <tr><td>Juliana Góngora Rasmussen</td><td>Líder de Diseño</td></tr>
-    <tr><td>Oscar Jhondairo Siabato León</td><td>Gerente Financiero</td></tr>
-    <tr><td>Julián David Pulido Castañeda</td><td>Gerente de Automatización</td></tr>
-</table>
-
-<p class="panel-text" style="text-align: center; font-size: 11.5px; margin-top: 20px; opacity: 0.7;">Universidad Nacional de Colombia — Facultad de Ingeniería Mecánica y Mecatrónica, Sede Bogotá · Semestre 2026-I</p>
