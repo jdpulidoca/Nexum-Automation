@@ -2,21 +2,247 @@
      FRAGMENTO DE PANEL: PROPUESTA DE AUTOMATIZACIÓN
      Se inyecta dinámicamente en #panel-dynamic-content
      ========================================================================== -->
+     <style>
+        /* ==========================================
+        PROPUESTA QUATRO — CELDA ROBOTIZADA
+        ========================================== */
+
+        .quatro-kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+            margin: 22px 0;
+        }
+
+        .quatro-kpi-card {
+            padding: 15px;
+            border: 1px solid var(--border-node);
+            border-radius: 7px;
+            background: rgba(142, 142, 147, 0.035);
+            border-top: 3px solid var(--nexum-blue);
+        }
+
+        .quatro-kpi-label {
+            display: block;
+            margin-bottom: 7px;
+            color: var(--text-muted);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        .quatro-kpi-value {
+            display: block;
+            color: var(--nexum-blue);
+            font-size: 18px;
+            line-height: 1.2;
+        }
+
+        .quatro-kpi-detail {
+            display: block;
+            margin-top: 6px;
+            color: var(--text-muted);
+            font-size: 10px;
+            line-height: 1.4;
+        }
+
+        .quatro-solution-layout {
+            align-items: flex-start;
+            gap: 24px;
+            margin-top: 25px;
+        }
+
+        .quatro-section-title {
+            margin: 25px 0 10px;
+            padding-bottom: 7px;
+            color: var(--nexum-blue);
+            font-size: 14px;
+            border-bottom: 1px solid var(--border-node);
+        }
+
+        .quatro-feature-list {
+            display: grid;
+            gap: 9px;
+            margin: 18px 0;
+        }
+
+        .quatro-feature {
+            display: grid;
+            grid-template-columns: 34px 1fr;
+            gap: 10px;
+            padding: 12px;
+            border: 1px solid var(--border-node);
+            border-radius: 6px;
+            background: rgba(142, 142, 147, 0.025);
+        }
+
+        .quatro-feature-icon {
+            display: flex;
+            width: 30px;
+            height: 30px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: var(--nexum-cyan);
+            background: rgba(14, 165, 233, 0.08);
+            border: 1px solid rgba(14, 165, 233, 0.28);
+        }
+
+        .quatro-feature strong {
+            color: var(--text-main);
+            font-size: 12px;
+        }
+
+        .quatro-feature p {
+            margin: 4px 0 0;
+            color: var(--text-muted);
+            font-size: 10.5px;
+            line-height: 1.45;
+        }
+
+        .quatro-impact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            margin: 16px 0;
+        }
+
+        .quatro-impact-card {
+            padding: 14px;
+            border: 1px solid var(--border-node);
+            border-left: 3px solid var(--nexum-cyan);
+            border-radius: 5px;
+            background: rgba(14, 165, 233, 0.035);
+        }
+
+        .quatro-impact-card strong {
+            display: block;
+            color: var(--nexum-blue);
+            font-size: 14px;
+        }
+
+        .quatro-impact-card span {
+            display: block;
+            margin-top: 4px;
+            color: var(--text-muted);
+            font-size: 10px;
+            line-height: 1.4;
+        }
+
+        .quatro-business-case {
+            margin: 22px 0;
+            padding: 16px;
+            border: 1px solid var(--border-node);
+            border-left: 3px solid #4caf50;
+            border-radius: 6px;
+            background: rgba(76, 175, 80, 0.045);
+        }
+
+        .quatro-business-eyebrow {
+            display: block;
+            margin-bottom: 8px;
+            color: #4caf50;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .quatro-disclaimer {
+            margin: 9px 0 0;
+            color: var(--text-muted);
+            font-size: 9.5px;
+            line-height: 1.45;
+        }
+
+        .quatro-safety-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: 14px;
+        }
+
+        .quatro-safety-tags span {
+            padding: 5px 8px;
+            border-radius: 12px;
+            color: var(--nexum-blue);
+            background: rgba(63, 81, 181, 0.07);
+            border: 1px solid rgba(63, 81, 181, 0.22);
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .quatro-media-column {
+            flex: 0 0 43%;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 16px;
+        }
+
+        .quatro-operation-card {
+            padding: 15px;
+            border: 1px solid var(--border-node);
+            border-radius: 6px;
+            background: rgba(142, 142, 147, 0.03);
+        }
+
+        .quatro-operation-label {
+            color: var(--nexum-cyan);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .quatro-operation-card ol {
+            margin: 12px 0 0;
+            padding-left: 20px;
+            color: var(--text-muted);
+            font-size: 10.5px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 950px) {
+            .quatro-kpi-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .quatro-solution-layout {
+                flex-direction: column;
+            }
+
+            .quatro-media-column {
+                width: 100%;
+                flex-basis: auto;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .quatro-kpi-grid,
+            .quatro-impact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+</style>
+
 
 <h2 class="panel-title">Propuesta de Automatización</h2>
 <div class="panel-meta-strip">ESTRATEGIA COMERCIAL // INDUSTRIA 4.0 // ISA-95</div>
 
-<p class="panel-text">Con base en los diagnósticos operativos y las simulaciones preliminares, <strong>Nexum Automation</strong> ha diseñado un plan de modernización tecnológica. El objetivo es transicionar la planta hacia un modelo de <strong>Industria 4.0</strong>, eliminando restricciones de capacidad, mejorando la ergonomía y garantizando la trazabilidad bajo el estándar ISA-95.</p>
+<p class="panel-text">Con base en los diagnósticos operativos y las simulaciones preliminares, <strong>Nexum Automation</strong> ha diseñado un plan de modernización tecnológica. El objetivo es transicionar la planta hacia un modelo de <strong>Industria 4.0</strong>, eliminando restricciones de capacidad, mejorando la ergonomía y garantizando la trazabilidad bajo el estándar ISA-95. <strong>Nexum Automation</strong>
+enfatiza y propone una propuesta solida y desarrollada para la linea denominada Quatro, donde alli se considera que existe gran punto de mejorada. De igual manera se dejan planteadas posibles mejoras para las otrass dos lineas de la planta.</p>
 
 <!-- Selector interactivo estilo constelación (Reemplaza las pestañas antiguas) -->
 <div class="mini-constellation">
-    <button class="mini-node panel-tablinks active" onclick="abrirPanelLinea(event, 'Monster')">
-        <span class="mini-icon">🔋</span>
-        <span class="mini-label">Monster</span>
-    </button>
-    <button class="mini-node panel-tablinks" onclick="abrirPanelLinea(event, 'Quatro')">
+    <button class="mini-node panel-tablinks active"
+            onclick="abrirPanelLinea(event, 'Quatro')">
         <span class="mini-icon">🥤</span>
         <span class="mini-label">Quatro</span>
+    </button>   
+    <button class="mini-node panel-tablinks" onclick="abrirPanelLinea(event, 'Monster')">
+        <span class="mini-icon">🔋</span>
+        <span class="mini-label">Monster</span>
     </button>
     <button class="mini-node panel-tablinks" onclick="abrirPanelLinea(event, 'Brisa')">
         <span class="mini-icon">💧</span>
@@ -27,7 +253,7 @@
 <!-- ========================================== -->
 <!-- SECCIÓN 1: MONSTER                         -->
 <!-- ========================================== -->
-<div id="Monster" class="panel-tabcontent" style="display: block;">
+<div id="Monster" class="panel-tabcontent" style="display: none;">
     <h3 class="panel-subtitle">Rediseño y Automatización del Fin de Línea (Lata 473ml)</h3>
     
     <p class="panel-text">La propuesta consiste en rediseñar y estabilizar la línea de envasado de Monster atacando de forma directa los principales puntos de pérdida de eficiencia. Se plantea reorganizar el <em>dry-end</em> para hacer más fluido el paso de codificación a empaque y paletizado, incorporar acumulación estratégica, corregir transfers y conveyors, y automatizar parcialmente el fin de línea.</p>
@@ -59,37 +285,268 @@
 </div>
 
 <!-- ========================================== -->
-<!-- SECCIÓN 2: QUATRO                          -->
+<!-- SECCIÓN: PROPUESTA PARA LÍNEA QUATRO       -->
 <!-- ========================================== -->
-<div id="Quatro" class="panel-tabcontent">
-    <h3 class="panel-subtitle">Automatización de Paletizado con Robot KUKA (PET 1.5L)</h3>
-    
-    <p class="panel-text">Actualmente, el traslado de pallets de 6 productos desde la máquina hasta la bodega se realiza de forma manual. Cada pallet pesa aproximadamente 9 kg, y al hacer dos viajes por minuto, el operario moviliza cerca de 18 kg/min, llegando al límite recomendado de 20 kg. Esto genera riesgos de salud, disminuye eficiencia e impacta la calidad.</p>
-    
-    <div class="tab-horizontal-layout" style="margin: 20px 0;">
-        <div class="tab-info-container">
-            <p class="panel-text">Se propone implementar un <strong>Robot KUKA de paletizado</strong>. En términos de rendimiento, un operario mueve aproximadamente 12 productos por minuto, mientras que el robot puede movilizar hasta 270 productos por minuto, lo que representa una mejora cercana al <strong>2150%</strong>.</p>
-            <p class="panel-text">El costo del robot con su celda completa es de aprox. 150,000 USD (mantenimiento 10,000 USD/semestre). El retorno de inversión (ROI) en escenarios óptimos con 5 a 6 operarios puede reducirse a aproximadamente 2–3 años, operando hasta 3 turnos diarios.</p>
-            
-            <div style="background: var(--axon-base); border-left: 3px solid var(--nexum-cyan); padding: 12px; margin-top: 15px; border-radius: 0 4px 4px 0;">
-                <strong style="color: var(--nexum-cyan); font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Impacto Proyectado:</strong>
-                <p class="panel-text" style="margin-bottom: 0; margin-top: 5px;">Mejora de rendimiento del 2150%, erradicación de riesgos de salud ocupacional y un ROI competitivo (2 a 3 años) escalable en operación de tres turnos.</p>
-            </div>
+
+<div id="Quatro" class="panel-tabcontent" style="display: block;">
+
+    <h3 class="panel-subtitle">
+        Celda robotizada de paletizado para la línea Quatro 2 L
+    </h3>
+
+    <p class="panel-text">
+        <strong>Nexum Automation</strong> propone automatizar el proceso de
+        paletizado al final de la línea Quatro mediante una celda robotizada
+        diseñada para recibir, manipular, organizar y evacuar packs de bebidas
+        de forma continua y segura.
+    </p>
+
+    <p class="panel-text">
+        La solución busca reducir la manipulación manual de cargas, mejorar la
+        continuidad de la operación y aumentar la eficiencia global del proceso,
+        manteniendo al operador en funciones de supervisión, abastecimiento y
+        atención de incidencias, en lugar de realizar movimientos repetitivos
+        de producto.
+    </p>
+
+    <!-- Indicadores principales -->
+    <div class="quatro-kpi-grid">
+
+        <div class="quatro-kpi-card">
+            <span class="quatro-kpi-label">Robot seleccionado</span>
+            <strong class="quatro-kpi-value">ABB IRB 460</strong>
+            <span class="quatro-kpi-detail">
+                110 kg de carga útil · 2,40 m de alcance
+            </span>
         </div>
-        
-        <div class="tab-image-container" style="flex-direction: column; align-items: center; gap: 15px; flex: 0 0 45%;">
+
+        <div class="quatro-kpi-card">
+            <span class="quatro-kpi-label">Configuración del producto</span>
+            <strong class="quatro-kpi-value">12 botellas</strong>
+            <span class="quatro-kpi-detail">
+                Manipuladas como un pack termoencogible
+            </span>
+        </div>
+
+        <div class="quatro-kpi-card">
+            <span class="quatro-kpi-label">Pallet terminado</span>
+            <strong class="quatro-kpi-value">18 packs</strong>
+            <span class="quatro-kpi-detail">
+                3 niveles de 6 packs con separadores
+            </span>
+        </div>
+
+        <div class="quatro-kpi-card">
+            <span class="quatro-kpi-label">OEE proyectado</span>
+            <strong class="quatro-kpi-value">79,0 %</strong>
+            <span class="quatro-kpi-detail">
+                Frente a 70,3 % del proceso manual
+            </span>
+        </div>
+
+    </div>
+
+    <div class="tab-horizontal-layout quatro-solution-layout">
+
+        <!-- Contenido principal -->
+        <div class="tab-info-container">
+
+            <h4 class="quatro-section-title">
+                ¿Cómo funciona la solución?
+            </h4>
+
+            <p class="panel-text">
+                Los packs llegan a la estación mediante una banda transportadora.
+                El robot los recoge con un gripper diseñado específicamente para
+                la aplicación y los deposita sobre el pallet siguiendo un patrón
+                de apilamiento estable.
+            </p>
+
+            <p class="panel-text">
+                Cada pallet se conforma con tres niveles de seis packs. Entre
+                niveles, el mismo robot instala separadores de cartón para
+                mejorar la estabilidad durante el almacenamiento y el transporte.
+                Cuando el pallet está completo, un transportador de rodillos lo
+                desplaza hasta una zona externa de entrega para su retiro mediante
+                montacargas.
+            </p>
+
+            <h4 class="quatro-section-title">
+                Gripper especializado
+            </h4>
+
+            <p class="panel-text">
+                El efector final combina doce ventosas de vacío con dos placas
+                laterales accionadas neumáticamente. El vacío soporta el pack
+                durante el traslado, mientras que las placas lo centran y
+                estabilizan para evitar desplazamientos o deformaciones del
+                empaque termoencogible.
+            </p>
+
+            <div class="quatro-feature-list">
+
+                <div class="quatro-feature">
+                    <span class="quatro-feature-icon">◉</span>
+                    <div>
+                        <strong>Sujeción distribuida</strong>
+                        <p>
+                            Doce puntos de vacío distribuyen la carga sobre las
+                            botellas y mejoran la estabilidad del conjunto.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="quatro-feature">
+                    <span class="quatro-feature-icon">↔</span>
+                    <div>
+                        <strong>Estabilización lateral</strong>
+                        <p>
+                            Placas acolchadas centran el pack sin aplicar presión
+                            excesiva sobre la película plástica.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="quatro-feature">
+                    <span class="quatro-feature-icon">✓</span>
+                    <div>
+                        <strong>Verificación por sensores</strong>
+                        <p>
+                            La secuencia solo continúa después de confirmar la
+                            posición del producto, del pallet y de los actuadores.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <h4 class="quatro-section-title">
+                Impacto esperado en la operación
+            </h4>
+
+            <div class="quatro-impact-grid">
+
+                <div class="quatro-impact-card">
+                    <strong>+8,7 pp</strong>
+                    <span>Mejora proyectada del OEE</span>
+                </div>
+
+                <div class="quatro-impact-card">
+                    <strong>Operación continua</strong>
+                    <span>Menor dependencia de manipulación manual repetitiva</span>
+                </div>
+
+                <div class="quatro-impact-card">
+                    <strong>Mayor trazabilidad</strong>
+                    <span>Estados, alarmas y ciclos integrables al SCADA</span>
+                </div>
+
+                <div class="quatro-impact-card">
+                    <strong>Entorno más seguro</strong>
+                    <span>Separación física entre operador y robot</span>
+                </div>
+
+            </div>
+
+            <div class="quatro-business-case">
+                <span class="quatro-business-eyebrow">
+                    Viabilidad económica preliminar
+                </span>
+
+                <p class="panel-text">
+                    El análisis desarrollado estima una inversión de
+                    <strong>$576.756.000 COP</strong> y un ahorro laboral anual
+                    potencial de <strong>$174.240.000 COP</strong>. Con estos
+                    valores, el periodo simple de recuperación se aproxima a
+                    <strong>3,3 años</strong>.
+                </p>
+
+                <p class="quatro-disclaimer">
+                    Esta estimación debe validarse durante la ingeniería de
+                    detalle e incorporar mantenimiento, consumo energético,
+                    repuestos, disponibilidad real, costos financieros,
+                    impuestos y condiciones definitivas de operación.
+                </p>
+            </div>
+
+            <h4 class="quatro-section-title">
+                Seguridad integrada desde el diseño
+            </h4>
+
+            <p class="panel-text">
+                La propuesta contempla cerramiento perimetral, puerta con
+                enclavamiento, parada de emergencia, sensores de presencia,
+                torre luminosa, gabinete externo y una zona independiente para
+                el retiro de pallets con montacargas.
+            </p>
+
+            <div class="quatro-safety-tags">
+                <span>ISO 12100</span>
+                <span>ISO 10218-2</span>
+                <span>ISO 14120</span>
+                <span>ISO 13857</span>
+                <span>ISO 13850</span>
+                <span>IEC 60204-1</span>
+                <span>ISO 13849-1</span>
+            </div>
+
+        </div>
+
+        <!-- Recursos visuales -->
+        <div class="tab-image-container quatro-media-column">
+
             <div class="hud-frame">
-                <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-                <img src="assets/img/propQuatro.jpeg" alt="Celda KUKA" style="width: 100%;">
-                <figcaption>FIG 3. Representación Celda KUKA</figcaption>
+                <div class="corner tl"></div>
+                <div class="corner tr"></div>
+                <div class="corner bl"></div>
+                <div class="corner br"></div>
+
+                <img
+                    src="assets/img/propQuatro.jpeg"
+                    alt="Propuesta de celda robotizada de paletizado para la línea Quatro"
+                    style="width: 100%;"
+                >
+
+                <figcaption>
+                    FIG. Propuesta conceptual de celda robotizada
+                </figcaption>
             </div>
-            
-            <!-- Video enmarcado en el estilo HUD -->
+
             <div class="hud-frame" style="width: 100%;">
-                <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-                <iframe width="100%" height="160" src="https://www.youtube.com/embed/vraW9u3921o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 2px;"></iframe>
-                <figcaption>VID 1. Demostración operativa</figcaption>
+                <div class="corner tl"></div>
+                <div class="corner tr"></div>
+                <div class="corner bl"></div>
+                <div class="corner br"></div>
+
+                <iframe
+                    width="100%"
+                    height="220"
+                    src="https://www.youtube.com/embed/vraW9u3921o"
+                    title="Demostración de una aplicación de paletizado robotizado"
+                    frameborder="0"
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                ></iframe>
+
+                <figcaption>
+                    VID. Referencia visual de paletizado robotizado
+                </figcaption>
             </div>
+
+            <div class="quatro-operation-card">
+                <span class="quatro-operation-label">Flujo automatizado</span>
+
+                <ol>
+                    <li>Recepción del pack.</li>
+                    <li>Centrado y activación del vacío.</li>
+                    <li>Recogida y transporte robotizado.</li>
+                    <li>Ubicación según patrón de pallet.</li>
+                    <li>Instalación de separadores.</li>
+                    <li>Evacuación del pallet terminado.</li>
+                </ol>
+            </div>
+
         </div>
     </div>
 </div>
@@ -97,7 +554,7 @@
 <!-- ========================================== -->
 <!-- SECCIÓN 3: BRISA                           -->
 <!-- ========================================== -->
-<div id="Brisa" class="panel-tabcontent">
+<div id="Brisa" class="panel-tabcontent" style="display: none;">
     <h3 class="panel-subtitle">Mejoras Estructurales y Robóticas (Garrafón 20L)</h3>
     <p class="panel-text">Para la línea HOD (garrafones retornables), <strong>Nexum Automation</strong> ha desarrollado dos propuestas de mejora independientes para atacar desafíos específicos de la planta.</p>
 
@@ -148,3 +605,25 @@
         </div>
     </div>
 </div>
+
+
+<script>
+function abrirPanelLinea(event, lineaId) {
+    const root = event.currentTarget.closest('#panel-dynamic-content') || document;
+
+    root.querySelectorAll('.panel-tabcontent').forEach((panel) => {
+        panel.style.display = 'none';
+    });
+
+    root.querySelectorAll('.panel-tablinks').forEach((button) => {
+        button.classList.remove('active');
+    });
+
+    const panelActivo = root.querySelector(`#${lineaId}`);
+    if (panelActivo) {
+        panelActivo.style.display = 'block';
+    }
+
+    event.currentTarget.classList.add('active');
+}
+</script>
