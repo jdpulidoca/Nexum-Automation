@@ -1,47 +1,46 @@
-# 📁 docs/modulo3/
+<div align="center">
 
-Documentos y assets de soporte del **Módulo 3 — Planeación y Evaluación de Proyectos** (`content/modulo3.html`), panel del hub [Nexum Automation](https://jdpulidoca.github.io/Nexum-Automation).
+# 📁 Módulo 3 — Planeación y Evaluación de Proyectos
 
-Cubre la estructuración del proyecto, el modelo de negocio, el cronograma y la demostración de viabilidad económica (CAPEX/OPEX) para la automatización de la línea **Quatro 1,5 L**.
+**Estructuración y viabilidad de la automatización de Quatro 1,5 L**
 
-## 🧩 Estructura del panel (7 secciones)
+`Canvas` · `EDP/EDT` · `Cronograma` · `CAPEX/OPEX`
 
-1. **Modelo Canvas** — modelo de negocio enfocado en la automatización, propuesta de valor y relación con clientes clave.
-2. **Desglose del Proceso (EDP)** — proceso productivo generalizado aplicable a los distintos productos de la planta.
-3. **Desglose del Trabajo (EDT)** — paquetes de trabajo en que se descompuso el proyecto.
-4. **Cronograma** — 9 fases y 40 actividades (10 feb – 7 jul 2026), con 99,75 % de avance global al corte.
-5. **Análisis Financiero** — presupuesto técnico-comercial, consolidado comercial, flujo de caja e indicadores (VPN, TIR, payback).
-6. **Propuesta de valor** — propuesta de valor específica para Quatro, KPIs proyectados y diferenciales de Nexum.
-7. **Propuesta Económica** — oferta comercial completa.
+[🌐 Ver proyecto](https://jdpulidoca.github.io/Nexum-Automation)
 
-## 🖼️ Contenido de la carpeta
+</div>
 
-| Archivo | Se usa en | Estado |
-|---|---|---|
-| `Modelo canvas de negocio.jpeg` | 1. Modelo Canvas | ✅ Activo |
-| `Etapas de EDT (EDP) de producción.png` | 2. Desglose del Proceso (EDP) | ✅ Activo |
-| `EDT.jpg` | 3. Desglose del Trabajo (EDT) | ✅ Activo |
-| `Cronograma Gantt Nexum - Quatro - 07 julio 2026.xlsX` | 4. Cronograma (vista por fases) | ⚠️ Ver nota de enlace roto |
-| `Evaluacion_economica_Automatización_Quatro1.5L.xlsx` | 5. Análisis Financiero (5.1–5.2) | ⚠️ Ver nota de enlace roto |
-| `Flujo de Caja.xlsx` | 5.3–5.4 Análisis Financiero | Fuente de los datos de flujo de caja mostrados en tabla (no está enlazado como descarga directa) |
-| `documento Modulo 2.pdf` | Introducción — botón "Consultar Documento Base (Taller 2)" | ✅ Activo |
-| `Cronograma Gantt.xlsx` | — | 🗄️ Histórico: pertenecía a la vista de calendario anterior, ya reemplazada y comentada en el HTML |
-| `EDT _Grupo_1.pdf` | — | 🗄️ Material de respaldo, sin enlace directo en el panel actual |
-| `Taller 2_ EDT.pdf` | — | 🗄️ Material de respaldo, sin enlace directo en el panel actual |
-| `Readme.md` | — | Este archivo |
+---
 
-## ⚠️ Pendientes / enlaces por revisar
+## 🎯 Descripción
 
-Dos archivos referenciados en el HTML **todavía no están en esta carpeta**:
+Este directorio contiene los documentos y recursos utilizados para planear, presupuestar y evaluar la automatización del final de línea de **Quatro 1,5 L**.
 
-- `Propuesta de Valor Automatización linea Quatro 1.5L.docx` (sección 6. Propuesta de valor)
-- `Propuesta Comercial Automatización linea Quatro 1.5L.pdf` (sección 7. Propuesta Económica)
+## 🧩 Secciones del módulo
 
-Dos enlaces existentes apuntan a un nombre/extensión distinto al archivo real, así que probablemente estén rotos en el sitio publicado:
+| Sección | Contenido |
+|---|---|
+| 📊 Modelo Canvas | Modelo de negocio y propuesta de valor. |
+| ⚙️ EDP | Etapas generales del proceso productivo. |
+| 🧩 EDT | Paquetes de trabajo y dependencias del proyecto. |
+| 🗓️ Cronograma | 9 fases y 40 actividades entre febrero y julio de 2026. |
+| 💰 Evaluación financiera | Presupuesto, CAPEX/OPEX, flujo de caja e indicadores. |
+| 🏆 Propuesta de valor | Beneficios técnicos y operativos para Quatro. |
+| 📄 Propuesta económica | Alcance comercial, precio, plazo y condiciones. |
 
-- **Cronograma**: el HTML enlaza `...07 julio 2026.xlsm`, pero el archivo real termina en `.xlsX`.
-- **Evaluación económica**: el HTML enlaza `Evaluacion_economica_Automatizacion_Quatro_1_5L.xlsm` (sin tilde, con guiones bajos), pero el archivo real es `Evaluacion_economica_Automatización_Quatro1.5L.xlsx`.
 
-## 🔗 Referenciado desde
+## 🖼️ Contenido principal
 
-- `content/modulo3.html` — todas las rutas usan `docs/modulo3/...` (rutas absolutas desde la raíz del sitio).
+| Archivo | Uso |
+|---|---|
+| `Modelo canvas de negocio.jpeg` | Modelo Canvas |
+| `Etapas de EDT (EDP) de producción.png` | Desglose del proceso |
+| `EDT.jpg` | Desglose del trabajo |
+| `Cronograma Gantt Nexum - Quatro - 07 julio 2026.xlsX` | Cronograma del proyecto |
+| `Evaluacion_economica_Automatización_Quatro1.5L.xlsx` | Presupuesto y evaluación económica |
+| `Flujo de Caja.xlsx` | Proyección financiera a cinco años |
+| `documento Modulo 2.pdf` | Documento base del Taller 2 |
+
+
+
+> 🔗 Estos recursos son utilizados por `content/modulo3.html` mediante rutas `docs/modulo3/...`.
