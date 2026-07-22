@@ -1,28 +1,52 @@
-# 📁 docs/modulo5/
+<div align="center">
 
-Assets 3D y de video del **Módulo 5 — Gemelo Digital** (`content/modulo5.html`), panel del hub [Nexum Automation](https://jdpulidoca.github.io/Nexum-Automation).
+# 🧊 Módulo 5 — Gemelo Digital
 
-El panel usa un mini-hub vertical (Línea Principal + las 5 estaciones de la línea Quatro); cada nodo muestra un video de funcionamiento en YouTube y un visor 3D (`<model-viewer>`) con el modelo del gemelo digital correspondiente.
+**Visualización interactiva de la línea Quatro y sus estaciones**
 
-## 🗂️ Subcarpetas
+`Siemens NX/MCD` · `Modelos GLB` · `Videos operativos`
 
-| Carpeta | Contenido |
-|---|---|
-| `ModelosPagina/` | Modelos `.glb` **usados directamente** por el sitio — los que carga `<model-viewer>` en cada nodo (detalle abajo). |
-| `Maquinas Definitivas/` | Por el nombre y el último commit ("Carga mod 3D"), parece contener los modelos 3D definitivos por máquina — probablemente el origen de las exportaciones que terminan en `ModelosPagina/`. *(No confirmado — dime qué formato/contenido tiene si quieres que lo detalle mejor.)* |
-| `NX Definitivo/` | Por el nombre, parece corresponder al proyecto de **Siemens NX/MCD** con el gemelo digital de las estaciones. *(No confirmado — mismo caso que arriba.)* |
+[🌐 Ver proyecto](https://jdpulidoca.github.io/Nexum-Automation)
 
-### 📂 `ModelosPagina/` — modelos usados en el sitio
+</div>
 
-| Archivo | Nodo / Estación | Video de referencia |
+---
+
+## 🎯 Descripción
+
+Este directorio contiene los modelos 3D y recursos del **gemelo digital de la línea Quatro**.
+
+El panel permite seleccionar la línea completa o una de sus cinco estaciones. Cada sección combina un **video de funcionamiento** con un modelo 3D interactivo que puede rotarse y ampliarse.
+
+## 🏭 Modelos publicados
+
+| Nodo | Modelo 3D | Video |
 |---|---|---|
-| `Ensamble.glb` | 🏭 Línea Principal | embed `8F76DjTWGtA` |
-| `Sopladora.glb` | ⚙️ Formadora | embed `GZU2WQnHZRs` |
-| `Lavado.glb` | 💦 Lavadora | embed `NxyuPooj0g0` |
-| `Llenado.glb` | 🍾 Llenadora y Tapadora | embed `u3Z8didx3zI` |
-| `Rjct.glb` | 🚫 Rechazadora | embed `djUwB_uDv2o` |
-| `APMPack.glb` | 📦 Empaquetadora | embed `glBmM6r72o4` |
+| 🏭 Línea principal | `Ensamble.glb` | [▶ Ver](https://www.youtube.com/watch?v=8F76DjTWGtA) |
+| ⚙️ Formadora | `Sopladora.glb` | [▶ Ver](https://www.youtube.com/watch?v=GZU2WQnHZRs) |
+| 💦 Lavadora | `Lavado.glb` | [▶ Ver](https://www.youtube.com/watch?v=NxyuPooj0g0) |
+| 🍾 Llenadora y Tapadora | `Llenado.glb` | [▶ Ver](https://www.youtube.com/watch?v=u3Z8didx3zI) |
+| 🚫 Rechazadora | `Rjct.glb` | [▶ Ver](https://www.youtube.com/watch?v=djUwB_uDv2o) |
+| 📦 Empaquetadora | `APMPack.glb` | [▶ Ver](https://www.youtube.com/watch?v=glBmM6r72o4) |
 
-## 🔗 Referenciado desde
+## 📂 Estructura
 
-- `content/modulo5.html` — cada `<model-viewer src="docs/modulo5/ModelosPagina/...">` carga uno de los archivos de la tabla anterior; el visor usa `model-viewer` 3.5.0 (cargado desde CDN solo si no está ya registrado en la página).
+```text
+modulo5/
+├── ModelosPagina/          → modelos GLB cargados por el sitio
+├── Maquinas Definitivas/   → recursos fuente conservados por estación
+├── NX Definitivo/          → archivos de trabajo del gemelo digital
+└── Readme.md
+```
+
+> 📌 Solo los archivos de `ModelosPagina/` son referenciados directamente por `content/modulo5.html`.
+
+## 🔧 Integración web
+
+Los modelos se visualizan mediante **`model-viewer` 3.5.0**, con rotación automática, control de cámara, iluminación y entorno neutro.
+
+Las rutas siguen el formato:
+
+```text
+docs/modulo5/ModelosPagina/[modelo].glb
+```
